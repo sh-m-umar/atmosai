@@ -1,0 +1,53 @@
+// Add some shadow and outline to the selected card
+.selected-option {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  outline: 2px solid #3f51b5;
+}
+
+span.tab-number {
+  display: block;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  background: var(--at-app-bg);
+  border-radius: 50%;
+  color: var(--at-font-color);
+  margin-right: 15px;
+  border: 1px solid var(--at-border-color);
+}
+.admin-page-wrapper {
+  background: var(--at-app-bg);
+  margin-left: -38px;
+  padding-left: 38px;
+  margin-right: -12px;
+  padding-right: 12px;
+  section.bg-white-light{
+      margin-left: -38px;
+      margin-right: -12px;
+  }
+}
+.inc-dic{
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+}
+
+.addrules{
+  .rounded-circle{
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 28px;
+    padding: 0;
+  }
+}

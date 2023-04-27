@@ -1,0 +1,36 @@
+.mat-slider-horizontal {
+  min-width: 0px !important;
+  height: 35px !important;
+  width: 75%;
+}
+
+.tags-span {
+  display: inline-block;
+  margin: 0 5px;
+  font-weight: 500;
+}
+
+.disabled-row {
+  background: transparent;
+  width: 300%;
+  height: 47px;
+  margin-left: -18px;
+  position: absolute;
+  z-index: 99999999;
+  margin-top: -5px;
+}
+
+.ratingStars {
+  color: lightslategrey;
+}
+
+.selectedRatingStars {
+  color: yellowgreen;
+}
+
+.vote {
+  width: 100px;
+  height: 15px;
+  position: relative;
+  top: 9px;
+}

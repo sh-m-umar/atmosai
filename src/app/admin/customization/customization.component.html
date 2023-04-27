@@ -1,0 +1,474 @@
+<div class="admin-page-wrapper">
+    <div class="page-header">
+        <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+            <div class="header-lhs d-flex align-items-center">
+                <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                    <span>Customization</span>
+                </h4>
+                <span class="ms-2 me-2"  mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+                <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+            </div>
+            <div class="header-rhs d-flex align-items-center">
+                <div class="button-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary borderless dropdown-toggle-split" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Console log</a></li>
+                        <li><a class="dropdown-item">Clear local cache only</a></li>
+                        <li><a class="dropdown-item">Clear cache and database both</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">
+            <span>This is description</span>
+            <i class="fa-solid fa-ellipsis"></i>
+        </div>
+        <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+                <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">Customization</h5>
+                <ul class="tabslink nav boards-top-menu-style" id="nav-tab" role="tablist">
+                    <li class="nav-item" [ngClass]="{'active':activeTab===1}" (click)="urlChange('branding')">
+                        <div class="boards-top-menu-style-first" data-bs-toggle="tab" data-bs-target="#nav-branding" type="button" role="tab" aria-controls="nav-branding" aria-selected="true"><i class="fa-thin fa-home"></i> Branding</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!--
+                    <li class="nav-item" [ngClass]="{'active':activeTab===2}" (click)="urlChange('features')">
+                        <div class="boards-top-menu-style-first" id="nav-features-tab" data-bs-toggle="tab" data-bs-target="#nav-features" type="button" role="tab" aria-controls="nav-features" aria-selected="false"><i class="fa-thin fa-home"></i> Features</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    -->
+
+                    <li class="nav-item" [ngClass]="{'active':activeTab===3}" (click)="urlChange('boards')">
+                        <div class="boards-top-menu-style-first" id="nav-boards-tab" data-bs-toggle="tab" data-bs-target="#nav-boards" type="button" role="tab" aria-controls="nav-boards" aria-selected="false"><i class="fa-thin fa-home"></i> Boards</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" [ngClass]="{'active':activeTab===4}" (click)="urlChange('user-profile')">
+                        <div class="boards-top-menu-style-first"  id="nav-userprofile-tab" data-bs-toggle="tab" data-bs-target="#nav-userprofile" type="button" role="tab" aria-controls="nav-userprofile" aria-selected="false"><i class="fa-thin fa-home"></i> User profile</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-thin fa-plus"></i>
+                    </button>
+                    <div class="dropdown-menu p-0 style-less">
+                        <ul class="list-group list-group-flush list-group-sm">
+                            <li class="list-group-item">
+                                <div class="ls" data-bs-toggle="modal" data-bs-target="#viewcenter" >
+                                    <i class="fa-light fa fa-home"></i>
+                                    <span class="ms-2">Apps</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex align-items-centere">
+                <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2" style="margin-top: -5px;">
+                    <div class="button-group outlined borderless">
+                        <button type="button" class="btn collapsed btn-outline-secondary"><i
+                                class="fa-thin fa-envelope"></i> Bulk Emails
+                        </button>
+                        <button type="button"
+                                class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <div class="button-group ms-2">
+                        <button type="button" class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div (click)="headerToggle()" class="header-collapse-btn"><i class="fa-thin fa-angle-{{anglePos}}"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="admin-page-content-wrapper">
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-branding" role="tabpanel" aria-labelledby="nav-branding-tab">
+                <div class="row mb-5">
+                    <div class="col-sm-5">
+                        <div class="mb-5">
+                            <h3>Add your own Branding</h3>
+                            <div class="form-group mb-3">
+                                <label for="">Main menu favicon</label>
+                                <div class="logo-div p-2 my-2"><img *ngIf="settings.main_menu_logo" [src]="settings.main_menu_logo" width="50" height="50"></div>
+                                <small class="d-block">Recommended: 40x40px PNG with transparent background</small>
+                                <label class="mt-3 btn btn-sm btn-primary">
+                                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                                  <span class="ms-2">Change logo</span> <input [disabled]="isMenuLogoUploading" type="file" style="display: none;" (change)="fileUpload($event, 'main_menu_logo')">
+                                </label>
+                                <i *ngIf="isMenuLogoUploading" class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                        <div class="mb-5">
+                            <div class="form-group mb-3">
+                                <label for="">E-mail header & IQEs</label>
+                                <div class="header-div p-2 my-2"><img *ngIf="settings.email_header_logo" [src]="settings.email_header_logo" width="580" height="80"></div>
+                                <small class="d-block">Recommended resolution 580x80px</small>
+                                <label class="mt-3 btn btn-sm btn-primary">
+                                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                                  <span class="ms-2">Change email header</span> <input [disabled]="isEmailLogoUploading" type="file" style="display: none;" (change)="fileUpload($event, 'email_header_logo')">
+                                </label>
+                                <i *ngIf="isEmailLogoUploading" class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-features" role="tabpanel" aria-labelledby="nav-features-tab">
+                <div class="row mb-5">
+                    <div class="col-sm-4">
+                        <div class="form-group mt-4 mb-3" *ngIf="!featureRadioLoad">
+                            <label for="">Enable or disable GIFS for your account</label>
+                            <small class="d-block mb-2 mt-1">Allows your team to add GIFs via GIPHY to their updates.</small>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="enablegif" id="enable" [value]="'yes'" [(ngModel)]="featuresModel.enable_gif" [checked]="featuresModel.enable_gif === 'yes'" (change)="saveFeatureChangeBtnValid(featuresModel)">
+                                <label class="form-check-label" for="enable">Enable</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="enablegif" id="hide" [value]="'no'" [(ngModel)]="featuresModel.enable_gif" [checked]="featuresModel.enable_gif === 'no'" (change)="saveFeatureChangeBtnValid(featuresModel)">
+                                <label class="form-check-label" for="hide">Disable</label>
+                            </div>
+                        </div>
+                        <div class="form-group mt-4 mb-3" *ngIf="!featureRadioLoad">
+                            <label for="">Display link preview</label>
+                            <small class="d-block mb-2 mt-1">Show previews for links in updates (e.g. embedded YouTube video, article overview, etc.)</small>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="displaylink" id="enable1" [value]="'yes'" [(ngModel)]="featuresModel.display_link" [checked]="featuresModel.display_link === 'yes'" (change)="saveFeatureChangeBtnValid(featuresModel)">
+                                <label class="form-check-label" for="enable1">Enable</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="displaylink" id="hide1" [value]="'no'" [(ngModel)]="featuresModel.display_link" [checked]="featuresModel.display_link === 'no'" (change)="saveFeatureChangeBtnValid(featuresModel)">
+                                <label class="form-check-label" for="hide1">Disable</label>
+                            </div>
+                        </div>
+                        <div class="form-group mt-4 mb-3" *ngIf="!featureRadioLoad">
+                            <label for="">Display file preview</label>
+                            <small class="d-block mb-2 mt-1">Show previews for attached files in updates & replies (e.g. pdf, doc, etc.)</small>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="fileprev" id="enable3" [value]="'yes'" [(ngModel)]="featuresModel.file_prev" [checked]="featuresModel.file_prev === 'yes'" (change)="saveFeatureChangeBtnValid(featuresModel)">
+                                <label class="form-check-label" for="enable3">Enable</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="fileprev" id="hide3" [value]="'no'" [(ngModel)]="featuresModel.file_prev" [checked]="featuresModel.file_prev === 'no'" (change)="saveFeatureChangeBtnValid(featuresModel)">
+                                <label class="form-check-label" for="hide3">Disable</label>
+                            </div>
+                        </div>
+                        <div class="form-group mt-4 mb-3" *ngIf="!featureRadioLoad">
+                            <label for="">Enable or disable pre-made due date Reminders</label>
+                            <small class="d-block mb-2 mt-1">Creates a due date reminder automation on every new board in the account</small>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="premadedue" id="enable4" [value]="'yes'" [(ngModel)]="featuresModel.premade_due" [checked]="featuresModel.premade_due === 'yes'" (change)="saveFeatureChangeBtnValid(featuresModel)">
+                                <label class="form-check-label" for="enable4">Enable</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="premadedue" id="hide4" [value]="'no'" [(ngModel)]="featuresModel.premade_due" [checked]="featuresModel.premade_due === 'no'" (change)="saveFeatureChangeBtnValid(featuresModel)">
+                                <label class="form-check-label" for="hide4">Disable</label>
+                            </div>
+                        </div>
+                        <div class="form-group mt-4 mb-3" *ngIf="!featureRadioLoad">
+                            <label for="">Enable or disable pre-made status updates</label>
+                            <small class="d-block mb-2 mt-1">Creates a comment in the updates section whenever a status is marked as done with quick reply options</small>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="premadestatus" id="enable5" [value]="'yes'" [(ngModel)]="featuresModel.premade_status" [checked]="featuresModel.premade_status === 'yes'" (change)="saveFeatureChangeBtnValid(featuresModel)">
+                                <label class="form-check-label" for="enable5">Enable</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="premadestatus" id="hide5" [value]="'no'" [(ngModel)]="featuresModel.premade_status" [checked]="featuresModel.premade_status === 'no'" (change)="saveFeatureChangeBtnValid(featuresModel)">
+                                <label class="form-check-label" for="hide5">Disable</label>
+                            </div>
+                        </div>
+                        <div class="form-group mt-4 mb-3" *ngIf="!featureRadioLoad">
+                            <label for="">Online Activity Indicator</label>
+                            <small class="d-block mb-2 mt-1">Show or hide a user’s online status</small>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="onlineactivity" id="enable6" [value]="'yes'" [(ngModel)]="featuresModel.online_activity" [checked]="featuresModel.online_activity === 'yes'" (change)="saveFeatureChangeBtnValid(featuresModel)">
+                                <label class="form-check-label" for="enable6">Enable</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="onlineactivity" id="hide6" [value]="'no'" [(ngModel)]="featuresModel.online_activity" [checked]="featuresModel.online_activity === 'no'" (change)="saveFeatureChangeBtnValid(featuresModel)">
+                                <label class="form-check-label" for="hide6">Disable</label>
+                            </div>
+                        </div>
+                        <div class="form-group mt-4 mb-3" *ngIf="!featureRadioLoad">
+                            <label for="">Get Mobile App - Auto Login</label>
+                            <small class="d-block mb-2 mt-1">Enable or disable auto login when getting mobile app using the QR code</small>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="autologin" id="enable7" [value]="'yes'" [(ngModel)]="featuresModel.auto_login" [checked]="featuresModel.auto_login === 'yes'" (change)="saveFeatureChangeBtnValid(featuresModel)">
+                                <label class="form-check-label" for="enable7">Enable</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="autologin" id="hide7" [value]="'no'" [(ngModel)]="featuresModel.auto_login" [checked]="featuresModel.auto_login === 'no'" (change)="saveFeatureChangeBtnValid(featuresModel)">
+                                <label class="form-check-label" for="hide7">Disable</label>
+                            </div>
+                        </div>
+                        <div class="form-group mt-4 mb-3" *ngIf="!featureRadioLoad">
+                            <label for="">Allow edit custom email</label>
+                            <small class="d-block mb-2 mt-1">Allow board owners to edit their customized boards' email address</small>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="boardsemail" id="enable8" [value]="'yes'" [(ngModel)]="featuresModel.boards_email" [checked]="featuresModel.boards_email === 'yes'" (change)="saveFeatureChangeBtnValid(featuresModel)">
+                                <label class="form-check-label" for="enable8">Enable</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="boardsemail" id="hide8" [value]="'no'" [(ngModel)]="featuresModel.boards_email" [checked]="featuresModel.boards_email === 'no'" (change)="saveFeatureChangeBtnValid(featuresModel)">
+                                <label class="form-check-label" for="hide8">Disable</label>
+                            </div>
+                        </div>
+                        <div class='loader-container mt-auto' *ngIf="featureRadioLoad">
+                            <div class='loader'>
+                                <div class='loader--dot'></div>
+                                <div class='loader--dot'></div>
+                                <div class='loader--dot'></div>
+                                <div class='loader--dot'></div>
+                                <div class='loader--dot'></div>
+                                <div class='loader--dot'></div>
+                            </div>
+                        </div>
+
+                        <div class="text-end">
+                            <button class="btn btn-sm btn-primary" [disabled]="!featureSaveBtnActive" (click)="updateFeatureOptions(featuresModel)">{{!featureSaveBtnLoad ? 'Save changes':'Loading...'}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-boards" role="tabpanel" aria-labelledby="nav-boards-tab">
+              <div class="d-flex">
+                <ul class="tabslink nav boards-top-menu-style" id="nav-tab" role="tablist">
+                    <li class="nav-item" [ngStyle]="{'border':boardSubTab==='status'? '1px solid #3b6bb3': ''}" (click)="changeBoardSubTab('status')">
+                        <div class="boards-top-menu-style-first" type="button"><i class="fa-solid fa-circle-notch"></i> Statuses</div>
+                    </li>
+                    <li class="nav-item" [ngStyle]="{'border':boardSubTab==='priority'? '1px solid #3b6bb3': ''}" (click)="changeBoardSubTab('priority')">
+                        <div class="boards-top-menu-style-first" type="button"><i class="fa-solid fa-circle-notch"></i> Priorities</div>
+                    </li>
+                    <li class="nav-item" [ngStyle]="{'border':boardSubTab==='label'? '1px solid #3b6bb3': ''}" (click)="changeBoardSubTab('label')">
+                        <div class="boards-top-menu-style-first" type="button"><i class="fa-solid fa-circle-notch"></i> Labels</div>
+                    </li>
+                    <li class="nav-item" [ngStyle]="{'border':boardSubTab==='category'? '1px solid #3b6bb3': ''}" (click)="changeBoardSubTab('category')">
+                        <div class="boards-top-menu-style-first" type="button"><i class="fa-solid fa-circle-notch"></i> Categories</div>
+                    </li>
+                    <li class="nav-item" [ngStyle]="{'border':boardSubTab==='dropdown'? '1px solid #3b6bb3': ''}" (click)="changeBoardSubTab('dropdown')">
+                        <div class="boards-top-menu-style-first" type="button"><i class="fa-solid fa-circle-notch"></i> Dropdowns</div>
+                    </li>
+                </ul>
+              </div>
+                <div class="row mb-5">
+                    <div class="col-sm-5">
+                        <div class="mb-4">
+                            <h3>Set Board Defaults</h3>
+                            <label for="">Sort & Rename Default Board Labels</label>
+                            <small class="d-block mb-2">
+                                This allows you to customize and sort the default labels for new board status columns. It saves you time and makes it easier for other users to understand the process you want to follow.
+                                <i class="d-block mb-2">Note: The changes will apply to new columns only and will not modify your existing labels.</i>
+                            </small>
+                        </div>
+                        <div class="dragable-fields" *ngIf="boardSubTab==='status'">
+                          <div *ngIf="isBoardStatusesLoading">
+                            Loading... <i class="fa fa-spinner fa-spin"></i>
+                          </div>
+                          <ng-container *ngIf="!isBoardStatusesLoading">
+                            <div cdkDropList (cdkDropListDropped)="sortColorOptions( $event, 'status' )">
+                                <div class="input-group input-group-sm mb-2" cdkDrag *ngFor="let item of settings.boardStatusData">
+                                    <span class="input-group-text px-1 text-white" [ngStyle]="{'background-color': item.color}"><i class="fa-solid fa-grip-dots-vertical"></i></span>
+                                    <input type="text" class="form-control" [(ngModel)]="item.name" (change)="onBoardValueChange($event, item)">
+                                </div>
+                            </div>
+                            <div class="text-end mt-3">
+                              <button class="btn btn-sm btn-primary" [disabled]="isUserProfileFieldsUploading" (click)="onBoardStatusSave()">Save changes</button>
+                              <i class="fa fa-spinner fa-spin" *ngIf="isUserProfileFieldsUploading"></i>
+                          </div>
+                          </ng-container>
+                        </div>
+                        <div class="dragable-fields" *ngIf="boardSubTab==='priority'">
+                          <div *ngIf="isBoardPriorityLoading">
+                            Loading... <i class="fa fa-spinner fa-spin"></i>
+                          </div>
+                          <ng-container *ngIf="!isBoardPriorityLoading">
+                            <div cdkDropList (cdkDropListDropped)="sortColorOptions( $event, 'priority' )">
+                                <div class="input-group input-group-sm mb-2" cdkDrag *ngFor="let item of settings.boardPriorityData">
+                                    <span class="input-group-text px-1 text-white" [ngStyle]="{'background-color': item.color}"><i class="fa-solid fa-grip-dots-vertical"></i></span>
+                                    <input type="text" class="form-control" [(ngModel)]="item.name" (change)="onBoardValueChange($event, item)">
+                                </div>
+                            </div>
+                            <div class="text-end mt-3">
+                                <button class="btn btn-sm btn-primary" [disabled]="isUserProfileFieldsUploading" (click)="onBoardPrioritySave()">Save changes</button>
+                                <i class="fa fa-spinner fa-spin" *ngIf="isUserProfileFieldsUploading"></i>
+                            </div>
+                          </ng-container>
+                      </div>
+
+                      <div class="dragable-fields" *ngIf="boardSubTab==='label'">
+                        <div *ngIf="isBoardLabelLoading">
+                          Loading... <i class="fa fa-spinner fa-spin"></i>
+                        </div>
+                        <ng-container *ngIf="!isBoardLabelLoading">
+                            <div cdkDropList (cdkDropListDropped)="sortColorOptions( $event, 'label' )">
+                                <div class="input-group input-group-sm mb-2" cdkDrag *ngFor="let item of settings.boardLabelData">
+                                    <span class="input-group-text px-1 text-white" [ngStyle]="{'background-color': item.color}"><i class="fa-solid fa-grip-dots-vertical"></i></span>
+                                    <input type="text" class="form-control" [(ngModel)]="item.name" (change)="onBoardValueChange($event, item)">
+                                </div>
+                            </div>
+                            <div class="text-end mt-3">
+                                <button class="btn btn-sm btn-primary" [disabled]="isUserProfileFieldsUploading" (click)="onBoardLabelSave()">Save changes</button>
+                                <i class="fa fa-spinner fa-spin" *ngIf="isUserProfileFieldsUploading"></i>
+                            </div>
+                        </ng-container>
+                      </div>
+
+                      <div class="dragable-fields" *ngIf="boardSubTab==='category'">
+                        <div *ngIf="isBoardCategoryLoading">
+                          Loading... <i class="fa fa-spinner fa-spin"></i>
+                        </div>
+                        <ng-container *ngIf="!isBoardCategoryLoading">
+                            <div cdkDropList (cdkDropListDropped)="sortColorOptions( $event, 'category' )">
+                                <div class="input-group input-group-sm mb-2" cdkDrag *ngFor="let item of settings.boardCategoryData">
+                                    <span class="input-group-text px-1 text-white" [ngStyle]="{'background-color': item.color}"><i class="fa-solid fa-grip-dots-vertical"></i></span>
+                                    <input type="text" class="form-control" [(ngModel)]="item.name" (change)="onBoardValueChange($event, item)">
+                                </div>
+                            </div>
+                            <div class="text-end mt-3">
+                                <button class="btn btn-sm btn-primary" [disabled]="isUserProfileFieldsUploading" (click)="onBoardCategorySave()">Save changes</button>
+                                <i class="fa fa-spinner fa-spin" *ngIf="isUserProfileFieldsUploading"></i>
+                            </div>
+                        </ng-container>
+                      </div>
+
+                      <div class="dragable-fields" *ngIf="boardSubTab==='dropdown'">
+                        <div *ngIf="isBoardDropdownLoading">
+                          Loading... <i class="fa fa-spinner fa-spin"></i>
+                        </div>
+                        <ng-container *ngIf="!isBoardDropdownLoading">
+                            <div cdkDropList (cdkDropListDropped)="sortColorOptions( $event, 'dropdown' )">
+                                <div class="input-group input-group-sm mb-2" cdkDrag *ngFor="let item of settings.boardDropdownData">
+                                    <span class="input-group-text px-1 text-white" [ngStyle]="{'background-color': item.color}"><i class="fa-solid fa-grip-dots-vertical"></i></span>
+                                    <input type="text" class="form-control" [(ngModel)]="item.name" (change)="onBoardValueChange($event, item)">
+                                </div>
+                            </div>
+                            <div class="text-end mt-3">
+                                <button class="btn btn-sm btn-primary" [disabled]="isUserProfileFieldsUploading" (click)="onBoardDropdownSave()">Save changes</button>
+                                <i class="fa fa-spinner fa-spin" *ngIf="isUserProfileFieldsUploading"></i>
+                            </div>
+                        </ng-container>
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-userprofile" role="tabpanel" aria-labelledby="nav-userprofile-tab">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p>Customize the fields that your teammates will be required to fill in on their profiles. You can flag the fields that you want to appear in their contact list title (for example: title, country, and building number.)</p>
+                        <div *ngIf="isUserProfileFieldsLoading">
+                          Loading... <i class="fa fa-spinner fa-spin"></i>
+                        </div>
+                        <div class="mt-3 editable">
+                            <div class="editable-item d-flex align-items-cneter mb-3" [ngStyle]="{'color': !['email', 'phone', 'skype', 'birthday', 'work_anniversary'].includes(field?.field_key)? 'royalblue': 'lightgray'}" *ngFor="let field of settings.user_profile_fields; let index = index">
+                                <span class="dragable-handle me-2"><i class="fa-light fa-grip-dots-vertical"></i></span>
+                                <div class="dropdown">
+                                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" [id]="'menu1'+index"><i class="fa-solid" [ngClass]="field.field_icon ? field.field_icon : 'fa-pencil'"></i></button>
+                                  <ul class="dropdown-menu profile-dropdown" [attr.aria-labelledby]="'menu1'+index">
+                                    <span><i class="fa-solid fa-pencil" (click)="setIcon(index, 'fa-pencil')"></i></span>
+                                    <span><i class="fa-solid fa-user" (click)="setIcon(index, 'fa-user')"></i></span>
+                                    <span><i class="fa-solid fa-phone" (click)="setIcon(index, 'fa-phone')"></i></span>
+                                    <span><i class="fa-solid fa-envelope" (click)="setIcon(index, 'fa-envelope')"></i></span>
+                                    <span><i class="fa-solid fa-map-marker" (click)="setIcon(index, 'fa-map-marker')"></i></span>
+                                    <span><i class="fa-brands fa-skype" (click)="setIcon(index, 'fa-skype')"></i></span>
+                                    <span><i class="fa-solid fa-birthday-cake" (click)="setIcon(index, 'fa-birthday-cake')"></i></span>
+                                    <span><i class="fa-solid fa-calendar" (click)="setIcon(index, 'fa-calendar')"></i></span>
+                                  </ul>
+                                </div>
+                                <span class="field-type dotted-field-group me-2">
+                                    <input type="text" class="dotted-fields" [(ngModel)]="field.field_key" [disabled]="['email', 'phone', 'skype', 'birthday', 'work_anniversary'].includes(field.field_key)" [ngStyle]="{'color': !['email', 'phone', 'skype', 'birthday', 'work_anniversary'].includes(field.field_key)? 'royalblue': 'lightgray'}">
+                                    <i class="fa-light fa-pencil" *ngIf="!['email', 'phone', 'skype', 'birthday', 'work_anniversary'].includes(field.field_key)"></i>
+                                </span>
+                                <span class="field-value dotted-field-group me-2">
+                                    <input type="text" class="dotted-fields" [(ngModel)]="field.field_title" [disabled]="['email', 'phone', 'skype', 'birthday', 'work_anniversary'].includes(field.field_key)" [ngStyle]="{'color': !['email', 'phone', 'skype', 'birthday', 'work_anniversary'].includes(field.field_key)? 'royalblue': 'lightgray'}">
+                                    <i class="fa-light fa-pencil" *ngIf="!['email', 'phone', 'skype', 'birthday', 'work_anniversary'].includes(field.field_key)"></i>
+                                </span>
+                                <span class="dragable-flag" (click)="setFlag(index)"><i class="fa-solid fa-flag" [ngStyle]="{'color': field.is_flag === 'yes'? 'royalblue': 'black'}"></i></span>
+                                <span class="dragable-flag" (click)="removeCustomField(index)" *ngIf="field?.is_custom === 'yes'"><i class="fa-solid fa-circle-xmark"></i></span>
+                            </div>
+                            <div class="editable-item d-flex align-items-cneter mb-3">
+                              <span class="field-type dotted-field-group me-2">
+                                  <i class="fa-light fa-pencil"></i>
+                              </span>
+                              <button *ngIf="!isUserProfileFieldsLoading" class="field-value dotted-field-group me-2 btn btn-primary" (click)="addNewCustomField()">
+                                  Add new custom field
+                              </button>
+                          </div>
+                        </div>
+                        <div class="text-end mt-5">
+                          <i class="fa fa-spinner fa-spin" *ngIf="isUserProfileFieldsUploading"></i>
+                          <button *ngIf="!isUserProfileFieldsLoading" class="btn bnt-sm" [ngClass]="isUserProfileFieldsUploading ? 'disable' : 'btn-primary'" (click)="onUserProfileFieldsSave()" [disabled]="isUserProfileFieldsUploading">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

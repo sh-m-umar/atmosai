@@ -1,0 +1,393 @@
+<div class="admin-page-wrapper">
+    <div class="page-header">
+        <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+            <div class="header-lhs d-flex align-items-center">
+                <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                    <span>Security</span>
+                </h4>
+                <span class="ms-2 me-2"  mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+                <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+            </div>
+            <div class="header-rhs d-flex align-items-center">
+                <div class="button-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary borderless dropdown-toggle-split" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Console log</a></li>
+                        <li><a class="dropdown-item">Clear local cache only</a></li>
+                        <li><a class="dropdown-item">Clear cache and database both</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">
+            <span>This is description</span>
+            <i class="fa-solid fa-ellipsis"></i>
+        </div>
+        <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+                <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">Security</h5>
+                <ul class="tabslink nav boards-top-menu-style" id="nav-tab" role="tablist">
+                    <li class="nav-item" type="button" [ngClass]="{active: activeTab === 'login'}">
+                        <div class="boards-top-menu-style-first" (click)="changeTab('login')"><i class="fa-thin fa-home"></i> Login</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" type="button" [ngClass]="{active: activeTab === 'audit'}">
+                        <div class="boards-top-menu-style-first" (click)="changeTab('audit')"><i class="fa-thin fa-home"></i> Audit</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" type="button" [ngClass]="{active: activeTab === 'compliance'}">
+                        <div class="boards-top-menu-style-first" (click)="changeTab('compliance')"><i class="fa-thin fa-home"></i> Compliance</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" type="button" [ngClass]="{active: activeTab === 'advanced'}">
+                        <div class="boards-top-menu-style-first" (click)="changeTab('advanced')"><i class="fa-thin fa-home"></i> Advanced</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-thin fa-plus"></i>
+                    </button>
+                    <div class="dropdown-menu p-0 style-less">
+                        <ul class="list-group list-group-flush list-group-sm">
+                            <li class="list-group-item">
+                                <div class="ls" data-bs-toggle="modal" data-bs-target="#viewcenter" >
+                                    <i class="fa-light fa fa-home"></i>
+                                    <span class="ms-2">Apps</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex align-items-centere">
+                <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2" style="margin-top: -5px;">
+                    <div class="button-group outlined borderless">
+                        <button type="button" class="btn collapsed btn-outline-secondary"><i
+                                class="fa-thin fa-envelope"></i> Bulk Emails
+                        </button>
+                        <button type="button"
+                                class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <div class="button-group ms-2">
+                        <button type="button" class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div (click)="headerToggle()" class="header-collapse-btn"><i class="fa-thin fa-angle-{{anglePos}}"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="admin-page-content-wrapper">
+        <div class="tab-content mb-5" id="nav-tabContent">
+            <div class="tab-pane fade show active" *ngIf="activeTab === 'login'">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h2 class="mb-0">Security & Authentication Settings</h2>
+                        <span class="mb-2 d-block">Use these settings to manage how people sign up and login to your monday.com account</span>
+                        <ul class="list-group rounded-3 mb-5">
+                            <li class="list-group-item px-4 py-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="d-flex mb-1">
+                                            <h3 class="mb-0">Email & Password</h3>
+                                            <span class="border rounded-2 ms-3 p-1 px-2">Active</span>
+                                        </div>
+                                        <small *ngIf="!authorized_domain_check">Only admins can invite members and viewers <i class="fa-light fa-circle-info ms-1"></i><span class="link cable ms-2">Learn more</span></small>
+                                        <small *ngIf="authorized_domain_check">Admins can invite members and viewers from any email domain · Sign up with Authorized Domain is active <i class="fa-light fa-circle-info ms-1"></i><span class="link cable ms-2">Learn more</span></small>
+                                    </div>
+                                    <button *ngIf="!isEditEmail" (click)="isEditEmail = !isEditEmail" class="btn btn-sm btn-primary">Edit</button>
+                                    <button *ngIf="isEditEmail" (click)="isEditEmail = !isEditEmail" class="btn btn-sm btn-primary">Close</button>
+                                </div>
+                                <div *ngIf="isEditEmail" class="mt-4">
+                                    <h3 class="mb-0">Authorized Domain</h3>
+                                    <small>The Authorized Domain option allows users from that email domain to sign up on their own, or be invited by existing Members / Viewers.</small>
+                                    <div class="row mt-3">
+                                        <div class="col-sm-5">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" [checked]="authorized_domain_check" value=true [(ngModel)]="authorized_domain_check" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    Enable the Authorized Domain option for the following domain:
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="input-group input-group-sm mb-3">
+                                                <span class="input-group-text" id="basic-addon1">@</span>
+                                                <input type="text" class="form-control" [(ngModel)]="authorized_domain" [disabled]="!authorized_domain_check">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <h3 class="mb-0">Password Policy</h3>
+                                        <div class="form-check mt-2">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="secure" [(ngModel)]="password_policy">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                Secure Password Policy
+                                            </label>
+                                          </div>
+                                          <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="strict" [(ngModel)]="password_policy">
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                Very Strict Password Policy
+                                            </label>
+                                        </div>
+                                        <button class="btn btn-sm btn-primary mt-3" [disabled]="!password_policy" (click)="updatePasswordPolicy()">Save changes</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item px-4 py-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="d-flex mb-1">
+                                            <h3 class="mb-0">Single Sign-On (SSO)</h3>
+                                        </div>
+                                    </div>
+                                    <button *ngIf="!isSso" (click)="isSso = !isSso" class="btn btn-sm btn-primary">Open</button>
+                                    <button *ngIf="isSso" (click)="isSso = !isSso" class="btn btn-sm btn-primary">Close</button>
+                                </div>
+                                <div *ngIf="isSso" class="mt-4 me-5 pe-5">
+                                    <h3 class="mb-0">Authorized Domain</h3>
+                                    <small class="d-block mb-3">
+                                        By activating Single Sign-On (SSO), anyone that was given access to the monday.com application within the Identity Provider system would be able to join the account and authenticate via SSO.
+                                    </small>
+                                    <small class="d-block mb-3">
+                                        For Google Authentication, anyone with the selected Google domain would be able to join the account and authenticate via SSO. As a result, existing members/viewers could invite new users that have the Google domain.
+                                    </small>
+                                    <small class="d-block mb-3">
+                                        <strong>Note:</strong> Admins can invite users from any domain, regardless of the SSO activation, however users would be able to log in based on the selected Login Restriction Policy.
+                                    </small>
+                                    <button class="btn btn-sm btn-outline-secondary">Activation guid<i class="ms-2 fa-light fa-arrow-up-right-from-square"></i></button>
+                                    <div class="mt-3">
+                                        <h3 class="mb-2">1. SSO provider</h3>
+                                        <label for="">SSO provider</label>
+                                        <div class="form-check mt-2">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="google" [(ngModel)]="sso_provider">
+                                            <label class="form-check-label" for="flexRadioDefault1">Google</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="okta" [(ngModel)]="sso_provider">
+                                            <label class="form-check-label" for="flexRadioDefault2">Okta</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="oneLogin" [(ngModel)]="sso_provider">
+                                            <label class="form-check-label" for="flexRadioDefault2">OneLogin</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="azure" [(ngModel)]="sso_provider">
+                                            <label class="form-check-label" for="flexRadioDefault2">Azure AD</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="oracle" [(ngModel)]="sso_provider">
+                                            <label class="form-check-label" for="flexRadioDefault2">Oracle</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="custom" [(ngModel)]="sso_provider">
+                                            <label class="form-check-label" for="flexRadioDefault2">Custom SMAL 2.0</label>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <h3 class="mb-3">2. Select restrictions and password policy</h3>
+                                        <label for="">Login Restrictions Policy</label>
+                                        <div class="form-check mt-2">
+                                            <input class="form-check-input" type="radio" name="login_res" id="login_res1" value="all" [(ngModel)]="login_restrictions">
+                                            <label class="form-check-label" for="login_res1">All users must use SSO authentication</label>
+                                            <small class="d-block">
+                                                Any Log In or Sign Up will be via SSO Authentication only
+                                                You won't be able to invite external guests to your account
+                                                Password Policy is disabled
+                                            </small>
+                                        </div>
+                                        <div class="form-check mt-2">
+                                            <input class="form-check-input" type="radio" name="login_res" id="login_res1" value="users_except_guests" [(ngModel)]="login_restrictions">
+                                            <label class="form-check-label" for="login_res1">All users except guests must use SSO authentication (Recommended)</label>
+                                            <small class="d-block">
+                                                Users will be able to Log In or Sign Up only via SSO Authentication and guests can use email & password Password Policy is only for guests
+                                            </small>
+                                        </div>
+                                        <div class="form-check mt-2">
+                                            <input class="form-check-input" type="radio" name="login_res" id="login_res1" value="optional" [(ngModel)]="login_restrictions">
+                                            <label class="form-check-label" for="login_res1">Using SSO authentication is optional</label>
+                                            <small class="d-block">
+                                                Any of your users will be able to Log In either via SSO Apps or with their email & password Password Policy is active
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <h3 class="mb-3">3. Activate SSO provider</h3>
+                                        <div class="card p-0">
+                                            <div class="card-body p-2">
+                                                Once you click 'Activate' all monday.com users will get an email explaining how to sign in using the selected SSO provider
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-sm btn-primary mt-3" type="button" (click)="updateSSO()">Activate</button>
+                                </div>
+                            </li>
+                            <li class="list-group-item px-4 py-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="d-flex mb-1">
+                                            <h3 class="mb-0">SCIM</h3>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="text-danger">Not included in your plan.</span>
+                                        <span class="link cable"> Unlock SCIM Provisioning</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item px-4 py-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="d-flex mb-1">
+                                            <h3 class="mb-0">Guests invite domain approval</h3>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="text-danger">Not included in your plan.</span>
+                                        <span class="link cable"> Unlock guest invite domain approval</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item px-4 py-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="d-flex mb-1">
+                                            <h3 class="mb-0">IP address restriction</h3>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="text-danger">Not included in your plan.</span>
+                                        <span class="link cable"> Unlock IP restrictions</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <h3 class="mb-0">Two-Factor Authentication</h3>
+                        <span class="d-block">Ensure top-level security for your account with Two-Factor Authentication.</span>
+                        <span class="d-block">When enabled, each team member is required to enter both a password and an authentication code either from an authentication app or SMS verification, to sign in to an account.</span>
+                        <span class="d-block">The authentication code will be required only from users that will connect with email and password.</span>
+                        <button data-bs-toggle="modal" data-bs-target="#twoFactorModal" class="btn btn-sm btn-primary mt-4">{{twoFactorAuth.enable_two_factor_auth === 'no'? 'Change': 'Enable'}} Two-Factor Authentication</button>
+                        <button class="btn btn-sm btn-danger mt-4" (click)="disable2FA()" [disabled]="twoFactorAuth.enable_two_factor_auth === 'no'">Disable Two-Factor Authentication</button>
+
+                        <h3 class="mb-0 mt-5">Support Access</h3>
+                        <span class="d-block">Authorize users in this account to grant access to Technical Support Agents to log into this account in order to solve a technical issue or bug they are experiencing.</span>
+                        <button class="btn btn-sm btn-primary mt-4">Grant Support Access</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade show active" *ngIf="activeTab === 'audit'">
+                <h2>Not available in your plan</h2>
+                <small>Audit feature is only included in the Enterprise plan. <span class="link cable">Please check out our plans to upgrade.</span></small>
+            </div>
+            <div class="tab-pane fade show active" *ngIf="activeTab === 'compliance'">
+                <h2>HIPAA Compliance</h2>
+                <small class="d-block"><span class="text-danger">HIPAA compliance is only available in the Enterprise plan.</span> <span class="link cable">Unlock HIPAA Compliance</span></small>
+                <span>For more information about HIPAA compliance, check out <small class="link cable">this article</small>.</span>
+            </div>
+            <div class="tab-pane fade show active" *ngIf="activeTab === 'advanced'">
+                <h2>HIPAA Compliance</h2>
+                <span class="d-block">Advanced security features are only included in the Enterprise plan.</span>
+                <span class="d-block link cable">Please check out our plans to upgrade.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for two factor -->
+<div class="modal fade" id="twoFactorModal" tabindex="-1" aria-labelledby="twoFactorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+            <span class="modal-close-btn cable" data-bs-dismiss="modal" aria-label="Close"><i class="fa-light fa-xmark"></i></span>
+            <h2>Setup Two-Factor Authentication for your account</h2>
+            <span>Choose your own authenticate method</span>
+            <small class="d-block">(User will be able to choose their own method)</small>
+            <div class="form-check mt-3">
+                <input class="form-check-input me-3 mt-2" type="radio" name="two-factor" id="app-auth" value="email" [(ngModel)]="twoFactorAuth.two_factor_auth_method">
+                <label class="form-check-label lh-1" for="app-auth">
+                  <h3 class="fw-bold mb-0">Authentication App (Recommended)</h3>
+                  <small>Get codes from an app (such as Google Authenticate and Duo Mobile</small>
+                </label>
+              </div>
+              <div class="form-check mt-4">
+                <input class="form-check-input me-3 mt-2" type="radio" name="two-factor" id="text-auth" value="sms" [(ngModel)]="twoFactorAuth.two_factor_auth_method">
+                <label class="form-check-label lh-1" for="text-auth">
+                    <h3 class="fw-bold mb-0">Text Message (SMS)</h3>
+                    <small>You'll receive a unique each time you log in</small>
+                </label>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-sm" (click)="enable2FA()">Continue</button>
+        </div>
+      </div>
+    </div>
+</div>

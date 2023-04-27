@@ -1,0 +1,157 @@
+<div *ngIf="!loaded" class='loader-container mt-5'>
+    <div class='loader'>
+        <div class='loader--dot'></div>
+        <div class='loader--dot'></div>
+        <div class='loader--dot'></div>
+        <div class='loader--dot'></div>
+        <div class='loader--dot'></div>
+        <div class='loader--dot'></div>
+    </div>
+</div>
+<div *ngIf="loaded" class="customer-portal-estimate-invoice customer-invoice-preview mt-4">
+    <div class="card bt-1 view-invoice" #customerPreview id="customerPreview">
+        <div class="card-body px-5">
+            <div class="invoice-header d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-0"><img src="{{data.logo || './assets/img/atmos-logo-sidebar.png'}}" width="120" height="auto" /></h2><span></span>
+                </div>
+                <div><span class="invoice-text text-capitalize">{{data.board_type}}</span></div>
+            </div>
+            <div class="row row-logo justify-content-between">
+                <div class="col-sm-3">
+                    <p>{{data?.invoice_billing_user_info?.address}}<br > {{data?.invoice_billing_user_info?.city}}, {{data?.invoice_billing_user_info?.postal_code}}</p>
+                </div>
+                <div class="col-sm-3">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex align-items-center justify-content-between p-1">Date:
+                            <span>{{data.due_date | date: 'MMMM d, y'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center justify-content-between p-1 text-capitalize">
+                            {{data.board_type}}#: <span>{{data.reference}}</span></li>
+                        <li class="list-group-item d-flex align-items-center justify-content-between p-1">
+                            Customer: <span>{{data.customer_name}}</span></li>
+                        <li class="list-group-item d-flex align-items-center justify-content-between p-1" *ngIf="data.board_type === 'invoice'">
+                            Payment due by: <span>{{data.date | date: 'MMMM d, y'}}</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row row-bill-ship justify-content-between mt-3">
+                <div class="col-sm-3 row-bill-ship-left">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item invoice-heading">Bill to:</li>
+                        <li
+                                class="list-group-item d-flex align-items-center justify-content-between p-1 ng-star-inserted">
+                            {{data.customer_name}}
+                        </li>
+                        <li
+                                class="list-group-item d-flex align-items-center justify-content-between p-1 ng-star-inserted">
+                            {{data.billed_to}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-3 row-bill-ship-right">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item invoice-heading">Ship to:</li>
+                        <li
+                                class="list-group-item d-flex align-items-center justify-content-between p-1 ng-star-inserted">
+                            {{data.customer_name}}
+                        </li>
+                        <li
+                                class="list-group-item d-flex align-items-center justify-content-between p-1 ng-star-inserted">
+                            {{data.ship_to}}
+                        </li>
+                    </ul>
+                    <div *ngIf="data.board_type === 'invoice' && data.invoiceStatus !== 'Paid'" class="mt-2">
+                        <app-payment-options [data]="data" [invoiceData]="invoiceData" (invoicePaid)="onInoicePayment()"></app-payment-options>
+                    </div>
+                    <div *ngIf="data.board_type === 'invoice' && data.invoiceStatus === 'Paid'" class="mt-2">
+                        Invoice Payment Paid
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 invoice-data">
+                <table class="invoice-data-table table table-sm table-striped mt-3 table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Items</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Tax</th>
+                        <th>Discount</th>
+                        <th>Total Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let product of invoiceData.products; let i = index;" class="ng-star-inserted">
+                        <td>{{product.category}}</td>
+                        <td>{{product.item}}</td>
+                        <td>{{product.quantity}}</td>
+                        <td>{{product.price | currency}}</td>
+                        <td>{{product.tax | currency}}</td>
+                        <td>{{product.discount | currency}}</td>
+                        <td>{{product.total_price | currency}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="row invoice-data-table-bellow">
+                    <div class="col-sm-8 invoice-data-table-left">
+                        <table *ngIf="['quote', 'estimate'].includes(data.board_type) && !approvalStatus" class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Special note and instructions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="signature-approve" style="height: 130px;">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Customer Notes</label>
+                                        <textarea class="form-control" [(ngModel)]="data.customer_notes" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
+                                    <div>
+                                        <label for="">Signature</label>
+                                        <canvas (change)="changeSignature($event)" ejs-signature #signature id="signature" style="width: 100%; height: 100px" ></canvas>
+                                        <button [disabled]="submitSignature" (click)="clear()" class="btn btn-sm btn-default me-2">Clear</button>
+                                        <button [disabled]="submitSignature" (click)="submitApproval()" class="btn btn-sm btn-primary me-2">Approve</button>
+                                        <button [disabled]="submitSignature" (click)="declineApproval()" class="btn btn-sm btn-primary me-2">Decline</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-4 invoice-data-table-right">
+                        <table class="table price table-bordered">
+                            <tr>
+                                <th>Subtotal</th>
+                                <td>{{invoiceData.subTotal | currency }}</td>
+                            </tr>
+                            <tr>
+                                <th>Sales tax</th>
+                                <td>{{invoiceData.salesTax | currency }}</td>
+                            </tr>
+                            <tr>
+                                <th>Discount</th>
+                                <td>{{invoiceData.discount | currency }}</td>
+                            </tr>
+                            <tr>
+                                <th><strong>Total</strong></th>
+                                <td><strong>{{invoiceData.total | currency }}</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 invoice-footer">
+                <hr>
+                <div [innerHTML]="data?.footer_text" class="mt-2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="download" hidden>
+  <img #canvas>
+  <a #downloadLink></a>
+</div>

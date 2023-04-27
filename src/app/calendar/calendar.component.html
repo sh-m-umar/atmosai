@@ -1,0 +1,13 @@
+<ejs-schedule *ngIf="loaded"
+              width="100%"
+              height="{{contentAvailableAreaHeight}}px"
+              [rowAutoHeight]="true"
+              [selectedDate]="selectedDate"
+              [eventSettings]="eventSettings"
+              (popupOpen)="onPopupOpen($event)"
+              (popupClose)="onPopupClose($event)"
+              [showQuickInfo]="true"
+              (eventRendered)="onEventRendered($event)"
+              [(currentView)]="currentView"
+>
+</ejs-schedule>

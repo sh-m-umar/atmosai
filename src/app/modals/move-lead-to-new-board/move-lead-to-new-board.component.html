@@ -1,0 +1,176 @@
+<div class="modal fade show" style="display: block; background: rgba(0, 0, 0, 0.7);" id="mappingModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="btn-close modal-close-btn" (click)="close()"></button>
+        <div class="choose-mapping-cols" *ngIf="step === 1">
+          <div class="popup-header mb-4">
+            <h3 class="mb-1">{{b2MissedColumns.length}} columns are missing from `{{moveEntryData?.newBoard?.name}}`</h3>
+            <p class="mb-0">Choose where your items data will go by mapping it to the relevant columns. Data of unmapped
+              columns will be lost.</p>
+          </div>
+          <div class="row mb-3">
+            <div class="col-sm-5">
+              <h3 class="mb-0 map-col-heading">{{moveEntryData?.currentBoard?.name}}</h3>
+            </div>
+            <div class="col-sm-1 text-center">
+            </div>
+            <div class="col-sm-6">
+              <h3 class="mb-0 map-col-heading">{{moveEntryData?.newBoard?.name}}</h3>
+            </div>
+          </div>
+          <div class="mapping-list">
+            <!-- <div class="row mapping-item align-items-center mb-3">
+              <div class="col-sm-5">
+                <div class="mapping-item-option d-flex align-items-center">
+                  <span class="mapping-item-icon me-2" style="background-color: rgb(247, 72, 117);">
+                    <img src="./assets/img/atmosai-connect.png">
+                  </span>
+                  <h4 class="mb-0">Contacts</h4>
+                </div>
+              </div>
+              <div class="col-sm-1 text-center">
+                <span class="move-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+              </div>
+              <div class="col-sm-6">
+                <div data-bs-toggle="dropdown" aria-expanded="false"
+                  class="mapping-item-slelect d-flex align-items-center justify-content-between border p-1 rounded-2">
+                  <div class="sleec-ls">
+                    <div class="mapping-item-option d-flex align-items-center">
+                      <span class="mapping-item-icon me-2" style="background-color: rgb(247, 72, 117);">
+                        <img src="./assets/img/atmosai-connect.png">
+                      </span>
+                      <h4 class="mb-0">Contacts</h4>
+                    </div>
+                  </div>
+                  <div class="sleec-rs d-flex align-items-center">
+                    <span class="remove-selection me-3"><i class="fa-light fa-xmark"></i></span>
+                    <span class="open-select-box"><i class="fa-light fa-angle-down"></i></span>
+                  </div>
+                </div>
+                <div class="dropdown-menu mapping-dropdown">
+                  <div class="mapping-item-option d-flex align-items-center">
+                    <span class="mapping-item-icon me-2" style="background-color: rgb(247, 72, 117);">
+                      <img src="./assets/img/atmosai-connect.png">
+                    </span>
+                    <h4 class="mb-0">Contacts</h4>
+                  </div>
+                  <hr class="my-2">
+                  <button class="btn bnt-sm btn-outline-secondary border-0 w-100">+ Add as a new column</button>
+                </div>
+              </div>
+            </div>
+            <div class="row mapping-item align-items-center mb-3">
+              <div class="col-sm-5">
+                <div class="mapping-item-option d-flex align-items-center">
+                  <span class="mapping-item-icon me-2" style="background-color: rgb(247, 72, 117);">
+                    <img src="./assets/img/atmosai-connect.png">
+                  </span>
+                  <h4 class="mb-0">Contacts</h4>
+                </div>
+              </div>
+              <div class="col-sm-1 text-center">
+                <span class="move-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+              </div>
+              <div class="col-sm-6">
+                <div data-bs-toggle="dropdown" aria-expanded="false"
+                  class="mapping-item-slelect d-flex align-items-center justify-content-between border p-1 rounded-2">
+                  <div class="sleec-ls">
+                  </div>
+                  <div class="sleec-rs d-flex align-items-center">
+                    <span class="open-select-box"><i class="fa-light fa-angle-down"></i></span>
+                  </div>
+                </div>
+                <div class="dropdown-menu mapping-dropdown">
+                  <small>There are no columns of this type. Manually create this column in the destination board before
+                    moving to keep it’s data.</small>
+                  <hr class="my-2">
+                  <button class="btn bnt-sm btn-outline-secondary border-0 w-100">+ Add as a new column</button>
+                </div>
+              </div>
+            </div> -->
+            <ng-container *ngFor="let columnSet of setOfColumnsToBeMapped; let i = index">
+              <div class="row mapping-item align-items-center mb-3">
+                <div class="col-sm-5">
+                  <div class="mapping-item-option d-flex align-items-center">
+                    <span class="mapping-item-icon me-2" style="background-color: rgb(247, 72, 117);">
+                      <img src="./assets/img/atmosai-connect.png">
+                    </span>
+                    <h4 class="mb-0">{{columnSet?.b1Col?.name}}</h4>
+                  </div>
+                </div>
+                <div class="col-sm-1 text-center">
+                  <span class="move-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+                <div class="col-sm-6">
+                  <ng-container *ngIf="columnSet?.b2Cols?.length">
+                    <div>
+                      <select name="cars" id="cars" class="select-input" [(ngModel)]="columnSet.selectedCol" (ngModelChange)="onColumnSelect()">
+                        <option value="{}" selected>Select column</option>
+                        <ng-container *ngFor="let b2Col of columnSet?.b2Cols">
+                          <option [ngValue]="b2Col">{{b2Col?.name}}</option>
+                        </ng-container>
+                      </select>
+                      <!-- <i class="fa fa-xmark cross"></i> -->
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="!columnSet?.b2Cols?.length">
+                    <div data-bs-toggle="dropdown" aria-expanded="false"
+                    class="mapping-item-slelect d-flex align-items-center justify-content-between border p-1 rounded-2">
+                    <div class="sleec-ls">
+                    </div>
+                    <div class="sleec-rs d-flex align-items-center">
+                      <span class="open-select-box"><i class="fa-light fa-angle-down"></i></span>
+                    </div>
+                    </div>
+                    <div class="dropdown-menu mapping-dropdown">
+                      <small>There are no columns of this type. Manually create this column in the destination board before
+                        moving to keep it’s data.</small>
+                      <hr class="my-2">
+                      <button class="btn bnt-sm btn-outline-secondary border-0 w-100" (click)="addNewColumnToBoard(columnSet?.b1Col?.type, columnSet?.b1Col?.name, i)">+ Add as a new column</button>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <hr class="my-3">
+          <div class="mapping-footer text-end">
+            <button class="btn btn-sm btn-outline-secondary me-3" (click)="close()">Cancel</button>
+            <button class="btn btn-sm btn-primary" (click)="moveItem()">Move item</button>
+          </div>
+        </div>
+        <div class="choose-mapping-cols" *ngIf="step === 2">
+          <div class="popup-header mb-4">
+            <h3 class="mb-1"><span class="text-danger me-2"><i class="fa-regular fa-triangle-exclamation"></i></span>The
+              following {{b1MissedColumns.length}} columns’ data will be <span class="text-danger">deleted</span></h3>
+          </div>
+          <div class="mapping-list">
+            <ng-container *ngFor="let col of b1MissedColumns">
+              <div class="row mapping-item align-items-center mb-3">
+                <div class="col-sm-12">
+                  <div class="mapping-item-option d-flex align-items-center">
+                    <span class="mapping-item-icon me-2" style="background-color: rgb(247, 72, 117);">
+                      <img src="./assets/img/atmosai-connect.png">
+                    </span>
+                    <h4 class="mb-0">{{col?.name  }}</h4>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <hr class="my-2">
+          <div class="mapping-footer">
+            <small>Keep these columns’ data by mapping them with the destination board.Note: This action can be reversed
+              from this boards’ Activity Log.</small>
+            <div class="text-end mt-2">
+              <button (click)="step = 1" class="btn btn-sm btn-outline-secondary me-3">Go back to
+                mapping</button>
+              <button class="btn btn-sm btn-primary" (click)="moveToBoard()">Move items anyway</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

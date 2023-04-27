@@ -1,0 +1,566 @@
+<div class="admin-page-wrapper">
+    <div class="page-header">
+        <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+            <div class="header-lhs d-flex align-items-center">
+                <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                    <span>New SMS Campaigns</span>
+                </h4>
+                <span class="ms-2 me-2"  mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+                <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+            </div>
+            <div class="header-rhs d-flex align-items-center">
+                <div class="button-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary borderless dropdown-toggle-split" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Console log</a></li>
+                        <li><a class="dropdown-item">Clear local cache only</a></li>
+                        <li><a class="dropdown-item">Clear cache and database both</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">
+            <span>This is description</span>
+            <i class="fa-solid fa-ellipsis"></i>
+        </div>
+        <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+                <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">New SMS Campaigns</h5>
+                <ul class="tabslink nav boards-top-menu-style" id="nav-tab" role="tablist">
+                    <li class="nav-item active" id="nav-login-tab" data-bs-toggle="tab" data-bs-target="#nav-login" type="button" role="tab" aria-controls="nav-login" aria-selected="true">
+                        <div class="boards-top-menu-style-first"><i class="fa-thin fa-home"></i> SMS Campaigns</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-thin fa-plus"></i>
+                    </button>
+                    <div class="dropdown-menu p-0 style-less">
+                        <ul class="list-group list-group-flush list-group-sm">
+                            <li class="list-group-item">
+                                <div class="ls" data-bs-toggle="modal" data-bs-target="#viewcenter" >
+                                    <i class="fa-light fa fa-home"></i>
+                                    <span class="ms-2">Apps</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex align-items-centere">
+                <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2" style="margin-top: -5px;">
+                    <div class="button-group outlined borderless">
+                        <button type="button" class="btn collapsed btn-outline-secondary"><i
+                                class="fa-thin fa-envelope"></i> Bulk Emails
+                        </button>
+                        <button type="button"
+                                class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <div class="button-group ms-2">
+                        <button type="button" class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div (click)="headerToggle()" class="header-collapse-btn"><i class="fa-thin fa-angle-{{anglePos}}"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="admin-page-content-wrapper">
+        <div class="tab-content mb-5" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-api" role="tabpanel" aria-labelledby="nav-api-tab">
+                <div class="email-campaign-wrapper">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-8">
+                            <div class="email-campaign-header mb-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="d-flex me-4">
+                                                <h2 class="mb-0">SMS Gateway</h2>
+                                                <span class="ms-2 mt-2"><i class="fa-light fa-pencil"></i></span>
+                                            </div>
+                                            <span><i class="fa-light fa-folder me-2"></i><span class="cable">Add Folder</span></span>
+                                        </div>
+                                        <span class="mt-2"><i class="fa-solid fa-square me-2"></i>Draft | Created on Dec 08, 2022 01:41 PM  </span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <button type="button" class="btn btn-outline-secondary me-3"><i class="fa-light fa-copy fa-2x"></i></button>
+                                        <button type="button" class="btn btn-outline-secondary"><i class="fa-light fa-trash fa-2x"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <section>
+                                <div class="wrp">
+                                    <div class="card shadow">
+                                        <div class="card-header d-flex align-items-center justify-content-between">
+                                            <div class="ls d-flex align-items-center w-100">
+                                                <h3 class="mb-0 me-3 fw-bold">Let's get you up and running</h3>
+                                                <button class="btn btn-sm btn-outline-secondary">Mark as complete</button>
+                                            </div>
+                                            <div class="rs d-flex align-items-center w-100 justify-content-end">
+                                                <div class="progress me-2 my-0 w-50">
+                                                    <div role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar" style="width: 15%;">15%</div>
+                                                </div>
+                                                <div>
+                                                    <p class="m-0">15% &nbsp; Completed</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-3 border-right pe-0">
+                                                    <ul class="nav nav-pills flex-column" id="setup-tab" role="tablist">
+                                                        <li class="nav-item" role="presentation">
+                                                            <a class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0 active" id="pills-account-tab" data-bs-toggle="pill" data-bs-target="#pills-account" type="button" role="tab" aria-controls="pills-account" aria-selected="true">
+                                                                <span class="tab-number">1</span>
+                                                                <span>SMS Gateway</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="nav-item" role="presentation">
+                                                            <a class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0" id="pills-upload-tab" data-bs-toggle="pill" data-bs-target="#pills-upload" type="button" role="tab" aria-controls="pills-upload" aria-selected="false">
+                                                                <span class="tab-number">2</span>
+                                                                <span>Recipient</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="nav-item" role="presentation">
+                                                            <a class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0" id="pills-connect-tab" data-bs-toggle="pill" data-bs-target="#pills-connect" type="button" role="tab" aria-controls="pills-connect" aria-selected="false">
+                                                                <span class="tab-number">3</span>
+                                                                <span>From</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="nav-item" role="presentation">
+                                                            <a class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0" id="pills-campaign-tab" data-bs-toggle="pill" data-bs-target="#pills-campaign" type="button" role="tab" aria-controls="pills-campaign" aria-selected="false">
+                                                                <span class="tab-number">4</span>
+                                                                <span>Type of Campaign</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="nav-item" role="presentation">
+                                                            <a class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0" id="pills-banking-tab" data-bs-toggle="pill" data-bs-target="#pills-banking" type="button" role="tab" aria-controls="pills-banking" aria-selected="false">
+                                                                <span class="tab-number">5</span>
+                                                                <span>SMS Content</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-sm-9 col-md-9">
+                                                    <div class="tab-content" id="setup-tabContent">
+                                                        <div class="tab-pane fade show active" id="pills-account" role="tabpanel" aria-labelledby="pills-account-tab" tabindex="0">
+                                                            <div class="campaign-item-wrp topic-wrp p-3">
+                                                                <div class="selected-campaign-content">
+                                                                    <!-- <div class="d-flex justify-content-center align-items-center">
+                                                                        <div style="width:85%"><img src="./assets/img/twillo.png" width="200"></div>
+                                                                        <div class="text-end" style="width:15%">
+                                                                            <button (click)="gateWayChange = !gateWayChange" class="btn-sm btn btn-outline-secondary">Change</button>
+                                                                        </div>
+                                                                    </div> -->
+                                                                    <div class="setup-account-title text-center py-3">
+                                                                        <p class="setup-account-title-head mb-2 fs-24">Choose an SMS gateway you want to use for SMS campaign</p>
+                                                                        <p class="setup-account-title-pera mb-0">Use SMS campaign to launch your business to next level. Choose your preffered carrier.</p>
+                                                                    </div>
+                                                                    <div class="modal-content border mt-3">
+                                                                        <div class="modal-body">
+                                                                            <div class="selected-gateways-list">
+                                                                                <p>If you have not selected any of the gateways yet, click on an integrated gateway below and follow the steps to proceed from here.</p>
+                                                                                <div class="gateway-item border rounded-4 p-2 px-3 border-green">
+                                                                                    <span class="ready-to-go-dot"></span>
+                                                                                    <img src="./assets/img/twillo.png" width="100px">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer d-flex align-items-center justify-content-between">
+                                                                            <div>
+                                                                                <button type="button" class="btn btn-primary">Add New</button>
+                                                                            </div>
+                                                                            <div>
+                                                                                <button type="button" class="btn btn-primary me-3">Proceed</button>
+                                                                                <button type="button" class="btn btn-outline-secondary">Cancel</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade mb-3" id="pills-upload" role="tabpanel" aria-labelledby="pills-upload-tab" tabindex="0">
+                                                            <div class="campaign-item-wrp topic-wrp p-3">
+                                                                <!-- <div class="selected-campaign-content" *ngIf="!isRecipientEdit">
+                                                                    <div class="d-flex justify-content-center align-items-top">
+                                                                        <div style="width:85%">
+                                                                            <div class="d-flex selected-list-segments">
+                                                                                <div class="selected-tags mb-3 radius-20 border me-3 py-1 px-3 text-center d-flex align-items-center">
+                                                                                    <span><i class="fa-light fa-square-user"></i><span class="ms-2">Tim Moses</span></span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="d-flex">
+                                                                                <div class="total-recipient border-right text-center pe-2">
+                                                                                    <h3 class="mb-0">
+                                                                                        <span class="d-block mb-2">Total Recipients</span>
+                                                                                        <h2 class="mb-0">0</h2>
+                                                                                    </h3>
+                                                                                </div>
+                                                                                <div class="pt-1 px-2">
+                                                                                    <small>0 contacts were ignored; 0 contacts had no mobile number; 0 contacts had invalid data; 0 contacts were from the countries that we do not support to send SMS campaigns; 0 contacts were from the countries that do not have an SMS sender address configured.</small>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="text-end" style="width:15%">
+                                                                            <button (click)="isRecipientEdit = !isRecipientEdit" class="btn-sm btn btn-outline-secondary">Edit Recipient</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> -->
+                                                                <div class="edit-campaign-content">
+                                                                    <div class="setup-account-title text-center py-3">
+                                                                        <p class="setup-account-title-head mb-2 fs-24">Who do you want to send this campaign to?</p>
+                                                                        <p class="setup-account-title-pera mb-0">Decide if you want one person or multiple recieve the SMS text.</p>
+                                                                    </div>
+                                                                    <div class="recipient-email mt-2">
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <div class="recipient-email-inner  border rounded d-flex p-2">
+                                                                                    <div class="recipient-email-icon me-2"><i class="fa-light fa-flux-capacitor"></i></div>
+                                                                                    <div class="recipient-email-content">
+                                                                                        <h3 class="mb-2">Automation Event</h3>
+                                                                                        <p>If you want your emails to go to persons when a certain event/status occurs use automation events.</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="recipient-email-inner  border rounded d-flex p-2">
+                                                                                    <div class="recipient-email-icon me-2"><i class="fa-light fa-list-ul"></i></div>
+                                                                                    <div class="recipient-email-content">
+                                                                                        <h3 class="mb-2">List</h3>
+                                                                                        <p>Send the campaign to contacts stored as mailist list.</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6 mt-4">
+                                                                                <div class="recipient-email-inner  border rounded d-flex p-2">
+                                                                                    <div class="recipient-email-icon me-2"><i class="fa-light fa-sitemap"></i></div>
+                                                                                    <div class="recipient-email-content">
+                                                                                        <h3 class="mb-2">Segment</h3>
+                                                                                        <p>Send campaigns to a targeted audience based on already created segments.</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6 mt-4">
+                                                                                <div class="recipient-email-inner  border rounded d-flex p-2">
+                                                                                    <div class="recipient-email-icon me-2"><i class="fa-light fa-tags"></i></div>
+                                                                                    <div class="recipient-email-content">
+                                                                                        <h3 class="mb-2">Tags</h3>
+                                                                                        <p>Send campaigns to audience based on the tags they are associated to.</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="text-end mt-5">
+                                                                            <button class="btn-sm btn btn-primary me-3">Save</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade mb-3" id="pills-connect" role="tabpanel" aria-labelledby="pills-connect-tab" tabindex="0">
+                                                            <div class="campaign-item-wrp topic-wrp p-3">
+                                                                <div class="selected-campaign-content">
+                                                                    <div class="setup-account-title text-center py-3">
+                                                                        <p class="setup-account-title-head mb-2 fs-24">Let your recipient know who is send them a SMS text message.</p>
+                                                                        <p class="setup-account-title-pera mb-0">You need to add a sender address to send SMS campaign using the AtmosAI Campaign SMS gateway.</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade mb-3" id="pills-campaign" role="tabpanel" aria-labelledby="pills-campaign-tab" tabindex="0">
+                                                            <div class="campaign-item-wrp topic-wrp p-3">
+                                                                <div class="recipient-email mt-2">
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <div class="recipient-email-inner  border rounded d-flex p-2">
+                                                                                <div class="recipient-email-icon me-2"><i class="fa-light fa-podcast"></i></div>
+                                                                                <div class="recipient-email-content">
+                                                                                    <h3 class="mb-2">Broadcast</h3>
+                                                                                    <p>If broadcast, then the steps you have work on content moving to content next.</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <div class="recipient-email-inner  border rounded d-flex p-2">
+                                                                                <div class="recipient-email-icon me-2"><i class="fa-light fa-diagram-nested"></i></div>
+                                                                                <div class="recipient-email-content">
+                                                                                    <h3 class="mb-2">Sequence</h3>
+                                                                                    <p>If sequence will need to go to another step to decide between automation, segment, tags our standard sequence flow here</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade pb-3 mb-3" id="pills-banking" role="tabpanel" aria-labelledby="pills-banking-tab" tabindex="0">
+                                                            <div class="campaign-item-wrp topic-wrp p-3">
+                                                                <div class="selected-campaign-content">
+                                                                    <div class="setup-account-title text-center py-3">
+                                                                        <p class="setup-account-title-head mb-2 fs-24">Give them the dynamic content you want to express.</p>
+                                                                        <p class="setup-account-title-pera mb-0">Provide content for your SMS Campaign and proceed.</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-content border mt-3">
+                                                                    <div class="modal-body">
+                                                                        <div class="row mb-3">
+                                                                            <label class="col-sm-3 col-form-label">DLT Template ID</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="text" class="form-control mb-2" placeholder="Optional">
+                                                                                <small>Messages to Indian numbers will fail in the absence of template ID</small>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row mb-5">
+                                                                            <label class="col-sm-3 col-form-label">SMS Content</label>
+                                                                            <div class="col-sm-9">
+                                                                                <textarea class="form-control" rows="10" placeholder="Hi $[FNAME|Customer|Guest]$, get 20% off on your next purchase with www.example.com"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row mb-3">
+                                                                            <label class="col-sm-3 col-form-label"></label>
+                                                                            <div class="col-sm-9">
+                                                                                <label class="mb-3">Press Control+M to add merge tags.</label>
+                                                                                <div class="form-check form-switch">
+                                                                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                                                                    <label class="form-check-label" for="flexSwitchCheckDefault">Add Unsubscribe link</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-primary me-3">Save</button>
+                                                                        <button (click)="smsContentConfigure = !smsContentConfigure" type="button" class="btn btn-outline-secondary">Cancel</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer list-group-item border-0 border-top">
+                                            <div class="campaign-item-wrp topic-wrp p-3">
+                                                <div class="selected-campaign-content">
+                                                    <div class="d-flex align-items-top">
+                                                        <div>
+                                                            <h3 (click)="advandedOptions = !advandedOptions" class="mb-0 link cable text-danger">
+                                                                <span *ngIf="!advandedOptions">Show advanced options</span>
+                                                                <span *ngIf="advandedOptions">Hide advanced options</span>
+                                                            </h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="advanced-options" *ngIf="advandedOptions">
+                                                <li class="list-group-item p-0">
+                                                    <div class="campaign-item-wrp topic-wrp p-3">
+                                                        <div class="d-flex justify-content-center align-items-top">
+                                                            <div style="width:15%"><h3 class="mb-0">Contact Scoring</h3></div>
+                                                            <div style="width:70%">
+                                                                <!--selected scroing content comes here-->
+                                                            </div>
+                                                            <div class="text-end" style="width:15%">
+                                                                <button class="btn-sm btn btn-outline-secondary">Setup Scoring</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item p-0">
+                                                    <div class="campaign-item-wrp topic-wrp p-3">
+                                                        <div class="d-flex justify-content-center align-items-top">
+                                                            <div style="width:15%"><h3 class="mb-0">Response Actions</h3></div>
+                                                            <div style="width:70%">
+                                                                <span class="d-block mb-2">Setup follow-up actions for contacts and have the actions triggered automatically when contacts open or make a click in the campaign.</span>
+                                                                <table class="table table-sm table-bordered" *ngIf="!configureResponse">
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <th width="200">Email open</th>
+                                                                        <td>---</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th width="200">Email click</th>
+                                                                        <td>Tim Moses</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th width="200">Specific link click</th>
+                                                                        <td>---</td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                                <div class="border p-2" *ngIf="configureResponse">
+                                                                    <div class="fieldset d-flex align-items-center justify-content-around">
+                                                                        <div>
+                                                                            <select class="form-select form-select-sm mb-2">
+                                                                                <option value="">Email open</option>
+                                                                                <option value="">Specific link click</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div>
+                                                                            <select class="form-select form-select-sm mb-2">
+                                                                                <option value="">Select an item</option>
+                                                                                <option value="">Add to a list</option>
+                                                                                <option value="">Assign tag</option>
+                                                                                <option value="">Remove tag</option>
+                                                                                <option value="">Add to workflow</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div>
+                                                                            <select class="form-select form-select-sm mb-2">
+                                                                                <option value="">Select an item</option>
+                                                                                <option value="">Umar</option>
+                                                                                <option value="">Tim</option>
+                                                                                <option value="">Tawassul</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="add-new-row-btn">
+                                                                            <span (click)="responseRowAdded = !responseRowAdded" class="cable"><i class="fa-light fa-circle-plus"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div *ngIf="responseRowAdded" class="fieldset d-flex align-items-center justify-content-around">
+                                                                        <div>
+                                                                            <select class="form-select form-select-sm mb-2">
+                                                                                <option value="">Email open</option>
+                                                                                <option value="">Specific link click</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div>
+                                                                            <select class="form-select form-select-sm mb-2">
+                                                                                <option value="">Select an item</option>
+                                                                                <option value="">Add to a list</option>
+                                                                                <option value="">Assign tag</option>
+                                                                                <option value="">Remove tag</option>
+                                                                                <option value="">Add to workflow</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div>
+                                                                            <select class="form-select form-select-sm mb-2">
+                                                                                <option value="">Select an item</option>
+                                                                                <option value="">Umar</option>
+                                                                                <option value="">Tim</option>
+                                                                                <option value="">Tawassul</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="add-new-row-btn">
+                                                                            <span (click)="responseRowAdded = !responseRowAdded" class="cable"><i class="fa-light fa-circle-minus"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <hr class="my-2">
+                                                                    <div class="btn-group-action text-center">
+                                                                        <button (click)="configureResponse = !configureResponse" class="btn btn-sm btn-outline-secondary">Save</button>
+                                                                        <button (click)="configureResponse = !configureResponse" class="btn btn-sm btn-outline-secondary ms-2 me-2">Cancel</button>
+                                                                        <button (click)="configureResponse = !configureResponse" class="btn btn-sm btn-outline-secondary">Reset</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="text-end" style="width:15%">
+                                                                <button (click)="configureResponse = !configureResponse" *ngIf="!configureResponse" class="btn-sm btn btn-outline-secondary">Configure</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item p-0">
+                                                    <div class="campaign-item-wrp topic-wrp p-3">
+                                                        <div class="d-flex justify-content-center align-items-top">
+                                                            <div style="width:15%"><h3 class="mb-0">Calendar</h3></div>
+                                                            <div style="width:70%">
+                                                                <span>Add as an event in Office 365 Calendar</span>
+                                                            </div>
+                                                            <div class="text-end" style="width:15%">
+                                                                <button class="btn-sm btn btn-outline-secondary">Configure</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="mt-5 pt-5 pb-5 bg-white-light" style="min-height: 500px;"></section>
+</div>
+
+<!-- Modal for sms content -->
+<div class="modal fade" id="smsContentModal" tabindex="-1" aria-labelledby="smsContentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="mb-0">Configure SMS Content</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">DLT Template ID</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control mb-2" placeholder="Optional">
+                        <small>Messages to Indian numbers will fail in the absence of template ID</small>
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <label class="col-sm-3 col-form-label">SMS Content</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" rows="10" placeholder="Hi $[FNAME|Customer|Guest]$, get 20% off on your next purchase with www.example.com"></textarea>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label"></label>
+                    <div class="col-sm-9">
+                        <label class="mb-3">Press Control+M to add merge tags.</label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Add Unsubscribe link</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary me-3">Save</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,1318 @@
+<div class="page-header">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="header-lhs d-flex align-items-center">
+            <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                <span>Sales Portal</span>
+            </h4>
+            <span class="ms-2 me-2"  mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+            <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+        </div>
+    </div>
+    <div class="page-heading-description w-50" contenteditable="true"><span>This is the sales page.</span>
+        <i class="fa-solid fa-ellipsis"></i>
+    </div>
+    <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+        <div class="d-flex">
+            <ul class="tabslink nav boards-top-menu-style">
+                <li class="nav-item active">
+                    <div class="boards-top-menu-style-first"><i class="fa-thin fa-home"></i> Main View</div>
+                    <div class="boards-top-menu-style-third">
+                        <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                        <div class="dropdown-menu p-0 style-less">
+                            <ul class="list-group list-group-flush list-group-sm">
+                                <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-thin fa-plus"></i>
+                </button>
+                <div class="dropdown-menu p-0 style-less">
+                    <ul class="list-group list-group-flush list-group-sm">
+                        <li class="list-group-item">
+                            <div class="ls">
+                                <i class="fa-light fa-cog"></i>
+                                <span class="ms-2">Your New Menu</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex align-items-centere">
+            <div class="header-collapse-btn"><i class="fa-thin fa-angle"></i>
+            </div>
+        </div>
+    </div>
+    <div class="header-filter-area d-flex leads-drop-popup">
+        <div class="button-group outlined">
+            <button href="#" (click)="newOrder('show')" type="button" class="btn btn-primary">New Order</button>
+            <button href="#" (click)="newOrder('show')" type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu leads-drop d-none">
+                <span>
+                    <li class="d-flex align-items-baseline dropdown-item"><i class="fa-duotone fa-file-invoice"></i><span
+                            class="dropdown-item">Invoice</span></li>
+                    <li class="d-flex align-items-baseline dropdown-item"><i class="fa-duotone fa-layer-plus"></i><span
+                            class="dropdown-item">Recurring Invoice</span></li>
+                </span>
+                <span>
+                <li class="d-flex align-items-baseline dropdown-item"><i class="fa-duotone fa-layer-plus"></i><span
+                        class="dropdown-item" href="#">New group of Leads</span></li>
+                <li class="d-flex align-items-baseline dropdown-item"><i class="fa-duotone fa-file-import"></i><span
+                        class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#importleads">Import
+                    Leads</span></li>
+                </span>
+            </ul>
+        </div>
+        <div class="button-group outlined single-btn-in-group ms-2">
+            <button type="button" class="btn btn-outline-secondaryless" data-bs-toggle="dropdown" aria-expanded="false">
+                Show Comparision
+            </button>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-thin fa-arrow-up-short-wide me-1"></i>Sort by<i class="fa-solid fa-angle-down ms-2"></i></button>
+            <div class="dropdown-menu p-0 style-less">
+                <ul class="list-group list-group-flush list-group-sm">
+                    <li class="list-group-item"><span class="ms-2">Price ASC</span></li>
+                    <li class="list-group-item"><span class="ms-2">Price DESC</span></li>
+                    <li class="list-group-item"><span class="ms-2">Name ASC</span></li>
+                    <li class="list-group-item"><span class="ms-2">Name DESC</span></li>
+                    <li class="list-group-item"><span class="ms-2">Product ID ASC</span></li>
+                    <li class="list-group-item"><span class="ms-2">Product ID DESC</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="button-group outlined single-btn-in-group ms-2">
+            <button type="button" class="btn btn-outline-secondaryless" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-thin fa-table-cells-large"></i> Grid View
+            </button>
+        </div>
+        <div class="button-group outlined single-btn-in-group ms-2">
+            <button type="button" class="btn btn-outline-secondaryless" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-thin fa-bars"></i> List View
+            </button>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-thin fa-columns-3"></i> Number of columns <i class="fa-solid fa-angle-down ms-2"></i>
+            </button>
+            <div class="dropdown-menu p-0 style-less">
+                <ul class="list-group list-group-flush list-group-sm">
+                    <li class="list-group-item text-center"><span class="ms-2">3</span></li>
+                    <li class="list-group-item text-center"><span class="ms-2">4</span></li>
+                    <li class="list-group-item text-center"><span class="ms-2">5</span></li>
+                    <li class="list-group-item text-center"><span class="ms-2">6</span></li>
+                    <li class="list-group-item text-center"><span class="ms-2">7</span></li>
+                    <li class="list-group-item text-center"><span class="ms-2">8</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="button-group outlined single-btn-in-group ms-2">
+            <button href="#" (click)="newOrder('show')" type="button" class="btn btn-outline-secondaryless" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-thin fa-shopping-cart"></i> Cart
+            </button>
+        </div>
+        <!-- <div class="button-group outlined single-btn-in-group ms-2">
+            <button type="button" class="btn btn-outline-secondaryless" data-bs-toggle="dropdown" aria-expanded="false" mat-raised-button matTooltip="Filter by person" matTooltipPosition="above" matTooltipClass="above">
+                <i class="fa-thin fa-circle-user"></i> Person
+            </button>
+            <ul class="dropdown-menu person-menu">
+                <div class="person-fa">
+                    <div class="person-fb">
+                        <div class="person-fc">
+                            <div class="person-fd">
+                                <div class="person-fe">Quick person filter</div>
+                                <div class="person-ff">Save as new view</div>
+                            </div>
+                            <div class="person-fg">Filter items and subitems by person</div>
+                        </div>
+                        <div class="person-fh">
+                            <div class="person-fi">
+                                <img src="https://files.monday.com/use1/photos/34112055/thumb_small/34112055-user_photo_initials_2022_09_07_13_50_28.png?1662558628"
+                                     alt="User Image">
+                            </div>
+                            <div class="person-fi">
+                                <img src="https://files.monday.com/use1/photos/33213082/thumb_small/33213082-user_photo_initials_2022_08_15_14_45_44.png?1660574744"
+                                     alt="User Image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div> -->
+    </div>
+</div>
+
+<div class="Sales-portal-filter-cards">
+    <div class="row">
+        <div class="col-2">
+            <div class="card">
+                <div class="card-header card-h-title">
+                    Categories
+                </div>
+                <div class="card-body">
+                    <div class="wc-parent-category">
+                        <label class="form-check-label d-flex align-items-center mb-2">
+                            <input class="form-check-input wc_category_filter me-2 mt-0" type="checkbox" name="wc_categories" value="39">Uncategorized (4)
+                        </label>
+                        <label class="form-check-label d-flex align-items-center mb-2">
+                            <input class="form-check-input wc_category_filter me-2 mt-0" type="checkbox" name="wc_categories" value="39">category 01
+                        </label>
+                        <label class="form-check-label d-flex align-items-center mb-2">
+                            <input class="form-check-input wc_category_filter me-2 mt-0" type="checkbox" name="wc_categories" value="39">category 02
+                        </label>
+                        <label class="form-check-label d-flex align-items-center mb-2">
+                            <input class="form-check-input wc_category_filter me-2 mt-0" type="checkbox" name="wc_categories" value="39">category 03
+                        </label>
+                        <label class="form-check-label d-flex align-items-center mb-2">
+                            <input class="form-check-input wc_category_filter me-2 mt-0" type="checkbox" name="wc_categories" value="39">category 04
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="row">
+                <div class="col-4 mb-3">
+                    <div class="card shadow-0 rounded-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="">
+                                    <div class="bg-image hover-zoom ripple rounded ripple-surface"><img
+                                            src="assets/img/product-img.webp" class="w-100"><a href="#!">
+                                            <div class="hover-overlay">
+                                                <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);">
+                                                </div>
+                                            </div>
+                                        </a></div>
+                                </div>
+                                <div class=" mt-2">
+                                    <h5>Product</h5>
+                                    <div class="mb-0 text-muted small"><span>100% cotton</span><span
+                                            class="text-primary"> • </span><span>Light weight</span><span
+                                            class="text-primary"> • </span><span>Best finish<br></span></div>
+                                    <p class="text-truncate mb-4"> There are many variations of passages of Lorem Ipsum
+                                        available, but the majority have suffered alteration in some form, by injected
+                                        humour, or randomised words which don't look even slightly believable. </p>
+                                </div>
+                                <div class="">
+                                    <div class="d-flex flex-row align-items-center mb-1">
+                                        <h4 class="mb-1 me-1">$13.99</h4><span class="text-danger"><s>$20.99</s></span>
+                                    </div>
+                                    <div class="d-flex flex-column mt-4"><button type="button"
+                                            class="btn btn-sm btn-primary">Details</button>
+                                            <button type="button" class="template-btn btn btn-sm mt-2"> Add to wishlist </button>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 mb-3">
+                    <div class="card shadow-0 rounded-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="">
+                                    <div class="bg-image hover-zoom ripple rounded ripple-surface"><img
+                                            src="assets/img/product-img.webp" class="w-100"><a href="#!">
+                                            <div class="hover-overlay">
+                                                <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);">
+                                                </div>
+                                            </div>
+                                        </a></div>
+                                </div>
+                                <div class=" mt-2">
+                                    <h5>Product</h5>
+                                    <div class="mb-0 text-muted small"><span>100% cotton</span><span
+                                            class="text-primary"> • </span><span>Light weight</span><span
+                                            class="text-primary"> • </span><span>Best finish<br></span></div>
+                                    <p class="text-truncate mb-4"> There are many variations of passages of Lorem Ipsum
+                                        available, but the majority have suffered alteration in some form, by injected
+                                        humour, or randomised words which don't look even slightly believable. </p>
+                                </div>
+                                <div class="">
+                                    <div class="d-flex flex-row align-items-center mb-1">
+                                        <h4 class="mb-1 me-1">$13.99</h4><span class="text-danger"><s>$20.99</s></span>
+                                    </div>
+                                    <div class="d-flex flex-column mt-4"><button type="button"
+                                            class="btn btn-sm btn-primary">Details</button><button type="button"
+                                            class="template-btn btn btn-sm mt-2"> Add to wishlist </button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 mb-3">
+                    <div class="card shadow-0 rounded-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="">
+                                    <div class="bg-image hover-zoom ripple rounded ripple-surface"><img
+                                            src="assets/img/product-img.webp" class="w-100"><a href="#!">
+                                            <div class="hover-overlay">
+                                                <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);">
+                                                </div>
+                                            </div>
+                                        </a></div>
+                                </div>
+                                <div class=" mt-2">
+                                    <h5>Product</h5>
+                                    <div class="mb-0 text-muted small"><span>100% cotton</span><span
+                                            class="text-primary"> • </span><span>Light weight</span><span
+                                            class="text-primary"> • </span><span>Best finish<br></span></div>
+                                    <p class="text-truncate mb-4"> There are many variations of passages of Lorem Ipsum
+                                        available, but the majority have suffered alteration in some form, by injected
+                                        humour, or randomised words which don't look even slightly believable. </p>
+                                </div>
+                                <div class="">
+                                    <div class="d-flex flex-row align-items-center mb-1">
+                                        <h4 class="mb-1 me-1">$13.99</h4><span class="text-danger"><s>$20.99</s></span>
+                                    </div>
+                                    <div class="d-flex flex-column mt-4"><button type="button"
+                                            class="btn btn-sm btn-primary">Details</button><button type="button"
+                                            class="template-btn btn btn-sm mt-2"> Add to wishlist </button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 mb-3">
+                    <div class="card shadow-0 rounded-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="">
+                                    <div class="bg-image hover-zoom ripple rounded ripple-surface"><img
+                                            src="assets/img/product-img.webp" class="w-100"><a href="#!">
+                                            <div class="hover-overlay">
+                                                <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);">
+                                                </div>
+                                            </div>
+                                        </a></div>
+                                </div>
+                                <div class=" mt-2">
+                                    <h5>Product</h5>
+                                    <div class="mb-0 text-muted small"><span>100% cotton</span><span
+                                            class="text-primary"> • </span><span>Light weight</span><span
+                                            class="text-primary"> • </span><span>Best finish<br></span></div>
+                                    <p class="text-truncate mb-4"> There are many variations of passages of Lorem Ipsum
+                                        available, but the majority have suffered alteration in some form, by injected
+                                        humour, or randomised words which don't look even slightly believable. </p>
+                                </div>
+                                <div class="">
+                                    <div class="d-flex flex-row align-items-center mb-1">
+                                        <h4 class="mb-1 me-1">$13.99</h4><span class="text-danger"><s>$20.99</s></span>
+                                    </div>
+                                    <div class="d-flex flex-column mt-4"><button type="button"
+                                            class="btn btn-sm btn-primary">Details</button><button type="button"
+                                            class="template-btn btn btn-sm mt-2"> Add to wishlist </button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- left notification tray start -->
+<div class="left-menu-tray for-notification new-order-right-tray" *ngIf="isNewOrder">
+    <div class="tray-header">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex flex-column-reverse">
+                <h4>Sales Portal</h4>
+                <div class="tray-action">
+                    <button class="btn btn-scondary btn-sm" (click)="newOrder('hide')"><i class="fa-solid fa-close"></i></button>
+                </div>
+            </div>
+            <div class="sales-header-rhs">
+                <div class="dropdown">
+                    <span class="btn btn-outline-secondary btn-sm ms-2" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-gear"></i></span>
+                    <div class="dropdown-menu p-0 style-less">
+                        <ul class="list-group list-group-flush list-group-sm">
+                            <li (click)="showSettingsInTray('sales')" class="list-group-item"><span class="ms-2">Sales Portal Settings</span></li>
+                            <li (click)="showSettingsInTray('teams')" class="list-group-item"><span class="ms-2">Team Management Setting</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navtab">
+            <ul class="nav">
+                <li class="nav-item"><a class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all"
+                        type="button" role="tab" aria-controls="all" aria-selected="true" href="#">Order Entry</a></li>
+                <li class="nav-item"><a class="nav-link" id="unread-tab" data-bs-toggle="tab" data-bs-target="#unread"
+                        type="button" role="tab" aria-controls="unread" aria-selected="true" href="#"
+                        href="#">Script</a></li>
+                <li class="nav-item"><a class="nav-link" id="iwasmentioned-tab" data-bs-toggle="tab"
+                        data-bs-target="#iwasmentioned" type="button" role="tab" aria-controls="iwasmentioned"
+                        aria-selected="true" href="#" href="#">Cart</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="tray-content sales-tray-content">
+        <div class="sales-portal-settings-wrp mb-5" *ngIf="salesSetting">
+            <div class="sms-calling-wrapper">
+                <div class="sale-setting-heading"><h4>SMS &amp; Calling</h4></div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Enable SMS
+                            <small class="d-block">Enable SMS for text messing or SMS for verification of purchase.</small>
+                        </label>
+                    </div>
+                    <div class="sms-fields-wrp d-flex align-items-center justify-content-between">
+                        <div class="form-group">
+                            <label class="form-label mb-0">Twillio SID</label>
+                            <input type="text" class="form-control form-control-sm" >
+                        </div>
+                        <div class="form-group me-2 ms-2">
+                            <label class="form-label mb-0">Twillio Token</label>
+                            <input type="text" class="form-control form-control-sm" >
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label mb-0">Twillio Message Sid</label>
+                            <input type="text" class="form-control form-control-sm" >
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-3">
+                <div class="d-flex align-items-center">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Enable Calling
+                            <small class="d-block">Enable calling to allow agents to make outbound calls from the portal</small>
+                        </label>
+                    </div>
+                    <div class="form-check form-switch ms-3">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Enable Outbound Power Dialer
+                            <small class="d-block"></small>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="sms-calling-wrapper">
+                <div class="sale-setting-heading"><h4>Checkout & Processors</h4></div>
+                <div class="d-flex align-items-center">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Enable Multiple Processors
+                            <small class="d-block">Enable multiple processors on a combined order.</small>
+                        </label>
+                    </div>
+                    <div class="form-check form-switch ms-3">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Enable Single Step Checkout
+                            <small class="d-block"></small>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="sms-calling-wrapper">
+                <div class="sale-setting-heading"><h4>Step 1 -Basic (if applicable)</h4></div>
+                <div class="d-flex align-items-center">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Enable Spouse Form
+                            <small class="d-block">Enable Multiple processors on a combined order.</small>
+                        </label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Enable Dependant Form
+                            <small class="d-block"></small>
+                        </label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Enable Smoker Form
+                            <small class="d-block"></small>
+                        </label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Enable Gender Field
+                            <small class="d-block"></small>
+                        </label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Enable DOB Field
+                            <small class="d-block"></small>
+                        </label>
+                    </div>
+                </div>
+                <hr class="my-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Enable Spouse Form
+                            <small class="d-block">Enable Multiple processors on a combined order.</small>
+                        </label>
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        <label class="form-label mb-0 me-2">Select default country <small class="d-block">Select default country for sales portal checkout</small></label>
+                        <select  class="form-select form-select-sm" data-placeholder="Select a Country"><option value="">Select a country / region…</option><option value="AF">Afghanistan</option><option value="AX">Åland Islands</option><option value="AL">Albania</option><option value="DZ">Algeria</option><option value="AS">American Samoa</option><option value="AD">Andorra</option><option value="AO">Angola</option><option value="AI">Anguilla</option><option value="AQ">Antarctica</option><option value="AG">Antigua and Barbuda</option><option value="AR">Argentina</option><option value="AM">Armenia</option><option value="AW">Aruba</option><option value="AU">Australia</option><option value="AT">Austria</option><option value="AZ">Azerbaijan</option><option value="BS">Bahamas</option><option value="BH">Bahrain</option><option value="BD">Bangladesh</option><option value="BB">Barbados</option><option value="BY">Belarus</option><option value="PW">Belau</option><option value="BE">Belgium</option><option value="BZ">Belize</option><option value="BJ">Benin</option><option value="BM">Bermuda</option><option value="BT">Bhutan</option><option value="BO">Bolivia</option><option value="BQ">Bonaire, Saint Eustatius and Saba</option><option value="BA">Bosnia and Herzegovina</option><option value="BW">Botswana</option><option value="BV">Bouvet Island</option><option value="BR">Brazil</option><option value="IO">British Indian Ocean Territory</option><option value="BN">Brunei</option><option value="BG">Bulgaria</option><option value="BF">Burkina Faso</option><option value="BI">Burundi</option><option value="KH">Cambodia</option><option value="CM">Cameroon</option><option value="CA">Canada</option><option value="CV">Cape Verde</option><option value="KY">Cayman Islands</option><option value="CF">Central African Republic</option><option value="TD">Chad</option><option value="CL">Chile</option><option value="CN">China</option><option value="CX">Christmas Island</option><option value="CC">Cocos (Keeling) Islands</option><option value="CO">Colombia</option><option value="KM">Comoros</option><option value="CG">Congo (Brazzaville)</option><option value="CD">Congo (Kinshasa)</option><option value="CK">Cook Islands</option><option value="CR">Costa Rica</option><option value="HR">Croatia</option><option value="CU">Cuba</option><option value="CW">Curaçao</option><option value="CY">Cyprus</option><option value="CZ">Czech Republic</option><option value="DK">Denmark</option><option value="DJ">Djibouti</option><option value="DM">Dominica</option><option value="DO">Dominican Republic</option><option value="EC">Ecuador</option><option value="EG">Egypt</option><option value="SV">El Salvador</option><option value="GQ">Equatorial Guinea</option><option value="ER">Eritrea</option><option value="EE">Estonia</option><option value="SZ">Eswatini</option><option value="ET">Ethiopia</option><option value="FK">Falkland Islands</option><option value="FO">Faroe Islands</option><option value="FJ">Fiji</option><option value="FI">Finland</option><option value="FR">France</option><option value="GF">French Guiana</option><option value="PF">French Polynesia</option><option value="TF">French Southern Territories</option><option value="GA">Gabon</option><option value="GM">Gambia</option><option value="GE">Georgia</option><option value="DE">Germany</option><option value="GH">Ghana</option><option value="GI">Gibraltar</option><option value="GR">Greece</option><option value="GL">Greenland</option><option value="GD">Grenada</option><option value="GP">Guadeloupe</option><option value="GU">Guam</option><option value="GT">Guatemala</option><option value="GG">Guernsey</option><option value="GN">Guinea</option><option value="GW">Guinea-Bissau</option><option value="GY">Guyana</option><option value="HT">Haiti</option><option value="HM">Heard Island and McDonald Islands</option><option value="HN">Honduras</option><option value="HK">Hong Kong</option><option value="HU">Hungary</option><option value="IS">Iceland</option><option value="IN">India</option><option value="ID">Indonesia</option><option value="IR">Iran</option><option value="IQ">Iraq</option><option value="IE">Ireland</option><option value="IM">Isle of Man</option><option value="IL">Israel</option><option value="IT">Italy</option><option value="CI">Ivory Coast</option><option value="JM">Jamaica</option><option value="JP">Japan</option><option value="JE">Jersey</option><option value="JO">Jordan</option><option value="KZ">Kazakhstan</option><option value="KE">Kenya</option><option value="KI">Kiribati</option><option value="KW">Kuwait</option><option value="KG">Kyrgyzstan</option><option value="LA">Laos</option><option value="LV">Latvia</option><option value="LB">Lebanon</option><option value="LS">Lesotho</option><option value="LR">Liberia</option><option value="LY">Libya</option><option value="LI">Liechtenstein</option><option value="LT">Lithuania</option><option value="LU">Luxembourg</option><option value="MO">Macao</option><option value="MG">Madagascar</option><option value="MW">Malawi</option><option value="MY">Malaysia</option><option value="MV">Maldives</option><option value="ML">Mali</option><option value="MT">Malta</option><option value="MH">Marshall Islands</option><option value="MQ">Martinique</option><option value="MR">Mauritania</option><option value="MU">Mauritius</option><option value="YT">Mayotte</option><option value="MX">Mexico</option><option value="FM">Micronesia</option><option value="MD">Moldova</option><option value="MC">Monaco</option><option value="MN">Mongolia</option><option value="ME">Montenegro</option><option value="MS">Montserrat</option><option value="MA">Morocco</option><option value="MZ">Mozambique</option><option value="MM">Myanmar</option><option value="NA">Namibia</option><option value="NR">Nauru</option><option value="NP">Nepal</option><option value="NL">Netherlands</option><option value="NC">New Caledonia</option><option value="NZ">New Zealand</option><option value="NI">Nicaragua</option><option value="NE">Niger</option><option value="NG">Nigeria</option><option value="NU">Niue</option><option value="NF">Norfolk Island</option><option value="KP">North Korea</option><option value="MK">North Macedonia</option><option value="MP">Northern Mariana Islands</option><option value="NO">Norway</option><option value="OM">Oman</option><option value="PK">Pakistan</option><option value="PS">Palestinian Territory</option><option value="PA">Panama</option><option value="PG">Papua New Guinea</option><option value="PY">Paraguay</option><option value="PE">Peru</option><option value="PH">Philippines</option><option value="PN">Pitcairn</option><option value="PL">Poland</option><option value="PT">Portugal</option><option value="PR">Puerto Rico</option><option value="QA">Qatar</option><option value="RE">Reunion</option><option value="RO">Romania</option><option value="RU">Russia</option><option value="RW">Rwanda</option><option value="BL">Saint Barthélemy</option><option value="SH">Saint Helena</option><option value="KN">Saint Kitts and Nevis</option><option value="LC">Saint Lucia</option><option value="SX">Saint Martin (Dutch part)</option><option value="MF">Saint Martin (French part)</option><option value="PM">Saint Pierre and Miquelon</option><option value="VC">Saint Vincent and the Grenadines</option><option value="WS">Samoa</option><option value="SM">San Marino</option><option value="ST">São Tomé and Príncipe</option><option value="SA">Saudi Arabia</option><option value="SN">Senegal</option><option value="RS">Serbia</option><option value="SC">Seychelles</option><option value="SL">Sierra Leone</option><option value="SG">Singapore</option><option value="SK">Slovakia</option><option value="SI">Slovenia</option><option value="SB">Solomon Islands</option><option value="SO">Somalia</option><option value="ZA">South Africa</option><option value="GS">South Georgia/Sandwich Islands</option><option value="KR">South Korea</option><option value="SS">South Sudan</option><option value="ES">Spain</option><option value="LK">Sri Lanka</option><option value="SD">Sudan</option><option value="SR">Suriname</option><option value="SJ">Svalbard and Jan Mayen</option><option value="SE">Sweden</option><option value="CH">Switzerland</option><option value="SY">Syria</option><option value="TW">Taiwan</option><option value="TJ">Tajikistan</option><option value="TZ">Tanzania</option><option value="TH">Thailand</option><option value="TL">Timor-Leste</option><option value="TG">Togo</option><option value="TK">Tokelau</option><option value="TO">Tonga</option><option value="TT">Trinidad and Tobago</option><option value="TN">Tunisia</option><option value="TR">Turkey</option><option value="TM">Turkmenistan</option><option value="TC">Turks and Caicos Islands</option><option value="TV">Tuvalu</option><option value="UG">Uganda</option><option value="UA">Ukraine</option><option value="AE">United Arab Emirates</option><option value="GB">United Kingdom (UK)</option><option value="US">United States (US)</option><option value="UM">United States (US) Minor Outlying Islands</option><option value="UY">Uruguay</option><option value="UZ">Uzbekistan</option><option value="VU">Vanuatu</option><option value="VA">Vatican</option><option value="VE">Venezuela</option><option value="VN">Vietnam</option><option value="VG">Virgin Islands (British)</option><option value="VI">Virgin Islands (US)</option><option value="WF">Wallis and Futuna</option><option value="EH">Western Sahara</option><option value="YE">Yemen</option><option value="ZM">Zambia</option><option value="ZW">Zimbabwe</option></select>
+                    </div>
+                </div>
+            </div>
+            <div class="sms-calling-wrapper">
+                <div class="sale-setting-heading"><h4>Step 2 -Custom questions (if applicable)</h4></div>
+                <div class="d-flex align-items-center">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Enable Step 2
+                            <small class="d-block">Enable step 2 allows you to add as many custom or regulatory questions as needed for information or compliance.</small>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="sms-calling-wrapper">
+                <div class="sale-setting-heading"><h4>Step-3 Verification or Final Checkout</h4></div>
+                <div class="d-flex align-items-center mb-2">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Enable Verification
+                            <small class="d-block">Enable calling to allow agents to make outbound calls from the portal.</small>
+                        </label>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Disable Verification Script
+                            <small class="d-block">This will disable only the Verification Script popup.</small>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group d-flex align-items-center mb-3">
+                    <label class="form-label mb-0 me-2">Sales portal verification script popup template <small class="d-block">This template will appear on sales portal on verification script popup; agent will read this script for the customer.</small></label>
+                    <select class="form-select form-select-sm">
+                        <option value="">Select</option>
+                        <option value="9">Agent Contract (Template)</option>
+                        <option value="10">Company Contract (Template)</option>
+                        <option value="11">Employee Contract (Template)</option>
+                        <option value="12">Customer Verification of Order (Template)</option>
+                        <option value="13" selected="selected">Customer Order Verification Script (Agent Verbal Template)</option>
+                        <option value="43">Vendor Contract (Template)</option>
+                        <option value="45">Affiliate Agreement</option>
+                        <option value="46">Partner Agreement</option>
+                        <option value="66">Agent Contract (Template)</option>
+                        <option value="67">Company Contract (Template)</option>
+                        <option value="68">Employee Contract (Template)</option>
+                        <option value="69">Customer Verification of Order (Template)</option>
+                        <option value="70">Customer Order Verification Script (Agent Verbal Template)</option>
+                        <option value="71">Vendor Contract (Template)</option>
+                        <option value="91">Agent Contract (Template)</option>
+                        <option value="92">Company Contract (Template)</option>
+                        <option value="93">Employee Contract (Template)</option>
+                        <option value="94">Customer Verification of Order (Template)</option>
+                        <option value="95">Customer Order Verification Script (Agent Verbal Template)</option>
+                        <option value="96">Vendor Contract (Template)</option>
+                        <option value="116">Agent Contract (Template)</option>
+                        <option value="117">Company Contract (Template)</option>
+                        <option value="118">Employee Contract (Template)</option>
+                        <option value="119">Customer Verification of Order (Template)</option>
+                        <option value="120">Customer Order Verification Script (Agent Verbal Template)</option>
+                        <option value="121">Vendor Contract (Template)</option>
+                        <option value="141">Agent Contract (Template)</option>
+                        <option value="142">Company Contract (Template)</option>
+                        <option value="143">Employee Contract (Template)</option>
+                        <option value="144">Customer Verification of Order (Template)</option>
+                        <option value="145">Customer Order Verification Script (Agent Verbal Template)</option>
+                        <option value="146">Vendor Contract (Template)</option>
+                    </select>
+                </div>
+                <div class="form-group d-flex align-items-center mb-3">
+                    <label class="form-label mb-0 me-2">Customer approval contract template<small class="d-block">This template will be presented to the customer via email or SMS verification link; customer will read and accept it by the signature.</small></label>
+                    <select class="form-select form-select-sm">
+                        <option value="">Select</option>
+                        <option value="9">Agent Contract (Template)</option>
+                        <option value="10">Company Contract (Template)</option>
+                        <option value="11">Employee Contract (Template)</option>
+                        <option value="12" selected="selected">Customer Verification of Order (Template)</option>
+                        <option value="13">Customer Order Verification Script (Agent Verbal Template)</option>
+                        <option value="43">Vendor Contract (Template)</option>
+                        <option value="45">Affiliate Agreement</option>
+                        <option value="46">Partner Agreement</option>
+                        <option value="66">Agent Contract (Template)</option>
+                        <option value="67">Company Contract (Template)</option>
+                        <option value="68">Employee Contract (Template)</option>
+                        <option value="69">Customer Verification of Order (Template)</option>
+                        <option value="70">Customer Order Verification Script (Agent Verbal Template)</option>
+                        <option value="71">Vendor Contract (Template)</option>
+                        <option value="91">Agent Contract (Template)</option>
+                        <option value="92">Company Contract (Template)</option>
+                        <option value="93">Employee Contract (Template)</option>
+                        <option value="94">Customer Verification of Order (Template)</option>
+                        <option value="95">Customer Order Verification Script (Agent Verbal Template)</option>
+                        <option value="96">Vendor Contract (Template)</option>
+                        <option value="116">Agent Contract (Template)</option>
+                        <option value="117">Company Contract (Template)</option>
+                        <option value="118">Employee Contract (Template)</option>
+                        <option value="119">Customer Verification of Order (Template)</option>
+                        <option value="120">Customer Order Verification Script (Agent Verbal Template)</option>
+                        <option value="121">Vendor Contract (Template)</option>
+                        <option value="141">Agent Contract (Template)</option>
+                        <option value="142">Company Contract (Template)</option>
+                        <option value="143">Employee Contract (Template)</option>
+                        <option value="144">Customer Verification of Order (Template)</option>
+                        <option value="145">Customer Order Verification Script (Agent Verbal Template)</option>
+                        <option value="146">Vendor Contract (Template)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="sms-calling-wrapper">
+                <div class="sale-setting-heading"><h4>Products</h4></div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Show Product Title
+                            <small class="d-block"></small>
+                        </label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Show SKU
+                            <small class="d-block"></small>
+                        </label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Show Price
+                            <small class="d-block"></small>
+                        </label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Show Description
+                            <small class="d-block"></small>
+                        </label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Show Compare Button
+                            <small class="d-block"></small>
+                        </label>
+                    </div>
+                </div>
+                <hr class="my-3">
+                <div class="d-flex align-items-center">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">
+                            Disable Product Sidebar
+                            <small class="d-block"></small>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="team-management-settings-wrp mb-5" *ngIf="TeamManagementSetting">
+            <div class="page-header">
+                <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+                    <div class="d-flex settings-tabs">
+                        <div class="nav nav-tabs tabslink boards-top-menu-style" id="nav-tab" role="tablist">
+                            <span class="nav-link boards-top-menu-style-first active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fa-light fa-home me-2"></i> Main View</span>
+                            <span class="nav-link boards-top-menu-style-first" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Email Template</span>
+                            <span class="nav-link boards-top-menu-style-first" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact Template</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="sms-calling-wrapper">
+                        <div class="sale-setting-heading"><h4>General Settings</h4></div>
+                        <div class="d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    Enable agents to add a new agent
+                                    <small class="d-block">This will allow agents to add an agent only but will not approve the agent.</small>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    Enable agents to manage a team
+                                    <small class="d-block">This will allow every agent to build or manage a team.</small>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    Enable agents to manage product assignments
+                                    <small class="d-block">Agents will have the ability to assign products to other agents, including their own.</small>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    Enable agents to approve sub agents
+                                    <small class="d-block">This will enable the ability for agents to approve other agents in their downline.</small>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    Enable automatically approve sub agents
+                                    <small class="d-block">Enable the automatic approval of all sub agents in any downline or company.</small>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex align-items-center">
+                            <label for=""><strong>Onboarding notification email address:</strong></label>
+                            <input type="email" class="form-control form-control-sm w-50 ms-2">
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    Disable sales portal
+                                    <small class="d-block">Enable/Disable sales portal pages access.</small>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    Disable affiliate dashboard
+                                    <small class="d-block">Enable/Disable affiliate dashboard pages access.</small>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    Show inactive agents
+                                    <small class="d-block">If enabled, then inactive Agents, Companies, Groups, and Vendors will be shown</small>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    Show Licensing Option
+                                    <small class="d-block">If enabled, then Show Licensing option will be shown on Add Quick Agent Module</small>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    Show Assign Company/Parent Option
+                                    <small class="d-block">If enabled, then Show Assign Company/Parent option will be shown on Add Quick Agent Module</small>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex align-items-center">
+                            <label for="">
+                                <strong>Invite new team member email template</strong>
+                                <small class="d-block">This visual email template will be used for inviting new user</small>
+                            </label>
+                            <select class="form-select form-select-sm ms-2 w-50">
+                                <option value="">Select Option</option>
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="sms-calling-wrapper">
+                        <div class="sale-setting-heading"><h4>Form Validation</h4></div>
+                        <div class="d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    Disable form validation for add/edit agent
+                                    <small class="d-block">and company Commissions paid based on a completed sale.</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sms-calling-wrapper">
+                        <div class="sale-setting-heading"><h4>Affiliates</h4></div>
+                        <div class="d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    Automatically approve affiliates
+                                    <small class="d-block"></small>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    Enable affiliates to add new affiliates
+                                    <small class="d-block">Assign commissions to a specific agent</small>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    Enable agent referral profile page
+                                    <small class="d-block">Show or Hide the agent profile page in referral url</small>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    Enable agent default parent agent
+                                    <small class="d-block">Enable default parent agent option when not parent agent is found for a customer</small>
+                                </label>
+                            </div>
+                            <div>
+                                <select class="form-select form-select-sm ms-2">
+                                    <option value="">Select parent agent</option>
+                                    <option value="">1</option>
+                                    <option value="">2</option>
+                                    <option value="">3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    Enable agent default parent agent
+                                    <small class="d-block">Enable default parent agent option when not parent agent is found for a customer</small>
+                                </label>
+                            </div>
+                            <div>
+                                <select class="form-select form-select-sm ms-2">
+                                    <option value="">Select Option</option>
+                                    <option value="">1</option>
+                                    <option value="">2</option>
+                                    <option value="">3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Email template settings area</div>
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">Contact templates setting area</div>
+            </div>
+        </div>
+        <div class="tab-content pt-3" *ngIf="!salesSetting && !TeamManagementSetting">
+            <div class="tab-pane active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="card">
+                            <div class="card-header  card-h-title">
+                                Customer details
+                            </div>
+                            <div class="card-body">
+                                <div class="sales-portal-cs-details">
+                                    <div class="new-cs-check d-flex mb-4">
+                                        <input type="checkbox" name="" id="checkall">
+                                        <label class="ms-2" for="checkall">New customer</label>                               
+                                    </div>
+                                    <div class="row align-items-center mb-3">
+                                        <div class="col-3">
+                                            <label class="form-label mb-0 me-2">Enter Name:*</label>
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="text" placeholder="First Nmae" class="form-control form-control-sm">                                  
+                                        </div>
+                                        <div class="col-5">
+                                            <input type="text" placeholder="Last Nmae" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                    <div class="cs-address-details">
+                                        <div class="row align-items-center mb-2">
+                                            <div class="col-3">
+                                                <label class="form-label mb-0 me-2">Address Line:*</label>
+                                            </div>
+                                            <div class="col-9">
+                                                <input type="text" placeholder="" class="form-control form-control-sm">
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-center mb-2">
+                                            <div class="col-3">
+                                                <label class="form-label mb-0 me-2">Country:*</label>
+                                            </div>
+                                            <div class="col-7">
+                                                <select placeholder="Select a country / region…" class="form-select form-select-sm">
+                                                    <option value="address" selected="" ng-reflect-value="address">Select a country / region…</option>
+                                                    <option value="AF">Afghanistan</option>
+                                                    <option value="AX">Åland Islands</option>
+                                                    <option value="AL">Albania</option>
+                                                    <option value="DZ">Algeria</option>
+                                                    <option value="AS">American Samoa</option>
+                                                    <option value="AD">Andorra</option>
+                                                    <option value="AO">Angola</option>
+                                                    <option value="AI">Anguilla</option>
+                                                    <option value="AQ">Antarctica</option>
+                                                    <option value="AG">Antigua and Barbuda</option>
+                                                    <option value="AR">Argentina</option>
+                                                    <option value="AM">Armenia</option>
+                                                    <option value="AW">Aruba</option>
+                                                    <option value="AU">Australia</option>
+                                                    <option value="AT">Austria</option>
+                                                    <option value="AZ">Azerbaijan</option>
+                                                    <option value="BS">Bahamas</option>
+                                                    <option value="BH">Bahrain</option>
+                                                    <option value="BD">Bangladesh</option>
+                                                    <option value="BB">Barbados</option>
+                                                    <option value="BY">Belarus</option>
+                                                    <option value="PW">Belau</option>
+                                                    <option value="BE">Belgium</option>
+                                                    <option value="BZ">Belize</option>
+                                                    <option value="BJ">Benin</option>
+                                                    <option value="BM">Bermuda</option>
+                                                    <option value="BT">Bhutan</option>
+                                                    <option value="BO">Bolivia</option>
+                                                    <option value="BQ">Bonaire, Saint Eustatius and Saba</option>
+                                                    <option value="BA">Bosnia and Herzegovina</option>
+                                                    <option value="BW">Botswana</option>
+                                                    <option value="BV">Bouvet Island</option>
+                                                    <option value="BR">Brazil</option>
+                                                    <option value="IO">British Indian Ocean Territory</option>
+                                                    <option value="BN">Brunei</option>
+                                                    <option value="BG">Bulgaria</option>
+                                                    <option value="BF">Burkina Faso</option>
+                                                    <option value="BI">Burundi</option>
+                                                    <option value="KH">Cambodia</option>
+                                                    <option value="CM">Cameroon</option>
+                                                    <option value="CA">Canada</option>
+                                                    <option value="CV">Cape Verde</option>
+                                                    <option value="KY">Cayman Islands</option>
+                                                    <option value="CF">Central African Republic</option>
+                                                    <option value="TD">Chad</option>
+                                                    <option value="CL">Chile</option>
+                                                    <option value="CN">China</option>
+                                                    <option value="CX">Christmas Island</option>
+                                                    <option value="CC">Cocos (Keeling) Islands</option>
+                                                    <option value="CO">Colombia</option>
+                                                    <option value="KM">Comoros</option>
+                                                    <option value="CG">Congo (Brazzaville)</option>
+                                                    <option value="CD">Congo (Kinshasa)</option>
+                                                    <option value="CK">Cook Islands</option>
+                                                    <option value="CR">Costa Rica</option>
+                                                    <option value="HR">Croatia</option>
+                                                    <option value="CU">Cuba</option>
+                                                    <option value="CW">Curaçao</option>
+                                                    <option value="CY">Cyprus</option>
+                                                    <option value="CZ">Czech Republic</option>
+                                                    <option value="DK">Denmark</option>
+                                                    <option value="DJ">Djibouti</option>
+                                                    <option value="DM">Dominica</option>
+                                                    <option value="DO">Dominican Republic</option>
+                                                    <option value="EC">Ecuador</option>
+                                                    <option value="EG">Egypt</option>
+                                                    <option value="SV">El Salvador</option>
+                                                    <option value="GQ">Equatorial Guinea</option>
+                                                    <option value="ER">Eritrea</option>
+                                                    <option value="EE">Estonia</option>
+                                                    <option value="SZ">Eswatini</option>
+                                                    <option value="ET">Ethiopia</option>
+                                                    <option value="FK">Falkland Islands</option>
+                                                    <option value="FO">Faroe Islands</option>
+                                                    <option value="FJ">Fiji</option>
+                                                    <option value="FI">Finland</option>
+                                                    <option value="FR">France</option>
+                                                    <option value="GF">French Guiana</option>
+                                                    <option value="PF">French Polynesia</option>
+                                                    <option value="TF">French Southern Territories</option>
+                                                    <option value="GA">Gabon</option>
+                                                    <option value="GM">Gambia</option>
+                                                    <option value="GE">Georgia</option>
+                                                    <option value="DE">Germany</option>
+                                                    <option value="GH">Ghana</option>
+                                                    <option value="GI">Gibraltar</option>
+                                                    <option value="GR">Greece</option>
+                                                    <option value="GL">Greenland</option>
+                                                    <option value="GD">Grenada</option>
+                                                    <option value="GP">Guadeloupe</option>
+                                                    <option value="GU">Guam</option>
+                                                    <option value="GT">Guatemala</option>
+                                                    <option value="GG">Guernsey</option>
+                                                    <option value="GN">Guinea</option>
+                                                    <option value="GW">Guinea-Bissau</option>
+                                                    <option value="GY">Guyana</option>
+                                                    <option value="HT">Haiti</option>
+                                                    <option value="HM">Heard Island and McDonald Islands</option>
+                                                    <option value="HN">Honduras</option>
+                                                    <option value="HK">Hong Kong</option>
+                                                    <option value="HU">Hungary</option>
+                                                    <option value="IS">Iceland</option>
+                                                    <option value="IN">India</option>
+                                                    <option value="ID">Indonesia</option>
+                                                    <option value="IR">Iran</option>
+                                                    <option value="IQ">Iraq</option>
+                                                    <option value="IE">Ireland</option>
+                                                    <option value="IM">Isle of Man</option>
+                                                    <option value="IL">Israel</option>
+                                                    <option value="IT">Italy</option>
+                                                    <option value="CI">Ivory Coast</option>
+                                                    <option value="JM">Jamaica</option>
+                                                    <option value="JP">Japan</option>
+                                                    <option value="JE">Jersey</option>
+                                                    <option value="JO">Jordan</option>
+                                                    <option value="KZ">Kazakhstan</option>
+                                                    <option value="KE">Kenya</option>
+                                                    <option value="KI">Kiribati</option>
+                                                    <option value="KW">Kuwait</option>
+                                                    <option value="KG">Kyrgyzstan</option>
+                                                    <option value="LA">Laos</option>
+                                                    <option value="LV">Latvia</option>
+                                                    <option value="LB">Lebanon</option>
+                                                    <option value="LS">Lesotho</option>
+                                                    <option value="LR">Liberia</option>
+                                                    <option value="LY">Libya</option>
+                                                    <option value="LI">Liechtenstein</option>
+                                                    <option value="LT">Lithuania</option>
+                                                    <option value="LU">Luxembourg</option>
+                                                    <option value="MO">Macao</option>
+                                                    <option value="MG">Madagascar</option>
+                                                    <option value="MW">Malawi</option>
+                                                    <option value="MY">Malaysia</option>
+                                                    <option value="MV">Maldives</option>
+                                                    <option value="ML">Mali</option>
+                                                    <option value="MT">Malta</option>
+                                                    <option value="MH">Marshall Islands</option>
+                                                    <option value="MQ">Martinique</option>
+                                                    <option value="MR">Mauritania</option>
+                                                    <option value="MU">Mauritius</option>
+                                                    <option value="YT">Mayotte</option>
+                                                    <option value="MX">Mexico</option>
+                                                    <option value="FM">Micronesia</option>
+                                                    <option value="MD">Moldova</option>
+                                                    <option value="MC">Monaco</option>
+                                                    <option value="MN">Mongolia</option>
+                                                    <option value="ME">Montenegro</option>
+                                                    <option value="MS">Montserrat</option>
+                                                    <option value="MA">Morocco</option>
+                                                    <option value="MZ">Mozambique</option>
+                                                    <option value="MM">Myanmar</option>
+                                                    <option value="NA">Namibia</option>
+                                                    <option value="NR">Nauru</option>
+                                                    <option value="NP">Nepal</option>
+                                                    <option value="NL">Netherlands</option>
+                                                    <option value="NC">New Caledonia</option>
+                                                    <option value="NZ">New Zealand</option>
+                                                    <option value="NI">Nicaragua</option>
+                                                    <option value="NE">Niger</option>
+                                                    <option value="NG">Nigeria</option>
+                                                    <option value="NU">Niue</option>
+                                                    <option value="NF">Norfolk Island</option>
+                                                    <option value="KP">North Korea</option>
+                                                    <option value="MK">North Macedonia</option>
+                                                    <option value="MP">Northern Mariana Islands</option>
+                                                    <option value="NO">Norway</option>
+                                                    <option value="OM">Oman</option>
+                                                    <option value="PK">Pakistan</option>
+                                                    <option value="PS">Palestinian Territory</option>
+                                                    <option value="PA">Panama</option>
+                                                    <option value="PG">Papua New Guinea</option>
+                                                    <option value="PY">Paraguay</option>
+                                                    <option value="PE">Peru</option>
+                                                    <option value="PH">Philippines</option>
+                                                    <option value="PN">Pitcairn</option>
+                                                    <option value="PL">Poland</option>
+                                                    <option value="PT">Portugal</option>
+                                                    <option value="PR">Puerto Rico</option>
+                                                    <option value="QA">Qatar</option>
+                                                    <option value="RE">Reunion</option>
+                                                    <option value="RO">Romania</option>
+                                                    <option value="RU">Russia</option>
+                                                    <option value="RW">Rwanda</option>
+                                                    <option value="BL">Saint Barthélemy</option>
+                                                    <option value="SH">Saint Helena</option>
+                                                    <option value="KN">Saint Kitts and Nevis</option>
+                                                    <option value="LC">Saint Lucia</option>
+                                                    <option value="SX">Saint Martin (Dutch part)</option>
+                                                    <option value="MF">Saint Martin (French part)</option>
+                                                    <option value="PM">Saint Pierre and Miquelon</option>
+                                                    <option value="VC">Saint Vincent and the Grenadines</option>
+                                                    <option value="WS">Samoa</option>
+                                                    <option value="SM">San Marino</option>
+                                                    <option value="ST">São Tomé and Príncipe</option>
+                                                    <option value="SA">Saudi Arabia</option>
+                                                    <option value="SN">Senegal</option>
+                                                    <option value="RS">Serbia</option>
+                                                    <option value="SC">Seychelles</option>
+                                                    <option value="SL">Sierra Leone</option>
+                                                    <option value="SG">Singapore</option>
+                                                    <option value="SK">Slovakia</option>
+                                                    <option value="SI">Slovenia</option>
+                                                    <option value="SB">Solomon Islands</option>
+                                                    <option value="SO">Somalia</option>
+                                                    <option value="ZA">South Africa</option>
+                                                    <option value="GS">South Georgia/Sandwich Islands</option>
+                                                    <option value="KR">South Korea</option>
+                                                    <option value="SS">South Sudan</option>
+                                                    <option value="ES">Spain</option>
+                                                    <option value="LK">Sri Lanka</option>
+                                                    <option value="SD">Sudan</option>
+                                                    <option value="SR">Suriname</option>
+                                                    <option value="SJ">Svalbard and Jan Mayen</option>
+                                                    <option value="SE">Sweden</option>
+                                                    <option value="CH">Switzerland</option>
+                                                    <option value="SY">Syria</option>
+                                                    <option value="TW">Taiwan</option>
+                                                    <option value="TJ">Tajikistan</option>
+                                                    <option value="TZ">Tanzania</option>
+                                                    <option value="TH">Thailand</option>
+                                                    <option value="TL">Timor-Leste</option>
+                                                    <option value="TG">Togo</option>
+                                                    <option value="TK">Tokelau</option>
+                                                    <option value="TO">Tonga</option>
+                                                    <option value="TT">Trinidad and Tobago</option>
+                                                    <option value="TN">Tunisia</option>
+                                                    <option value="TR">Turkey</option>
+                                                    <option value="TM">Turkmenistan</option>
+                                                    <option value="TC">Turks and Caicos Islands</option>
+                                                    <option value="TV">Tuvalu</option>
+                                                    <option value="UG">Uganda</option>
+                                                    <option value="UA">Ukraine</option>
+                                                    <option value="AE">United Arab Emirates</option>
+                                                    <option value="GB">United Kingdom (UK)</option>
+                                                    <option value="US">United States (US)</option>
+                                                    <option value="UM">United States (US) Minor Outlying Islands</option>
+                                                    <option value="UY">Uruguay</option>
+                                                    <option value="UZ">Uzbekistan</option>
+                                                    <option value="VU">Vanuatu</option>
+                                                    <option value="VA">Vatican</option>
+                                                    <option value="VE">Venezuela</option>
+                                                    <option value="VN">Vietnam</option>
+                                                    <option value="VG">Virgin Islands (British)</option>
+                                                    <option value="VI">Virgin Islands (US)</option>
+                                                    <option value="WF">Wallis and Futuna</option>
+                                                    <option value="EH">Western Sahara</option>
+                                                    <option value="YE">Yemen</option>
+                                                    <option value="ZM">Zambia</option>
+                                                    <option value="ZW">Zimbabwe</option>
+                                                </select>                                        
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-center mb-2">
+                                            <div class="col-3">
+                                                <label class="form-label mb-0 me-2">City and State:*</label>
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="text" placeholder="City" class="form-control form-control-sm">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" placeholder="Select a State" class="form-control form-control-sm">
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-center mb-2">
+                                            <div class="col-3">
+                                                <label class="form-label mb-0 me-2">Post Code:*</label>
+                                            </div>
+                                            <div class="col-9">
+                                                <input type="text" placeholder="e.g. 10019" class="form-control form-control-sm">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center mt-3 mb-2">
+                                        <div class="col-3">
+                                            <label class="form-label mb-0 me-2">Phone:*</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input type="text" placeholder="e.g. 877 2733049" class="form-control form-control-sm">                                  
+                                        </div>                                
+                                    </div>                           
+                                    <div class="row align-items-center">
+                                        <div class="col-3">
+                                            <label class="form-label mb-0 me-2">Email Address:*</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input type="text" placeholder="hello@example.com" class="form-control form-control-sm">                                  
+                                        </div>                                
+                                    </div>                           
+                                </div>
+                                <button type="button" class="btn btn-sm btn-primary mt-5 mb-2">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Selected Product
+                            </div>
+                            <div class="card-body">
+                                <div class="no-product-found text-center">
+                                    <img src="./assets/img/empty-table.png" alt="">
+                                    <p class="mt-0 mb-0">No products have been selected</p>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="unread" role="tabpanel" aria-labelledby="unread-tab">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header card-h-title">
+                                Script
+                            </div>
+                            <div class="card-body">
+                                <div class="script-content ms-3">
+                                    <div class="mb-2">
+                                        <strong>Agent Verification Script:&nbsp;</strong>
+                                    </div>
+                                    <ol>
+                                        <li>Before proceeding with your order, would you mind verifying product details and some personal information to
+                                            ensure your order is submitted successfully? [CLIENT ANSWER]</li>
+                                        <li>I see you're submitting an order for [insert product and quantity]. Is this correct? [CLIENT ANSWER]</li>
+                                        <li>May I please confirm the last four digits of the credit card number (or bank account) you are using for this
+                                            purchase? [CLIENT ANSWER]</li>
+                                        <li>Can you please verify your physical address and zip code? [CLIENT ANSWER]. Is your billing address the same?
+                                            [CLIENT ANSWER]</li>
+                                        <li>Lastly, to help me verify your identity, please tell me the phone number on the account and also verify your
+                                            birth date. [CLIENT ANSWER]</li>
+                                        <li>Before we proceed with the purchase, do you have any additional questions for me? [CLIENT ANSWER]</li>
+                                        <li>If you think of any additional questions, please give us a call at [user_phone_number]. Thank you for doing
+                                            business with [user_organization_name], and we hope you have a great rest of your day.&nbsp;</li>
+                                    </ol>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="iwasmentioned" role="tabpanel" aria-labelledby="iwasmentioned-tab">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header card-h-title">
+                                Cart
+                            </div>
+                            <div class="card-body">
+                                <table class="left-tray-sales-table table table-bordered mt-4">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col" colspan="1"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Subtotal</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <th class="text-center" scope="row" colspan="1">X</th>
+                                        <td class="text-center" colspan="1">img</td>
+                                        <td>AtmosAi Invoice</td>
+                                        <td>$0.00</td>
+                                        <td>$0.00</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row" colspan="5"></th>
+                                      </tr>
+                                    </tbody>
+                                </table>
+                                <div class="cart-totals">
+                                    <div class="row">
+                                        <div class="col-6">
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="cart-total-title mb-3">
+                                                Cart totals
+                                            </div>
+                                            <table class="left-tray-sales-table table table-bordered">
+                                                <thead>
+                                                  <tr>
+                                                    <th scope="col">Subtotal</th>
+                                                    <th scope="col">$0.00</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                    <td>Discount</td>
+                                                    <td>$0.00</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Tax</td>
+                                                    <td>$0.00</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Total</td>
+                                                    <td>$0.00</td>
+                                                  </tr>
+                                                </tbody>
+                                            </table>
+                                            <button type="button" class="btn btn-sm btn-primary mt-2 mb-2">Proceed to checkout</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="no-product-found text-center d-none">
+                                    <img class="adjust-img" src="./assets/img/empty-table.png" alt="">
+                                    <p class="mt-0 mb-0">No products have been selected</p>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- left notification tray end -->

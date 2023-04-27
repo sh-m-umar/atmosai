@@ -1,0 +1,1175 @@
+<div class="wrapper-loaded">
+    <div class="page-header">
+        <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+            <div class="header-lhs d-flex align-items-center">
+                <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                Dashboard
+                </h4>
+                <span class="ms-2 me-2"><i class="fa-thin fa-circle-info"></i></span>
+                <span class="favorite"><i class="fa-thin fa-star"></i></span>
+            </div>
+            <div class="header-rhs d-flex align-items-center">
+                <div class="header-rhs-inner d-flex align-items-center">
+                    <div class="header-rhs-person d-flex">
+                        <i class="fa-light fa-user-gear cable" data-bs-toggle="modal" data-bs-target="#team-subscribe-popup"></i>
+                        <small class="mx-2">{{currentUser?.display_name}}</small>
+                        <span class="cable"><i class="fa-light fa-xmark"></i></span>
+                        <!--
+                        <div *ngIf="showUserDropDown">
+                          <mat-form-field floatLabel="never" appearance="outline">
+                            <input type="text"
+                                   matInput
+                                   [(ngModel)]="peopleSearchString"
+                                   (ngModelChange)="filterPeople()"
+                                   [matAutocomplete]="searchPeople"
+                                   class="no-blue-input text-dark"
+                                   placeholder="People">
+                            <mat-autocomplete autoActiveFirstOption #searchPeople="matAutocomplete">
+                                <mat-option *ngFor="let option of filteredPeople"
+                                            name="option.display_name">
+                                    {{option.display_name}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                        </div>
+                        -->
+                    </div>
+
+                    <!-- Select user to view data popup start -->
+                    <div class="modal fade invite-modal pt-5" id="team-subscribe-popup" tabindex="-1" aria-labelledby="team-subscribe-popupModal" aria-hidden="true">
+                        <div class="modal-dialog pt-5 mt-5">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="invite-modal-header">
+                                        <h2 class="modal-title mt-0 mb-1"><i class="fa-solid fa-circle-plus me-2"></i> Select user to view data</h2>
+                                        <button type="button" id="filter-popup-close" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="m-body-wrapper">
+                                        <div class="subscriber-search">
+                                            <input type="text" class="form-control" [matAutocomplete]="auto">
+                                            <mat-autocomplete #auto="matAutocomplete">
+                                                <mat-option *ngFor="let user of users" [value]="user.display_name">
+                                                    <div class="d-flex align-items-center" (click)="filterByUser( user.ID, user.display_name )">
+                                                        <div class="initials" style="background: blueviolet;" *ngIf="user.fname[0] && user.lname">{{user.fname[0]}}{{user.lname[0]}}</div>
+                                                        <div class="initials" style="background: blueviolet;" *ngIf="!user.fname[0] || !user.lname">{{user.display_name[0]}}</div>
+                                                        <span class="username">{{user.display_name}}</span>
+                                                    </div>
+                                                </mat-option>
+                                            </mat-autocomplete>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Select user to view data popup end -->
+
+                    <div class="header-rhs-owner d-flex align-items-center">
+                      <div class="user-picture initials ng-star-inserted"> {{currentUser?.display_name[0]}} </div>
+                      <div class="info-container">
+                        <div class="user-name ng-star-inserted">{{currentUser?.display_name}}</div>
+                        <div class="user-title ng-star-inserted">{{currentUser?.user_email}}</div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">Dashboard details
+            <i class="fa-solid fa-ellipsis"></i>
+        </div>
+    </div>
+    <div>
+        <div class="ngx-style" *ngIf="dashboardId == 1">
+            <div class="row services-card" cdkDropList>
+                <div cdkDrag class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-3 mb-3" >
+                    <div class="card bg-primary text-white primary">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-white text-primary"><i class="fa-solid fa-credit-card"></i></div>
+                                <div class="mt-1 ms-3">
+                                <h6 class="text-white">Total balance</h6>
+                                <h4 class="text-white"><span>$</span>28.33K</h4>
+                                <!-- <small class="text-white">Month Total this month</small> -->
+                                </div>
+                            </div>
+                            <div class="progress mt-4">
+                                <div class="progress-bar bg-white" role="progressbar" style="width:100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3">
+                                <span>
+                                <div class="card-icon-growth"><i class="fa-light fa-loader me-1"></i></div>
+                                Pending<span> $</span>0
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div cdkDrag class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-3 mb-3">
+                    <div class="card success">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-success text-white"><i class="fa-solid fa-file"></i></div>
+                                <div class="mt-1 ms-3 card-text">
+                                    <h6>Total Invoice</h6>
+                                    <div><b>176</b></div>
+                                    <small class="text-muted">11 This Month</small>
+                                </div>
+                            </div>
+                            <div class="progress mt-3">
+                                <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': 90+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3">
+                                <span class="text-danger">
+                                    <div  icon="arrow-upward-outline" class="card-icon-growth"><i class="fa-light fa-arrow-up"></i></div>
+                                    90%
+                                </span>
+                                Since Last Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div cdkDrag class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-3 mb-3">
+                    <div class="card warning">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-warning text-white"><i class="fa-solid fa-users"></i></div>
+                                <div class="mt-1 ms-3 card-text">
+                                    <h6>Total Customers</h6>
+                                    <div><b>176</b></div>
+                                    <small class="text-muted">11 This Month</small>
+                                </div>
+                            </div>
+                            <div class="progress mt-3">
+                                <div class="progress-bar bg-warning" role="progressbar" [ngStyle]="{'width': 60+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3">
+                                <span class="text-danger">
+                                    <div  icon="arrow-upward-outline" class="card-icon-growth"><i class="fa-light fa-arrow-up"></i></div>
+                                    90%
+                                </span>
+                                Since Last Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div cdkDrag class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-3 mb-3">
+                    <div class="card info">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-info text-white"><i class="fa-solid fa-file"></i></div>
+                                <div class="mt-1 ms-3 card-text">
+                                    <h6>Total Estimate</h6>
+                                    <div><b>176</b></div>
+                                    <small class="text-muted">11 This Month</small>
+                                </div>
+                            </div>
+                            <div class="progress mt-3">
+                                <div class="progress-bar bg-info" role="progressbar" [ngStyle]="{'width': 30+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3">
+                                <span class="text-danger">
+                                    <div  icon="arrow-upward-outline" class="card-icon-growth"><i class="fa-light fa-arrow-up"></i></div>
+                                    90%
+                                </span>
+                                Since Last Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-8  mb-3">
+                        <div class="card">
+                            <div class="card-header">Profit & Loss</div>
+                            <div class="card-body p-0">
+                                <div echarts [options]="chartOption1" class="profitLoss"></div>
+                            </div>
+                            <div class="card-footer text-primary chart-footer d-flex align-items-center justify-content-between p-4 px-5 m-4 mx-5">
+                                <div>
+                                    <span class="d-block ">Total Income</span><b>$509099</b>
+                                </div>
+                                <div>
+                                    <span class="d-block">Total Expense</span><b>$509099</b>
+                                </div>
+                                <div>
+                                    <span class="d-block">Total Profit</span><b>$509099</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-4  mb-3">
+                        <div class="card h-100">
+                            <div class="card-header d-flex align-items-center justify-content-between">Transactions <button class="btn btn-sm btn-primary">View All</button></div>
+                            <div class="card-body">
+                                <table  class="table table-striped table-borderless height-47">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="date">Date</th>
+                                            <th scope="col" class="category">Category</th>
+                                            <th scope="col" class="amount">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Sep 28, 2022, 01:26 </td>
+                                            <td>
+                                                <span class="badge bg-primary">Income</span>
+                                            </td>
+                                            <td class="text-primary">
+                                                <span>₹</span>1672.25
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sep 28, 2022, 01:26 </td>
+                                            <td>
+                                                <span class="badge bg-primary">Income</span>
+                                            </td>
+                                            <td class="text-primary">
+                                                <span>₹</span>1672.25
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sep 28, 2022, 01:26 </td>
+                                            <td>
+                                                <span class="badge bg-primary">Income</span>
+                                            </td>
+                                            <td class="text-primary">
+                                                <span>₹</span>1672.25
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sep 28, 2022, 01:26 </td>
+                                            <td>
+                                                <span class="badge bg-primary">Income</span>
+                                            </td>
+                                            <td class="text-primary">
+                                                <span>₹</span>1672.25
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sep 28, 2022, 01:26 </td>
+                                            <td>
+                                                <span class="badge bg-primary">Income</span>
+                                            </td>
+                                            <td class="text-primary">
+                                                <span>₹</span>1672.25
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6  mb-3">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center justify-content-between">Recent Invoice <button class="btn btn-sm btn-primary">View All</button></div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-borderless align-middle height-66">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="customer">Customer</th>
+                                                <th scope="col" class="total-amount">Amount</th>
+                                                <th scope="col" class="issue-date">Due date</th>
+                                                <th scope="col" class="status text-center">Status</th>
+                                                <th class="text-center">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6  mb-3">
+                        <div class="card">
+                            <div class="card-header">Invoice Analytics</div>
+                            <div class="card-body">
+                                <div echarts [options]="chartOption2" class="profitLoss"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6  mb-3">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center justify-content-between">Recent Estimates <button class="btn btn-sm btn-primary">View All</button></div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-borderless align-middle height-66">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="customer">Customer</th>
+                                                <th scope="col" class="total-amount">Amount</th>
+                                                <th scope="col" class="issue-date">Due date</th>
+                                                <th scope="col" class="status text-center">Status</th>
+                                                <th class="text-center">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6  mb-3">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center justify-content-between">Recent Bills <button class="btn btn-sm btn-primary">View All</button></div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-borderless align-middle height-66">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="customer">Vendor</th>
+                                                <th scope="col" class="total-amount">Amount</th>
+                                                <th scope="col" class="issue-date">Due date</th>
+                                                <th scope="col" class="status text-center">Status</th>
+                                                <th class="text-center">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="initials">TE</div>
+                                                        <div class="lineh-16">
+                                                            Tawassual Gohar
+                                                            <small class="d-block">tge@mail.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$5</td>
+                                                <td>Oct 5, 2022, 18:10</td>
+                                                <td class="text-center"><div class="badge badge-sm bg-primary">Sent</div></td>
+                                                <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12  mb-3">
+                        <div class="card">
+                            <div class="card-header">Goals</div>
+                            <div class="card-body">
+                                <div class="goal-status-info d-flex align-items-center justify-content-between">
+                                    <div><b>Amount to reach </b> <span class="text-primary">$765567</span></div>
+                                    <div><b>Started at: </b>Aug 23, 2022, 18:30</div>
+                                    <div><b>End at: </b>Aug 23, 2022, 18:30</div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 10%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between mt-3">
+                                    <div><b>Name: Tawassual Gohar</b></div>
+                                    <button class="btn btn-sm bg-warning"><i class="fa-light fa-pencil me-1"></i>Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ngx-style" *ngIf="dashboardId == 2">
+            <!--
+            <div cdkDropList class="row services-card main">
+                <div cdkDrag class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-3 mb-3" >
+                    <div class="card bg-primary text-white primary">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-white text-primary"><i class="fa-solid fa-credit-card"></i></div>
+                                <div class="mt-1 ms-3">
+                                <h6 class="text-white">Total balance</h6>
+                                <h4 class="text-white"><span>$</span>28.33K</h4>
+                                <!-- <small class="text-white">Month Total this month</small>
+                                </div>
+                            </div>
+                            <div class="progress mt-4">
+                                <div class="progress-bar bg-white" role="progressbar" style="width:100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3">
+                                <span>
+                                <div class="card-icon-growth"><i class="fa-light fa-loader me-1"></i></div>
+                                Pending<span> $</span>0
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div cdkDrag class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-3 mb-3">
+                    <div class="card success">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-success text-white"><i class="fa-solid fa-file"></i></div>
+                                <div class="mt-1 ms-3 card-text">
+                                    <h6>Total Invoice</h6>
+                                    <div><b>176</b></div>
+                                    <small class="text-muted">11 This Month</small>
+                                </div>
+                            </div>
+                            <div class="progress mt-3">
+                                <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': 90+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3">
+                                <span class="text-danger">
+                                    <div  icon="arrow-upward-outline" class="card-icon-growth"><i class="fa-light fa-arrow-up"></i></div>
+                                    90%
+                                </span>
+                                Since Last Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div cdkDrag class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-3 mb-3">
+                    <div class="card warning">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-warning text-white"><i class="fa-solid fa-users"></i></div>
+                                <div class="mt-1 ms-3 card-text">
+                                    <h6>Total Customers</h6>
+                                    <div><b>176</b></div>
+                                    <small class="text-muted">11 This Month</small>
+                                </div>
+                            </div>
+                            <div class="progress mt-3">
+                                <div class="progress-bar bg-warning" role="progressbar" [ngStyle]="{'width': 60+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3">
+                                <span class="text-danger">
+                                    <div  icon="arrow-upward-outline" class="card-icon-growth"><i class="fa-light fa-arrow-up"></i></div>
+                                    90%
+                                </span>
+                                Since Last Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div cdkDrag class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-3 mb-3">
+                    <div class="card info">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-info text-white"><i class="fa-solid fa-file"></i></div>
+                                <div class="mt-1 ms-3 card-text">
+                                    <h6>Total Estimate</h6>
+                                    <div><b>176</b></div>
+                                    <small class="text-muted">11 This Month</small>
+                                </div>
+                            </div>
+                            <div class="progress mt-3">
+                                <div class="progress-bar bg-info" role="progressbar" [ngStyle]="{'width': 30+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3">
+                                <span class="text-danger">
+                                    <div  icon="arrow-upward-outline" class="card-icon-growth"><i class="fa-light fa-arrow-up"></i></div>
+                                    90%
+                                </span>
+                                Since Last Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
+            <div cdkDropList class="row services-card minni dashboard-card-color">
+                <div cdkDrag class="dashboard-card-color-outbound col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-3 mb-3">
+                    <div class="card info">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-info text-white"><i class="fa-solid fa-file"></i></div>
+                                <div class="mt-1 ms-3 card-text">
+                                    <h6>Revenue</h6>
+                                    <div><b style="font-size: 24px;">${{revenue | number:'1.0':'en-US'}}</b></div>
+                                    <small class="text-muted">${{monthRevenue | number:'1.0':'en-US'}} This Month</small>
+                                </div>
+                            </div>
+                            <div class="progress mt-3">
+                                <div class="progress-bar bg-info" role="progressbar" [ngStyle]="{'width': getProgressBarWidth( monthRevenueConversion ) + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3 profit-detail">
+                                <span [ngClass]="monthRevenueConversion > 0 ? 'text-success' : 'text-danger'">
+                                    <div  icon="arrow-upward-outline" class="card-icon-growth"><i *ngIf="monthRevenueConversion > 0" class="fa-light fa-arrow-up"></i><i *ngIf="monthRevenueConversion < 0" class="fa-light fa-arrow-down"></i></div>
+                                    {{monthRevenueConversion}}%
+                                </span>
+                                Since Last Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div cdkDrag class="dashboard-card-color-all-calls col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-3 mb-3">
+                    <div class="card success">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-success text-white"><i class="fa-solid fa-file"></i></div>
+                                <div class="mt-1 ms-3 card-text">
+                                    <h6>Expected Revenue</h6>
+                                    <div><b style="font-size: 24px;">${{expectedRevenue | number:'1.0':'en-US'}}</b></div>
+                                    <small class="text-muted">${{monthExpectedRevenue | number:'1.0':'en-US'}} This Month</small>
+                                </div>
+                            </div>
+                            <div class="progress mt-3">
+                                <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': getProgressBarWidth( expectedRevenueConversion ) + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3 profit-detail">
+                                <span [ngClass]="expectedRevenueConversion > 0 ? 'text-success' : 'text-danger'">
+                                    <div  icon="arrow-upward-outline" class="card-icon-growth"><i *ngIf="expectedRevenueConversion > 0" class="fa-light fa-arrow-up"></i><i *ngIf="expectedRevenueConversion < 0" class="fa-light fa-arrow-down"></i></div>
+                                    {{expectedRevenueConversion}}%
+                                </span>
+                                Since Last Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div cdkDrag class="dashboard-card-color-emails col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-3 mb-3">
+                    <div class="card warning bg-sent-emails">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-warning bg-sent-emails text-white"><i class="fa-solid fa-file"></i></div>
+                                <div class="mt-1 ms-3 card-text">
+                                    <h6>Deals in Pipeline</h6>
+                                    <div><b style="font-size: 24px;">{{pipelineDeals}}</b></div>
+                                    <small class="text-muted">{{monthPipelineDeals}} This Month</small>
+                                </div>
+                            </div>
+                            <div class="progress mt-3">
+                                <div class="progress-bar bg-sent-emails" role="progressbar" [ngStyle]="{'width': getProgressBarWidth( pipelineDealsConversion ) + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3 profit-detail">
+                                <span [ngClass]="pipelineDealsConversion > 0 ? 'text-success' : 'text-danger'">
+                                    <div  icon="arrow-upward-outline" class="card-icon-growth"><i *ngIf="pipelineDealsConversion > 0" class="fa-light fa-arrow-up"></i><i *ngIf="pipelineDealsConversion < 0" class="fa-light fa-arrow-down"></i></div>
+                                    {{pipelineDealsConversion}}%
+                                </span>
+                                Since Last Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div cdkDrag class="dashboard-card-color-contact col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-3 mb-3">
+                    <div class="card success">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-success text-white"><i class="fa-solid fa-file"></i></div>
+                                <div class="mt-1 ms-3 card-text">
+                                    <h6>Won Deals</h6>
+                                    <div><b style="font-size: 24px;">{{widgetWonDeals}}</b></div>
+                                    <small class="text-muted">{{monthWonDeals}} This Month</small>
+                                </div>
+                            </div>
+                            <div class="progress mt-3">
+                                <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': getProgressBarWidth( wonDealsConversion ) + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3 profit-detail">
+                                <span [ngClass]="wonDealsConversion > 0 ? 'text-success' : 'text-danger'">
+                                    <div  icon="arrow-upward-outline" class="card-icon-growth"><i *ngIf="wonDealsConversion > 0" class="fa-light fa-arrow-up"></i><i *ngIf="wonDealsConversion < 0" class="fa-light fa-arrow-down"></i></div>
+                                    {{wonDealsConversion}}%
+                                </span>
+                                Since Last Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div cdkDrag class="dashboard-card-color-created col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-3 mb-3">
+                    <div class="card warning">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-warning text-white"><i class="fa-solid fa-file"></i></div>
+                                <div class="mt-1 ms-3 card-text">
+                                    <h6>Lost Deals</h6>
+                                    <div><b style="font-size: 24px;">{{lostDeals}}</b></div>
+                                    <small class="text-muted">{{monthLostDeals}} This Month</small>
+                                </div>
+                            </div>
+                            <div class="progress mt-3">
+                                <div class="progress-bar bg-warning" role="progressbar" [ngStyle]="{'width': getProgressBarWidth( lostDealsConversion ) + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3 profit-detail">
+                                <span [ngClass]="lostDealsConversion > 0 ? 'text-success' : 'text-danger'">
+                                    <div  icon="arrow-upward-outline" class="card-icon-growth"><i *ngIf="lostDealsConversion > 0" class="fa-light fa-arrow-up"></i><i *ngIf="lostDealsConversion < 0" class="fa-light fa-arrow-down"></i></div>
+                                    {{lostDealsConversion}}%
+                                </span>
+                                Since Last Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div cdkDrag class="dashboard-card-color-received col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-3 mb-3">
+                    <div class="card info bg-received">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-info bg-received text-white"><i class="fa-solid fa-file"></i></div>
+                                <div class="mt-1 ms-3 card-text">
+                                    <h6>Conversion %</h6>
+                                    <div><b style="font-size: 24px;">{{dealsConversion}}%</b></div>
+                                    <small class="text-muted">{{monthDealsConversion}}% This Month</small>
+                                </div>
+                            </div>
+                            <div class="progress mt-3">
+                                <div class="progress-bar bg-received" role="progressbar" [ngStyle]="{'width': getProgressBarWidth( lastToThisMonthConversion ) + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3 profit-detail">
+                                <span [ngClass]="lastToThisMonthConversion > 0 ? 'text-success' : 'text-danger'">
+                                    <div  icon="arrow-upward-outline" class="card-icon-growth"><i *ngIf="lastToThisMonthConversion > 0" class="fa-light fa-arrow-up"></i><i *ngIf="lastToThisMonthConversion < 0" class="fa-light fa-arrow-down"></i></div>
+                                    {{lastToThisMonthConversion}}%
+                                </span>
+                                Since Last Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--
+                <div cdkDrag class="dashboard-card-color-contact col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-2 mb-3">
+                    <div class="card info bg-contact">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-info bg-contact text-white"><i class="fa-solid fa-file"></i></div>
+                                <div class="mt-1 ms-3 card-text">
+                                    <h6>All Contacts</h6>
+                                    <div><b>176</b></div>
+                                    <small class="text-muted">11 This Month</small>
+                                </div>
+                            </div>
+                            <div class="progress mt-3">
+                                <div class="progress-bar bg-info bg-contact" role="progressbar" [ngStyle]="{'width': 30+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3 profit-detail">
+                                <span class="text-danger">
+                                    <div  icon="arrow-upward-outline" class="card-icon-growth"><i class="fa-light fa-arrow-up"></i></div>
+                                    90%
+                                </span>
+                                Since Last Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div cdkDrag class="dashboard-card-color-opportunity col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-2 mb-3">
+                    <div class="card info bg-opportunity">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-info bg-opportunity text-white"><i class="fa-solid fa-file"></i></div>
+                                <div class="mt-1 ms-3 card-text">
+                                    <h6>Opportunities</h6>
+                                    <div><b>176</b></div>
+                                    <small class="text-muted">11 This Month</small>
+                                </div>
+                            </div>
+                            <div class="progress mt-3">
+                                <div class="progress-bar bg-info bg-opportunity" role="progressbar" [ngStyle]="{'width': 30+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3 profit-detail">
+                                <span class="text-danger">
+                                    <div  icon="arrow-upward-outline" class="card-icon-growth"><i class="fa-light fa-arrow-up"></i></div>
+                                    90%
+                                </span>
+                                Since Last Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div cdkDrag class="dashboard-card-color-closed col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-2 mb-3">
+                    <div class="card info bg-closed">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="card-icon bg-info bg-closed text-white"><i class="fa-solid fa-file"></i></div>
+                                <div class="mt-1 ms-3 card-text">
+                                    <h6>Closed opportunities</h6>
+                                    <div><b>176</b></div>
+                                    <small class="text-muted">11 This Month</small>
+                                </div>
+                            </div>
+                            <div class="progress mt-3">
+                                <div class="progress-bar bg-info bg-closed" role="progressbar" [ngStyle]="{'width': 30+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3 profit-detail">
+                                <span class="text-danger">
+                                    <div  icon="arrow-upward-outline" class="card-icon-growth"><i class="fa-light fa-arrow-up"></i></div>
+                                    90%
+                                </span>
+                                Since Last Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                -->
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-2  mb-3">
+                    <div class="card-placeholder"><i class="fa-solid fa-plus"></i></div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-2  mb-3">
+                    <div class="card-placeholder"><i class="fa-solid fa-plus"></i></div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-2  mb-3">
+                    <div class="card-placeholder"><i class="fa-solid fa-plus"></i></div>
+                </div>
+
+            </div>
+            <div class="mt-3">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-8 mb-3">
+                        <div class="card">
+                            <div class="card-header">Sales trend w/forecast</div>
+                            <div class="card-body p-0">
+                                <ejs-chart id='spline-chartcontainer' [legendSettings]='SalesTrendForecastChart.legendSettings' [titleStyle]='SalesTrendForecastChart.titleStyle' align='center' [chartArea]='SalesTrendForecastChart.chartArea' style='display:block;' [primaryXAxis]='SalesTrendForecastChart.primaryXAxis'
+                                    [primaryYAxis]='SalesTrendForecastChart.primaryYAxis' [title]='SalesTrendForecastChart.title' [tooltip]='SalesTrendForecastChart.tooltip' [legendSettings]='SalesTrendForecastChart.legend'>
+                                    <e-series-collection>
+                                        <e-series [dataSource]='SalesTrendForecastChart.dealValueData' type='Spline' xName='date' yName='value' name='Deal Value' width=2 [marker]='SalesTrendForecastChart.marker'> </e-series>
+                                        <e-series [dataSource]='SalesTrendForecastChart.foreCastData' type='Spline' xName='date' yName='value' name='Forecast Value' width=2 [marker]='SalesTrendForecastChart.marker'> </e-series>
+                                    </e-series-collection>
+                                </ejs-chart>
+                            </div>
+                            <div class="card-footer text-primary chart-footer d-flex align-items-center justify-content-between p-4 px-5 m-4 mx-5">
+                                <div>
+                                    <span class="d-block ">Total Forecast Value</span><b>$ {{SalesTrendForecastChart.totalForeCastValue || 0}}</b>
+                                </div>
+                                <div>
+                                    <span class="d-block">Total Deal Value</span><b>$ {{SalesTrendForecastChart.totalDealValue || 0}}</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-header d-flex align-items-center justify-content-between">Leader Board – Opportunities Won <a class="btn btn-sm btn-primary" [routerLink]="['/boards/2']">View All</a></div>
+                            <div class="card-body">
+                                <table  class="table table-striped table-borderless height-47">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="customer">Deal name</th>
+                                            <th scope="col" class="date">Date</th>
+                                            <th scope="col" class="category">Owner</th>
+                                            <th scope="col" class="amount">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      <ng-container *ngFor="let deal of wonDeals | slice:0: (wonDeals.length > 7 ? 7 - wonDeals.length : 7);">
+                                        <tr>
+                                            <td>{{deal?.item}}</td>
+                                            <td>{{deal?.created?.date}}</td>
+                                            <td>
+                                                <!-- <span class="badge">{{deal?.ownerNames?.length? deal?.ownerNames[0] : '-'}}</span> -->
+                                                <span class="initials">{{deal?.ownerNames?.length? getInitials(deal?.ownerNames[0]) : '-'}}</span>
+                                            </td>
+                                            <td class="text-primary">
+                                                <span *ngIf="deal?.deal_value">$</span>{{deal?.deal_value}}
+                                            </td>
+                                        </tr>
+                                      </ng-container>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center justify-content-between">Top deals pending <a class="btn btn-sm btn-primary" [routerLink]="['/boards/2']">View All</a></div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-borderless align-middle height-66">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="customer">Deal name</th>
+                                                <th scope="col" class="total-amount">Amount</th>
+                                                <th scope="col" class="issue-date">Due date</th>
+                                                <th scope="col" class="status text-center">Status</th>
+                                                <th class="text-center">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          <ng-container *ngFor="let deal of activeDeals | slice:0: (activeDeals.length > 7 ? 7 - activeDeals.length : 7)">
+                                            <tr>
+                                              <td>
+                                                <div class="d-flex align-items-center">
+                                                  <div class="initials">{{deal?.item[0]}}</div>
+                                                  <div class="lineh-16">
+                                                    {{deal?.item}}
+                                                    <small class="d-block">{{deal?.email}}</small>
+                                                  </div>
+                                                </div>
+                                              </td>
+                                              <td>
+                                                <span *ngIf="deal.deal_value">${{deal.deal_value}}</span>
+                                              </td>
+                                              <td>{{deal?.created?.date}}</td>
+                                              <td class="text-center"><div class="badge badge-sm" [ngStyle]="{'background-color': deal?.stageColor}" *ngIf="deal?.stageName">{{deal?.stageName}}</div></td>
+                                              <td class="text-center"><span><i class="fa-light fa-eye"></i></span></td>
+                                            </tr>
+                                          </ng-container>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">
+                        <div class="card">
+                            <div class="card-header">Sales funnel</div>
+                            <div class="card-body">
+                                <div echarts [options]="chartOption3" class=""></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center justify-content-between">New Customers <a class="btn btn-sm btn-primary" [routerLink]="['/boards/4']">View All</a></div>
+                            <div class="card-body">
+                              <ejs-chart id="chart-container" [primaryXAxis]="newCustomersChart.primaryXAxis" [primaryYAxis]="newCustomersChart.primaryYAxis" [tooltip]="newCustomersChart.tooltip" [legendSettings]="newCustomersChart.legendSettings">
+                                <e-series-collection>
+                                  <e-series [dataSource]="newCustomersChart.chartData" [type]="newCustomersChart.type" [xName]="newCustomersChart.xName" [yName]="newCustomersChart.yName" [name]=newCustomersChart.name>
+                                  </e-series>
+                                </e-series-collection>
+                                </ejs-chart>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center justify-content-between">Sales by Country</div>
+                            <div class="card-body">
+                                <app-maps></app-maps>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 mb-3">
+                        <div class="card">
+                            <div class="card-header">Goals</div>
+                            <div class="card-body">
+                                <div class="goal-status-info d-flex align-items-center justify-content-between">
+                                    <div><b>Amount to reach </b> <span class="text-primary">$765567</span></div>
+                                    <div><b>Started at: </b>Aug 23, 2022, 18:30</div>
+                                    <div><b>End at: </b>Aug 23, 2022, 18:30</div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 10%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between mt-3">
+                                    <div><b>Name: Tawassual Gohar</b></div>
+                                    <button class="btn btn-sm bg-warning"><i class="fa-light fa-pencil me-1"></i>Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

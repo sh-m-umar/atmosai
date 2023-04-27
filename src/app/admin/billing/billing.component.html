@@ -1,0 +1,763 @@
+<div class="admin-page-wrapper">
+    <div class="page-header">
+        <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+            <div class="header-lhs d-flex align-items-center">
+                <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                    <span>Billing</span>
+                </h4>
+                <span class="ms-2 me-2" mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+                <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+            </div>
+            <div class="header-rhs d-flex align-items-center">
+                <div class="button-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary borderless dropdown-toggle-split" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Console log</a></li>
+                        <li><a class="dropdown-item">Clear local cache only</a></li>
+                        <li><a class="dropdown-item">Clear cache and database both</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">
+            <span>This is description</span>
+            <i class="fa-solid fa-ellipsis"></i>
+        </div>
+        <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+                <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">Billing</h5>
+                <ul class="tabslink nav boards-top-menu-style" id="nav-tab" role="tablist">
+                    <li class="nav-item" [ngClass]="{'active': activeTab==='overview'}" type="button">
+                        <div class="boards-top-menu-style-first" (click)="onTabChange('overview')"><i class="fa-thin fa-home"></i> Overview</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" [ngClass]="{'active': activeTab==='settings'}" type="button">
+                        <div class="boards-top-menu-style-first" (click)="onTabChange('settings')"><i class="fa-thin fa-home"></i> Settings</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" [ngClass]="{'active': activeTab==='invoices'}" type="button">
+                        <div class="boards-top-menu-style-first" (click)="onTabChange('invoices')"><i class="fa-thin fa-home"></i> Invoices</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" [ngClass]="{'active': activeTab==='payments'}" type="button">
+                        <div class="boards-top-menu-style-first" (click)="onTabChange('payments')"><i class="fa-thin fa-home"></i> Payment Method</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" [ngClass]="{'active': activeTab==='billing-contacts'}" type="button">
+                        <div class="boards-top-menu-style-first" (click)="onTabChange('billing-contacts')"><i class="fa-thin fa-home"></i> Billing Contacts</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" [ngClass]="{'active': activeTab==='customer-billing'}" type="button">
+                        <div class="boards-top-menu-style-first" (click)="onTabChange('customer-billing')"><i class="fa-thin fa-home"></i> Customer Billing</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-thin fa-plus"></i>
+                    </button>
+                    <div class="dropdown-menu p-0 style-less">
+                        <ul class="list-group list-group-flush list-group-sm">
+                            <li class="list-group-item">
+                                <div class="ls" data-bs-toggle="modal" data-bs-target="#viewcenter">
+                                    <i class="fa-light fa fa-home"></i>
+                                    <span class="ms-2">Apps</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex align-items-centere">
+                <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2" style="margin-top: -5px;">
+                    <div class="button-group outlined borderless">
+                        <button type="button" class="btn collapsed btn-outline-secondary"><i
+                                class="fa-thin fa-envelope"></i> Bulk Emails
+                        </button>
+                        <button type="button"
+                                class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <div class="button-group ms-2">
+                        <button type="button" class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div (click)="headerToggle()" class="header-collapse-btn"><i class="fa-thin fa-angle-{{anglePos}}"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isLoading" class="fa-3x wrapper-loader-middle-inner text-center">
+        <div class='loader-container mt-auto'>
+            <div class='loader'>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!isLoading" class="admin-page-content-wrapper">
+        <div class="tab-content mb-5" id="nav-tabContent">
+            <div class="tab-pane fade show active" *ngIf="activeTab === 'overview'">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h3 class="mb-0">App plan details</h3>
+                                <div>
+                                    <button class="btn btn-sm btn-primary me-2">Change plan</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Add more apps</button>
+                                </div>
+                            </div>
+                            <div *ngFor="let item of overview?.packages; let i = index;" class="card rounded-3  mb-2">
+                                <div class="card-body p-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <label for="">Current Plan</label>
+                                            <h4 class="mb-0"><strong>{{item.package_name}}</strong></h4>
+                                        </div>
+                                        <div>
+                                            <label for="">Billing Period</label>
+                                            <h4 class="mb-0">
+                                              <strong>{{item.billing_period? item.billing_period : '-'}}</strong>
+                                            </h4>
+                                        </div>
+                                        <div>
+                                            <label for="">Renewal date</label>
+                                            <h4 class="mb-0">
+                                              <strong *ngIf="item?.next_payment_date">{{item.next_payment_date | date}}</strong>
+                                              <strong *ngIf="!item?.next_payment_date">Lifetime</strong>
+                                            </h4>
+                                        </div>
+                                        <div>
+                                            <label for="">Total</label>
+                                            <h4 *ngIf="item?.order_total"  class="mb-0"><strong>{{item?.order_total | currency }}</strong></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h3 class="mb-0">Addons details</h3>
+                                <button class="btn btn-sm btn-outline-secondary">+ Add more addons</button>
+                            </div>
+                            <div *ngFor="let item of overview?.addons" class="card rounded-3 mb-2">
+                                <div class="card-body p-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <label for="">App</label>
+                                            <h4 class="mb-0"><strong>{{item.addon_name}}</strong></h4>
+                                        </div>
+                                        <div>
+                                            <label for="">Billing Period</label>
+                                            <h4 class="mb-0">
+                                              <strong>{{item.billing_period? item.billing_period : '-'}}</strong>
+                                            </h4>
+                                        </div>
+                                        <div>
+                                            <label for="">Renewal date</label>
+                                            <h4 class="mb-0">
+                                              <strong *ngIf="item?.next_payment_date">{{item.next_payment_date | date}}</strong>
+                                              <strong *ngIf="!item?.next_payment_date">Lifetime</strong>
+                                            </h4>
+                                        </div>
+                                        <div>
+                                            <label for="">Total</label>
+                                            <h4 *ngIf="item?.order_total" class="mb-0"><strong>{{item?.order_total | currency}}</strong></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h3 class="mb-0">Products</h3>
+                            </div>
+                            <div class="card rounded-3 mb-3">
+                                <div class="card-body p-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="d-flex align-items-center">
+                                            <h3 class="mb-0 me-3"><img src="./assets/img/left-menu/crm.png" class="me-2" width="25px"> work management</h3>
+                                            <span class="border rounded-3 px-2">Included</span>
+                                        </div>
+                                        <div class="dropdown">
+                                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                                            <div class="dropdown-menu p-0 style-less">
+                                                <ul class="list-group list-group-flush list-group-sm">
+                                                    <li class="list-group-item"><span>Upgrade</span></li>
+                                                    <li class="list-group-item"><span>Delete product</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <label for="">Seats</label>
+                                            <h4 class="mb-0"><strong>3/3</strong></h4>
+                                        </div>
+                                        <div>
+                                            <label for="">Members</label>
+                                            <h4 class="mb-0"><strong>3</strong></h4>
+                                        </div>
+                                        <div>
+                                            <label for="">Guests</label>
+                                            <h4 class="mb-0"><strong>0</strong></h4>
+                                        </div>
+                                        <div>
+                                            <label for="">Viewers</label>
+                                            <h4 class="mb-0"><strong>1</strong></h4>
+                                        </div>
+                                        <div>
+                                            <label for="">Renewal Amount</label>
+                                            <h4 class="mb-0"><strong>$60</strong></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h3 class="mb-0">Addons</h3>
+                                </div>
+                                <div *ngFor="let item of overview?.addons" class="col-sm-12 col-lg-6">
+                                    <div class="card rounded-3 mb-3">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div class="d-flex">
+                                                    <h3 class="mb-0 me-3"><img src="./assets/img/left-menu/crm.png" class="me-2" width="25px">{{item.addon_name}}</h3>
+                                                </div>
+                                                <div class="dropdown">
+                                                    <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                                                    <div class="dropdown-menu p-0 style-less">
+                                                        <ul class="list-group list-group-flush list-group-sm">
+                                                            <li class="list-group-item"><span>Upgrade</span></li>
+                                                            <li class="list-group-item"><span>Delete product</span></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <label for="">Seats</label>
+                                                    <h4 class="mb-0"><strong>{{item.number_of_seats}}</strong></h4>
+                                                </div>
+                                                <div>
+                                                    <label for="">Members</label>
+                                                    <h4 class="mb-0"><strong>{{item.number_of_seats}}</strong></h4>
+                                                </div>
+                                                <div>
+                                                    <label for="">Guests</label>
+                                                    <h4 class="mb-0"><strong>{{item.number_of_seats}}</strong></h4>
+                                                </div>
+                                                <div>
+                                                    <label for="">Viewers</label>
+                                                    <h4 class="mb-0"><strong>{{item.number_of_seats}}</strong></h4>
+                                                </div>
+                                                <div>
+                                                    <label for="">Renewal Amount</label>
+                                                    <h4 *ngIf="item?.order_total" class="mb-0"><strong>{{item?.order_total | currency}}</strong></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h3 class="mb-0">Need help?</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                    <div class="card rounded-3 h-100">
+                                        <div class="card-body p-1">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <div>
+                                                    <img src="./assets/img/billing-support-center.png">
+                                                </div>
+                                                <div>
+                                                    <h4 class="mb-0">Questions?</h4>
+                                                    <p class="mb-0">For more information about billing and pricing,<br>
+                                                        <a href="https://help.atmosai.io/" target="_blank" class="link cable">visit our knowledge base</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                    <div class="card rounded-3">
+                                        <div class="card-body p-2">
+                                            <div class="text-center">
+                                                <div>
+                                                    <h4 class="mb-0">Contact support</h4>
+                                                    <p>Our support team is here to help with any questions you may have!</p>
+                                                    <button class="btn btn-sm btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#contactModal">Contact support</button>
+                                                    <span class="cable link d-block">Cancel my account</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade show active" *ngIf="activeTab === 'settings'">
+                <div class="row">
+                    <div class="col-sm-12 col-md-8 col-lg-7 col-xl-6 col-xxl-5">
+                        <h2 class="mb-0">Invoice settings</h2>
+                        <small class="mb-4 d-block">Any changes will be applied to your upcoming invoices.</small>
+                        <div class="card rounded-3">
+                            <div class="card-body p-5">
+                                <div class="row">
+                                    <div class="form-group col-sm-6 mb-3">
+                                        <label>First Name</label>
+                                        <input type="text" [(ngModel)]="settings.first_name" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="form-group col-sm-6 mb-3">
+                                        <label>Last Name</label>
+                                        <input type="text" [(ngModel)]="settings.last_name" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="form-group col-sm-6 mb-3">
+                                        <label>Company Name</label>
+                                        <input type="text" [(ngModel)]="settings.company" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="form-group col-sm-6 mb-3">
+                                        <label>Address</label>
+                                        <input type="text" [(ngModel)]="settings.address" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="form-group col-sm-6 mb-3">
+                                        <label>City</label>
+                                        <input type="text" [(ngModel)]="settings.city" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="form-group col-sm-6 mb-3">
+                                        <label>Postal Code</label>
+                                        <input type="text" [(ngModel)]="settings.postal_code" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="form-group col-sm-6 mb-3">
+                                        <label>Country</label>
+                                        <select class="form-select form-select-sm" [(ngModel)]="settings.country">
+                                            <option value="USA">USA</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6 mb-3">
+                                        <label>State</label>
+                                        <select class="form-select form-select-sm" [(ngModel)]="settings.state">
+                                            <option value="AL">Alabama</option>
+                                            <option value="AK">Alaska</option>
+                                            <option value="AZ">Arizona</option>
+                                            <option value="AR">Arkansas</option>
+                                            <option value="CA">California</option>
+                                            <option value="CO">Colorado</option>
+                                            <option value="CT">Connecticut</option>
+                                            <option value="DE">Delaware</option>
+                                            <option value="DC">District Of Columbia</option>
+                                            <option value="FL">Florida</option>
+                                            <option value="GA">Georgia</option>
+                                            <option value="HI">Hawaii</option>
+                                            <option value="ID">Idaho</option>
+                                            <option value="IL">Illinois</option>
+                                            <option value="IN">Indiana</option>
+                                            <option value="IA">Iowa</option>
+                                            <option value="KS">Kansas</option>
+                                            <option value="KY">Kentucky</option>
+                                            <option value="LA">Louisiana</option>
+                                            <option value="ME">Maine</option>
+                                            <option value="MD">Maryland</option>
+                                            <option value="MA">Massachusetts</option>
+                                            <option value="MI">Michigan</option>
+                                            <option value="MN">Minnesota</option>
+                                            <option value="MS">Mississippi</option>
+                                            <option value="MO">Missouri</option>
+                                            <option value="MT">Montana</option>
+                                            <option value="NE">Nebraska</option>
+                                            <option value="NV">Nevada</option>
+                                            <option value="NH">New Hampshire</option>
+                                            <option value="NJ">New Jersey</option>
+                                            <option value="NM">New Mexico</option>
+                                            <option value="NY">New York</option>
+                                            <option value="NC">North Carolina</option>
+                                            <option value="ND">North Dakota</option>
+                                            <option value="OH">Ohio</option>
+                                            <option value="OK">Oklahoma</option>
+                                            <option value="OR">Oregon</option>
+                                            <option value="PA">Pennsylvania</option>
+                                            <option value="RI">Rhode Island</option>
+                                            <option value="SC">South Carolina</option>
+                                            <option value="SD">South Dakota</option>
+                                            <option value="TN">Tennessee</option>
+                                            <option value="TX">Texas</option>
+                                            <option value="UT">Utah</option>
+                                            <option value="VT">Vermont</option>
+                                            <option value="VA">Virginia</option>
+                                            <option value="WA">Washington</option>
+                                            <option value="WV">West Virginia</option>
+                                            <option value="WI">Wisconsin</option>
+                                            <option value="WY">Wyoming</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button class="btn btn-sm btn-primary" (click)="onSettingsUpdate()" [disabled]="isUpdating">Update</button>
+                                <i class="fa fa-spinner fa-spin" *ngIf="isUpdating"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade show active" *ngIf="activeTab === 'invoices'">
+                <div class="row">
+                    <div class="col-sm-12 col-md-8 col-lg-7 col-xl-6 col-xxl-5 mb-5">
+                        <h3>Invoices</h3>
+                        <div class="invoices-table-wrp">
+                            <table class="table table-sm">
+                                <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Payment Method</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let item of invoices">
+                                    <td>{{item.date_created | date:'medium' }}</td>
+                                    <td>{{item.payment_method}}</td>
+                                    <td>{{item.total | currency}}</td>
+                                    <td><span class="border rounded-3 px-1">{{item.status}}</span></td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                                            <div class="dropdown-menu p-0 style-less">
+                                                <ul class="list-group list-group-flush list-group-sm">
+                                                    <li class="list-group-item"><span>View Invoice</span></li>
+                                                    <li class="list-group-item"><span>View Receipt</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade show active" *ngIf="activeTab === 'payments'">
+                <div class="row">
+                    <div class="col-sm-12 col-md-8 col-lg-7 col-xl-6 col-xxl-5">
+                        <h3>Payment Methods</h3>
+                        <ul class="list-group list-group-flush" *ngIf="!isUpdatePayment">
+                            <li *ngFor="let item of paymentMethods" class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>{{item.type}}</div>
+                                <div><i class="fa-brands fa-cc-{{item.card_type}} me-2"></i>************{{item.last4}}</div>
+                                <div>
+                                    <button (click)="isUpdatePaymentMethod()" class="btn btn-sm btn-outline-secondary">Change payment method</button>
+                                </div>
+                            </li>
+                            <p *ngIf="paymentMethods.length === 0">No payment methods stored yet! <button (click)="isUpdatePaymentMethod()" class="btn btn-primary">Add payment method now!</button></p>
+                        </ul>
+                        <div class="card" *ngIf="isUpdatePayment">
+                            <div class="card-body p-3">
+                                <div class="row">
+                                    <div class="col-sm-12 mb-3">
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="radio" name="payments" [(ngModel)]="paymentMethod" value="card" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                <div class="cc-icons-container d-flex align-items-center">
+                                                    <div class="cc-icon me-1">
+                                                        <svg width="34" height="25" viewBox="0 0 34 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <rect x="0.5" y="0.577148" width="33" height="23" rx="3.5" fill="white" stroke="#D9D9D9"></rect>
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                  d="M10.7503 15.9355H8.69056L7.146 9.86962C7.07269 9.59059 6.91703 9.34391 6.68806 9.22765C6.11664 8.93548 5.48696 8.70295 4.80005 8.58568V8.35214H8.11813C8.57607 8.35214 8.91953 8.70295 8.97677 9.11038L9.77817 13.4859L11.8369 8.35214H13.8394L10.7503 15.9355ZM14.9843 15.9355H13.039L14.6408 8.35214H16.5861L14.9843 15.9355ZM19.1028 10.453C19.16 10.0445 19.5035 9.81099 19.9042 9.81099C20.5338 9.75235 21.2197 9.86962 21.7922 10.1608L22.1356 8.52806C21.5632 8.29452 20.9335 8.17725 20.3621 8.17725C18.4741 8.17725 17.1003 9.22765 17.1003 10.6855C17.1003 11.7945 18.0734 12.3769 18.7603 12.7277C19.5035 13.0775 19.7897 13.311 19.7324 13.6608C19.7324 14.1855 19.16 14.419 18.5886 14.419C17.9017 14.419 17.2147 14.2441 16.5861 13.952L16.2426 15.5857C16.9295 15.8769 17.6727 15.9941 18.3596 15.9941C20.4766 16.0518 21.7922 15.0024 21.7922 13.4273C21.7922 11.4437 19.1028 11.3275 19.1028 10.453ZM28.6 15.9355L27.0555 8.35214H25.3965C25.053 8.35214 24.7095 8.58568 24.5951 8.93548L21.7349 15.9355H23.7374L24.1371 14.8275H26.5976L26.8265 15.9355H28.6ZM25.6827 10.3943L26.2541 13.2524H24.6523L25.6827 10.3943Z"
+                                                                  fill="#172B85"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="cc-icon me-1">
+                                                        <svg width="34" height="25" viewBox="0 0 34 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <rect x="0.5" y="0.577148" width="33" height="23" rx="3.5" fill="white" stroke="#D9D9D9"></rect>
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.179 16.9066C15.9949 17.9047 14.459 18.5072 12.7807 18.5072C9.03582 18.5072 6 15.5075 6 11.8072C6 8.10687 9.03582 5.10718 12.7807 5.10718C14.459 5.10718 15.9949 5.70968 17.179 6.70772C18.363 5.70968 19.8989 5.10718 21.5773 5.10718C25.3221 5.10718 28.358 8.10687 28.358 11.8072C28.358 15.5075 25.3221 18.5072 21.5773 18.5072C19.8989 18.5072 18.363 17.9047 17.179 16.9066Z" fill="#ED0006"></path>
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.179 16.9066C18.6369 15.6777 19.5614 13.8491 19.5614 11.8072C19.5614 9.76522 18.6369 7.93662 17.179 6.70772C18.363 5.70967 19.8989 5.10718 21.5772 5.10718C25.3221 5.10718 28.3579 8.10687 28.3579 11.8072C28.3579 15.5075 25.3221 18.5072 21.5772 18.5072C19.8989 18.5072 18.363 17.9047 17.179 16.9066Z" fill="#F9A000"></path>
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.179 16.9066C18.6369 15.6777 19.5614 13.8491 19.5614 11.8072C19.5614 9.76526 18.6369 7.93667 17.179 6.70776C15.7211 7.93667 14.7966 9.76526 14.7966 11.8072C14.7966 13.8491 15.7211 15.6777 17.179 16.9066Z" fill="#FF5E00"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="cc-icon me-1">
+                                                        <svg width="34" height="24" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <rect x="0.5" y="0.5" width="33" height="23" rx="3.5" fill="white" stroke="#D9D9D9"></rect>
+                                                            <path d="M14 23L33 17.25V20C33 21.6569 31.6569 23 30 23H14Z" fill="#FD6020"></path>
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                  d="M29.3937 9.11084C30.439 9.11084 31.0139 9.59438 31.0139 10.5077C31.0662 11.2062 30.5958 11.7972 29.9686 11.9046L31.3797 13.8925H30.2822L29.0801 11.9584H28.9756V13.8925H28.0871V9.11084H29.3937ZM28.9756 11.3137H29.2369C29.8118 11.3137 30.0731 11.045 30.0731 10.5615C30.0731 10.1317 29.8118 9.86304 29.2369 9.86304H28.9756V11.3137ZM25.0034 13.8925H27.5122V13.0866H25.8919V11.7972H27.4599V10.9913H25.8919V9.91674H27.5122V9.11084H25.0034V13.8925ZM22.3902 12.3345L21.1881 9.11084H20.2474L22.1812 14H22.6515L24.5853 9.11084H23.6446L22.3902 12.3345ZM11.7805 11.5286C11.7805 12.8717 12.8258 14 14.1324 14C14.5505 14 14.9164 13.8925 15.2822 13.7314V12.6568C15.0209 12.9792 14.655 13.1941 14.2369 13.1941C13.4007 13.1941 12.7212 12.5494 12.7212 11.6897V11.5823C12.669 10.7227 13.3484 9.97048 14.1847 9.91675C14.6028 9.91675 15.0209 10.1317 15.2822 10.454V9.37948C14.9686 9.16458 14.5505 9.11085 14.1847 9.11085C12.8258 9.0034 11.7805 10.1317 11.7805 11.5286ZM10.1603 10.9376C9.63762 10.7227 9.48082 10.6152 9.48082 10.3466C9.53309 10.0242 9.79441 9.75557 10.108 9.8093C10.3693 9.8093 10.6306 9.97048 10.8397 10.1854L11.3101 9.54066C10.9442 9.2183 10.4739 9.00339 10.0035 9.00339C9.27176 8.94967 8.64459 9.54066 8.59232 10.2928V10.3466C8.59232 10.9913 8.85365 11.3674 9.68988 11.636C9.89894 11.6897 10.108 11.7972 10.3171 11.9046C10.4739 12.0121 10.5784 12.1733 10.5784 12.3882C10.5784 12.7643 10.2648 13.0866 9.95121 13.0866H9.89894C9.48082 13.0866 9.11497 12.818 8.95818 12.4419L8.38326 13.0329C8.69685 13.6239 9.32403 13.9463 9.95121 13.9463C10.7874 14 11.4669 13.3553 11.5191 12.4956V12.3345C11.4669 11.6897 11.2056 11.3674 10.1603 10.9376ZM7.12892 13.8925H8.01742V9.11084H7.12892V13.8925ZM3 9.11086H4.30662H4.56794C5.8223 9.16458 6.81532 10.2391 6.76306 11.5286C6.76306 12.227 6.44947 12.8717 5.92682 13.3553C5.45644 13.7314 4.88153 13.9463 4.30662 13.8926H3V9.11086ZM4.14983 13.0866C4.56794 13.1404 5.03833 12.9792 5.35191 12.7105C5.6655 12.3882 5.8223 11.9584 5.8223 11.4748C5.8223 11.045 5.6655 10.6152 5.35191 10.2928C5.03833 10.0242 4.56794 9.86302 4.14983 9.91674H3.8885V13.0866H4.14983Z"
+                                                                  fill="black"></path>
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.9476 9C16.641 9 15.5435 10.0745 15.5435 11.4714C15.5435 12.8146 16.5888 13.9429 17.9476 13.9966C19.3065 14.0503 20.3518 12.9221 20.4041 11.5252C20.3518 10.1283 19.3065 9 17.9476 9V9Z" fill="#FD6020"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="cc-icon me-1">
+                                                        <svg width="34" height="24" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <rect width="34" height="24" rx="4" fill="#1F72CD"></rect>
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.09542 8.5L2.91431 15.7467H6.72254L7.19465 14.5913H8.27379L8.7459 15.7467H12.9377V14.8649L13.3112 15.7467H15.4795L15.8531 14.8462V15.7467H24.5709L25.6309 14.6213L26.6235 15.7467L31.1011 15.7561L27.91 12.1436L31.1011 8.5H26.6929L25.661 9.60463L24.6997 8.5H15.2159L14.4015 10.3704L13.568 8.5H9.76774V9.35186L9.34498 8.5H6.09542ZM6.83229 9.52905H8.6886L10.7986 14.4431V9.52905H12.8322L14.4619 13.0524L15.9639 9.52905H17.9873V14.7291H16.7561L16.746 10.6544L14.9511 14.7291H13.8498L12.0448 10.6544V14.7291H9.51203L9.03187 13.5633H6.43769L5.95851 14.728H4.60147L6.83229 9.52905ZM24.1198 9.52905H19.1137V14.726H24.0423L25.6309 13.0036L27.1621 14.726H28.7627L26.4362 12.1426L28.7627 9.52905H27.2315L25.651 11.2316L24.1198 9.52905ZM7.73532 10.4089L6.88064 12.4856H8.58901L7.73532 10.4089ZM20.3499 11.555V10.6057V10.6048H23.4736L24.8366 12.1229L23.4132 13.6493H20.3499V12.613H23.081V11.555H20.3499Z"
+                                                                  fill="white"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="cc-icon me-1">
+                                                        <svg width="34" height="24" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <rect x="0.5" y="0.5" width="33" height="23" rx="3.5" fill="white" stroke="#D9D9D9"></rect>
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.8385 19.3H18.4346C22.487 19.3 25.7163 16.085 25.8429 12.1135V12.0505C25.7796 8.01596 22.487 4.7379 18.4346 4.80094H15.5219C11.6594 4.92702 8.6201 8.20508 8.74674 12.1135C8.74674 16.022 11.9127 19.237 15.8385 19.3ZM10.0131 12.0505C10.0131 8.77241 12.7359 6.06171 16.0284 6.06171C19.321 6.06171 22.0438 8.77241 22.0438 12.0505C22.0438 15.3285 19.321 18.0392 16.0284 18.0392C12.7359 18.0392 10.0131 15.3285 10.0131 12.0505ZM16.9782 16.085V8.07898C19.1944 8.64634 20.5874 10.8527 20.0176 13.0591C19.6376 14.5721 18.4979 15.7068 16.9782 16.085ZM12.1027 11.0418C11.5328 13.2482 12.8625 15.5177 15.0787 16.085V8.07898C13.6223 8.45722 12.4826 9.59193 12.1027 11.0418Z" fill="#0079BE"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="cc-icon me-1">
+                                                        <svg width="34" height="24" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <rect x="0.5" y="0.5" width="33" height="23" rx="3.5" fill="white" stroke="#D9D9D9"></rect>
+                                                            <path d="M21.9818 11.9542C22.5131 11.9658 23.0473 11.9308 23.5765 11.9724C24.1123 12.0724 24.2415 12.8836 23.7654 13.1493C23.4406 13.3243 23.0547 13.2145 22.7025 13.2454H21.9818V11.9542ZM23.8837 10.4928C24.0017 10.9095 23.6001 11.2835 23.1988 11.2262H21.9818C21.9903 10.8333 21.9651 10.4068 21.9942 10.0346C22.4817 10.0484 22.9737 10.0066 23.4585 10.0564C23.6667 10.1088 23.841 10.28 23.8837 10.4928ZM26.8126 4.31448C26.8352 5.11012 26.8158 5.94781 26.8223 6.75959C26.8208 10.06 26.8255 13.3603 26.8198 16.6609C26.7984 17.8978 25.7022 18.9726 24.4739 18.9972C23.2443 19.0022 22.0146 18.998 20.7849 18.9994V14.0099C22.1247 14.003 23.4652 14.0239 24.8045 13.9994C25.4258 13.9604 26.1063 13.5505 26.1352 12.8668C26.2084 12.1801 25.561 11.7051 24.9463 11.6301C24.7101 11.624 24.717 11.5613 24.9463 11.5339C25.5326 11.4072 25.9929 10.8004 25.8204 10.1928C25.6735 9.55368 24.9671 9.30631 24.3795 9.30754C23.1815 9.2994 21.9832 9.30641 20.7852 9.30404C20.7929 8.37256 20.769 7.44008 20.798 6.50928C20.893 5.2947 22.0167 4.29307 23.2278 4.3148C24.4229 4.31462 25.6178 4.31462 26.8126 4.31457V4.31448Z"
+                                                                  fill="url(#paint0_linear_214_454)"></path>
+                                                            <path d="M7.24647 6.63505C7.27706 5.40011 8.37794 4.33415 9.6047 4.3161C10.8297 4.31233 12.0549 4.31556 13.2798 4.31446C13.2765 8.44633 13.2865 12.5786 13.2748 16.7103C13.2276 17.9302 12.1387 18.9759 10.9253 18.9975C9.69803 19.0019 8.47059 18.9981 7.24324 18.9993V13.8416C8.4354 14.1232 9.68558 14.2431 10.9018 14.0563C11.6288 13.9393 12.4242 13.5823 12.6703 12.8281C12.8515 12.1829 12.7495 11.504 12.7764 10.8418V9.30402H10.6717C10.6622 10.3211 10.691 11.3399 10.6564 12.3557C10.5997 12.9801 9.98136 13.3768 9.39248 13.3556C8.66217 13.3633 7.21496 12.8263 7.21496 12.8263C7.21132 10.9208 7.23615 8.53443 7.24647 6.63524V6.63505Z" fill="url(#paint1_linear_214_454)"></path>
+                                                            <path d="M14.0649 9.92427C13.9541 9.94778 14.0426 9.54689 14.0143 9.39482C14.0218 8.43328 13.9985 7.4707 14.0271 6.50985C14.1218 5.29014 15.2542 4.28601 16.4702 4.31456H20.0512C20.0478 8.44642 20.0578 12.5787 20.0461 16.7104C19.9989 17.9303 18.9099 18.9759 17.6965 18.9976C16.4691 19.0022 15.2417 18.9983 14.0142 18.9995V13.3485C14.8525 14.0363 15.9918 14.1433 17.0362 14.1452C17.8235 14.1449 18.6062 14.0235 19.3708 13.842V12.8067C18.5092 13.2361 17.4963 13.5089 16.5411 13.2622C15.8748 13.0963 15.3911 12.4524 15.4019 11.7648C15.3247 11.0497 15.7439 10.2947 16.4466 10.0822C17.3191 9.80903 18.27 10.0179 19.0878 10.373C19.263 10.4648 19.4408 10.5786 19.3708 10.2857V9.47197C18.003 9.14654 16.5474 9.0268 15.1732 9.38081C14.7755 9.49301 14.388 9.66318 14.0649 9.92436V9.92427Z" fill="url(#paint2_linear_214_454)"></path>
+                                                            <defs>
+                                                                <linearGradient id="paint0_linear_214_454" x1="20.7437" y1="11.343" x2="26.7843" y2="11.343" gradientUnits="userSpaceOnUse">
+                                                                    <stop stop-color="#58B03A"></stop>
+                                                                    <stop offset="1" stop-color="#55B330"></stop>
+                                                                </linearGradient>
+                                                                <linearGradient id="paint1_linear_214_454" x1="7.1148" y1="11.7975" x2="13.1809" y2="11.7975" gradientUnits="userSpaceOnUse">
+                                                                    <stop stop-color="#0F6EB6"></stop>
+                                                                    <stop offset="1" stop-color="#006DBA"></stop>
+                                                                </linearGradient>
+                                                                <linearGradient id="paint2_linear_214_454" x1="14.0054" y1="11.4853" x2="20.05" y2="11.4853" gradientUnits="userSpaceOnUse">
+                                                                    <stop stop-color="#DE0D3D"></stop>
+                                                                    <stop offset="1" stop-color="#E30138"></stop>
+                                                                </linearGradient>
+                                                            </defs>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="cc-icon">
+                                                        <svg width="34" height="24" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <rect x="0.5" y="0.5" width="33" height="23" rx="3.5" fill="white" stroke="#D9D9D9"></rect>
+                                                            <path d="M10.5183 5.00073H15.8765C16.6244 5.00073 17.0896 5.62831 16.9152 6.40082L14.4205 17.4262C14.2445 18.196 13.4956 18.8241 12.7471 18.8241H7.38948C6.64257 18.8241 6.17633 18.196 6.35081 17.4262L8.84647 6.40082C9.02096 5.62831 9.76943 5.00073 10.5183 5.00073Z" fill="#E21836"></path>
+                                                            <path d="M15.4303 5H21.5921C22.3399 5 22.0027 5.62758 21.8268 6.40009L19.3326 17.4255C19.1576 18.1953 19.2121 18.8234 18.4628 18.8234H12.301C11.5516 18.8234 11.0878 18.1953 11.2639 17.4255L13.758 6.40009C13.9351 5.62758 14.682 5 15.4303 5Z" fill="#00447C"></path>
+                                                            <path d="M21.3478 5H26.706C27.455 5 27.9202 5.62758 27.7443 6.40009L25.25 17.4255C25.074 18.1953 24.3246 18.8234 23.5757 18.8234H18.22C17.4706 18.8234 17.0058 18.1953 17.1813 17.4255L19.676 6.40009C19.8504 5.62758 20.5984 5 21.3478 5Z" fill="#007B84"></path>
+                                                            <path d="M11.9173 8.53338C11.3663 8.53916 11.2036 8.53338 11.1516 8.52075C11.1316 8.61849 10.7598 10.3841 10.7588 10.3856C10.6787 10.7428 10.6205 10.9974 10.4226 11.1619C10.3103 11.2575 10.1792 11.3036 10.0271 11.3036C9.78279 11.3036 9.64043 11.1787 9.61653 10.9418L9.61196 10.8604C9.61196 10.8604 9.6864 10.382 9.6864 10.3793C9.6864 10.3793 10.0766 8.77027 10.1465 8.55758C10.1502 8.54548 10.1512 8.53916 10.1521 8.53338C9.39255 8.54024 9.2579 8.53338 9.24863 8.52075C9.24353 8.53809 9.22473 8.63785 9.22473 8.63785L8.82626 10.4513L8.79204 10.6051L8.72583 11.1082C8.72583 11.2575 8.7543 11.3793 8.81098 11.4822C8.99252 11.8088 9.51035 11.8577 9.80329 11.8577C10.1807 11.8577 10.5348 11.7752 10.7741 11.6245C11.1894 11.3719 11.298 10.977 11.3949 10.6261L11.4399 10.4461C11.4399 10.4461 11.8418 8.77498 11.9102 8.55758C11.9128 8.54548 11.9138 8.53916 11.9173 8.53338ZM13.2851 9.88149C13.1882 9.88149 13.0111 9.90569 12.852 9.98595C12.7943 10.0165 12.7397 10.0517 12.6821 10.0868L12.7341 9.89359L12.7056 9.86106C12.3683 9.93137 12.2928 9.94078 11.9812 9.98595L11.955 10.0038C11.9189 10.3127 11.8867 10.5448 11.7526 11.1518C11.7015 11.3756 11.6485 11.6014 11.5954 11.8246L11.6097 11.853C11.9291 11.8356 12.026 11.8356 12.3035 11.8403L12.3259 11.8152C12.3612 11.6292 12.3658 11.5857 12.4439 11.2091C12.4806 11.0306 12.5571 10.6383 12.5949 10.4986C12.6642 10.4655 12.7326 10.433 12.7979 10.433C12.9535 10.433 12.9346 10.5727 12.9285 10.6283C12.9219 10.7218 12.8652 11.0269 12.8071 11.289L12.7683 11.4581C12.7413 11.583 12.7116 11.7044 12.6846 11.8282L12.6963 11.853C13.0111 11.8356 13.1071 11.8356 13.3759 11.8403L13.4075 11.8152C13.456 11.5248 13.4703 11.4471 13.5565 11.0243L13.5998 10.83C13.6841 10.4498 13.7264 10.257 13.6627 10.1C13.5953 9.92398 13.4336 9.88149 13.2851 9.88149ZM14.813 10.2796C14.6457 10.3126 14.539 10.3347 14.433 10.3489C14.3278 10.3663 14.2253 10.382 14.0636 10.4051L14.0508 10.4171L14.0391 10.4266C14.0222 10.5506 14.0105 10.6578 13.9881 10.7837C13.9692 10.914 13.9401 11.062 13.8927 11.2747C13.856 11.4375 13.837 11.4943 13.8161 11.5515C13.7958 11.6088 13.7733 11.6645 13.732 11.8246L13.7417 11.8394L13.7498 11.8529C13.9009 11.8456 13.9998 11.8403 14.1014 11.8394C14.2028 11.8356 14.308 11.8394 14.4707 11.8403L14.4849 11.8283L14.5002 11.8152C14.5237 11.6708 14.5273 11.6319 14.5416 11.5615C14.5559 11.4859 14.5804 11.3813 14.6406 11.1019C14.6691 10.9707 14.7008 10.8399 14.7303 10.706C14.761 10.5726 14.7932 10.4413 14.8237 10.3101L14.8192 10.2942L14.813 10.2796ZM14.8166 9.74284C14.6646 9.65048 14.3977 9.67979 14.2182 9.80737C14.0391 9.93241 14.0187 10.1099 14.1702 10.2034C14.3196 10.2932 14.5875 10.2665 14.7655 10.1378C14.9442 10.0101 14.9665 9.83426 14.8166 9.74284ZM15.7359 11.8819C16.0435 11.8819 16.3588 11.7946 16.5961 11.5357C16.7787 11.3257 16.8624 11.0133 16.8914 10.8846C16.9858 10.4581 16.9123 10.259 16.8199 10.1378C16.6797 9.95291 16.4318 9.89362 16.1746 9.89362C16.02 9.89362 15.6517 9.90935 15.364 10.1824C15.1574 10.3794 15.0619 10.6466 15.0043 10.9029C14.9462 11.164 14.8793 11.634 15.2992 11.8089C15.4288 11.8662 15.6155 11.8819 15.7359 11.8819ZM15.7119 10.9224C15.7828 10.5994 15.8666 10.3284 16.0802 10.3284C16.2476 10.3284 16.2598 10.5301 16.1853 10.8541C16.172 10.926 16.1109 11.1934 16.0282 11.3073C15.9705 11.3913 15.9022 11.4423 15.8267 11.4423C15.8043 11.4423 15.6706 11.4423 15.6686 11.238C15.6675 11.1372 15.6875 11.0342 15.7119 10.9224ZM17.6602 11.8404L17.6843 11.8152C17.7183 11.6293 17.724 11.5856 17.7995 11.2092C17.8372 11.0306 17.9153 10.6383 17.952 10.4986C18.0215 10.4654 18.0887 10.4329 18.1561 10.4329C18.3106 10.4329 18.2918 10.5726 18.2857 10.6282C18.2801 10.7218 18.2234 11.0268 18.1642 11.2889L18.1275 11.458C18.0994 11.583 18.0689 11.7043 18.0418 11.8283L18.0536 11.853C18.3694 11.8357 18.4617 11.8357 18.7321 11.8404L18.7647 11.8152C18.8121 11.5247 18.8249 11.447 18.9137 11.0243L18.9561 10.8299C19.0407 10.4497 19.0835 10.257 19.0208 10.1C18.9515 9.92402 18.7888 9.88153 18.6424 9.88153C18.5453 9.88153 18.3673 9.9056 18.2091 9.98599C18.1526 10.0165 18.0959 10.0516 18.0403 10.0868L18.0887 9.89363L18.0627 9.86096C17.7255 9.93141 17.6485 9.94082 17.3373 9.98599L17.3134 10.0039C17.2756 10.3127 17.2449 10.5447 17.1108 11.1519C17.0597 11.3756 17.0067 11.6015 16.9537 11.8246L16.9679 11.853C17.2878 11.8357 17.3832 11.8357 17.6602 11.8404ZM19.9804 11.8529C20.0003 11.7532 20.1182 11.1619 20.1193 11.1619C20.1193 11.1619 20.2197 10.7281 20.2258 10.7123C20.2258 10.7123 20.2574 10.6671 20.289 10.6493H20.3355C20.7742 10.6493 21.2696 10.6493 21.6579 10.3552C21.9221 10.1536 22.1027 9.85579 22.1833 9.49387C22.2042 9.40514 22.2196 9.2996 22.2196 9.19406C22.2196 9.05545 22.1926 8.91832 22.1145 8.81117C21.9165 8.52602 21.5222 8.52077 21.067 8.51862C21.0656 8.51862 20.8427 8.52077 20.8427 8.52077C20.26 8.52817 20.0264 8.52602 19.9304 8.51392C19.9223 8.55761 19.907 8.63532 19.907 8.63532C19.907 8.63532 19.6983 9.631 19.6983 9.63261C19.6983 9.63261 19.1989 11.7495 19.1754 11.8493C19.6841 11.843 19.8927 11.843 19.9804 11.8529ZM20.3671 10.0842C20.3671 10.0842 20.589 9.09054 20.588 9.0943L20.5952 9.04335L20.5983 9.0045L20.687 9.01391C20.687 9.01391 21.1446 9.05437 21.1553 9.05545C21.3359 9.12738 21.4104 9.31277 21.3584 9.55477C21.311 9.77593 21.1716 9.96186 20.9926 10.0517C20.8451 10.1278 20.6645 10.1341 20.4784 10.1341H20.358L20.3671 10.0842ZM21.7487 10.9408C21.6901 11.1981 21.6227 11.6681 22.0405 11.8356C22.1737 11.894 22.293 11.9113 22.4144 11.905C22.5425 11.8979 22.6612 11.8317 22.7712 11.7365C22.7612 11.7757 22.7513 11.8148 22.7414 11.854L22.7603 11.8792C23.0608 11.8661 23.1541 11.8661 23.4797 11.8687L23.5092 11.8456C23.5567 11.5579 23.6015 11.2785 23.7251 10.7281C23.7853 10.4644 23.8454 10.2034 23.9071 9.9408L23.8975 9.91189C23.5613 9.97602 23.4715 9.98973 23.1481 10.0369L23.1235 10.0575C23.1203 10.0842 23.1169 10.1099 23.1137 10.1356C23.0635 10.052 22.9906 9.98059 22.8781 9.93609C22.7343 9.87788 22.3966 9.9529 22.1063 10.225C21.9023 10.4193 21.8043 10.6855 21.7487 10.9408ZM22.4547 10.9565C22.5267 10.6394 22.6094 10.371 22.8235 10.371C22.959 10.371 23.0303 10.4997 23.0158 10.7191C23.0043 10.7738 22.9919 10.8315 22.9771 10.8967C22.9557 10.9909 22.9325 11.0844 22.9099 11.1779C22.8869 11.2419 22.8601 11.3023 22.8307 11.3425C22.7756 11.4229 22.6445 11.4728 22.569 11.4728C22.5476 11.4728 22.4154 11.4728 22.4108 11.2722C22.4098 11.1723 22.4298 11.0694 22.4547 10.9565ZM26.1417 9.90932L26.1157 9.8788C25.783 9.94818 25.7228 9.9592 25.4172 10.0017L25.3948 10.0248C25.3937 10.0286 25.3928 10.0344 25.3912 10.0396L25.3902 10.0344C25.1627 10.5747 25.1693 10.4581 24.9841 10.8835C24.9831 10.8641 24.9831 10.852 24.9821 10.8315L24.9357 9.90932L24.9066 9.8788C24.5581 9.94818 24.5499 9.9592 24.2281 10.0017L24.203 10.0248C24.1995 10.0358 24.1995 10.0479 24.1974 10.0611L24.1995 10.0658C24.2397 10.2774 24.2301 10.2302 24.2704 10.5642C24.2892 10.7281 24.3143 10.8929 24.3331 11.0548C24.3648 11.3257 24.3826 11.459 24.4214 11.8725C24.2041 12.2416 24.1526 12.3813 23.9434 12.7053L23.9448 12.7086L23.7975 12.9484C23.7807 12.9737 23.7654 12.991 23.744 12.9984C23.7204 13.0104 23.6899 13.0125 23.6474 13.0125H23.5658L23.4445 13.428L23.8607 13.4353C24.1051 13.4343 24.2587 13.3166 24.3413 13.1585L24.6031 12.6969H24.5989L24.6264 12.6643C24.8025 12.2742 26.1417 9.90932 26.1417 9.90932ZM21.7487 15.3653H21.5721L22.2256 13.1402H22.4424L22.5113 12.911L22.5179 13.1659C22.5098 13.3234 22.6302 13.4631 22.9466 13.44H23.3124L23.4383 13.0115H23.3006C23.2215 13.0115 23.1848 12.9909 23.1893 12.9469L23.1827 12.6875H22.5053V12.6889C22.2862 12.6936 21.6322 12.7105 21.4998 12.7468C21.3395 12.7893 21.1706 12.9143 21.1706 12.9143L21.237 12.6848H20.6033L20.4713 13.1402L19.809 15.3994H19.6805L19.5544 15.8247H20.8166L20.7743 15.9666H21.3962L21.4375 15.8247H21.6119L21.7487 15.3653ZM21.2308 13.5923C21.1294 13.6212 20.9405 13.7089 20.9405 13.7089L21.1085 13.1402H21.6119L21.4905 13.5545C21.4905 13.5545 21.3349 13.5639 21.2308 13.5923ZM21.2405 14.4047C21.2405 14.4047 21.0824 14.4252 20.9783 14.4494C20.8757 14.4814 20.6835 14.5822 20.6835 14.5822L20.8569 13.9904H21.363L21.2405 14.4047ZM20.9584 15.3706H20.4534L20.5998 14.8711H21.1032L20.9584 15.3706ZM22.1746 13.9904H22.9026L22.798 14.3391H22.0604L21.9496 14.7204H22.5951L22.1063 15.4288C22.0721 15.4808 22.0414 15.4992 22.0073 15.5139C21.9731 15.5318 21.9282 15.5528 21.8762 15.5528H21.6972L21.5741 15.9703H22.0425C22.2859 15.9703 22.4297 15.8563 22.5359 15.7067L22.871 15.2345L22.943 15.7139C22.9583 15.8038 23.0209 15.8563 23.0634 15.8768C23.1103 15.901 23.1587 15.9425 23.2272 15.9487C23.3006 15.9519 23.3536 15.9545 23.3889 15.9545H23.619L23.7571 15.4871H23.6664C23.6143 15.4871 23.5245 15.4781 23.5093 15.4613C23.494 15.4409 23.494 15.4094 23.4858 15.3616L23.4128 14.8811H23.1138L23.2449 14.7204H23.9811L24.0944 14.3391H23.4128L23.5189 13.9904H24.1984L24.3245 13.5603H22.2986L22.1746 13.9904ZM16.0262 15.4677L16.1961 14.8858H16.8944L17.022 14.4531H16.323L16.4297 14.0949H17.1128L17.2393 13.6758H15.5303L15.4063 14.0949H15.7946L15.691 14.4531H15.3017L15.1727 14.8932H15.5608L15.3344 15.663C15.3038 15.7649 15.3487 15.8038 15.3772 15.8511C15.4063 15.8972 15.4359 15.9278 15.5022 15.9451C15.5706 15.9608 15.6175 15.9702 15.6813 15.9702H16.4685L16.6088 15.4908L16.2598 15.5402C16.1924 15.5402 16.0058 15.5318 16.0262 15.4677ZM16.1063 12.6822L15.9293 13.0115C15.8914 13.0834 15.8573 13.128 15.8267 13.1486C15.7996 13.1659 15.7461 13.1732 15.6685 13.1732H15.5762L15.4527 13.5944H15.7594C15.9068 13.5944 16.0201 13.5387 16.0741 13.5109C16.1323 13.4789 16.1475 13.4972 16.1925 13.4526L16.296 13.3602H17.2536L17.3807 12.9216H16.6797L16.8021 12.6822H16.1063ZM17.52 15.4761C17.5036 15.4519 17.5154 15.4093 17.5403 15.3206L17.8021 14.4288H18.7331C18.8688 14.4268 18.9668 14.4252 19.0305 14.4205C19.0989 14.4131 19.1734 14.388 19.2545 14.3428C19.3382 14.2955 19.381 14.2456 19.4172 14.1883C19.4576 14.1312 19.5223 14.0062 19.578 13.8134L19.907 12.6848L18.9408 12.6906C18.9408 12.6906 18.6433 12.7358 18.5123 12.7857C18.3801 12.8413 18.1912 12.9968 18.1912 12.9968L18.2785 12.6874H17.6816L16.846 15.5401C16.8164 15.6509 16.7966 15.7313 16.792 15.7796C16.7904 15.8316 16.8557 15.8831 16.898 15.922C16.948 15.9608 17.022 15.9545 17.0929 15.9608C17.1675 15.9666 17.2735 15.9702 17.4199 15.9702H17.8786L18.0194 15.4809L17.6088 15.5208C17.5649 15.5208 17.5331 15.4966 17.52 15.4761ZM17.9709 13.8265H18.9489L18.8867 14.0271C18.8779 14.0318 18.857 14.0172 18.7575 14.0293H17.9107L17.9709 13.8265ZM18.1668 13.1538H19.153L19.0821 13.3954C19.0821 13.3954 18.6173 13.3907 18.5428 13.4048C18.2153 13.4631 18.0239 13.6433 18.0239 13.6433L18.1668 13.1538ZM18.9086 14.6988C18.9005 14.7288 18.8877 14.7471 18.8698 14.7608C18.8499 14.774 18.8178 14.7787 18.7699 14.7787H18.6305L18.6388 14.5344H18.0592L18.0356 15.7287C18.0347 15.8148 18.0428 15.8647 18.1041 15.9047C18.1653 15.9545 18.3541 15.9609 18.6081 15.9609H18.9713L19.1024 15.5138L18.7862 15.5317L18.6811 15.538C18.6667 15.5317 18.653 15.5259 18.6377 15.5102C18.6244 15.4966 18.6019 15.505 18.6056 15.4188L18.6081 15.1127L18.9397 15.0985C19.1187 15.0985 19.1953 15.0386 19.2606 14.9814C19.3229 14.9267 19.3432 14.8638 19.3667 14.7787L19.4224 14.5077H18.9667L18.9086 14.6988Z"
+                                                                  fill="#FEFEFE"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+<!--                                        <div class="form-check">-->
+<!--                                            <input class="form-check-input" type="radio" name="payments" [(ngModel)]="paymentMethod" value="paypal" id="flexRadioDefault2" checked>-->
+<!--                                            <label class="form-check-label" for="flexRadioDefault2">-->
+<!--                                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="85px" height="25px" viewBox="0 0 124 33">-->
+<!--                                                    <path fill="#253B80" d="M46.211,6.749h-6.839c-0.468,0-0.866,0.34-0.939,0.802l-2.766,17.537c-0.055,0.346,0.213,0.658,0.564,0.658 h3.265c0.468,0,0.866-0.34,0.939-0.803l0.746-4.73c0.072-0.463,0.471-0.803,0.938-0.803h2.165c4.505,0,7.105-2.18,7.784-6.5 c0.306-1.89,0.013-3.375-0.872-4.415C50.224,7.353,48.5,6.749,46.211,6.749z M47,13.154c-0.374,2.454-2.249,2.454-4.062,2.454 h-1.032l0.724-4.583c0.043-0.277,0.283-0.481,0.563-0.481h0.473c1.235,0,2.4,0,3.002,0.704C47.027,11.668,47.137,12.292,47,13.154z"></path>-->
+<!--                                                    <path fill="#253B80" d="M66.654,13.075h-3.275c-0.279,0-0.52,0.204-0.563,0.481l-0.145,0.916l-0.229-0.332 c-0.709-1.029-2.29-1.373-3.868-1.373c-3.619,0-6.71,2.741-7.312,6.586c-0.313,1.918,0.132,3.752,1.22,5.031 c0.998,1.176,2.426,1.666,4.125,1.666c2.916,0,4.533-1.875,4.533-1.875l-0.146,0.91c-0.055,0.348,0.213,0.66,0.562,0.66h2.95 c0.469,0,0.865-0.34,0.939-0.803l1.77-11.209C67.271,13.388,67.004,13.075,66.654,13.075z M62.089,19.449 c-0.316,1.871-1.801,3.127-3.695,3.127c-0.951,0-1.711-0.305-2.199-0.883c-0.484-0.574-0.668-1.391-0.514-2.301 c0.295-1.855,1.805-3.152,3.67-3.152c0.93,0,1.686,0.309,2.184,0.892C62.034,17.721,62.232,18.543,62.089,19.449z"></path>-->
+<!--                                                    <path fill="#253B80" d="M84.096,13.075h-3.291c-0.314,0-0.609,0.156-0.787,0.417l-4.539,6.686l-1.924-6.425 c-0.121-0.402-0.492-0.678-0.912-0.678h-3.234c-0.393,0-0.666,0.384-0.541,0.754l3.625,10.638l-3.408,4.811 c-0.268,0.379,0.002,0.9,0.465,0.9h3.287c0.312,0,0.604-0.152,0.781-0.408L84.564,13.97C84.826,13.592,84.557,13.075,84.096,13.075z "></path>-->
+<!--                                                    <path fill="#179BD7" d="M94.992,6.749h-6.84c-0.467,0-0.865,0.34-0.938,0.802l-2.766,17.537c-0.055,0.346,0.213,0.658,0.562,0.658 h3.51c0.326,0,0.605-0.238,0.656-0.562l0.785-4.971c0.072-0.463,0.471-0.803,0.938-0.803h2.164c4.506,0,7.105-2.18,7.785-6.5 c0.307-1.89,0.012-3.375-0.873-4.415C99.004,7.353,97.281,6.749,94.992,6.749z M95.781,13.154c-0.373,2.454-2.248,2.454-4.062,2.454 h-1.031l0.725-4.583c0.043-0.277,0.281-0.481,0.562-0.481h0.473c1.234,0,2.4,0,3.002,0.704 C95.809,11.668,95.918,12.292,95.781,13.154z"></path>-->
+<!--                                                    <path fill="#179BD7" d="M115.434,13.075h-3.273c-0.281,0-0.52,0.204-0.562,0.481l-0.145,0.916l-0.23-0.332 c-0.709-1.029-2.289-1.373-3.867-1.373c-3.619,0-6.709,2.741-7.311,6.586c-0.312,1.918,0.131,3.752,1.219,5.031 c1,1.176,2.426,1.666,4.125,1.666c2.916,0,4.533-1.875,4.533-1.875l-0.146,0.91c-0.055,0.348,0.213,0.66,0.564,0.66h2.949 c0.467,0,0.865-0.34,0.938-0.803l1.771-11.209C116.053,13.388,115.785,13.075,115.434,13.075z M110.869,19.449 c-0.314,1.871-1.801,3.127-3.695,3.127c-0.949,0-1.711-0.305-2.199-0.883c-0.484-0.574-0.666-1.391-0.514-2.301 c0.297-1.855,1.805-3.152,3.67-3.152c0.93,0,1.686,0.309,2.184,0.892C110.816,17.721,111.014,18.543,110.869,19.449z"></path>-->
+<!--                                                    <path fill="#179BD7" d="M119.295,7.23l-2.807,17.858c-0.055,0.346,0.213,0.658,0.562,0.658h2.822c0.469,0,0.867-0.34,0.939-0.803 l2.768-17.536c0.055-0.346-0.213-0.659-0.562-0.659h-3.16C119.578,6.749,119.338,6.953,119.295,7.23z"></path>-->
+<!--                                                    <path fill="#253B80" d="M7.266,29.154l0.523-3.322l-1.165-0.027H1.061L4.927,1.292C4.939,1.218,4.978,1.149,5.035,1.1 c0.057-0.049,0.13-0.076,0.206-0.076h9.38c3.114,0,5.263,0.648,6.385,1.927c0.526,0.6,0.861,1.227,1.023,1.917 c0.17,0.724,0.173,1.589,0.007,2.644l-0.012,0.077v0.676l0.526,0.298c0.443,0.235,0.795,0.504,1.065,0.812 c0.45,0.513,0.741,1.165,0.864,1.938c0.127,0.795,0.085,1.741-0.123,2.812c-0.24,1.232-0.628,2.305-1.152,3.183 c-0.482,0.809-1.096,1.48-1.825,2c-0.696,0.494-1.523,0.869-2.458,1.109c-0.906,0.236-1.939,0.355-3.072,0.355h-0.73 c-0.522,0-1.029,0.188-1.427,0.525c-0.399,0.344-0.663,0.814-0.744,1.328l-0.055,0.299l-0.924,5.855l-0.042,0.215 c-0.011,0.068-0.03,0.102-0.058,0.125c-0.025,0.021-0.061,0.035-0.096,0.035H7.266z"></path>-->
+<!--                                                    <path fill="#179BD7" d="M23.048,7.667L23.048,7.667L23.048,7.667c-0.028,0.179-0.06,0.362-0.096,0.55 c-1.237,6.351-5.469,8.545-10.874,8.545H9.326c-0.661,0-1.218,0.48-1.321,1.132l0,0l0,0L6.596,26.83l-0.399,2.533 c-0.067,0.428,0.263,0.814,0.695,0.814h4.881c0.578,0,1.069-0.42,1.16-0.99l0.048-0.248l0.919-5.832l0.059-0.32 c0.09-0.572,0.582-0.992,1.16-0.992h0.73c4.729,0,8.431-1.92,9.513-7.476c0.452-2.321,0.218-4.259-0.978-5.622 C24.022,8.286,23.573,7.945,23.048,7.667z"></path>-->
+<!--                                                    <path fill="#222D65" d="M21.754,7.151c-0.189-0.055-0.384-0.105-0.584-0.15c-0.201-0.044-0.407-0.083-0.619-0.117 c-0.742-0.12-1.555-0.177-2.426-0.177h-7.352c-0.181,0-0.353,0.041-0.507,0.115C9.927,6.985,9.675,7.306,9.614,7.699L8.05,17.605 l-0.045,0.289c0.103-0.652,0.66-1.132,1.321-1.132h2.752c5.405,0,9.637-2.195,10.874-8.545c0.037-0.188,0.068-0.371,0.096-0.55 c-0.313-0.166-0.652-0.308-1.017-0.429C21.941,7.208,21.848,7.179,21.754,7.151z"></path>-->
+<!--                                                    <path fill="#253B80" d="M9.614,7.699c0.061-0.393,0.313-0.714,0.652-0.876c0.155-0.074,0.326-0.115,0.507-0.115h7.352 c0.871,0,1.684,0.057,2.426,0.177c0.212,0.034,0.418,0.073,0.619,0.117c0.2,0.045,0.395,0.095,0.584,0.15 c0.094,0.028,0.187,0.057,0.278,0.086c0.365,0.121,0.704,0.264,1.017,0.429c0.368-2.347-0.003-3.945-1.272-5.392 C20.378,0.682,17.853,0,14.622,0h-9.38c-0.66,0-1.223,0.48-1.325,1.133L0.01,25.898c-0.077,0.49,0.301,0.932,0.795,0.932h5.791 l1.454-9.225L9.614,7.699z"></path>-->
+<!--                                                </svg>-->
+<!--                                            </label>-->
+<!--                                        </div>-->
+                                    </div>
+                                </div>
+                                <div class="row mb-3" *ngIf="paymentMethod == 'card'">
+                                    <div class="col-sm-12 form-group mb-3">
+                                        <label for="">Card Number</label>
+                                        <input (change)="formatCardInput()" [(ngModel)]="creditCard['nmi-card-number']" type="text" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="col-sm-6 form-group mb-3">
+                                        <label for="">Expiration</label>
+                                        <input (change)="formatCardInput()" [(ngModel)]="creditCard['nmi-card-expiry']" type="text" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="col-sm-6 form-group mb-3">
+                                        <label for="">Security Code</label>
+                                        <input (change)="formatCardInput()" [(ngModel)]="creditCard['nmi-card-cvc']" type="text" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <button (click)="savePaymentMethod()" class="btn btn-sm btn-primary" [disabled]="isUpdating">{{isUpdating ? 'Please wait...' : 'Update'}}</button>
+                                    </div>
+                                </div>
+                                <div class="" *ngIf="paymentMethod == 'paypal'">
+                                    <p>By clicking on “PayPal” you will be redirected to PayPal to complete the process</p>
+                                    <button class="btn btn-lg bg-warning "><i class="fa-brands fa-paypal me-2"></i>PayPal</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade show active" *ngIf="activeTab === 'billing-contacts'">
+                <div class="row">
+                    <div class="col-sm-12 col-md-8 col-lg-7 col-xl-6 col-xxl-5">
+                        <h3 class="mb-0">Manage billing contacts</h3>
+                        <small>Billing contacts will be notified by email regarding billing changes in your account</small>
+                        <div *ngIf="isLoading">Loading... <i class="fa fa-spinner fa-spin"></i></div>
+                        <ul class="list-group list-group-flush mt-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let contact of billingContacts; let index = index">
+                                <div class="d-flex align-items-center">
+                                    <span class="initials me-2">{{contact.user[0] || contact.email[0] | uppercase}}</span>
+                                    <div>
+                                        <h4 class="mb-0" *ngIf="contact.name">{{contact.name}}</h4>
+                                        <small *ngIf="contact.email">{{contact.email}}</small>
+                                    </div>
+                                </div>
+                                <span class="cable" (click)="removeBillingContact(index)"><i class="fa-light fa-xmark"></i></span>
+                            </li>
+                        </ul>
+                        <div class="mt-4">
+                            <h3><i class="fa-light fa-circle-plus me-2"></i> Add billing contact</h3>
+                            <div class="d-flex align-items-end justify-content-between">
+                                <div class="form-group w-100">
+                                    <label>Choose from your members</label>
+                                    <div class="custom-select dropdown">
+                                        <mat-form-field floatLabel="never" appearance="outline">
+                                            <input type="text"
+                                                   matInput
+                                                   [(ngModel)]="selectedUser.name"
+                                                   name="selectedUser" ngControl="selectedUser"
+                                                   (ngModelChange)="onDealLeadChange(selectedUser.name)"
+                                                   [matAutocomplete]="billingUser">
+                                            <mat-autocomplete autoActiveFirstOption #billingUser="matAutocomplete">
+                                                <mat-option *ngIf="!filteredUsers.length" [value]="">
+                                                    No Users Found
+                                                </mat-option>
+                                                <mat-option *ngFor="let user of filteredUsers"
+                                                            [value]="user.display_name"
+                                                            name="user.display_name"
+                                                            (click)="onUserSelect(user)">
+                                                    <div class="suggested-item d-flex align-items-center mb-2">
+                                                        <div class="initials" style="background: purple" *ngIf="user.fname[0] && user.lname">{{user.fname[0]}}{{user.lname[0]}}</div>
+                                                        <div class="initials" style="background: purple" *ngIf="!user.fname[0] || !user.lname">{{user.display_name[0]}}</div>
+                                                        <div class="item-name">{{user.display_name}}</div>
+                                                    </div>
+                                                </mat-option>
+                                            </mat-autocomplete>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="form-group w-100 ms-2 me-2">
+                                    <label>Or Add a billing contact by email</label>
+                                    <input type="text" [(ngModel)]="selectedUser.email" class="form-control" placeholder="Enter Email">
+                                </div>
+                                <button class="btn btn-primary w-100" (click)="addBillingContacts()" [disabled]="!selectedUser.name && !selectedUser.email">Add billing contact</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade show active" *ngIf="activeTab === 'customer-billing'">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-7">
+                        <h2>Footer text for invoice</h2>
+                        <div class="email-body mb-2">
+                            <editor
+                                    [(ngModel)]="footerTxt"
+                                    cloudChannel="5"
+                                    [disabled]="false"
+                                    [init]="{
+                                    height: 500,
+                                    menubar: 'file edit view insert format tools table tc help',
+                                    plugins: [
+                                    'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons'
+                                    ],
+                                    toolbar:'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl'
+
+                                }"
+                            ></editor>
+                        </div>
+                        <button (click)="updateSettingsFooterTxt()" [disabled]="isUpdating" class="btn btn-primary">{{isUpdating ? 'Please wait...' : 'Update'}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+li.nav-link.broadcard-link .nav-link-wrp,
+li.nav-link.sequences-link .nav-link-wrp {
+    padding-left: 20px !important;
+}
+.left-menu-tray.howcanwehelp-try {
+    position: absolute;
+    top: 0;
+    left: 66px;
+}
+
+.full-strip {
+    background: #1a1e21;
+    color: white;
+    .pull-right {
+        float: right !important;
+    }
+    .close-btn-top{
+        color: white;
+    }
+}

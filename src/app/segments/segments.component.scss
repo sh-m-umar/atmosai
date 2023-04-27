@@ -1,0 +1,95 @@
+.badge.active{
+    background: rgb(231, 246, 238);
+    color: rgb(38, 119, 76);
+}
+.badge.paused{
+    color: rgb(40, 51, 62);
+    background-color: rgb(229, 232, 235);
+}
+.table-hover > tbody > tr:hover {
+    color: var(--at-font-color);
+    background: var(--at-app-bg);
+}
+.segment-rules{
+    .rule-item{
+        background: var(--at-app-bg);
+        padding-right: 10px;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 10px;
+        cursor: pointer;
+        .rule-name{
+            background: var(--at-list-item-hover);
+            height: 40px;
+            line-height: 40px;
+            padding: 0 15px;
+            width: 30%;
+            margin-right: 20px;
+            svg{
+                width: 16px;
+            }
+
+        }
+        &:hover{
+            background: var(--at-list-item-hover);
+        }
+    }
+    .selected-rules-wrapper{
+        background: var(--at-app-bg);
+        margin-bottom: 15px;
+        .rule-item{
+            border-bottom: 1px dashed var(--at-font-color);
+            position: relative;
+            overflow: visible;
+            .form-select-sm{
+                min-height: 33px;
+            }
+            .rule-name{
+                padding: 10px 15px;
+                height: unset;
+            }
+            &:hover{
+                background: unset;
+            }
+            &:not(:first-child){
+                &::before{
+                    content: "AND";
+                    position: absolute;
+                    top: -12px;
+                    left: -10px;
+                    border: 1px solid var(--at-border-color);
+                    width: 40px;
+                    background: var(--at-app-bg);
+                    height: 24px;
+                    line-height: 24px;
+                    text-align: center;
+                    border-radius: 5px;
+                }
+            }
+        }
+        .add-filter{
+            height: 40px;
+            line-height: 40px;
+            margin-left: 10px;
+        }
+    }
+    .or-devider {
+        margin-bottom: 20px;
+        width: 40px;
+        height: 25px;
+        line-height: 25px;
+        background: var(--at-app-bg);
+        text-align: center;
+        border-radius: 3px;
+        border: 1px solid var(--at-border-color);
+        &::after {
+            content: "";
+            position: absolute;
+            left: 55px;
+            right: 0;
+            top: 13px;
+            border: 1px dashed var(--at-border-color);
+            
+        }
+    }
+}

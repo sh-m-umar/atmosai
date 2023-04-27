@@ -1,0 +1,205 @@
+.mat-form-field-underline {
+    display: none;
+}
+.top-notice-board {
+  padding: 5px;
+  background: purple;
+  color: white;
+}
+.ag-theme-alpine [class^=ag-] .ag-pinned-left-cols-container .ag-cell[col-id=item],
+.ag-theme-alpine [class^=ag-] .ag-pinned-left-cols-container .ag-cell[col-id=checkbox]{
+  border-bottom: 1px solid var(--at-border-color) !important;
+}
+.ag-theme-alpine .ag-root-wrapper .ag-header-cell{
+  padding: 0;
+}
+.ag-header-cell:not(.ag-header-cell-auto-height) .ag-header-cell-comp-wrapper{
+  justify-content: center;
+  width: 100%;
+}
+.page-header{
+  div[data-bs-toggle=dropstart]{ 
+    .dropdown-menu.style-less.second-level-drop {
+      top: 0;
+      right: 100%;
+    }
+    &:hover{
+      .dropdown-menu.style-less.second-level-drop{
+        display: block;
+      }
+    }
+  }
+  .second-level-drop{
+    .list-group-item{ 
+      .dropdown-menu.style-less.third-level-drop {
+        top: 0;
+        right: 100%;
+      }
+      &:hover{
+        .dropdown-menu.style-less.third-level-drop{
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.isActive {
+  border: 2px solid green !important;
+}
+.mapcol .ng2-tag-input__text-input {
+  border: 1px solid var(--at-border-color) !important;
+  border-radius: 5px;
+}
+.ng2-dropdown-menu {
+  z-index: 2000 !important;
+}
+
+.hidden {
+  display:none;
+}
+#columnbuttonpopup{
+  .modal-content{
+    min-height: 60vh;
+  }
+  .all-boards-options-wrap {
+    min-width: 300px;
+    background: var(--at-card-bg);
+    height: 100% !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    .close-board-options{
+      position: relative;
+      top: -18px;
+      right: -7px;
+    }
+  }
+}
+
+.overlay-groups {
+  background: white;
+  opacity: .70;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 99;
+}
+.accordion-item{
+  position: relative;
+}
+
+.red-color-text {
+  color: red;
+}
+
+.green-color-text{
+    color: green;
+}
+.files-body{
+  .files-items-wrapper{
+    &.grid{
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -10px;
+      .files-item{
+        width: calc(20% - 20px);
+        margin: 0px 10px 30px;
+        .files-item-image{
+          position: relative;
+        }
+        .files-item-details-btns {
+          position: absolute;
+          left: 5px;
+          bottom: 5px;
+        }
+        .files-item-description{
+          .files-item-name{
+            margin-bottom: 0;
+          }
+          .uploader-times{
+            display: none !important;
+          }
+        }
+        .files-item-menu {
+          box-shadow: none;
+          width: 30px;
+          height: 30px;
+          background: var(--at-app-bg);
+          text-align: center;
+          line-height: 30px;
+          padding: 0 !important;
+          border: 1px solid var(--at-border-color);
+          border-radius: 5px;
+          color: var(--at-font-color);
+          svg{
+            width: 20px;
+          }
+          &.elipisis {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+          }
+        }
+      }
+    }
+    &.list{
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -10px;
+      .files-item{
+        width: calc(100% - 20px);
+        margin: 0px 10px 20px;
+        display: flex;
+        border: 1px solid var(--at-border-color);
+        border-radius: 10px;
+        padding: 10px;
+        position: relative;
+        .files-item-image{
+          position: unset;
+          max-width: 175px;
+          margin-right: 15px;
+          border-radius: 5px;
+          overflow: hidden;
+        }
+        .files-item-details-btns {
+          position: absolute;
+          right: 10px;
+          bottom: 10px;
+        }
+        .files-item-description{
+          .files-item-name{
+            margin-bottom: 0;
+          }
+          .files-item-uploaded-time {
+            display: none;
+          }
+        }
+        .files-item-menu {
+          box-shadow: none;
+          width: 30px;
+          height: 30px;
+          background: var(--at-app-bg);
+          text-align: center;
+          line-height: 30px;
+          padding: 0 !important;
+          border: 1px solid var(--at-border-color);
+          color: var(--at-font-color);
+          border-radius: 5px;
+          svg{
+            width: 20px;
+          }
+          &.elipisis {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+          }
+        }
+      }
+    }
+  }
+}

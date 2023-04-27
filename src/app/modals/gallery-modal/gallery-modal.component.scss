@@ -1,0 +1,91 @@
+.inner-gallery-tabs-wrapper{
+    height: 100%;
+    .gallery-wrp {
+        width: 70%;
+        background: var(--at-app-bg);
+        padding: 30px 0 100px;
+        height: 100%;
+        #galleryCarousel{
+            .carousel-inner {
+                width: 75%;
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+            .carousel-control-prev, .carousel-control-next {
+                width: 50px;
+            }
+        }
+        .gallery-controls {
+            background: var(--at-card-bg);
+            border: 1px solid var(--at-border-color);
+            width: fit-content;
+            margin: 50px auto;
+            padding: 5px 10px 5px 5px;
+            box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+            border-radius: 5px;
+            button {
+                border: 0;
+                padding: 5px;
+                background: transparent;
+                margin-left: 5px;
+                border-radius: 5px;
+                .marker-button-text {
+                    vertical-align: middle;
+                }
+                &:hover{
+                    background: var(--at-app-bg) !important;
+                }
+            }
+        }
+        &.full{
+            width: calc(100% - 90px);
+        }
+    }
+    .description-wrp{
+        width: calc(30% - 90px);
+        .files-body .files-items-wrapper.grid .files-item {
+            width: calc(50% - 20px);
+        }
+    }
+    .gallery-fixed-menu{
+        .list-group{
+            height: 100%;
+            border-left:1px solid var(--at-border-color);
+            .list-group-item{
+                border-radius: 0;
+                border: 0;
+                text-align: center;
+                padding: 0;
+                width: 90px;
+                height: 90px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                i{
+                    font-size: 30px;
+                    margin-bottom:5px;
+                }
+                small{
+                    font-size: 12px;
+                }
+                &:hover, &.active{
+                    background: var(--at-app-bg);
+                    color:var(--at-font-color);
+                }
+                &.active::before {
+                    content: ' ';
+                    width: 0px;
+                    height: 10px;
+                    border-left: 15px solid transparent;
+                    border-right: 15px solid transparent;
+                    border-bottom: 15px solid var(--at-card-bg);
+                    display: inline-block;
+                    position: absolute;
+                    transform: rotate(90deg);
+                    left: -8px;
+                    top: 38px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,598 @@
+<div class="admin-page-wrapper">
+    <div class="page-header">
+        <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+            <div class="header-lhs d-flex align-items-center">
+                <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                    <span>Usage Stats</span>
+                </h4>
+                <span class="ms-2 me-2"  mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+                <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+            </div>
+            <div class="header-rhs d-flex align-items-center">
+                <div class="button-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary borderless dropdown-toggle-split" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Console log</a></li>
+                        <li><a class="dropdown-item">Clear local cache only</a></li>
+                        <li><a class="dropdown-item">Clear cache and database both</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">
+            <span>This is description</span>
+            <i class="fa-solid fa-ellipsis"></i>
+        </div>
+        <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+                <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">Usage Stats</h5>
+                <ul class="tabslink nav boards-top-menu-style" id="nav-tab" role="tablist">
+                    <li class="nav-item" type="button" [ngClass]="{active: activeTab === 'basic'}">
+                        <div class="boards-top-menu-style-first" (click)="changeTab('basic')"><i class="fa-thin fa-home"></i> Basic</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" type="button" [ngClass]="{active: activeTab === 'storage'}">
+                        <div class="boards-top-menu-style-first" (click)="changeTab('storage')"><i class="fa-thin fa-home"></i> Storage</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" type="button" [ngClass]="{active: activeTab === 'automation'}">
+                        <div class="boards-top-menu-style-first" (click)="changeTab('automation')"><i class="fa-thin fa-home"></i> Automations</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" type="button" [ngClass]="{active: activeTab === 'integrations'}">
+                        <div class="boards-top-menu-style-first" (click)="changeTab('integrations')"><i class="fa-thin fa-home"></i> Integrations</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" type="button" [ngClass]="{active: activeTab === 'advanced'}">
+                        <div class="boards-top-menu-style-first" (click)="changeTab('advanced')"><i class="fa-thin fa-home"></i> Advanced</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-thin fa-plus"></i>
+                    </button>
+                    <div class="dropdown-menu p-0 style-less">
+                        <ul class="list-group list-group-flush list-group-sm">
+                            <li class="list-group-item">
+                                <div class="ls" data-bs-toggle="modal" data-bs-target="#viewcenter" >
+                                    <i class="fa-light fa fa-home"></i>
+                                    <span class="ms-2">Apps</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex align-items-centere">
+                <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2" style="margin-top: -5px;">
+                    <div class="button-group outlined borderless">
+                        <button type="button" class="btn collapsed btn-outline-secondary"><i
+                                class="fa-thin fa-envelope"></i> Bulk Emails
+                        </button>
+                        <button type="button"
+                                class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <div class="button-group ms-2">
+                        <button type="button" class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div (click)="headerToggle()" class="header-collapse-btn"><i class="fa-thin fa-angle-{{anglePos}}"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="admin-page-content-wrapper">
+        <div class="tab-content mb-5" id="nav-tabContent">
+            <div class="tab-pane fade show active" *ngIf="activeTab === 'basic'">
+                <h3>Basic Stats</h3>
+                <div class="row">
+                    <div class="col-sm-12 col-md-8 col-lg-7 col-xl-6 col-xxl-5">
+                        <div class="row mb-3">
+                            <div class="col-sm-12 col-lg-7">
+                                <div class="card purple">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center justify-content-between mb-3">
+                                            <h4 class="mb-0">Summary</h4>
+                                            <small>Last 60 days</small>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="text-center">
+                                                <h1 class="mb-2">{{basicStats.boards_updated}}</h1>
+                                                <small>Boards updated</small>
+                                            </div>
+                                            <div class="text-center">
+                                                <h1 class="mb-2">{{basicStats.people_posted}}</h1>
+                                                <small>People posted</small>
+                                            </div>
+                                            <div class="text-center">
+                                                <h1 class="mb-2">{{basicStats.updates_in_boards}}</h1>
+                                                <small>Updates in boards</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-5">
+                                <div class="card blue">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center justify-content-between mb-3">
+                                            <h4 class="mb-0">Summary</h4>
+                                        </div>
+                                        <div class="">
+                                            <div class="text-center text-center">
+                                                <div class="progress mb-3">
+                                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                                                </div>
+                                                <h3 class="mb-0"><strong>{{basicStats.storage_used}}</strong> of Unlimited</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-12 col-lg-7">
+                                <div class="card green">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center justify-content-between mb-3">
+                                            <h4 class="mb-0">People Activity</h4>
+                                            <small>Last 60 days</small>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="text-center">
+                                                <h1 class="mb-2">{{basicStats.people_joined}}</h1>
+                                                <small>People joined</small>
+                                            </div>
+                                            <div class="text-center">
+                                                <h1 class="mb-2">{{basicStats.people_contributed}}</h1>
+                                                <small>People contributed</small>
+                                            </div>
+                                            <div class="text-center">
+                                                <h1 class="mb-2">{{basicStats.invited_but_didnt_join}}</h1>
+                                                <small>Invited but didn't join</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-sm-12 col-lg-5">
+                                <div class="card bg-warning">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center justify-content-between mb-3">
+                                            <h4 class="mb-0">People Activity</h4>
+                                            <small>Last 60 days</small>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="text-center">
+                                                <h1 class="mb-2">96</h1>
+                                                <small>People joined</small>
+                                            </div>
+                                            <div class="text-center">
+                                                <h1 class="mb-2">2</h1>
+                                                <small>People contributed</small>
+                                            </div>
+                                            <div class="text-center">
+                                                <h1 class="mb-2">9</h1>
+                                                <small>Invited but didn't join</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade show active" *ngIf="activeTab === 'storage'">
+              <div class='loader-container mt-auto' *ngIf="!storageStats.length">
+                <div class='loader'>
+                    <div class='loader--dot'></div>
+                    <div class='loader--dot'></div>
+                    <div class='loader--dot'></div>
+                    <div class='loader--dot'></div>
+                    <div class='loader--dot'></div>
+                    <div class='loader--dot'></div>
+                </div>
+              </div>
+              <ng-container *ngIf="storageStats.length">
+                <h3>Storage Stats</h3>
+                <div class="row">
+                    <div class="col-sm-12 col-md-8 col-lg-7 col-xl-6 col-xxl-5">
+                        <div class="row mb-3">
+                            <div class="col-sm-12 col-lg-7">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>FILE TYPE</th>
+                                            <th>CAPACITY</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      <ng-container *ngFor="let item of storageStats">
+                                        <tr *ngIf="item[0] && item[1]">
+                                          <td>{{item[0]}}</td>
+                                          <td>{{item[1]}}</td>
+                                        </tr>
+                                      </ng-container>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-sm-12 col-lg-5">
+                                <div class="card blue">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center justify-content-between mb-3">
+                                            <h4 class="mb-0">Storage Used</h4>
+                                        </div>
+                                        <div class="">
+                                            <div class="text-center text-center">
+                                                <div class="progress mb-3">
+                                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                                                </div>
+                                                <h3 class="mb-0"><strong>{{storageUsed}}</strong> of Unlimited</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </ng-container>
+            </div>
+            <div class="tab-pane fade show active" *ngIf="activeTab === 'automation'">
+                <div class="row justify-content-center">
+                    <div class="col-sm-12 col-md-8 col-lg-7 col-xl-6 col-xxl-5">
+                        <div class="d-flex justify-content-end align-items-end mt-3">
+                            <button class="btn btn-sm btn-primary me-3">Upgrade</button>
+                            <h3 class="mb-0">{{automationStats.upgrade_date}}</h3>
+                        </div>
+                        <div class="mt-3 mb-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h1 class="mb-0">{{automationStats.actions_used}} Actions used</h1>
+                                <p class="mb-0">Projected actions this month: {{automationStats.projected_actions}}</p>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width:17px" role="progressbar" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <div>
+                                    <h2 class="mb-0">/ {{automationStats.actions_available }} Actions available</h2>
+                                    <span>{{automationStats.actions_available}} Actions per month for Free trial, considered as Pro plan</span>
+                                </div>
+                                <div>
+                                    <span class="me-4"><i class="fa-solid fa-circle me-2 text-success"></i>Actions used</span>
+                                    <span><i class="fa-solid fa-circle me-2 text-white"></i>Available actions</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-sm-6">
+                                <h3 class="mb-0 text-center">Actions by board</h3>
+                                <echarts [initOpts]="initOpts" [options]="options"></echarts>
+                            </div>
+                            <div class="col-sm-6">
+                                <h3 class="mb-0 text-center">Actions by board</h3>
+                                <echarts [initOpts]="initOpts" [options]="options"></echarts>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade show active" *ngIf="activeTab === 'integrations'">
+                <div class="row justify-content-center">
+                    <div class="col-sm-12 col-md-8 col-lg-7 col-xl-6 col-xxl-5">
+                        <div class="d-flex justify-content-end align-items-end mt-3">
+                            <button class="btn btn-sm btn-primary me-3">Upgrade</button>
+                            <h3 class="mb-0">{{integrationsStats.upgrade_date}}</h3>
+                        </div>
+                        <div class="mt-3 mb-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h1 class="mb-0">{{integrationsStats.actions_used}} Actions used</h1>
+                                <p class="mb-0">Projected actions this month: {{integrationsStats.projected_actions}}</p>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width:17px" role="progressbar" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <div>
+                                    <h2 class="mb-0">/ {{integrationsStats.actions_available}} Actions available</h2>
+                                    <span>{{integrationsStats.actions_available}} Actions per month for Free trial, considered as Pro plan</span>
+                                </div>
+                                <div>
+                                    <span class="me-4"><i class="fa-solid fa-circle me-2 text-success"></i>Actions used</span>
+                                    <span><i class="fa-solid fa-circle me-2 text-white"></i>Available actions</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade show active" *ngIf="activeTab === 'advanced'">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3 class="mb-0">Advanced Usage Stats</h3>
+                    <div class="d-flex align-items-center">
+                        <label style="min-width: 125px;">Number of results:</label>
+                        <select class="form-select form-select-sm w-50">
+                            <option value="">1</option>
+                            <option value="">2</option>
+                            <option value="">3</option>
+                            <option value="">4</option>
+                            <option value="">5</option>
+                            <option value="">6</option>
+                            <option value="">7</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card mt-3 mb-3 border">
+                    <div class="card-body px-0 pb-0 pt-1">
+                        <div class="d-flex align-items-center justify-content-between mb-4 px-2">
+                            <h3 class="mb-0">Trending Boards <small>in the last month</small></h3>
+                        </div>
+                        <table class="table mb-0 align-middle">
+                            <thead>
+                                <tr>
+                                    <th style="width:50px;"></th>
+                                    <th style="width:60%;">Boards</th>
+                                    <th>Items</th>
+                                    <th>Updates</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><span class="link cable">Project Alpha</span></td>
+                                    <td>13</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><span class="link cable">Project Alpha</span></td>
+                                    <td>13</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><span class="link cable">Project Alpha</span></td>
+                                    <td>13</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><span class="link cable">Project Alpha</span></td>
+                                    <td>13</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td><span class="link cable">Project Alpha</span></td>
+                                    <td>13</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td><span class="link cable">Project Alpha</span></td>
+                                    <td>13</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td><span class="link cable">Project Alpha</span></td>
+                                    <td>13</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td><span class="link cable">Project Alpha</span></td>
+                                    <td>13</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center cable py-2">Show more</div>
+                    </div>
+                </div>
+                <div class="card mt-3 mb-3 border">
+                    <div class="card-body px-0 pb-0 pt-1">
+                        <div class="d-flex align-items-center justify-content-between mb-4 px-2">
+                            <h3 class="mb-0">Top Creator <small>in the last month</small></h3>
+                            <span><i class="fa-light fa-circle-info"></i></span>
+                        </div>
+                        <table class="table mb-0 align-middle">
+                            <thead>
+                                <tr>
+                                    <th style="width:50px;"></th>
+                                    <th style="width:60%;">Person</th>
+                                    <th>NOV 14-20</th>
+                                    <th>NOV 21-27</th>
+                                    <th>NOV 28-DEC 10</th>
+                                    <th>DEC 11-DEC 21</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="initials me-2">TM</span>
+                                            <span class="cable link">Tim Moses</span>
+                                        </div>
+                                    </td>
+                                    <td>13 <span class="ms-2 text-success"><i class="fa-solid fa-caret-up"></i></span></td>
+                                    <td>34 <span class="ms-2 text-danger"><i class="fa-solid fa-caret-down"></i></span></td>
+                                    <td>13 <span class="ms-2 text-success"><i class="fa-solid fa-caret-up"></i></span></td>
+                                    <td>34 <span class="ms-2 text-danger"><i class="fa-solid fa-caret-down"></i></span></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="initials me-2">TM</span>
+                                            <span class="cable link">Tim Moses</span>
+                                        </div>
+                                    </td>
+                                    <td>13 <span class="ms-2 text-success"><i class="fa-solid fa-caret-up"></i></span></td>
+                                    <td>34 <span class="ms-2 text-danger"><i class="fa-solid fa-caret-down"></i></span></td>
+                                    <td>13 <span class="ms-2 text-success"><i class="fa-solid fa-caret-up"></i></span></td>
+                                    <td>34 <span class="ms-2 text-danger"><i class="fa-solid fa-caret-down"></i></span></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="initials me-2">TM</span>
+                                            <span class="cable link">Tim Moses</span>
+                                        </div>
+                                    </td>
+                                    <td>13 <span class="ms-2 text-success"><i class="fa-solid fa-caret-up"></i></span></td>
+                                    <td>34 <span class="ms-2 text-danger"><i class="fa-solid fa-caret-down"></i></span></td>
+                                    <td>13 <span class="ms-2 text-success"><i class="fa-solid fa-caret-up"></i></span></td>
+                                    <td>34 <span class="ms-2 text-danger"><i class="fa-solid fa-caret-down"></i></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center cable py-2">Show more</div>
+                    </div>
+                </div>
+                <div class="card mt-3 mb-3 border">
+                    <div class="card-body px-0 pb-0 pt-1">
+                        <div class="d-flex align-items-center justify-content-between mb-4 px-2">
+                            <h3 class="mb-0">Top Communicators <small>in the last month</small></h3>
+                            <span><i class="fa-light fa-circle-info"></i></span>
+                        </div>
+                        <table class="table mb-0 align-middle">
+                            <thead>
+                                <tr>
+                                    <th style="width:50px;"></th>
+                                    <th style="width:60%;">Person</th>
+                                    <th>NOV 14-20</th>
+                                    <th>NOV 21-27</th>
+                                    <th>NOV 28-DEC 10</th>
+                                    <th>DEC 11-DEC 21</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="initials me-2">TM</span>
+                                            <span class="cable link">Tim Moses</span>
+                                        </div>
+                                    </td>
+                                    <td>13 <span class="ms-2 text-success"><i class="fa-solid fa-caret-up"></i></span></td>
+                                    <td>34 <span class="ms-2 text-danger"><i class="fa-solid fa-caret-down"></i></span></td>
+                                    <td>13 <span class="ms-2 text-success"><i class="fa-solid fa-caret-up"></i></span></td>
+                                    <td>34 <span class="ms-2 text-danger"><i class="fa-solid fa-caret-down"></i></span></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="initials me-2">TM</span>
+                                            <span class="cable link">Tim Moses</span>
+                                        </div>
+                                    </td>
+                                    <td>13 <span class="ms-2 text-success"><i class="fa-solid fa-caret-up"></i></span></td>
+                                    <td>34 <span class="ms-2 text-danger"><i class="fa-solid fa-caret-down"></i></span></td>
+                                    <td>13 <span class="ms-2 text-success"><i class="fa-solid fa-caret-up"></i></span></td>
+                                    <td>34 <span class="ms-2 text-danger"><i class="fa-solid fa-caret-down"></i></span></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="initials me-2">TM</span>
+                                            <span class="cable link">Tim Moses</span>
+                                        </div>
+                                    </td>
+                                    <td>13 <span class="ms-2 text-success"><i class="fa-solid fa-caret-up"></i></span></td>
+                                    <td>34 <span class="ms-2 text-danger"><i class="fa-solid fa-caret-down"></i></span></td>
+                                    <td>13 <span class="ms-2 text-success"><i class="fa-solid fa-caret-up"></i></span></td>
+                                    <td>34 <span class="ms-2 text-danger"><i class="fa-solid fa-caret-down"></i></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center cable py-2">Show more</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

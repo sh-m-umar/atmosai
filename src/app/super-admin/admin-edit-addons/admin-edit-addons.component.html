@@ -1,0 +1,255 @@
+<div class="page-header">
+    <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+        <div class="header-lhs d-flex align-items-center">
+            <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                <span>Edit Addons</span>
+            </h4>
+            <span class="ms-2 me-2"  mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+            <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+        </div>
+        <div class="header-rhs d-flex align-items-center">
+            <div class="button-group ms-2">
+                <button type="button" class="btn btn-outline-secondary borderless dropdown-toggle-split" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                    <i class="fa-solid fa-ellipsis"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item">Console log</a></li>
+                    <li><a class="dropdown-item">Clear local cache only</a></li>
+                    <li><a class="dropdown-item">Clear cache and database both</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">
+        <span>This is description</span>
+        <i class="fa-solid fa-ellipsis"></i>
+    </div>
+    <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+        <div class="d-flex">
+            <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">Edit Addons</h5>
+
+            <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-thin fa-plus"></i>
+                </button>
+                <div class="dropdown-menu p-0 style-less">
+                    <ul class="list-group list-group-flush list-group-sm">
+                        <li class="list-group-item">
+                            <div class="ls" data-bs-toggle="modal" data-bs-target="#viewcenter" >
+                                <i class="fa-light fa fa-home"></i>
+                                <span class="ms-2">Apps</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex align-items-centere">
+            <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2" style="margin-top: -5px;">
+                <div class="button-group outlined borderless">
+                    <button type="button" class="btn collapsed btn-outline-secondary"><i
+                            class="fa-thin fa-envelope"></i> Bulk Emails
+                    </button>
+                    <button type="button"
+                            class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+                <div class="button-group ms-2">
+                    <button type="button" class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div (click)="headerToggle()" class="header-collapse-btn"><i class="fa-thin fa-angle-{{anglePos}}"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--add subscription addons starts-->
+<div class="add-subscription-addons-form mb-4 card p-3">
+    <div class="row mb-4">
+        <div class="col-sm-6">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h3 class="mb-0">Add Subscription Addon</h3>
+                <button routerLink="/super-admin/addons" class="btn btn-sm btn-outline-secondary">Back to Addons</button>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Addon Status</label>
+                </div>
+                <div class="col-sm-9">
+                    <select class="form-select from-select-sm">
+                        <option>Active</option>
+                        <option>Cancled</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Addon Name</label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Addon Id</label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Addon Icon</label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="file" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Cover Image</label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="file" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Addon Description</label>
+                </div>
+                <div class="col-sm-9">
+                    <textarea rows="3" class="form-control form-control-sm"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for=""># of Subscriber Inclused</label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Package Included Seats</label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Per Seat Price</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control form-control-sm">
+                            <small class="d-block">Monthly</small>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control form-control-sm">
+                            <small class="d-block">Yearly</small>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Per Additional Seat Price</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control form-control-sm">
+                            <small class="d-block">Monthly</small>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control form-control-sm">
+                            <small class="d-block">Yearly</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Free Trial Days</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control form-control-sm">
+                            <small class="d-block">Monthly</small>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control form-control-sm">
+                            <small class="d-block">Yearly</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Select App</label>
+                </div>
+                <div class="col-sm-9">
+                    <select class="form-select from-select-sm">
+                        <option>App 1</option>
+                        <option>App 2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Select Modules</label>
+                </div>
+                <div class="col-sm-9">
+                    <select class="form-select from-select-sm">
+                        <option>Module 1</option>
+                        <option>Module 2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">List Order</label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-end">
+            <button class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</div>
+<!--add subscription addons ends-->

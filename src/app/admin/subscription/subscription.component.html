@@ -1,0 +1,1231 @@
+<!-- Header Start -->
+<div class="purchase-header d-flex align-items-center justify-content-center mt-4">
+    <div class="header-tick text-center">
+        <i class="fa-light fa-circle-check"></i>
+        <p class="mb-0">Trial expired</p>
+    </div>
+    <div [ngClass]="{'text-gray': step <= 2}" class="border-top mb-3"></div>
+    <div [ngClass]="{'text-gray': step <= 2}" class="header-tick text-center">
+        <i class="fa-light fa-circle-check"></i>
+        <p class="mb-0">Choose plan</p>
+    </div>
+    <div [ngClass]="{'text-gray': step <= 3}" class="border-top mb-3"></div>
+    <div [ngClass]="{'text-gray': step <= 3}" class="header-tick text-center">
+        <i class="fa-light fa-circle-check"></i>
+        <p class="mb-0">Select add-ons</p>
+    </div>
+    <div [ngClass]="{'text-gray': step <= 4}" class="border-top mb-3"></div>
+    <div [ngClass]="{'text-gray': step <= 4}" class="header-tick text-center">
+        <i class="fa-light fa-circle-check"></i>
+        <p class="mb-0">Add billing details</p>
+    </div>
+    <div [ngClass]="{'text-gray': step <= 5}" class="border-top mb-3"></div>
+    <div [ngClass]="{'text-gray': step <= 5}" class="header-tick text-center">
+        <i class="fa-light fa-circle-check text-gray"></i>
+        <p class="mb-0">Confirm purchase</p>
+    </div>
+</div>
+<!-- Header End  -->
+<!--<button class="btn btn-sm btn-outline-secondary mt-2" data-bs-toggle="modal" data-bs-target="#brandSetupModal">Brand Setup</button>-->
+<!--<button class="btn btn-sm btn-outline-secondary mt-2" data-bs-toggle="modal" data-bs-target="#socialCampaignModal">Social Campaign</button>-->
+<!--<button class="btn btn-sm btn-outline-secondary mt-2" data-bs-toggle="modal" data-bs-target="#connectSocialModal">Connect Social</button>-->
+<!-- Step One Start -->
+<div *ngIf="step===1" class="trial-expired mb-5">
+    <div class="trial-expired-inner d-flex align-items-center">
+        <div class="trial-expired-left">
+            <img src="./assets/img/subscription-board.png">
+        </div>
+        <div class="trial-expired-right">
+            <h1 class="">We hope it's not goodbye, Weston!</h1>
+            <p class="mt-2">Your free trial period has ended. <b>Your data will be deleted soon. <i class="fa-light fa-circle-info"></i></b></p>
+            <p class="mt-2">Subscribe to AtmosAi and choose to be past of the 73% of customers <br><b>who win a deal faster than before!</b></p>
+            <div class="card">
+                <div class="card-body">
+                    <div class="trial-expired-flower d-flex align-items-center">
+                        <div class="inner-flower me-2 d-none"><img src="./assets/img/limited-img.png"></div>
+                        <div class="trial-limited d-flex">
+                            <div class="tiral-btn">
+                                <h2 class="mb-0">Limited time offer</h2>
+                                <div class="d-flex">
+                                    <p class="mt-1">
+                                        Subscribe to the business plan and get the Campaigns and IQE's add-ons free for 90 days.
+                                    </p>
+                                    <button class="btn btn-primary btn-sm mt-2">View offer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-3 mb-0">You can also change your plan and add-ons.</p>
+            <p class="a-text">Need help choosing the right plan? <a class="" href="">Chat with us</a></p>
+            <div class="mt-3">
+                <button class="btn btn-primary btn-sm">I'm not interested</button>
+                <button class="btn btn-primary btn-sm ms-2">Choose plan</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Step One End -->
+
+<!-- Step Two Start -->
+<div *ngIf="step===2" class="choose-plan-pricing mt-4">
+    <div class="choose-plan mt-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-4 d-flex align-items-center">
+                        <button type="button" class="btn btn-primary btn-sm d-none trigger-fity-plus-popup" data-bs-toggle="modal" data-bs-target="#contactModal">50</button>
+                        <label class="w-75">Choose team size:</label>
+                        <select (ngModelChange)="selectSeats()" [(ngModel)]="subscriptionObj.line_items[0].number_of_seats" class="form-select form-select-sm"
+                                aria-label=".form-select-sm example">
+                            <option *ngFor="let option of seatsOptions" [value]="option">{{option}}{{option === 200 ? '+' : ' Seats'}}</option>
+                        </select>
+                    </div>
+                    <div class="col-2">
+                        <label class="form-check-label d-flex align-items-center">
+                            <input [(ngModel)]="subscriptionObj.billing_type" type="radio" name="billing_type" value="monthly" class="form-check-input wc_category_filter me-2 mt-0">Billed monthly</label>
+                    </div>
+                    <div class="col-4">
+                        <div class="plan-billed-save d-flex">
+                            <div class="plan-billed">
+                                <label class="form-check-label d-flex align-items-center">
+                                    <input [(ngModel)]="subscriptionObj.billing_type" type="radio" name="billing_type" value="yearly" class="form-check-input wc_category_filter me-2 mt-0">Billed annually</label>
+                            </div>
+                            <div class="plan-annually ms-2">
+                                <span class="plan-save">SAVE 17%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="plan-seat-manage d-flex">
+                            <div class="plan-seat">
+                                <p class="mb-0">{{subscriptionObj.line_items[0].number_of_seats}} seat</p>
+                            </div>
+                            <div class="plan-manage ms-3">
+                                <a>Manage seats</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="loadedPackages" class="d-flex subs-pricing">
+        <div *ngFor="let package of packages; let i = index;" class="subs-pricing-inner mb-3 p-2">
+            <div [ngClass]="{'selected-card': subscriptionObj.line_items[0].package_id === package.package_id }" class="card shadow-0 rounded-3">
+                <div class="card-body">
+                    <div class="choose-plan-essential text-center mb-4">
+                        <img src="./assets/img/fram-pricing.svg">
+                    </div>
+                    <div class="essential-title">
+                        <h2 class="essential-title-h" style="background-color: {{package?.color}} !important;">{{package.package_name}}</h2>
+                    </div>
+                    <div *ngIf="subscriptionObj.billing_type == 'monthly'" class="essential-price text-center">
+                        <h1 class="essential-usd mb-0">
+                            <span *ngIf="package.per_seat_price_monthly == 0">Free</span>
+                            <span *ngIf="package.per_seat_price_monthly > 0">{{package.per_seat_price_monthly | currency}}</span>
+                        </h1>
+                        <span *ngIf="package.seats_included > 1">includes {{package.seats_included}} seats</span>
+                        <span *ngIf="package.seats_included == 1">seat/month</span>
+                    </div>
+                    <div *ngIf="subscriptionObj.billing_type == 'yearly'" class="essential-price text-center">
+                        <h1 class="essential-usd mb-0">
+                            <span *ngIf="package.per_seat_price_yearly == 0">Free</span>
+                            <span *ngIf="package.per_seat_price_yearly > 0">{{package.per_seat_price_yearly | currency}}</span>
+                        </h1>
+                        <span *ngIf="package.seats_included > 1">includes {{package.seats_included}} seats</span>
+                        <span *ngIf="package.seats_included == 1">seat/yearly</span>
+                    </div>
+                    <button (click)="selectPackage(package.package_id)" type="button" [ngClass]="{'btn-primary': subscriptionObj.line_items[0].package_id == package.package_id }" class="template-btn btn btn-sm w-100 border mt-3 mb-3">
+                        {{subscriptionObj.line_items[0].package_id == package.package_id ? 'Selected plan' : 'Choose plan'}}
+                    </button>
+                    <div class="devider-plan mb-4">
+                        <hr class="dropdown-divider">
+                    </div>
+
+                    <div *ngIf="i === 0">
+                        <div class="features-list d-flex ">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Core CRM</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-xmark"></i>
+                            </div>
+                            <span class="ms-2">Command Center</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Pipeline</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-xmark"></i>
+                            </div>
+                            <span class="ms-2">Connect Email</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3 mb-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-xmark"></i>
+                            </div>
+                            <span class="ms-2">Tasks Activities</span>
+                        </div>
+                        <div class="accordion accordion-flush atmosai-entrepreneur mt-3" id="operationsStarter">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="operations-starterOne">
+                                    <button class="accordion-button collapsed justify-content-center p-0 shadow-none" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#starter-collapseOne" aria-expanded="false" aria-controls="starter-collapseOne">
+                                    </button>
+                                </h2>
+                                <div id="starter-collapseOne" class="accordion-collapse collapse" aria-labelledby="operations-starterOne"
+                                     data-bs-parent="#operationsStarter">
+                                    <div class="accordion-body p-0 mt-3">
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-xmark"></i>
+                                            </div>
+                                            <span class="ms-2">Invoices</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                            </div>
+                                            <span class="ms-3">Leads - 1,000</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-xmark"></i>
+                                            </div>
+                                            <span class="ms-2">Click to call</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-xmark"></i>
+                                            </div>
+                                            <span class="ms-2">Advanced Dialing</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-xmark"></i>
+                                            </div>
+                                            <span class="ms-2">Marketing</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-xmark"></i>
+                                            </div>
+                                            <span class="ms-2">Campaigns</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-xmark"></i>
+                                            </div>
+                                            <span class="ms-2">Automations</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="i === 1">
+                        <div class="features-list d-flex ">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Core CRM</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Command Center</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Pipeline</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-xmark"></i>
+                            </div>
+                            <span class="ms-2">Connect Email</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-xmark"></i>
+                            </div>
+                            <span class="ms-2">Tasks Activities</span>
+                        </div>
+                        <div class="accordion accordion-flush atmosai-entrepreneur mt-3" id="operationsStarter">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="operations-starterOne">
+                                    <button class="accordion-button collapsed justify-content-center p-0 shadow-none" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#starter-collapseOne" aria-expanded="false" aria-controls="starter-collapseOne">
+                                    </button>
+                                </h2>
+                                <div id="starter-collapseOne" class="accordion-collapse collapse" aria-labelledby="operations-starterOne"
+                                     data-bs-parent="#operationsStarter">
+                                    <div class="accordion-body p-0 mt-3">
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-xmark"></i>
+                                            </div>
+                                            <span class="ms-2">Invoices</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                            </div>
+                                            <span class="ms-3">Leads - 2,500</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-xmark"></i>
+                                            </div>
+                                            <span class="ms-2">Click to call</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-xmark"></i>
+                                            </div>
+                                            <span class="ms-2">Advanced Dialing</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-xmark"></i>
+                                            </div>
+                                            <span class="ms-2">Marketing</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-xmark"></i>
+                                            </div>
+                                            <span class="ms-2">Campaigns</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-xmark"></i>
+                                            </div>
+                                            <span class="ms-2">Automations</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="i === 2">
+                        <div class="features-list d-flex ">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Core CRM</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Command Center</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Pipeline</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Connect Email</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Tasks Activities</span>
+                        </div>
+                        <div class="accordion accordion-flush atmosai-entrepreneur mt-3" id="operationsStarter">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="operations-starterOne">
+                                    <button class="accordion-button collapsed justify-content-center p-0 shadow-none" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#starter-collapseOne" aria-expanded="false" aria-controls="starter-collapseOne">
+                                    </button>
+                                </h2>
+                                <div id="starter-collapseOne" class="accordion-collapse collapse" aria-labelledby="operations-starterOne"
+                                     data-bs-parent="#operationsStarter">
+                                    <div class="accordion-body p-0 mt-3">
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-xmark"></i>
+                                            </div>
+                                            <span class="ms-2">Invoices</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                            </div>
+                                            <span class="ms-3">Leads - 25,000</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-check"></i>
+                                            </div>
+                                            <span class="ms-2">Click to call</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                            </div>
+                                            <span class="ms-2">Advanced Dialing (Add-On)</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-xmark"></i>
+                                            </div>
+                                            <span class="ms-2">Marketing (Add-On)</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-xmark"></i>
+                                            </div>
+                                            <span class="ms-2">Campaigns (Add-On)</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-xmark"></i>
+                                            </div>
+                                            <span class="ms-2">Automations</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="i === 3">
+                        <div class="features-list d-flex ">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Core CRM</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Command Center</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Pipeline</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Connect Email</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Tasks Activities</span>
+                        </div>
+                        <div class="accordion accordion-flush atmosai-entrepreneur mt-3" id="operationsStarter">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="operations-starterOne">
+                                    <button class="accordion-button collapsed justify-content-center p-0 shadow-none" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#starter-collapseOne" aria-expanded="false" aria-controls="starter-collapseOne">
+                                    </button>
+                                </h2>
+                                <div id="starter-collapseOne" class="accordion-collapse collapse" aria-labelledby="operations-starterOne"
+                                     data-bs-parent="#operationsStarter">
+                                    <div class="accordion-body p-0 mt-3">
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-check"></i>
+                                            </div>
+                                            <span class="ms-2">Invoices</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                            </div>
+                                            <span class="ms-3">Leads - 50,000</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-check"></i>
+                                            </div>
+                                            <span class="ms-2">Click to call</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                            </div>
+                                            <span class="ms-2">Advanced Dialing (Add-On)</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-check"></i>
+                                            </div>
+                                            <span class="ms-2">Marketing (Add-On)</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-check"></i>
+                                            </div>
+                                            <span class="ms-2">Campaigns (Add-On)</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-check"></i>
+                                            </div>
+                                            <span class="ms-2">Automations</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="i === 4">
+                        <div class="features-list d-flex ">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Core CRM</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Command Center</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Pipeline</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Connect Email</span>
+                        </div>
+                        <div class="features-list d-flex  mt-3">
+                            <div class="features-list-icon">
+                                <i class="fa-regular fa-check"></i>
+                            </div>
+                            <span class="ms-2">Tasks Activities</span>
+                        </div>
+                        <div class="accordion accordion-flush atmosai-entrepreneur mt-3" id="operationsStarter">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="operations-starterOne">
+                                    <button class="accordion-button collapsed justify-content-center p-0 shadow-none" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#starter-collapseOne" aria-expanded="false" aria-controls="starter-collapseOne">
+                                    </button>
+                                </h2>
+                                <div id="starter-collapseOne" class="accordion-collapse collapse" aria-labelledby="operations-starterOne"
+                                     data-bs-parent="#operationsStarter">
+                                    <div class="accordion-body p-0 mt-3">
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-check"></i>
+                                            </div>
+                                            <span class="ms-2">Invoices</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                            </div>
+                                            <span class="ms-3">Contact Sales</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-check"></i>
+                                            </div>
+                                            <span class="ms-2">Click to call</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-check"></i>
+                                            </div>
+                                            <span class="ms-2">Advanced Dialing</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-check"></i>
+                                            </div>
+                                            <span class="ms-2">Marketing</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-check"></i>
+                                            </div>
+                                            <span class="ms-2">Campaigns</span>
+                                        </div>
+                                        <div class="features-list d-flex  mt-3">
+                                            <div class="features-list-icon">
+                                                <i class="fa-regular fa-check"></i>
+                                            </div>
+                                            <span class="ms-2">Automations</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!loadedPackages" class="fa-3x wrapper-loader-middle-inner text-center">
+        <div class='loader-container mt-auto'>
+            <div class='loader'>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Step Two End -->
+
+<!-- Step Three Start -->
+<div *ngIf="step===3" class="subs-add-ons">
+    <div *ngIf="!loadedAddons" class="fa-3x wrapper-loader-middle-inner text-center">
+        <div class='loader-container mt-auto'>
+            <div class='loader'>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+            </div>
+        </div>
+    </div>
+    <div *ngFor="let addon of addons; let i = index;" class="card mt-4">
+        <div class="card-body mt-3">
+            <div class="campaigns-add-ons d-flex justify-content-between">
+                <div class="add-ons-img mt-3 ms-4">
+                    <img src="./assets/img/social-media-marketing.png">
+                </div>
+                <div class="add-ons-mid">
+                    <div class="add-ons-campaigns d-flex align-items-center mb-2">
+                        <h2 class="mb-0 me-2">{{addon.addon_name}}</h2>
+                        <span class="add-ons-standard">Standard</span>
+                        <span class="add-ons-premium">Premium</span>
+                    </div>
+                    <div class="add-ons-subscriber d-flex align-items-center mb-3">
+                        <h3 class="mb-0 me-2">3,000 subscriber limit</h3>
+                        <p class="mb-0">(3,000 during trial)</p>
+                        <a class="ms-3" href="">Change number</a>
+                    </div>
+                    <div class="add-ons-para">
+                        <p>{{addon.addon_description}}</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-5"><i class="fa-light fa-circle-info me-2"></i> Email
+                            campaigns
+                        </div>
+                        <div class="col-5"><i class="fa-light fa-circle-info me-2"></i> SMS
+                            campaigns
+                        </div>
+                        <div class="col-6 mt-2"><i class="fa-light fa-circle-info me-2"></i> Social Media
+                            campaigns
+                        </div>
+                    </div>
+                    <div class="last-add-ons mt-2">
+                        <p>*Available on the AtmosAi Professional plan or higher</p>
+                    </div>
+                </div>
+                <div class="add-ons-end text-end me-4">
+                    <div class="add-ons-end-inner d-flex align-items-center">
+                        <label class="">Choose team size:</label>
+                        <select [(ngModel)]="seatsModel[i]"
+                                class="form-select form-select-sm ms-2"
+                                aria-label=".form-select-sm example">
+                            <option value="1" selected>1 Seat</option>
+                            <option value="2">2 Seats</option>
+                            <option value="3">3 Seats</option>
+                            <option value="4">4 Seats</option>
+                            <option value="10">10 Seats</option>
+                        </select>
+                    </div>
+                    <!-- <div class="add-ons-needed">
+                        <p>ACCOUNT REVIEW NEEDED</p>
+                    </div> -->
+                    <h1 *ngIf="addon.on_trial">Try free for {{addon.free_trial_days_monthly}} days</h1>
+                    <h3>Extended 60-day trial offer</h3>
+                    <p>Standard {{addon.per_seat_price_monthly | currency}}/month per seat<br>Unlimited Emails<br>5,000 Contacts<br>{{addon.seats_included}} seat(s) included</p>
+                    <button (click)="addRemoveAddonToPlan(addon.addon_id, seatsModel[0])" class="btn btn-primary btn-sm mt-2">
+                        -- {{!checkIfAddOnSelected(addon.addon_id) ? 'Add to plan' : 'Remove from plan'}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Step Three End -->
+
+<!-- Step Four Start -->
+<div *ngIf="step===4" class="add-billing mt-4">
+    <div class="card">
+        <div class="card-body">
+            <div class="add-billing-contact">
+                <h1 class="add-billing-h">Billing contact</h1>
+                <div class="add-billing-width">
+                    <div class="row align-items-center mb-3">
+                        <div class="col-3 text-end">
+                            <label class="form-label mb-0 me-2">Name</label>
+                        </div>
+                        <div class="col-4">
+                            <input [(ngModel)]="subscriptionObj.billing.first_name" type="text" placeholder="First Name" class="form-control form-control-sm">
+                        </div>
+                        <div class="col-5">
+                            <input [(ngModel)]="subscriptionObj.billing.last_name" type="text" placeholder="Last Name" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-3 text-end">
+                            <label class="form-label mb-0 me-2">Email address</label>
+                        </div>
+                        <div class="col-9">
+                            <input [(ngModel)]="subscriptionObj.billing.email" type="text" placeholder="Enter Your Email" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="devider-plan">
+            <hr class="dropdown-divider">
+        </div>
+        <div class="card-body pt-1">
+            <div class="add-billing-contact">
+                <h1 class="add-billing-h">Billing address</h1>
+                <div class="add-billing-width">
+                    <div class="row align-items-center mb-3">
+                        <div class="col-3 text-end">
+                            <label class="form-label mb-0 me-2">Country</label>
+                        </div>
+                        <div class="col-9">
+                            <select [(ngModel)]="subscriptionObj.billing.country" placeholder="Select a country / region…" class="form-select form-select-sm">
+                                <option value="address" selected="" ng-reflect-value="address">Select a country / region…</option>
+                                <option value="AF" ng-reflect-value="AF">Afghanistan</option>
+                                <option value="AX" ng-reflect-value="AX">Åland Islands</option>
+                                <option value="AL" ng-reflect-value="AL">Albania</option>
+                                <option value="DZ" ng-reflect-value="DZ">Algeria</option>
+                                <option value="AS" ng-reflect-value="AS">American Samoa</option>
+                                <option value="AD" ng-reflect-value="AD">Andorra</option>
+                                <option value="AO" ng-reflect-value="AO">Angola</option>
+                                <option value="AI" ng-reflect-value="AI">Anguilla</option>
+                                <option value="AQ" ng-reflect-value="AQ">Antarctica</option>
+                                <option value="AG" ng-reflect-value="AG">Antigua and Barbuda</option>
+                                <option value="AR" ng-reflect-value="AR">Argentina</option>
+                                <option value="AM" ng-reflect-value="AM">Armenia</option>
+                                <option value="AW" ng-reflect-value="AW">Aruba</option>
+                                <option value="AU" ng-reflect-value="AU">Australia</option>
+                                <option value="AT" ng-reflect-value="AT">Austria</option>
+                                <option value="AZ" ng-reflect-value="AZ">Azerbaijan</option>
+                                <option value="BS" ng-reflect-value="BS">Bahamas</option>
+                                <option value="BH" ng-reflect-value="BH">Bahrain</option>
+                                <option value="BD" ng-reflect-value="BD">Bangladesh</option>
+                                <option value="BB" ng-reflect-value="BB">Barbados</option>
+                                <option value="BY" ng-reflect-value="BY">Belarus</option>
+                                <option value="PW" ng-reflect-value="PW">Belau</option>
+                                <option value="BE" ng-reflect-value="BE">Belgium</option>
+                                <option value="BZ" ng-reflect-value="BZ">Belize</option>
+                                <option value="BJ" ng-reflect-value="BJ">Benin</option>
+                                <option value="BM" ng-reflect-value="BM">Bermuda</option>
+                                <option value="BT" ng-reflect-value="BT">Bhutan</option>
+                                <option value="BO" ng-reflect-value="BO">Bolivia</option>
+                                <option value="BQ" ng-reflect-value="BQ">Bonaire, Saint Eustatius and Saba</option>
+                                <option value="BA" ng-reflect-value="BA">Bosnia and Herzegovina</option>
+                                <option value="BW" ng-reflect-value="BW">Botswana</option>
+                                <option value="BV" ng-reflect-value="BV">Bouvet Island</option>
+                                <option value="BR" ng-reflect-value="BR">Brazil</option>
+                                <option value="IO" ng-reflect-value="IO">British Indian Ocean Territory</option>
+                                <option value="BN" ng-reflect-value="BN">Brunei</option>
+                                <option value="BG" ng-reflect-value="BG">Bulgaria</option>
+                                <option value="BF" ng-reflect-value="BF">Burkina Faso</option>
+                                <option value="BI" ng-reflect-value="BI">Burundi</option>
+                                <option value="KH" ng-reflect-value="KH">Cambodia</option>
+                                <option value="CM" ng-reflect-value="CM">Cameroon</option>
+                                <option value="CA" ng-reflect-value="CA">Canada</option>
+                                <option value="CV" ng-reflect-value="CV">Cape Verde</option>
+                                <option value="KY" ng-reflect-value="KY">Cayman Islands</option>
+                                <option value="CF" ng-reflect-value="CF">Central African Republic</option>
+                                <option value="TD" ng-reflect-value="TD">Chad</option>
+                                <option value="CL" ng-reflect-value="CL">Chile</option>
+                                <option value="CN" ng-reflect-value="CN">China</option>
+                                <option value="CX" ng-reflect-value="CX">Christmas Island</option>
+                                <option value="CC" ng-reflect-value="CC">Cocos (Keeling) Islands</option>
+                                <option value="CO" ng-reflect-value="CO">Colombia</option>
+                                <option value="KM" ng-reflect-value="KM">Comoros</option>
+                                <option value="CG" ng-reflect-value="CG">Congo (Brazzaville)</option>
+                                <option value="CD" ng-reflect-value="CD">Congo (Kinshasa)</option>
+                                <option value="CK" ng-reflect-value="CK">Cook Islands</option>
+                                <option value="CR" ng-reflect-value="CR">Costa Rica</option>
+                                <option value="HR" ng-reflect-value="HR">Croatia</option>
+                                <option value="CU" ng-reflect-value="CU">Cuba</option>
+                                <option value="CW" ng-reflect-value="CW">Curaçao</option>
+                                <option value="CY" ng-reflect-value="CY">Cyprus</option>
+                                <option value="CZ" ng-reflect-value="CZ">Czech Republic</option>
+                                <option value="DK" ng-reflect-value="DK">Denmark</option>
+                                <option value="DJ" ng-reflect-value="DJ">Djibouti</option>
+                                <option value="DM" ng-reflect-value="DM">Dominica</option>
+                                <option value="DO" ng-reflect-value="DO">Dominican Republic</option>
+                                <option value="EC" ng-reflect-value="EC">Ecuador</option>
+                                <option value="EG" ng-reflect-value="EG">Egypt</option>
+                                <option value="SV" ng-reflect-value="SV">El Salvador</option>
+                                <option value="GQ" ng-reflect-value="GQ">Equatorial Guinea</option>
+                                <option value="ER" ng-reflect-value="ER">Eritrea</option>
+                                <option value="EE" ng-reflect-value="EE">Estonia</option>
+                                <option value="SZ" ng-reflect-value="SZ">Eswatini</option>
+                                <option value="ET" ng-reflect-value="ET">Ethiopia</option>
+                                <option value="FK" ng-reflect-value="FK">Falkland Islands</option>
+                                <option value="FO" ng-reflect-value="FO">Faroe Islands</option>
+                                <option value="FJ" ng-reflect-value="FJ">Fiji</option>
+                                <option value="FI" ng-reflect-value="FI">Finland</option>
+                                <option value="FR" ng-reflect-value="FR">France</option>
+                                <option value="GF" ng-reflect-value="GF">French Guiana</option>
+                                <option value="PF" ng-reflect-value="PF">French Polynesia</option>
+                                <option value="TF" ng-reflect-value="TF">French Southern Territories</option>
+                                <option value="GA" ng-reflect-value="GA">Gabon</option>
+                                <option value="GM" ng-reflect-value="GM">Gambia</option>
+                                <option value="GE" ng-reflect-value="GE">Georgia</option>
+                                <option value="DE" ng-reflect-value="DE">Germany</option>
+                                <option value="GH" ng-reflect-value="GH">Ghana</option>
+                                <option value="GI" ng-reflect-value="GI">Gibraltar</option>
+                                <option value="GR" ng-reflect-value="GR">Greece</option>
+                                <option value="GL" ng-reflect-value="GL">Greenland</option>
+                                <option value="GD" ng-reflect-value="GD">Grenada</option>
+                                <option value="GP" ng-reflect-value="GP">Guadeloupe</option>
+                                <option value="GU" ng-reflect-value="GU">Guam</option>
+                                <option value="GT" ng-reflect-value="GT">Guatemala</option>
+                                <option value="GG" ng-reflect-value="GG">Guernsey</option>
+                                <option value="GN" ng-reflect-value="GN">Guinea</option>
+                                <option value="GW" ng-reflect-value="GW">Guinea-Bissau</option>
+                                <option value="GY" ng-reflect-value="GY">Guyana</option>
+                                <option value="HT" ng-reflect-value="HT">Haiti</option>
+                                <option value="HM" ng-reflect-value="HM">Heard Island and McDonald Islands</option>
+                                <option value="HN" ng-reflect-value="HN">Honduras</option>
+                                <option value="HK" ng-reflect-value="HK">Hong Kong</option>
+                                <option value="HU" ng-reflect-value="HU">Hungary</option>
+                                <option value="IS" ng-reflect-value="IS">Iceland</option>
+                                <option value="IN" ng-reflect-value="IN">India</option>
+                                <option value="ID" ng-reflect-value="ID">Indonesia</option>
+                                <option value="IR" ng-reflect-value="IR">Iran</option>
+                                <option value="IQ" ng-reflect-value="IQ">Iraq</option>
+                                <option value="IE" ng-reflect-value="IE">Ireland</option>
+                                <option value="IM" ng-reflect-value="IM">Isle of Man</option>
+                                <option value="IL" ng-reflect-value="IL">Israel</option>
+                                <option value="IT" ng-reflect-value="IT">Italy</option>
+                                <option value="CI" ng-reflect-value="CI">Ivory Coast</option>
+                                <option value="JM" ng-reflect-value="JM">Jamaica</option>
+                                <option value="JP" ng-reflect-value="JP">Japan</option>
+                                <option value="JE" ng-reflect-value="JE">Jersey</option>
+                                <option value="JO" ng-reflect-value="JO">Jordan</option>
+                                <option value="KZ" ng-reflect-value="KZ">Kazakhstan</option>
+                                <option value="KE" ng-reflect-value="KE">Kenya</option>
+                                <option value="KI" ng-reflect-value="KI">Kiribati</option>
+                                <option value="KW" ng-reflect-value="KW">Kuwait</option>
+                                <option value="KG" ng-reflect-value="KG">Kyrgyzstan</option>
+                                <option value="LA" ng-reflect-value="LA">Laos</option>
+                                <option value="LV" ng-reflect-value="LV">Latvia</option>
+                                <option value="LB" ng-reflect-value="LB">Lebanon</option>
+                                <option value="LS" ng-reflect-value="LS">Lesotho</option>
+                                <option value="LR" ng-reflect-value="LR">Liberia</option>
+                                <option value="LY" ng-reflect-value="LY">Libya</option>
+                                <option value="LI" ng-reflect-value="LI">Liechtenstein</option>
+                                <option value="LT" ng-reflect-value="LT">Lithuania</option>
+                                <option value="LU" ng-reflect-value="LU">Luxembourg</option>
+                                <option value="MO" ng-reflect-value="MO">Macao</option>
+                                <option value="MG" ng-reflect-value="MG">Madagascar</option>
+                                <option value="MW" ng-reflect-value="MW">Malawi</option>
+                                <option value="MY" ng-reflect-value="MY">Malaysia</option>
+                                <option value="MV" ng-reflect-value="MV">Maldives</option>
+                                <option value="ML" ng-reflect-value="ML">Mali</option>
+                                <option value="MT" ng-reflect-value="MT">Malta</option>
+                                <option value="MH" ng-reflect-value="MH">Marshall Islands</option>
+                                <option value="MQ" ng-reflect-value="MQ">Martinique</option>
+                                <option value="MR" ng-reflect-value="MR">Mauritania</option>
+                                <option value="MU" ng-reflect-value="MU">Mauritius</option>
+                                <option value="YT" ng-reflect-value="YT">Mayotte</option>
+                                <option value="MX" ng-reflect-value="MX">Mexico</option>
+                                <option value="FM" ng-reflect-value="FM">Micronesia</option>
+                                <option value="MD" ng-reflect-value="MD">Moldova</option>
+                                <option value="MC" ng-reflect-value="MC">Monaco</option>
+                                <option value="MN" ng-reflect-value="MN">Mongolia</option>
+                                <option value="ME" ng-reflect-value="ME">Montenegro</option>
+                                <option value="MS" ng-reflect-value="MS">Montserrat</option>
+                                <option value="MA" ng-reflect-value="MA">Morocco</option>
+                                <option value="MZ" ng-reflect-value="MZ">Mozambique</option>
+                                <option value="MM" ng-reflect-value="MM">Myanmar</option>
+                                <option value="NA" ng-reflect-value="NA">Namibia</option>
+                                <option value="NR" ng-reflect-value="NR">Nauru</option>
+                                <option value="NP" ng-reflect-value="NP">Nepal</option>
+                                <option value="NL" ng-reflect-value="NL">Netherlands</option>
+                                <option value="NC" ng-reflect-value="NC">New Caledonia</option>
+                                <option value="NZ" ng-reflect-value="NZ">New Zealand</option>
+                                <option value="NI" ng-reflect-value="NI">Nicaragua</option>
+                                <option value="NE" ng-reflect-value="NE">Niger</option>
+                                <option value="NG" ng-reflect-value="NG">Nigeria</option>
+                                <option value="NU" ng-reflect-value="NU">Niue</option>
+                                <option value="NF" ng-reflect-value="NF">Norfolk Island</option>
+                                <option value="KP" ng-reflect-value="KP">North Korea</option>
+                                <option value="MK" ng-reflect-value="MK">North Macedonia</option>
+                                <option value="MP" ng-reflect-value="MP">Northern Mariana Islands</option>
+                                <option value="NO" ng-reflect-value="NO">Norway</option>
+                                <option value="OM" ng-reflect-value="OM">Oman</option>
+                                <option value="PK" ng-reflect-value="PK">Pakistan</option>
+                                <option value="PS" ng-reflect-value="PS">Palestinian Territory</option>
+                                <option value="PA" ng-reflect-value="PA">Panama</option>
+                                <option value="PG" ng-reflect-value="PG">Papua New Guinea</option>
+                                <option value="PY" ng-reflect-value="PY">Paraguay</option>
+                                <option value="PE" ng-reflect-value="PE">Peru</option>
+                                <option value="PH" ng-reflect-value="PH">Philippines</option>
+                                <option value="PN" ng-reflect-value="PN">Pitcairn</option>
+                                <option value="PL" ng-reflect-value="PL">Poland</option>
+                                <option value="PT" ng-reflect-value="PT">Portugal</option>
+                                <option value="PR" ng-reflect-value="PR">Puerto Rico</option>
+                                <option value="QA" ng-reflect-value="QA">Qatar</option>
+                                <option value="RE" ng-reflect-value="RE">Reunion</option>
+                                <option value="RO" ng-reflect-value="RO">Romania</option>
+                                <option value="RU" ng-reflect-value="RU">Russia</option>
+                                <option value="RW" ng-reflect-value="RW">Rwanda</option>
+                                <option value="BL" ng-reflect-value="BL">Saint Barthélemy</option>
+                                <option value="SH" ng-reflect-value="SH">Saint Helena</option>
+                                <option value="KN" ng-reflect-value="KN">Saint Kitts and Nevis</option>
+                                <option value="LC" ng-reflect-value="LC">Saint Lucia</option>
+                                <option value="SX" ng-reflect-value="SX">Saint Martin (Dutch part)</option>
+                                <option value="MF" ng-reflect-value="MF">Saint Martin (French part)</option>
+                                <option value="PM" ng-reflect-value="PM">Saint Pierre and Miquelon</option>
+                                <option value="VC" ng-reflect-value="VC">Saint Vincent and the Grenadines</option>
+                                <option value="WS" ng-reflect-value="WS">Samoa</option>
+                                <option value="SM" ng-reflect-value="SM">San Marino</option>
+                                <option value="ST" ng-reflect-value="ST">São Tomé and Príncipe</option>
+                                <option value="SA" ng-reflect-value="SA">Saudi Arabia</option>
+                                <option value="SN" ng-reflect-value="SN">Senegal</option>
+                                <option value="RS" ng-reflect-value="RS">Serbia</option>
+                                <option value="SC" ng-reflect-value="SC">Seychelles</option>
+                                <option value="SL" ng-reflect-value="SL">Sierra Leone</option>
+                                <option value="SG" ng-reflect-value="SG">Singapore</option>
+                                <option value="SK" ng-reflect-value="SK">Slovakia</option>
+                                <option value="SI" ng-reflect-value="SI">Slovenia</option>
+                                <option value="SB" ng-reflect-value="SB">Solomon Islands</option>
+                                <option value="SO" ng-reflect-value="SO">Somalia</option>
+                                <option value="ZA" ng-reflect-value="ZA">South Africa</option>
+                                <option value="GS" ng-reflect-value="GS">South Georgia/Sandwich Islands</option>
+                                <option value="KR" ng-reflect-value="KR">South Korea</option>
+                                <option value="SS" ng-reflect-value="SS">South Sudan</option>
+                                <option value="ES" ng-reflect-value="ES">Spain</option>
+                                <option value="LK" ng-reflect-value="LK">Sri Lanka</option>
+                                <option value="SD" ng-reflect-value="SD">Sudan</option>
+                                <option value="SR" ng-reflect-value="SR">Suriname</option>
+                                <option value="SJ" ng-reflect-value="SJ">Svalbard and Jan Mayen</option>
+                                <option value="SE" ng-reflect-value="SE">Sweden</option>
+                                <option value="CH" ng-reflect-value="CH">Switzerland</option>
+                                <option value="SY" ng-reflect-value="SY">Syria</option>
+                                <option value="TW" ng-reflect-value="TW">Taiwan</option>
+                                <option value="TJ" ng-reflect-value="TJ">Tajikistan</option>
+                                <option value="TZ" ng-reflect-value="TZ">Tanzania</option>
+                                <option value="TH" ng-reflect-value="TH">Thailand</option>
+                                <option value="TL" ng-reflect-value="TL">Timor-Leste</option>
+                                <option value="TG" ng-reflect-value="TG">Togo</option>
+                                <option value="TK" ng-reflect-value="TK">Tokelau</option>
+                                <option value="TO" ng-reflect-value="TO">Tonga</option>
+                                <option value="TT" ng-reflect-value="TT">Trinidad and Tobago</option>
+                                <option value="TN" ng-reflect-value="TN">Tunisia</option>
+                                <option value="TR" ng-reflect-value="TR">Turkey</option>
+                                <option value="TM" ng-reflect-value="TM">Turkmenistan</option>
+                                <option value="TC" ng-reflect-value="TC">Turks and Caicos Islands</option>
+                                <option value="TV" ng-reflect-value="TV">Tuvalu</option>
+                                <option value="UG" ng-reflect-value="UG">Uganda</option>
+                                <option value="UA" ng-reflect-value="UA">Ukraine</option>
+                                <option value="AE" ng-reflect-value="AE">United Arab Emirates</option>
+                                <option value="GB" ng-reflect-value="GB">United Kingdom (UK)</option>
+                                <option value="US" ng-reflect-value="US">United States (US)</option>
+                                <option value="UM" ng-reflect-value="UM">United States (US) Minor Outlying Islands</option>
+                                <option value="UY" ng-reflect-value="UY">Uruguay</option>
+                                <option value="UZ" ng-reflect-value="UZ">Uzbekistan</option>
+                                <option value="VU" ng-reflect-value="VU">Vanuatu</option>
+                                <option value="VA" ng-reflect-value="VA">Vatican</option>
+                                <option value="VE" ng-reflect-value="VE">Venezuela</option>
+                                <option value="VN" ng-reflect-value="VN">Vietnam</option>
+                                <option value="VG" ng-reflect-value="VG">Virgin Islands (British)</option>
+                                <option value="VI" ng-reflect-value="VI">Virgin Islands (US)</option>
+                                <option value="WF" ng-reflect-value="WF">Wallis and Futuna</option>
+                                <option value="EH" ng-reflect-value="EH">Western Sahara</option>
+                                <option value="YE" ng-reflect-value="YE">Yemen</option>
+                                <option value="ZM" ng-reflect-value="ZM">Zambia</option>
+                                <option value="ZW" ng-reflect-value="ZW">Zimbabwe</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-3">
+                        <div class="col-3 text-end">
+                            <label class="form-label mb-0 me-2">Address</label>
+                        </div>
+                        <div class="col-9">
+                            <input [(ngModel)]="subscriptionObj.billing.address_1" type="text" placeholder="Enter Address" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-3">
+                        <div class="col-3 text-end">
+                        </div>
+                        <div class="col-9">
+                            <input [(ngModel)]="subscriptionObj.billing.address_2" type="text" placeholder="Apt/Suite" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-3">
+                        <div class="col-3 text-end">
+                            <label class="form-label mb-0 me-2">City</label>
+                        </div>
+                        <div class="col-9">
+                            <input [(ngModel)]="subscriptionObj.billing.city" type="text" placeholder="Enter City" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-3">
+                        <div class="col-3 text-end">
+                            <label class="form-label mb-0 me-2">State</label>
+                        </div>
+                        <div class="col-9">
+                            <input [(ngModel)]="subscriptionObj.billing.state" type="text" placeholder="Enter State" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-3">
+                        <div class="col-3 text-end">
+                            <label class="form-label mb-0 me-2">Zip/Postal</label>
+                        </div>
+                        <div class="col-9">
+                            <input [(ngModel)]="subscriptionObj.billing.postcode" type="text" placeholder="Enter Zip/Postal" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <!--                    <div class="row align-items-center">-->
+                    <!--                        <div class="col-3 text-end">-->
+                    <!--                            <label class="form-label mb-0 me-2">Sales tax number (optional)</label>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="col-9">-->
+                    <!--                            <input type="text" placeholder="123456" class="form-control form-control-sm">-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                </div>
+            </div>
+        </div>
+        <div class="devider-plan">
+            <hr class="dropdown-divider">
+        </div>
+        <div class="card-body pt-1">
+            <div class="add-billing-contact">
+                <h1 class="add-billing-h">Payment method</h1>
+                <!--                <div class="payment-option mb-4">-->
+                <!--                    <div class="row">-->
+                <!--                        <div class="col-6">-->
+                <!--                            <div class="payment-credit d-flex align-items-center">-->
+                <!--                                <div class="payment-credit-inner d-flex align-items-center me-3">-->
+                <!--                                    <input class="form-check-input mt-0" type="radio" name="radioNoLabelX" id="radioNoLabel11" value="" aria-label="..." checked/>-->
+                <!--                                </div>-->
+                <!--                                <i class="fa-light fa-credit-card-front me-2"></i>-->
+                <!--                                <p class="mb-0">Credit Card</p>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                        <div class="col-6">-->
+                <!--                            <div class="payment-credit payment-paypal d-flex align-items-center">-->
+                <!--                                <div class="payment-credit-inner d-flex align-items-center me-3">-->
+                <!--                                    <input class="form-check-input mt-0" type="radio" name="radioNoLabelX" id="radioNoLabel11" value="" aria-label="..." checked/>-->
+                <!--                                </div>-->
+                <!--                                <i class="fa-brands fa-paypal me-2"></i>-->
+                <!--                                <p class="mb-0">PayPal</p>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <div class="add-billing-width-payment d-flex justify-content-around">
+                    <div class="add-billing-width-payment-left">
+                        <div class="row align-items-center mb-3">
+                            <div class="col-3 text-end">
+                                <label class="form-label mb-0 me-2">Name on the card</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" placeholder="First Name" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-5">
+                                <input type="text" placeholder="Last Name" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="row align-items-center mb-3">
+                            <div class="col-3 text-end">
+                                <label class="form-label mb-0 me-2">Credit card number</label>
+                            </div>
+                            <div class="col-9">
+                                <input (change)="formatCardInput()" [(ngModel)]="subscriptionObj.nmi.card.number" type="text" placeholder="0000 0000 0000 0000" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="row align-items-center mb-3">
+                            <div class="col-3 text-end">
+                                <label class="form-label mb-0 me-2">Card expiration date</label>
+                            </div>
+                            <div class="col-2">
+                                <input (change)="formatCardInput()" [(ngModel)]="subscriptionObj.nmi.card['card-expiry']" type="text" placeholder="MM / YY" class="form-control form-control-sm">
+                            </div>
+                            <!--                            <div class="col-2">-->
+                            <!--                                <input type="text" placeholder="YYYY" class="form-control form-control-sm">-->
+                            <!--                            </div>-->
+                            <div class="col-5 d-flex align-items-center justify-content-end">
+                                <label class="form-label mb-0 me-2">CVV</label>
+                                <input (change)="formatCardInput()" [(ngModel)]="subscriptionObj.nmi.card['card-cvc']" type="text" placeholder="000" class="form-control form-control-sm w-50">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add-billing-payment">
+                        <img src="https://cdn.us-east-1.pipedriveassets.com/billing-fe/ccba8bbe761b7c90893e.svg" class="add-billing-payment-img">
+                        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMzhweCIgaGVpZ2h0PSIyNHB4IiB2aWV3Qm94PSIwIDAgMzggMjQiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogc2tldGNodG9vbCA1NC4xICg3NjQ5MCkgLSBodHRwczovL3NrZXRjaGFwcC5jb20gLS0+CiAgICA8dGl0bGU+MENBOTM2MDItODFFQi00NUFCLUI3REQtNjRGM0E4RUUzNzVDQDF4PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBza2V0Y2h0b29sLjwvZGVzYz4KICAgIDxkZWZzPgogICAgICAgIDxwb2x5Z29uIGlkPSJwYXRoLTEiIHBvaW50cz0iMjcuOTkxMDcxNCAxMCAyNy45OTEwNzE0IDAgMS41MjQ1MjM4OGUtMTUgMCAwIDEwIj48L3BvbHlnb24+CiAgICAgICAgPHBhdGggZD0iTTE3LjM3MjkyMzIsMC4zMjQ3MTI4NjcgQzE1LjkwMTkwODcsMC4zMjQ3MTI4NjcgMTQuNzA3NjQyNCwxLjUxOTkzMDg2IDE0LjcwNzY0MjQsMi45OTE1MjA1OSBDMTQuNzA3NjQyNCw0LjU1ODgyMzQ3IDE1Ljg1MDIzMzcsNS43Mjg5MTY3NiAxNy4zNzI5MjMyLDUuNzI4OTE2NzYgQzE4Ljg1NzcxNzgsNS43Mjg5MTY3NiAyMC4wMzEzMTQxLDQuNTQzMjcwMDggMjAuMDMxMzE0MSwzLjAyMjYyNzM3IEMyMC4wMzEzMTQxLDEuNTEyNzUyMzggMTguODY1NzU2MSwwLjMyNDcxMjg2NyAxNy4zNzI5MjMyLDAuMzI0NzEyODY3IiBpZD0icGF0aC0zIj48L3BhdGg+CiAgICA8L2RlZnM+CiAgICA8ZyBpZD0iVUkiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSIxLjEiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02MTguMDAwMDAwLCAtOTI0LjAwMDAwMCkiPgogICAgICAgICAgICA8ZyBpZD0iaW1nLWZpLWRpc2NvdmVyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2MTguMDAwMDAwLCA5MjQuMDAwMDAwKSI+CiAgICAgICAgICAgICAgICA8cmVjdCBpZD0iUmVjdGFuZ2xlLTQiIHN0cm9rZT0iI0I5QkFCQiIgc3Ryb2tlLXdpZHRoPSIxLjAwMDAwMDAxIiBmaWxsPSIjRkZGRkZGIiB4PSIwLjUwMDAwMDAwNyIgeT0iMC41MDAwMDAwMDciIHdpZHRoPSIzNyIgaGVpZ2h0PSIyMyIgcng9IjIuMDAwMDAwMDMiPjwvcmVjdD4KICAgICAgICAgICAgICAgIDxnIGlkPSJQYWdlLTEiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDkuNDEzNTY3LCAxMy4wMDAwMDApIj4KICAgICAgICAgICAgICAgICAgICA8bWFzayBpZD0ibWFzay0yIiBmaWxsPSJ3aGl0ZSI+CiAgICAgICAgICAgICAgICAgICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI3BhdGgtMSI+PC91c2U+CiAgICAgICAgICAgICAgICAgICAgPC9tYXNrPgogICAgICAgICAgICAgICAgICAgIDxnIGlkPSJDbGlwLTIiPjwvZz4KICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMjcuOTkxMDcxNCwwIEMyNy45OTEwNzE0LDAgMTguMTA1NDgzLDYuOTA4MjEwNjEgMCwxMCBMMjcuOTkxMDcxNCwxMCBMMjcuOTkxMDcxNCwwIFoiIGlkPSJGaWxsLTEiIGZpbGw9IiNGNDgxMUYiIG1hc2s9InVybCgjbWFzay0yKSI+PC9wYXRoPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgPGcgaWQ9Ikdyb3VwLTIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIuNzE0Mjg2LCA3LjAwMDAwMCkiPgogICAgICAgICAgICAgICAgICAgIDxnIGlkPSJUZXh0Ij4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTIuMjQ0Nzg0NTUsMC40MjQwMTUyNjMgTDAuODEyODEzMzI0LDAuNDI0MDE1MjYzIEwwLjgxMjgxMzMyNCw1LjYxMTY2ODE1IEwyLjIzNjc0NjIyLDUuNjExNjY4MTUgQzIuOTk0NjQ1OTksNS42MTE2NjgxNSAzLjU0MDEwNDE1LDUuNDI2MjIzOTIgNC4wMjAxMDczNCw1LjAxMzQ2MDk1IEM0LjU4OTY4MDQ5LDQuNTI0MTI3NDUgNC45MjcyOTAzOSwzLjc4MzU0NjkzIDQuOTI3MjkwMzksMy4wMjAyMzQ1NCBDNC45MjcyOTAzOSwxLjQ4ODgyNDA5IDMuODI0ODkwNzMsMC40MjQwMTUyNjMgMi4yNDQ3ODQ1NSwwLjQyNDAxNTI2MyBMMi4yNDQ3ODQ1NSwwLjQyNDAxNTI2MyBaIE0zLjM4NTA3OTIsNC4zMjA3MzcgQzMuMDc2MTc3NjMsNC42MDkwNzI4OCAyLjY4MDAwMjc1LDQuNzMzNDk5OTcgMi4wNDk1Njc5NCw0LjczMzQ5OTk3IEwxLjc4Nzc0ODAyLDQuNzMzNDk5OTcgTDEuNzg3NzQ4MDIsMS4zMDA5ODcwMyBMMi4wNDk1Njc5NCwxLjMwMDk4NzAzIEMyLjY4MDAwMjc1LDEuMzAwOTg3MDMgMy4wNjEyNDkzLDEuNDE4MjM1NjQgMy4zODUwNzkyLDEuNzIwOTI4NDkgQzMuNzIxNTQwNzYsMi4wMzMxOTI2NSAzLjkyMjQ5OTAzLDIuNTE1MzQ3NjUgMy45MjI0OTkwMywzLjAxMzA1NjA1IEMzLjkyMjQ5OTAzLDMuNTExOTYwODYgMy43MjE1NDA3Niw0LjAxMDg2NTY3IDMuMzg1MDc5Miw0LjMyMDczNyBMMy4zODUwNzkyLDQuMzIwNzM3IFoiIGlkPSJGaWxsLTEwIiBmaWxsPSIjMDAxNzIyIj48L3BhdGg+CiAgICAgICAgICAgICAgICAgICAgICAgIDxwb2x5Z29uIGlkPSJGaWxsLTEyIiBmaWxsPSIjMDAxNzIyIiBwb2ludHM9IjUuMzc2Mjg4NTkgMC40MjQwMTUyNjMgNi4zNTAwNzQ5NSAwLjQyNDAxNTI2MyA2LjM1MDA3NDk1IDUuNjExNjY4MTUgNS4zNzYyODg1OSA1LjYxMTY2ODE1Ij48L3BvbHlnb24+CiAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik04LjczNDAxNDIyLDIuNDEzNjUyNDMgQzguMTQ4MzY0NCwyLjE4ODcyNjUyIDcuOTc2MTE0NDUsMi4wNDAzNzExMyA3Ljk3NjExNDQ1LDEuNzYxNjA2NTggQzcuOTc2MTE0NDUsMS40MzM3ODkwMyA4LjI4MjcxOTM2LDEuMTg0OTM0ODMgOC43MDQxNTc1NiwxLjE4NDkzNDgzIEM4Ljk5NTgzNDE0LDEuMTg0OTM0ODMgOS4yMzU4MzU3MywxLjMwOTM2MTkzIDkuNDkwNzY1NjUsMS42MDM2Nzk4NyBMOS45OTk0NzcxNiwwLjkxMzM0ODc1OCBDOS41ODE0ODM5NiwwLjUzMDQ5NjE0NiA5LjA3ODUxNDExLDAuMzM2Njc3MDExIDguNTMwNzU5MjgsMC4zMzY2NzcwMTEgQzcuNjQ3NjkxMjIsMC4zMzY2NzcwMTEgNi45NzI0NzE0MywwLjk3NDM2NTg5MyA2Ljk3MjQ3MTQzLDEuODIxNDI3MyBDNi45NzI0NzE0MywyLjUzODA3OTUzIDcuMjg3MTE0NjYsMi45MDQxODIzNCA4LjIwMTE4NzcyLDMuMjQ3NTUzMjcgQzguNTgzNTgyNiwzLjM4NjMzNzM1IDguNzc4Nzk5MjEsMy40Nzk2NTc2NyA4Ljg3NjQwNzUxLDMuNTQzMDY3NjMgQzkuMDcwNDc1NzgsMy42NzU4Njk2MyA5LjE2OTIzMjQyLDMuODYxMzEzODcgOS4xNjkyMzI0Miw0LjA3OTA2MTI5IEM5LjE2OTIzMjQyLDQuNTAwMTk5MTYgOC44NDU0MDI1Miw0LjgxMTI2NjkxIDguNDEwMTg0MzIsNC44MTEyNjY5MSBDNy45NDYyNTc3OSw0LjgxMTI2NjkxIDcuNTcxOTAxMjQsNC41Njk1OTEyIDcuMzQ2ODI3OTgsNC4xMTg1NDI5NyBMNi43MTg2ODk4NCw0Ljc0OTA1MzM2IEM3LjE2NjUzOTcsNS40MzM0MDI0IDcuNzA2MjU2Miw1LjczNzI5MTY3IDguNDQ5MjI3NjQsNS43MzcyOTE2NyBDOS40NjA5MDksNS43MzcyOTE2NyAxMC4xNzE3MjcxLDUuMDM2MTkyODIgMTAuMTcxNzI3MSw0LjAzMzU5NzU0IEMxMC4xNzE3MjcxLDMuMjA4MDcxNiA5Ljg0MzMwMzg4LDIuODM0NzkwMyA4LjczNDAxNDIyLDIuNDEzNjUyNDMiIGlkPSJGaWxsLTEzIiBmaWxsPSIjMDAxNzIyIj48L3BhdGg+CiAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0xMC40Nzk0ODAzLDMuMDIwMjM0NTQgQzEwLjQ3OTQ4MDMsNC41NDY4NTkzMyAxMS42MzI0MDY3LDUuNzI4OTE2NzYgMTMuMTE3MjAxMiw1LjcyODkxNjc2IEMxMy41MzYzNDI3LDUuNzI4OTE2NzYgMTMuODk1NzcxLDUuNjQyNzc0OTMgMTQuMzM3ODc5Miw1LjQyNjIyMzkyIEwxNC4zMzc4NzkyLDQuMjM1NzkxNTggQzEzLjk0ODU5NDMsNC42NDAxNzk2NSAxMy42MDI5NDYxLDQuODAyODkyMDEgMTMuMTYwODM3OSw0LjgwMjg5MjAxIEMxMi4xODAxNjE1LDQuODAyODkyMDEgMTEuNDgzMTIzNCw0LjA2MzUwNzkgMTEuNDgzMTIzNCwzLjAxMzA1NjA1IEMxMS40ODMxMjM0LDIuMDE3NjM5MjYgMTIuMjAxOTc5OCwxLjIzMTU5NDk5IDEzLjExNzIwMTIsMS4yMzE1OTQ5OSBDMTMuNTgxMTI3NywxLjIzMTU5NDk5IDEzLjkzMzY2NiwxLjQwMjY4MjI1IDE0LjMzNzg3OTIsMS44MTU0NDUyMiBMMTQuMzM3ODc5MiwwLjYyMzgxNjQ3IEMxMy45MTE4NDc2LDAuMzk4ODkwNTYxIDEzLjU1OTMwOTQsMC4zMDY3NjY2NTEgMTMuMTQwMTY3OSwwLjMwNjc2NjY1MSBDMTEuNjYzNDExNywwLjMwNjc2NjY1MSAxMC40Nzk0ODAzLDEuNTEyNzUyMzggMTAuNDc5NDgwMywzLjAyMDIzNDU0IiBpZD0iRmlsbC0xNCIgZmlsbD0iIzAwMTcyMiI+PC9wYXRoPgogICAgICAgICAgICAgICAgICAgICAgICA8cG9seWxpbmUgaWQ9IkZpbGwtMTUiIGZpbGw9IiMwMDE3MjIiIHBvaW50cz0iMjIuMjM2MTEzNCAzLjkwOTE3MDQ0IDIwLjkwMTc1MDUgMC40MjQwMTUyNjMgMTkuODM4Mzk0MSAwLjQyNDAxNTI2MyAyMS45NTkzNjUxIDUuNzQ0NDcwMTUgMjIuNDgzMDA1IDUuNzQ0NDcwMTUgMjQuNjQwNzIyNyAwLjQyNDAxNTI2MyAyMy41ODU0MDQ2IDAuNDI0MDE1MjYzIDIyLjIzNjExMzQgMy45MDkxNzA0NCI+PC9wb2x5bGluZT4KICAgICAgICAgICAgICAgICAgICAgICAgPHBvbHlsaW5lIGlkPSJGaWxsLTE2IiBmaWxsPSIjMDAxNzIyIiBwb2ludHM9IjI1LjA4Mzk3OTIgNS42MTE2NjgxNSAyNy44NDkxNjUgNS42MTE2NjgxNSAyNy44NDkxNjUgNC43MzM0OTk5NyAyNi4wNTc3NjU2IDQuNzMzNDk5OTcgMjYuMDU3NzY1NiAzLjMzMjQ5ODcgMjcuNzgwMjY1IDMuMzMyNDk4NyAyNy43ODAyNjUgMi40NTMxMzQxMSAyNi4wNTc3NjU2IDIuNDUzMTM0MTEgMjYuMDU3NzY1NiAxLjMwMDk4NzAzIDI3Ljg0OTE2NSAxLjMwMDk4NzAzIDI3Ljg0OTE2NSAwLjQyNDAxNTI2MyAyNS4wODM5NzkyIDAuNDI0MDE1MjYzIDI1LjA4Mzk3OTIgNS42MTE2NjgxNSI+PC9wb2x5bGluZT4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTMxLjcwNjQxNTUsMS45NTQyMjkzIEMzMS43MDY0MTU1LDAuOTgyNzQwNzk0IDMxLjA2MzM0OSwwLjQyNDAxNTI2MyAyOS45MzkxMzEsMC40MjQwMTUyNjMgTDI4LjQ5MjIzMTUsMC40MjQwMTUyNjMgTDI4LjQ5MjIzMTUsNS42MTE2NjgxNSBMMjkuNDY3MTY2Miw1LjYxMTY2ODE1IEwyOS40NjcxNjYyLDMuNTI2MzE3ODMgTDI5LjU5NDYzMTEsMy41MjYzMTc4MyBMMzAuOTQyNzc0MSw1LjYxMTY2ODE1IEwzMi4xNDE2MzM3LDUuNjExNjY4MTUgTDMwLjU2NzI2OTIsMy40MjU4MTkwMiBDMzEuMzAzMzUwNiwzLjI3MDI4NTE1IDMxLjcwNjQxNTUsMi43NDg2NDg0NyAzMS43MDY0MTU1LDEuOTU0MjI5MyBMMzEuNzA2NDE1NSwxLjk1NDIyOTMgWiBNMjkuNzUwODA0NCwyLjgxMjA1ODQzIEwyOS40NjcxNjYyLDIuODEyMDU4NDMgTDI5LjQ2NzE2NjIsMS4yMzg3NzM0OCBMMjkuNzY2ODgxMSwxLjIzODc3MzQ4IEMzMC4zNzQzNDkyLDEuMjM4NzczNDggMzAuNzA1MDY5MSwxLjUwNDM3NzQ4IDMwLjcwNTA2OTEsMi4wMDkyNjQzNiBDMzAuNzA1MDY5MSwyLjUyOTcwNDYzIDMwLjM3NDM0OTIsMi44MTIwNTg0MyAyOS43NTA4MDQ0LDIuODEyMDU4NDMgTDI5Ljc1MDgwNDQsMi44MTIwNTg0MyBaIiBpZD0iRmlsbC0xNyIgZmlsbD0iIzAwMTcyMiI+PC9wYXRoPgogICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMzIuNDEyODg2LDAuODE4OTk4MzIxIEMzMi40MTI4ODYsMC43MjEzMDA5MTUgMzIuMzUwNzc3OCwwLjY2OTI4MDIxOCAzMi4yMzc1MjE4LDAuNjY5MjgwMjE4IEwzMi4wODY1MTM3LDAuNjY5MjgwMjE4IEwzMi4wODY1MTM3LDEuMTUzOTYwODYgTDMyLjE5NzMzNDEsMS4xNTM5NjA4NiBMMzIuMTk3MzM0MSwwLjk2NjE3ODgyOSBMMzIuMzI3NjM5NSwxLjE1Mzk2MDg2IEwzMi40NjY0Njk1LDEuMTUzOTYwODYgTDMyLjMxMDU5MDIsMC45NTM0OTA4NTQgQzMyLjM3NjM1MTgsMC45MzU3Mjc2ODkgMzIuNDEyODg2LDAuODg0OTc1NzkgMzIuNDEyODg2LDAuODE4OTk4MzIxIEwzMi40MTI4ODYsMC44MTg5OTgzMjEgWiBNMzIuMjE2ODE5MSwwLjg4MzcwNjk5MiBMMzIuMTk3MzM0MSwwLjg4MzcwNjk5MiBMMzIuMTk3MzM0MSwwLjc1NjgyNzI0NCBMMzIuMjE5MjU0NywwLjc1NjgyNzI0NCBDMzIuMjc0MDU2LDAuNzU2ODI3MjQ0IDMyLjMwMDg0NzgsMC43Nzk2NjU1OTkgMzIuMzAwODQ3OCwwLjgyMDI2NzExOCBDMzIuMzAwODQ3OCwwLjg2MjEzNzQzNSAzMi4yNzI4MzgyLDAuODgzNzA2OTkyIDMyLjIxNjgxOTEsMC44ODM3MDY5OTIgTDMyLjIxNjgxOTEsMC44ODM3MDY5OTIgWiIgaWQ9IkZpbGwtMTgiIGZpbGw9IiMyMzFGMjAiPjwvcGF0aD4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTMyLjI0OTU3NywwLjQ5Njk5NjU0MiBDMzIuMDM3MTM1NCwwLjQ5Njk5NjU0MiAzMS44NjQ4ODU0LDAuNjc1MjYyMjkgMzEuODY0ODg1NCwwLjg5NjU5ODk1NiBDMzEuODY0ODg1NCwxLjExOTEzMjA0IDMyLjAzODI4MzcsMS4yOTYyMDEzNyAzMi4yNDk1NzcsMS4yOTYyMDEzNyBDMzIuNDU4NTczNiwxLjI5NjIwMTM3IDMyLjYyODUyNjksMS4xMTY3MzkyMSAzMi42Mjg1MjY5LDAuODk2NTk4OTU2IEMzMi42Mjg1MjY5LDAuNjc3NjU1MTE5IDMyLjQ1ODU3MzYsMC40OTY5OTY1NDIgMzIuMjQ5NTc3LDAuNDk2OTk2NTQyIEwzMi4yNDk1NzcsMC40OTY5OTY1NDIgWiBNMzIuMjQ5NTc3LDEuMjI0NDE2NSBDMzIuMDc3MzI3LDEuMjI0NDE2NSAzMS45NDA2NzU0LDEuMDc4NDUzOTUgMzEuOTQwNjc1NCwwLjg5Nzc5NTM3IEMzMS45NDA2NzU0LDAuNzE0NzQzOTY1IDMyLjA3NzMyNywwLjU2OTk3NzgyMiAzMi4yNDk1NzcsMC41Njk5Nzc4MjIgQzMyLjQxNDkzNjksMC41Njk5Nzc4MjIgMzIuNTUxNTg4NiwwLjcxODMzMzIwOSAzMi41NTE1ODg2LDAuODk3Nzk1MzcgQzMyLjU1MTU4ODYsMS4wNzcyNTc1MyAzMi40MTQ5MzY5LDEuMjI0NDE2NSAzMi4yNDk1NzcsMS4yMjQ0MTY1IEwzMi4yNDk1NzcsMS4yMjQ0MTY1IFoiIGlkPSJGaWxsLTE5IiBmaWxsPSIjMjMxRjIwIj48L3BhdGg+CiAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgIDxtYXNrIGlkPSJtYXNrLTQiIGZpbGw9IndoaXRlIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHVzZSB4bGluazpocmVmPSIjcGF0aC0zIj48L3VzZT4KICAgICAgICAgICAgICAgICAgICA8L21hc2s+CiAgICAgICAgICAgICAgICAgICAgPHVzZSBpZD0iQ2xpcC04IiBmaWxsPSIjRjU4MjIwIiB4bGluazpocmVmPSIjcGF0aC0zIj48L3VzZT4KICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+"
+                             class="add-billing-payment-img">
+                        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMzhweCIgaGVpZ2h0PSIyNHB4IiB2aWV3Qm94PSIwIDAgMzggMjQiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogc2tldGNodG9vbCA1NC4xICg3NjQ5MCkgLSBodHRwczovL3NrZXRjaGFwcC5jb20gLS0+CiAgICA8dGl0bGU+Qzc0NEMzNUUtRDA0Mi00NTRCLUJDMTYtMUZDNkQzM0U0QzM5QDF4PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBza2V0Y2h0b29sLjwvZGVzYz4KICAgIDxnIGlkPSJVSSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9IjEuMSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTY2NC4wMDAwMDAsIC05MjQuMDAwMDAwKSI+CiAgICAgICAgICAgIDxnIGlkPSJpbWctZmktamNiIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2NjQuMDAwMDAwLCA5MjQuMDAwMDAwKSI+CiAgICAgICAgICAgICAgICA8cmVjdCBpZD0iUmVjdGFuZ2xlIiBzdHJva2U9IiNCOUJBQkIiIHN0cm9rZS13aWR0aD0iMS4wMDAwMDAwMSIgZmlsbD0iI0ZGRkZGRiIgeD0iMC41MDAwMDAwMDciIHk9IjAuNTAwMDAwMDA3IiB3aWR0aD0iMzciIGhlaWdodD0iMjMiIHJ4PSIyLjAwMDAwMDAzIj48L3JlY3Q+CiAgICAgICAgICAgICAgICA8ZyBpZD0iSkNCIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0LjUwMDAwMCwgMS4wMDAwMDApIj4KICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNNS40MTcwMjIzNSw3LjYzNzY3NjM2IEM1LjQxNzAyMjM1LDcuNzAzNzMwOTEgNS40MTcwMjIzNSw3Ljc1NjYyOTA5IDUuNDE3MDIyMzUsNy44MDk3NTYzNiBDNS40MTY5MDI2NSw5LjExMTgyMTgyIDUuNDIwODA5NDEsMTAuNDE0MTI3MyA1LjQxNDg4OTQxLDExLjcxNjMyMzYgQzUuNDEyNzU2NDcsMTIuMjIxNjY1NSA1LjI1MjMzOTcxLDEyLjY2OTAwMzYgNC44NTYyNTQ3MSwxMy4wMDU5NDE4IEM0LjUyMDE0MjM1LDEzLjI5MTc2IDQuMTE4NDk2NDcsMTMuNDA4MjI1NSAzLjY4NzE1MjY1LDEzLjQyMjU3MDkgQzIuNzEzNzM3MDYsMTMuNDU1NDE4MiAxLjc5OTk0NTg4LDEzLjIwMzQwNzMgMC45MTUyNTQxMTgsMTIuODIwODE0NSBDMC44MjE0MzczNTMsMTIuNzgwMTM0NSAwLjczMTA0ODUyOSwxMi43MzAyMDM2IDAuNjM0ODcwMjk0LDEyLjY5NTkyNzMgQzAuNTUwMDQyMzUzLDEyLjY2NTY4NzMgMC41MzIwNjQ3MDYsMTIuNjEzNjE4MiAwLjUzMjA2NDcwNiwxMi41MjkxODE4IEMwLjUzNDE5NzY0Nyw5LjY5ODc2MzY0IDAuNTMxNTk2NzY1LDYuODY4NTc0NTUgMC41MzQ2NjU1ODgsNC4wMzgxNTYzNiBDMC41MzY0NTAyOTQsMi4zMzg1NTI3MyAxLjY0ODAzOTEyLDAuOTQ3NTM0NTQ1IDMuMzAxMzYyMzUsMC41ODM2ODM2MzYgQzMuNTcwNzQ0MTIsMC41MjQ1MDE4MTggMy44NTM1MDAyOSwwLjUwNDM0MTgxOCA0LjEzMDIxNjc2LDAuNTAzODcyNzI3IEM1Ljc0NDYxMzgyLDAuNTAxMDI1NDU1IDcuMzU5MjUwMjksMC41MDk5MTYzNjQgOC45NzM3NjcwNiwwLjUxMzAwMzYzNiBDOS4wNjkyMzc5NCwwLjUxMzI0MzYzNiA5LjEzMTcwMjY1LDAuNTE0MTkyNzI3IDkuMTMxNzAyNjUsMC42NDYxOTI3MjcgQzkuMTI4MDM1MjksNi40NTQ2OTQ1NSA5LjEzMTExNSwxMi4yNjMxODU1IDkuMTI0OTU1NTksMTguMDcxNzk2NCBDOS4xMjQwMDg4MiwxOS4wNjIwOCA4LjczMjY1NzY1LDE5Ljg5Nzk0NTUgOC4wMTMxMTY0NywyMC41NzE4MTA5IEM3LjM0NjcwMjk0LDIxLjE5NTg2NTUgNi41NDU4OTIzNSwyMS40OTk1ODU1IDUuNjM2MzU2MTgsMjEuNTAyOTEyNyBDMy45ODkxODE0NywyMS41MDkwNzY0IDIuMzQxNzg5MTIsMjEuNTA2NzA5MSAwLjY5NDQ5NDcwNiwyMS41MDc4OTgyIEMwLjY0NjExMTc2NSwyMS41MDc4OTgyIDAuNTk3ODM3NjQ3LDIxLjUwNzg5ODIgMC41NDE2NDExNzYsMjEuNTA3ODk4MiBDMC41NDE2NDExNzYsMTkuMDUxMTcwOSAwLjU0MTY0MTE3NiwxNi42MDQ4ODM2IDAuNTQxNjQxMTc2LDE0LjE0NDYgQzAuNzQ4OTE3MzUzLDE0LjE4OTE4NTUgMC45NTM5NDA4ODIsMTQuMjM1OCAxLjE1OTc5MTQ3LDE0LjI3NjgyOTEgQzEuODM5MTAwNTksMTQuNDExNjc2NCAyLjUyMzc0MjA2LDE0LjUxNjAzMjcgMy4yMTYxODYxOCwxNC41MzgyMTA5IEMzLjgwOTAxMzI0LDE0LjU1Njk1MjcgNC40MDQyMTI2NSwxNC41NjU3MjM2IDQuOTk2MDkyOTQsMTQuNTM1NjAzNiBDNS43MzEwMTA4OCwxNC40OTgyNTA5IDYuNDQ5NDc0NzEsMTQuMzU3NDY5MSA3LjExMDQ1Nzk0LDE0LjAwODMyMzYgQzcuOTU1NjM1ODgsMTMuNTYxODAzNiA4LjQxMTEwNTg4LDEyLjg1NDM4MTggOC40Mjc3ODg1MywxMS45MDAzOTI3IEM4LjQ1MTgwNTg4LDEwLjUxNjQ4NzMgOC40NDI0NTc5NCw5LjEzMjExMjczIDguNDQ4MDE4ODIsNy43NDc5NzgxOCBDOC40NDgyNTgyNCw3LjY3NTA0IDguNDQxMTUyMDYsNy42MjQ2NCA4LjM0MzY3ODgyLDcuNjI0ODggQzcuMzkyOTc0NzEsNy42Mjg3OTYzNiA2LjQ0MjE1MDg4LDcuNjI4NDM2MzYgNS40OTE1NjY0Nyw3LjYyOTc0NTQ1IEM1LjQ3MTkxMjk0LDcuNjI5NzIzNjQgNS40NTIyNzAyOSw3LjYzMzc2IDUuNDE3MDIyMzUsNy42Mzc2NzYzNiBaIiBpZD0iUGF0aCIgZmlsbD0iIzAxNTJDQyI+PC9wYXRoPgogICAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0xMC4yMDU2ODIxLDEzLjQ0NjY0NzMgQzEwLjMxNDk5NTMsMTMuNTI2MzQ5MSAxMC40MTEwNjQ3LDEzLjYwMTY1NDUgMTAuNTExOTc2OCwxMy42NjkwMTgyIEMxMS4xMTU4MDU5LDE0LjA3MTUzMDkgMTEuNzkwOTc5NywxNC4yODU2IDEyLjQ5NzE0NjUsMTQuNDE0NzUyNyBDMTMuNDY2NjU1MywxNC41OTE2OTgyIDE0LjQ0NDgwNDcsMTQuNjAyMDE4MiAxNS40MjMxOTM1LDE0LjUzMjUxNjQgQzE2LjIzNTI0NTYsMTQuNDc0OTkyNyAxNy4wMzU1ODgyLDE0LjMzMDA3NjQgMTcuODM1NDUyMSwxNC4xMzYyODczIEMxNy44MzU0NTIxLDEzLjY0ODM3ODIgMTcuODM1NDUyMSwxMy4xNjE0MTgyIDE3LjgzNTQ1MjEsMTIuNjYyMzcwOSBDMTcuODA0MSwxMi42NzMwNCAxNy43NzQxNzM1LDEyLjY3OTkyMzYgMTcuNzQ3MzE1OSwxMi42OTMwOTA5IEMxNy4wODcxNzA2LDEzLjAxODA0IDE2LjM5OTQ2MDMsMTMuMjU5NTAxOCAxNS42Njk2MzUzLDEzLjM2NDgxODIgQzE0Ljk1Mzg4MTIsMTMuNDY3OTk2NCAxNC4yNDA2MTkxLDEzLjQ4NzU2NzMgMTMuNTUzNjI3MSwxMy4yMDgzOTI3IEMxMi43NjA0OTk0LDEyLjg4NTkzMDkgMTIuMzI3MzgxOCwxMi4yODE1NjczIDEyLjIxMDAyNjUsMTEuNDQxODk0NSBDMTIuMTQ5NDU1MywxMS4wMTAzMiAxMi4xNjU3Nzg4LDEwLjU4MDY0MzYgMTIuMjk1OTIwOSwxMC4xNjIyMzY0IEMxMi41NjY3MjgyLDkuMjkzMjgzNjQgMTMuMTkxODU0MSw4LjgyNjk2MzY0IDE0LjA1Mjg4NzYsOC42NTA3MjcyNyBDMTQuODY1NjQ3MSw4LjQ4NDM0MTgyIDE1LjY2ODkzODgsOC41ODQ2NzI3MyAxNi40NTI0NzkxLDguODE3MTEyNzMgQzE2Ljg4MDk4MjYsOC45NDQyNDcyNyAxNy4yOTEwMjk3LDkuMTM0NzA5MDkgMTcuNzA4OTk5MSw5LjI5NzQyOTA5IEMxNy43NDk1Nzk0LDkuMzEzMDgzNjQgMTcuNzg4Mzg1OSw5LjMzMzM2MzY0IDE3LjgzNjc2ODgsOS4zNTU1NDE4MiBDMTcuODQwMzE2NSw5LjMxNyAxNy44NDQxMDM1LDkuMjkzMTYzNjQgMTcuODQ0MTAzNSw5LjI2OTQzNjM2IEMxNy44NDQ1ODI0LDguODM4MTAxODIgMTcuODQzMzk2Miw4LjQwNjY0NzI3IDE3Ljg0NTQwOTQsNy45NzU0MzI3MyBDMTcuODQ1ODc3NCw3LjkwNDYzMjczIDE3LjgzMjAzNSw3Ljg2ODY5ODE4IDE3Ljc1MTQ3MjksNy44NDk3MTYzNiBDMTYuNTM5Nzg4Miw3LjU2NTU1NjM2IDE1LjMxNDYwOTQsNy40MDQwMjU0NSAxNC4wNjgxNDQ3LDcuNDQxMDI5MDkgQzEzLjE2NDg3NjgsNy40Njc4MzI3MyAxMi4yNzI1MDIxLDcuNTY4MTYzNjQgMTEuNDE2ODAwOSw3Ljg4MzYzMjczIEMxMC45ODM1NjM1LDguMDQzMjY1NDUgMTAuNTgxNjc4Miw4LjI2MDE4MTgyIDEwLjIwOTg1LDguNTY1NTYgQzEwLjIwNDk5NjUsOC41MjA4NDM2NCAxMC4xOTg5Njc2LDguNDkxMzIzNjQgMTAuMTk4OTY3Niw4LjQ2MTkxMjczIEMxMC4xOTg2MDg1LDYuOTc4OTg1NDUgMTAuMTkyODE5MSw1LjQ5NjE2NzI3IDEwLjIwMDI3MzUsNC4wMTMzNiBDMTAuMjA4NTU1LDIuMzI3NzUyNzMgMTEuMzIzMjM0NCwwLjk0MjE4OTA5MSAxMi45NjI5NTQ3LDAuNTgwNDY1NDU1IEMxMy4yMjQ1MzM4LDAuNTIyNTkyNzI3IDEzLjQ5ODYzODUsMC41MDAyOTQ1NDUgMTMuNzY3MDczNSwwLjQ5ODk4NTQ1NSBDMTUuNDAxODIwNiwwLjQ5MTUxMjcyNyAxNy4wMzY4MDcxLDAuNDk1ODk4MTgyIDE4LjY3MTc5MzUsMC40OTE1MTI3MjcgQzE4Ljc5MzY0MzIsMC40OTEwNDM2MzYgMTguODE4NzI3MSwwLjUyOTcwNTQ1NSAxOC44MTg3MjcxLDAuNjQ0NTAxODE4IEMxOC44MTYwMDY1LDYuMzk5Mjc2MzYgMTguODE2NzEzOCwxMi4xNTQxNiAxOC44MTU4OTc2LDE3LjkwOTA1NDUgQzE4LjgxNTc3NzksMTguOTI4OTc4MiAxOC40NzY4MjUzLDE5LjgxNDY2NTUgMTcuNzQwMzcyOSwyMC41Mjg2MTA5IEMxNy4xNjMwNDI0LDIxLjA4ODI2OTEgMTYuNDY4ODI0NCwyMS40MTE1NiAxNS42NjU3NjEyLDIxLjQ4NzIyNTUgQzE1LjUwNzIyNzEsMjEuNTAyMTcwOSAxNS4zNDcxNjk0LDIxLjUwNzYyNTUgMTUuMTg3OTI3OSwyMS41MDc2MjU1IEMxMy41Nzc1NDY1LDIxLjUwOTE3NDUgMTEuOTY3MTc1OSwyMS41MDg1NzQ1IDEwLjM1Njc5NDQsMjEuNTA4NTc0NSBDMTAuMzA4NzU5NywyMS41MDg1NzQ1IDEwLjI2MDYxNjIsMjEuNTA4NTc0NSAxMC4yMDU3MTQ3LDIxLjUwODU3NDUgQzEwLjIwNTY4MjEsMTguODE5MDU4MiAxMC4yMDU2ODIxLDE2LjE0MjMzODIgMTAuMjA1NjgyMSwxMy40NDY2NDczIFoiIGlkPSJQYXRoIiBmaWxsPSIjRDIyRjJGIj48L3BhdGg+CiAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTE5Ljg3MjA4NDQsNy42Mjk4NDM2NCBDMTkuODY5ODMxOCw3LjU3NjM1NjM2IDE5Ljg2NjA1NTYsNy41MzIzNiAxOS44NjYwNTU2LDcuNDg4NDcyNzMgQzE5Ljg2NTY5NjUsNi4zMzg0NDcyNyAxOS44NjMzMzUsNS4xODgyOTA5MSAxOS44NjYyOTUsNC4wMzgxNDU0NSBDMTkuODcxMDI4OCwyLjM0MTc0OTA5IDIwLjk4MjE0OTcsMC45NDkwNjE4MTggMjIuNjMyNjMyNiwwLjU4NTIxMDkwOSBDMjIuOTAyMDE0NCwwLjUyNTkwOTA5MSAyMy4xODQ0MTE1LDAuNTA0MDkwOTA5IDIzLjQ2MTAwODIsMC41MDM1MDE4MTggQzI1LjA3NTI4NTYsMC40OTk0NjU0NTUgMjYuNjg5NTczOCwwLjUwNjkzODE4MiAyOC4zMDM5NzA5LDAuNTEwNjE0NTQ1IEMyOC40NjI2MTM4LDAuNTExMjAzNjM2IDI4LjQ2MzA4MTgsMC41MTE1NjM2MzYgMjguNDYzMDgxOCwwLjY3NjUzMDkwOSBDMjguNDYzMjAxNSw2LjQzMTA2NTQ1IDI4LjQ1NTYyNzQsMTIuMTg1NzIgMjguNDY3OTM1MywxNy45NDAyNTQ1IEMyOC40NzEzNjMyLDE5LjU2MjQxNDUgMjcuNDQwNTY1LDIwLjg2ODI3NjQgMjYuMTAxODE3OSwyMS4zMTg4MzI3IEMyNS43NDYwNzM4LDIxLjQzODM3NDUgMjUuMzgwNTAyOSwyMS41MDI3NzA5IDI1LjAwNjY2MTUsMjEuNTAzNiBDMjMuMzM5MDI3OSwyMS41MDY1NjczIDIxLjY3MTI2MzgsMjEuNTA1MTQ5MSAyMC4wMDM2MzAzLDIxLjUwNTI1ODIgQzE5Ljk2MzUxNzksMjEuNTA1MjU4MiAxOS45MjM0MTY1LDIxLjUwNTI1ODIgMTkuODcyNDIxOCwyMS41MDUyNTgyIEMxOS44Njk5NDA2LDIxLjQ1MDExMjcgMTkuODY2MDMzOCwyMS40MDYzNDU1IDE5Ljg2NjAzMzgsMjEuMzYyMzQ5MSBDMTkuODY1Njc0NywxOS4wODI2ODczIDE5Ljg2Njc0MTIsMTYuODAzMDM2NCAxOS44NjMxOTM1LDE0LjUyMzM3NDUgQzE5Ljg2MzA3MzgsMTQuNDAzODMyNyAxOS44OTYzMTk0LDE0LjM3MjI4MzYgMjAuMDE0MzkyOSwxNC4zNzI4NzI3IEMyMS43MjI5NjU5LDE0LjM3ODY4NzMgMjMuNDMxNTM4OCwxNC4zNzkyNzY0IDI1LjE0MDExMTgsMTQuMzgyMTIzNiBDMjUuNTc2ODk2OCwxNC4zODI4MzI3IDI2LjAwNjU4NjUsMTQuMzQ0MjkwOSAyNi40MTI5NjYyLDE0LjE2ODUzNDUgQzI2LjkxMzc1MDMsMTMuOTUyMDk4MiAyNy4yODk2MDUsMTMuNjEzMzgxOCAyNy40NTAzOTE4LDEzLjA3NDYwMzYgQzI3LjY0NDA1NDEsMTIuNDI1NDAzNiAyNy40MTI4OTEyLDExLjc2ODM4MTggMjYuODU3MDk2OCwxMS4zNjk3NzQ1IEMyNi40ODc4NTg1LDExLjEwNDk0NTUgMjYuMDY5MTgxOCwxMC45ODAxODkxIDI1LjYyMzUxNjgsMTAuOTMyNTA1NSBDMjUuNTk1OTUxOCwxMC45Mjk2NTgyIDI1LjU2ODYyNjIsMTAuOTI1OTgxOCAyNS41MzgxMDEyLDEwLjkwMzIxNDUgQzI1LjY0ODM2MTIsMTAuODc1MjIxOCAyNS43NjAwNDY4LDEwLjg1MjU3NDUgMjUuODY4MjkzNSwxMC44MTg0MTgyIEMyNi40MzA0ODY4LDEwLjY0MDQwMzYgMjYuODY3NjIsMTAuMzEzNDM2NCAyNy4wMzQ3ODM4LDkuNzI0NjA3MjcgQzI3LjI2MDUxNjUsOC45Mjk1MzA5MSAyNi45MjcxMjQ3LDguMTQzOTU2MzYgMjYuMDA0NTg0MSw3LjgwNTM2IEMyNS42MjY4MzU5LDcuNjY2NzE2MzYgMjUuMjMzMzUxOCw3LjYyOTI0MzY0IDI0LjgzNDUzNTMsNy42MjkzNjM2NCBDMjMuMjMyNDQ2Miw3LjYyOTgzMjczIDIxLjYzMDM0NjIsNy42Mjk3MjM2NCAyMC4wMjgzNjU5LDcuNjI5ODMyNzMgQzE5Ljk3OTg2MzIsNy42Mjk4NDM2NCAxOS45MzEzNjA2LDcuNjI5ODQzNjQgMTkuODcyMDg0NCw3LjYyOTg0MzY0IFoiIGlkPSJQYXRoIiBmaWxsPSIjMjVCQTJGIj48L3BhdGg+CiAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTIxLjU4NTM5MTIsMTMuMjU3NzIzNiBDMjEuNTg1MzkxMiwxMi42NTE1ODE4IDIxLjU4NTM5MTIsMTIuMDUyOTAxOCAyMS41ODUzOTEyLDExLjQ0NjY0IEMyMS42MjA5OTgyLDExLjQ0MzA4MzYgMjEuNjUyMjMwNiwxMS40MzcyNjkxIDIxLjY4MzQ2MjksMTEuNDM3MTQ5MSBDMjIuMzIyNjcwNiwxMS40MzY2OCAyMi45NjE3NTg1LDExLjQzNDMwMTggMjMuNjAwODQ2NSwxMS40Mzc3MzgyIEMyNC4wMzk1MjUsMTEuNDM5ODc2NCAyNC4zODg0MTMyLDExLjY5NzM0MTggMjQuNDk3MTI3OSwxMi4wODgwMDczIEMyNC42NjQ2NTA5LDEyLjY5MDAwMzYgMjQuMjY4MjA2OCwxMy4yNDg3MTI3IDIzLjYzMzczMjksMTMuMjY2MjY1NSBDMjIuOTY2NDkyNCwxMy4yODQ3NjczIDIyLjI5ODI5NDEsMTMuMjcwNDIxOCAyMS42MzA2OTQ0LDEzLjI3MDA2MTggQzIxLjYxOTEwNDcsMTMuMjcwMDUwOSAyMS42MDc2MzQ3LDEzLjI2Mzg4NzMgMjEuNTg1MzkxMiwxMy4yNTc3MjM2IFoiIGlkPSJQYXRoIiBmaWxsPSIjMjVCQTJGIj48L3BhdGg+CiAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTIxLjU4NTM5MTIsMTAuMzYzMTM4MiBDMjEuNTg1MzkxMiw5LjgwNTM3ODE4IDIxLjU4NTM5MTIsOS4yNjA5MDU0NSAyMS41ODUzOTEyLDguNzA3ODkwOTEgQzIxLjYyMDI5MDksOC43MDMyNjU0NSAyMS42NTEyODM4LDguNjk1NjcyNzMgMjEuNjgyNTE2Miw4LjY5NTY3MjczIEMyMi4yNzE2NzU5LDguNjk1MjAzNjQgMjIuODYwOTY2Miw4LjY5MTQwNzI3IDIzLjQ1MDI0NTYsOC42OTc5MzA5MSBDMjMuODU1MzE5NCw4LjcwMjU1NjM2IDI0LjE1NjQxMjQsOC45MjkwNzI3MyAyNC4yNjA4NzIxLDkuMjg3OTQ5MDkgQzI0LjQxODMzOTcsOS44MzA1MjM2NCAyNC4wNTgyMSwxMC4zNTMxNzgyIDIzLjQ5NjAyNzYsMTAuMzY3NjU0NSBDMjIuODg2NzQ2NSwxMC4zODM0MjkxIDIyLjI3Njc1NzksMTAuMzczMzQ5MSAyMS42NjcwMTk3LDEwLjM3MzkzODIgQzIxLjY0MzM2MTUsMTAuMzczOTI3MyAyMS42MTk3MDMyLDEwLjM2Nzc2MzYgMjEuNTg1MzkxMiwxMC4zNjMxMzgyIFoiIGlkPSJQYXRoIiBmaWxsPSIjMjVCQTJGIj48L3BhdGg+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg=="
+                             class="add-billing-payment-img">
+                        <img src="https://cdn.us-east-1.pipedriveassets.com/billing-fe/2d6b8927aeb31881b8b7.svg" class="add-billing-payment-img">
+                        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMzhweCIgaGVpZ2h0PSIyNHB4IiB2aWV3Qm94PSIwIDAgMzggMjQiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogc2tldGNodG9vbCA1Mi42ICg2NzQ5MSkgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+MDg1MDQ5NzctQzE5Ni00NjJDLUEyRkYtNjAzRjNBQTU5NThCPC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBza2V0Y2h0b29sLjwvZGVzYz4KICAgIDxnIGlkPSJVSSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9IjQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00ODAuMDAwMDAwLCAtODEyLjAwMDAwMCkiPgogICAgICAgICAgICA8ZyBpZD0iR3JvdXAtNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjIwLjAwMDAwMCwgNDEuMDAwMDAwKSI+CiAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXAtNCI+CiAgICAgICAgICAgICAgICAgICAgPGcgaWQ9Ikdyb3VwLTciIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI2MC4wMDAwMDAsIDc3MS4wMDAwMDApIj4KICAgICAgICAgICAgICAgICAgICAgICAgPGcgaWQ9ImltZy1maS12aXNhIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUiIHN0cm9rZT0iI0I5QkFCQiIgc3Ryb2tlLXdpZHRoPSIxLjAwMDAwMDAxIiBmaWxsPSIjRkZGRkZGIiB4PSIwLjUwMDAwMDAwNyIgeT0iMC41MDAwMDAwMDciIHdpZHRoPSIzNyIgaGVpZ2h0PSIyMyIgcng9IjIuMDAwMDAwMDMiPjwvcmVjdD4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJWaXNhIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzLjYxOTA0OCwgNi42NjY2NjcpIiBmaWxsPSIjMTYyMTZBIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMjEuOTIyOTM5MSwwLjg4NDc0NjY2MyBDMjEuNDQzNjcxOCwwLjcwODE3NzUwOCAyMC42OTM0MTE0LDAuNTE3NjY4NjgzIDE5Ljc1NDk5NDIsMC41MTc2Njg2ODMgQzE3LjM2Njk0MTQsMC41MTc2Njg2ODMgMTUuNjgyOTk3NCwxLjY5Nzg5NDA5IDE1LjY2ODc5NjksMy4zOTA0MDIzNyBDMTUuNjU0NTk2NCw0LjY0MDMyNjEzIDE2Ljg2OTkyMzUsNS4zMzg0NzEyOCAxNy43ODcwMzk5LDUuNzU1NDk5NzUgQzE4LjcyNzgyMzksNi4xODE4MjEzMiAxOS4wNDYxNTIsNi40NTM2NDQ4OSAxOS4wNDE0MTg1LDYuODM0NjYyNTQgQzE5LjAzNDMxODIsNy40MTc4MDU0MSAxOC4yODg3OTE0LDcuNjgzODIwNzggMTcuNTkyOTY2Myw3LjY4MzgyMDc4IEMxNi42MjczMzE0LDcuNjgzODIwNzggMTYuMTEzNzQ2Myw3LjU1MTM5MzkyIDE1LjMxODUxNzYsNy4yMjcyOTY1OSBMMTUuMDA3Mjg5Nyw3LjA5MDIyMzE2IEwxNC42Njc2NjA4LDkuMDM4MjkyMDcgQzE1LjIzMDk0NzgsOS4yODEwNzQ2NiAxNi4yNzU4Njg4LDkuNDkxMzMxMzUgMTcuMzYxMDI0Niw5LjUwMTc4NjEgQzE5LjkwMjkxNjIsOS41MDE3ODYxIDIxLjU1MjU0MjQsOC4zMzU1MDAzNiAyMS41NzE0NzY0LDYuNTI3OTg5OCBDMjEuNTc5NzYsNS41Mzk0MzQ4NiAyMC45MzcxODY4LDQuNzg1NTMxMDMgMTkuNTQxOTg2NSw0LjE2NDA1NDA3IEMxOC42OTU4NzI3LDMuNzYwOTY1MjcgMTguMTc4NzM3NCwzLjQ5MjYyNjYyIDE4LjE4MjI4NzUsMy4wODQ4OTEyNyBDMTguMTgyMjg3NSwyLjcyMzYyMTQ5IDE4LjYyMjUwMzQsMi4zMzY3OTU2NCAxOS41NjgwMjA4LDIuMzM2Nzk1NjQgQzIwLjM1ODUxNiwyLjMyNDAxNzYxIDIwLjkzMjQ1MzMsMi40OTM2MTY5MyAyMS4zNzc0MDI3LDIuNjY5MDI0NDQgTDIxLjU5Mzk2MDUsMi43NzAwODcwNSBMMjEuOTIyOTM5MSwwLjg4NDc0NjY2MyIgaWQ9IkZpbGwtMyI+PC9wYXRoPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0yOC4xMjE0NjI2LDAuNjc3OTc0ODg5IEwyNi4yNTQwOTUyLDAuNjc3OTc0ODg5IEMyNS42NzU0MjQ0LDAuNjc3OTc0ODg5IDI1LjI0MjMwODcsMC44MzM2MzQ1NCAyNC45ODkwNjYzLDEuMzk5MzUyODIgTDIxLjM5NzUyMDEsOS4zNzUxNjc0MyBMMjMuOTM3MDQ1LDkuMzc1MTY3NDMgQzIzLjkzNzA0NSw5LjM3NTE2NzQzIDI0LjM1MTIyNjYsOC4zMDI5NzQ0NyAyNC40NDU4OTY3LDguMDY4MzIzMzUgQzI0LjcyMjgwNjcsOC4wNjgzMjMzNSAyNy4xODg5NjIzLDguMDcxODA4MjcgMjcuNTQxNjA4Myw4LjA3MTgwODI3IEMyNy42MTM3OTQyLDguMzc2MTU3NzQgMjcuODM2MjY4OSw5LjM3NTE2NzQzIDI3LjgzNjI2ODksOS4zNzUxNjc0MyBMMzAuMDc5OTQ5OCw5LjM3NTE2NzQzIEwyOC4xMjE0NjI2LDAuNjc3OTc0ODg5IEwyOC4xMjE0NjI2LDAuNjc3OTc0ODg5IFogTTI1LjE0MDUzODQsNi4yODg2OTIxMyBDMjUuMzQxNzEyMyw1Ljc4NTcwMjM2IDI2LjEwMzgwNjUsMy44NTM4OTY0MSAyNi4xMDM4MDY1LDMuODUzODk2NDEgQzI2LjA5MDc4OTMsMy44NzgyOTA4MyAyNi4zMDI2MTM2LDMuMzUwOTA2NjQgMjYuNDIzMzE4LDMuMDIzMzI0MzkgTDI2LjU4NzgwNzMsMy43NzM3NDMzIEMyNi41ODc4MDczLDMuNzczNzQzMyAyNy4wNTE2OTA2LDUuODUxOTE1OCAyNy4xNDg3Mjc1LDYuMjg4NjkyMTMgTDI1LjE0MDUzODQsNi4yODg2OTIxMyBMMjUuMTQwNTM4NCw2LjI4ODY5MjEzIFoiIGlkPSJGaWxsLTQiPjwvcGF0aD4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNOC43MDgxNzkyNCwwLjY3NTY1MTYxMSBMNi4zNDE0MjcyNCw2LjYxMDQ2NjE4IEw2LjA4ODE4NDc3LDUuNDA0Njg0NzEgQzUuNjQ5MTUyMjgsNC4wMTUzNjQyNSA0LjI3NTI1Mjc0LDIuNTA3NTU2NiAyLjc0MDQxNDA2LDEuNzUzNjUyNzcgTDQuOTAzNjI1NCw5LjM2NDcxMjY4IEw3LjQ2MjA4NDMxLDkuMzYyMzg5NCBMMTEuMjY5MDA0OSwwLjY3NTY1MTYxMSBMOC43MDgxNzkyNCwwLjY3NTY1MTYxMSIgaWQ9IkZpbGwtNSI+PC9wYXRoPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik00LjE0NTA4MTM4LDAuNjcxMDA1MDU0IEwwLjI0NDY3NDA3NywwLjY3MTAwNTA1NCBMMC4yMTUwODk2NzcsMC44NTEwNTkxMjcgQzMuMjQ4MDgyMzcsMS41NzEyNzU0MiA1LjI1NjI3MTQ0LDMuMzEzNzM0MTkgNi4wODgxODQ3Nyw1LjQwNDY4NDcxIEw1LjI0MDg4NzU2LDEuNDA1MTYxMDIgQzUuMDk0MTQ4OTMsMC44NTMzODI0MDYgNC42NzA1MDAzMiwwLjY5MDc1MjkyIDQuMTQ1MDgxMzgsMC42NzEwMDUwNTQiIGlkPSJGaWxsLTYiPjwvcGF0aD4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cG9seWxpbmUgaWQ9IkZpbGwtNyIgcG9pbnRzPSIxMC43MzY0ODU3IDkuMzcxNjgyNTEgMTIuMjQ3NjU2OSAwLjY2OTg0MzQxNSAxNC42NjY0Nzc0IDAuNjY5ODQzNDE1IDEzLjE1MTc1NjEgOS4zNzE2ODI1MSAxMC43MzY0ODU3IDkuMzcxNjgyNTEiPjwvcG9seWxpbmU+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg=="
+                             class="add-billing-payment-img">
+                        <img src="https://cdn.us-east-1.pipedriveassets.com/billing-fe/bfc3cd1370b5b6b1b1b3.svg" class="add-billing-payment-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Step Four End -->
+
+<!-- Step Five Start -->
+<div *ngIf="step===5" class="confirm-purchase mt-4">
+    <div class="card">
+        <div class="card-body">
+            <div class="row d-flex justify-content-center">
+                <div class="col-5 border rounded p-4 me-4">
+                    <h1>Subscription overview</h1>
+                    <div class="purchase-usd">
+                        <p class="purchase-monthly mt-3">{{subscriptionObj.billing_type.toUpperCase()}} SUBSCRIPTION PLAN</p>
+                        <div class="purchase-profassional d-flex">
+                            <div class="confirm-pro">
+                                <h4 class="mb-1 text-uppercase">{{getPackage(subscriptionObj.line_items[0].package_id, 'package_name')}}</h4>
+                            </div>
+                            <div class="ms-auto">
+                                <!--                                <p>{{getPackage(subscriptionObj.line_items[0].package_id, 'price') | currency}}</p>-->
+                            </div>
+                        </div>
+                        <div class="purchase-seat d-flex">
+                            <div class="pro-seat">
+                                <p class="pro-seat-inner">{{subscriptionObj?.line_items[0]?.number_of_seats}} seat(s) x <span class="me-2">{{getPackage(subscriptionObj?.line_items[0]?.package_id, 'price') | currency}} per seat(s)</span><a>Manage seats</a></p>
+                            </div>
+                            <div class="ms-auto">
+                                <p><strong>{{getPackage(subscriptionObj?.line_items[0]?.package_id, 'price') * subscriptionObj?.line_items[0]?.number_of_seats | currency}}</strong> {{subscriptionObj.billing_type}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="dropdown-divider">
+                    <div class="purchase-usd">
+                        <p class="purchase-monthly mt-3">SELECTED ADD-ONS</p>
+                    </div>
+                    <div *ngFor="let addon of subscriptionObj.app_addons" class="purchase-usd purchase-usd-cam mt-2">
+                        <div class="purchase-profassional d-flex">
+                            <div class="confirm-pro">
+                                <h4 class="mb-1">{{getPackage(addon.addon_id, 'addon_name', 'addons')}}</h4>
+                            </div>
+                            <div class="ms-auto">
+                                <p>
+                                    <!--                                    <span *ngIf="getPackage(addon.addon_id, 'on_trial', 'addons')" class="usd-color">0</span>-->
+                                    <!--                                    <label class="text-decoration-line-through">-->
+                                    <!--                                    </label> {{getPackage(addon.addon_id, 'price', 'addons') | currency}}-->
+                                </p>
+                            </div>
+                        </div>
+                        <div class="purchase-seat d-flex">
+                            <div class="pro-seat">
+                                <p class="pro-seat-inner mb-1">{{getPackage(addon.addon_id, 'addon_description', 'addons')}}</p>
+                            </div>
+                            <div class="ms-auto">
+                            </div>
+                        </div>
+                        <div class="purchase-seat d-flex">
+                            <div class="pro-seat">
+                                <p class="pro-seat-inner">{{addon.number_of_seats}} seat(s) x <span class="me-2">{{getPackage(addon.addon_id, 'price', 'addons') | currency}} per seat(s)</span></p>
+                            </div>
+                            <div class="ms-auto">
+                                <p><strong>{{getPackage(addon.addon_id, 'price', 'addons') * addon.number_of_seats | currency}}</strong> {{subscriptionObj.billing_type}}</p>
+                            </div>
+                        </div>
+                        <div class="purchase-seat d-flex">
+                            <div class="ms-auto invisible">
+                                <p>{{subscriptionObj.billing_type}}</p>
+                            </div>
+
+                            <p *ngIf="getPackage(addon.addon_id, 'on_trial', 'addons')" class="purchase-gift"><i class="fa-light fa-gift me-2"></i>Free trial until {{getTrialExpiryDate(addon.addon_id)}}</p>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row pb-3">
+                        <div class="rounded border d-flex w-100 p-3 align-items-center">
+                            <p class="mb-0">
+                                <i class="fab fa-cc-visa fa-lg text-primary pe-2"></i>{{maskCardNumber()}}
+                            </p>
+                            <div class="ms-auto"><i class="fa-light fa-pen"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 border rounded p-4">
+                    <div class="rounded d-flex flex-column">
+                        <div class="me-3">
+                            <h1>Summary</h1>
+                        </div>
+                        <div class="d-flex mb-2">
+                            <div class="col-8">Subtotal</div>
+                            <div class="ms-auto">{{getSubtotal() | currency}}</div>
+                        </div>
+                        <div class="border-top"></div>
+                        <div class="d-flex mt-4 mb-2">
+                            <div class="col-8">Estimated tax (0%)<i class="fa-light fa-circle-info ms-1"></i></div>
+                            <div class="ms-auto">{{getTax() | currency}}</div>
+                        </div>
+                        <div class="border-top"></div>
+                        <div class="col-bold d-flex mt-4 mb-4">
+                            <div class="col-8">Total {{subscriptionObj.billing_type}} recurring payment (excluding offers)<i class="fa-light fa-circle-info ms-1"></i></div>
+                            <div class="ms-auto">{{getTotal(false) | currency}}</div>
+                        </div>
+                        <div class="col-bold d-flex mb-1">
+                            <div class="col-8">
+                                Next estimated invoice <i class="fa-light fa-circle-info ms-1"></i>
+                            </div>
+                            <div class="ms-auto mb-0">
+                                <p class="mb-0"><span class="usd-color">{{getNextInvoiceAmount() | currency}}</span></p>
+                            </div>
+                        </div>
+                        <p class="next-billing">Next billing date {{getNextBillingDate()}}</p>
+                        <div class="rounded border d-flex p-3 mt-4">
+                            <div class="col-8"><b>Total</b></div>
+                            <div class="ms-auto"><b class="text-success">{{getTotal() | currency}}</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Step Five End -->
+
+<!-- Footer Start-->
+<div class="footer-btn d-flex align-items-center justify-content-between mb-4 mt-4">
+    <div class="footer-left-btn">
+        <button *ngIf="step > 2" (click)="prevStep()" class="btn btn-primary btn-sm"><i class="fa-light fa-arrow-left me-2"></i> Remove from plan</button>
+    </div>
+    <div class="footer-right-btn d-flex align-items-center">
+        <p class="btn-next mb-0">Next estimated invoice ({{subscriptionObj?.line_items[0]?.number_of_seats}} seats)</p>
+        <button *ngIf="step < 5" (click)="nextStep()" class="btn btn-primary btn-sm ms-3">Continue</button>
+        <button *ngIf="step === 5" (click)="payNow()" class="btn btn-primary btn-sm ms-3" [disabled]="paymentInProgress">{{paymentInProgress ? 'Please wait..' : 'Pay now'}}</button>
+    </div>
+</div>
+<!-- Footer End-->

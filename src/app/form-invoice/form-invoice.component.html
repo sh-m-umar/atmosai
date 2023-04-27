@@ -1,0 +1,714 @@
+<form #invoiceForm="ngForm" (ngSubmit)="onInvoiceFormSubmit()">
+<div class="page-content-container ngx-style page-content-width">
+    <div class="iqe-container">
+        <div class="row" *ngIf="!showInvoiceSec">
+            <div class="col-sm-12">
+              <div class="d-flex align-items-center col-8 mb-4" *ngIf="boardType === 'invoice'">
+                <label class="me-3">Invoice</label>
+                <div class="switch blue-white-switch">
+                    <label class="switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" [checked]="recurring" (change)="toggleRecurringInvoice($event)">
+                        <span class="slider round"></span>
+                      </label>
+                </div>
+                <label class="ms-3">Recurring Invoice</label>
+              </div>
+                <div *ngIf="showStepper" class="card mb-3">
+                    <div class="card-header">
+                        <div>{{data?.board?.type | titlecase}} <small class="d-block">Reference: # <strong>{{invoiceResponse?.reference || invoice.reference}}</strong></small></div>
+                    </div>
+                    <div class="card-body">
+                        <mat-horizontal-stepper #stepper>
+                            <mat-step state="approve" [editable]=false>
+                                <ng-template matStepLabel>Approve</ng-template>
+                                <div class="step-contetn mt-2 {{stepContentPos}}">
+                                    <div class="set-content-heading">
+                                        <h2 class="mb-3">Your {{boardType}} is created # {{invoiceResponse?.reference || invoice.reference}}</h2>
+                                        Current Status: <span class="badge bg-dark mb-4">{{invoiceCurrentStatus?.name}}</span>
+                                        <div class="iqe-invoice-btn-edit d-flex">
+<!--                                            <select *ngIf="getStatuses().length" name="" id="" class="form-select form-select-sm" [(ngModel)]="invoiceCurrentStatus.name" [ngModelOptions]="{standalone: true}">-->
+<!--                                                <option *ngFor="let status of getStatuses()" value="{{status.name}}" [selected]="( invoiceCurrentStatus?.name == status.name )">{{status.name}}</option>-->
+<!--                                            </select>-->
+
+                                              <button class="btn btn-sm btn-primary" type="button" (click)="changeStatus('Approved')" matStepperNext>Approve</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-step>
+                            <mat-step state="send" [editable]=false>
+                                <ng-template matStepLabel>Send</ng-template>
+                                <div class="step-contetn mt-2 {{stepContentPos}} d-flex">
+                                    <div class="set-content-heading">
+                                        Status: <span class="badge bg-warning mb-4">{{invoiceCurrentStatus?.name}}</span>
+                                    </div>
+                                    <div class="d-flex">
+                                        <button class="btn btn-sm btn-primary me-2" type="button" (click)="changeStatus('Sent')" matStepperNext>Mark as sent <i class="fa-light fa-check ms-2"></i></button>
+                                        <input name="email_address" ngControl="email_address" [(ngModel)]="customerEmailAddress" placeholder="Enter , separated email IDs" type="text" class="form-control form-control-sm w-25 me-2">
+                                        <button [disabled]="customerLoading" class="btn btn-sm btn-primary" type="button" (click)="sendInvoice()" mat-button >Send<i class="fa-light fa-paper-plane ms-2" *ngIf="!customerLoading"></i></button>
+                                    </div>
+                                      <div>
+                                        <input type="checkbox" [checked]="emailNotificationData.send_me_notification === 'yes'" (change)="onChangeSendNotification($event)">
+                                        <label>Send me notification</label>
+                                      </div>
+                                      <div class="ms-5">
+                                        <label>Send notification to: </label>
+                                        <mat-form-field floatLabel="never" appearance="outline">
+                                          <input type="text"
+                                                  matInput
+                                                  [(ngModel)]="notificationUser"
+                                                  name="assign_to" ngControl="assign_to"
+                                                  (ngModelChange)="onDealLeadChange(notificationUser)"
+                                                  [matAutocomplete]="user">
+                                          <mat-autocomplete autoActiveFirstOption #user="matAutocomplete">
+                                            <mat-option *ngIf="!filteredUsers.length" [value]="">
+                                              No Users Found
+                                            </mat-option>
+                                            <mat-option *ngFor="let user of filteredUsers"
+                                              [value]="user.display_name"
+                                              name="user.display_name"
+                                              (click)="onNotificationUserSelect(user)">
+                                              {{user.display_name}}
+                                            </mat-option>
+                                          </mat-autocomplete>
+                                        </mat-form-field>
+                                      </div>
+                                </div>
+                            </mat-step>
+                            <mat-step state="approval-pending" [editable]=false *ngIf="['estimate', 'quote'].includes(boardType)">
+                                <ng-template matStepLabel>Customer Approval</ng-template>
+                                <div class="step-contetn mt-2 {{stepContentPos}}">
+                                    <div class="set-content-heading">
+                                      Approval Status: <span class="badge bg-primary mb-4">{{['customer declined', 'customer approved'].includes(invoiceCurrentStatus?.name?.toLowerCase())? invoiceCurrentStatus?.name : 'Pending'}}</span>
+                                    </div>
+                                </div>
+                            </mat-step>
+                            <mat-step  state="payment" [editable]=false *ngIf="boardType === 'invoice'">
+                              <ng-template matStepLabel>Payment</ng-template>
+                              <div class="step-contetn mt-2 {{stepContentPos}}">
+                                <div class="set-content-heading">
+                                  <p>Pending payment</p>
+                                </div>
+                              </div>
+                            </mat-step>
+                            <mat-step  state="convert-to-invoice" [editable]=false *ngIf="boardType === 'quote'">
+                              <ng-template matStepLabel>Invoice Created</ng-template>
+                              <div class="step-contetn mt-2 {{stepContentPos}}">
+                                <div class="set-content-heading">
+                                  Status: <span class="badge bg-primary mb-4">Invoice Created</span>
+                                </div>
+                              </div>
+                            </mat-step>
+                            <mat-step  state="convert-to-invoice" [editable]=false *ngIf="boardType === 'estimate'">
+                              <ng-template matStepLabel>Convert To Invoice</ng-template>
+                              <div class="step-contetn mt-2 {{stepContentPos}}">
+                                <div class="set-content-heading">
+                                  <button type="button" (click)="convertToInvoice()" class="btn btn-sm btn-primary me-2">
+                                    <i class="fa-solid fa-file-invoice-dollar fa-fw me-2"></i>Convert to Invoice
+                                  </button>
+                                </div>
+                              </div>
+                            </mat-step>
+                        </mat-horizontal-stepper>
+                    </div>
+                </div>
+                <div *ngIf="showStepper" class="action-bttons mb-1 text-end">
+                    <button type="button" (click)="convertToInvoice()" *ngIf="boardType !== 'invoice'" class="btn btn-sm btn-primary me-2" [disabled]="toInvoiceLoading">
+                        <i class="fa-solid fa-file-invoice-dollar fa-fw me-2"></i>Convert to Invoice <i *ngIf="toInvoiceLoading" class="fa fa-spinner fa-spin"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-sm btn-primary me-2" [disabled]="customerLoading" (click)="sendReminder()"><i class="fa-light fa-paper-plane me-2"></i>Send Reminder</button>
+                    <button type="button" *ngIf="step1 && step2" class="btn btn-sm btn-primary me-2"><i class="fa-light fa-paper-plane me-2"></i>Resend {{ucFirst( boardType )}}</button>
+                    <button type="button" class="btn btn-sm btn-primary me-2" (click)="showCustomerInvoicePreview()"><i class="fa-light fa-eye me-2"></i>Customer Preview</button>
+                    <button type="button" class="btn btn-sm btn-primary me-2" (click)="showCustomerInvoicePreview({print: true})"><i class="fa-light fa-print me-2"></i>Print</button>
+                    <button type="button" class="btn btn-sm btn-primary" (click)="showCustomerInvoicePreview({download: true})"><i class="fa-light fa-download me-2"></i>Download</button>
+                </div>
+                <div class="card mb-3" *ngIf="recurring">
+                  <div class="card-header">Set schedule</div>
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-12 col-sm-12 col-md-4 invoice-set-date">
+                            <div class="row invoice-form-group">
+                              <label for="recurringStartDate" class="col-3 mt-2">Start date</label>
+                              <div class="col-8">
+                                  <div class="d-flex">
+                                    <mat-form-field floatLabel='never' appearance="outline">
+                                      <input matInput [ngxMatDatetimePicker]="recurringStartDate" name="recurring_start_date" ngControl="recurring_start_date" [(ngModel)]="recurringInvoiceOptions.recurring_start_date">
+                                      <mat-datepicker-toggle matSuffix [for]="$any(recurringStartDate)"></mat-datepicker-toggle>
+                                      <ngx-mat-datetime-picker #recurringStartDate [enableMeridian]="true"></ngx-mat-datetime-picker>
+                                    </mat-form-field>
+                                  </div>
+                                  <p id="emailHelp" class="form-text text-muted me-5 mt-2">The {{boardType}} will be automatically sent on this date for the selected frequency</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 col-sm-12 col-md-4 invoice-set-date">
+                              <div class="row invoice-form-group">
+                                <label for="recurringEndDate" class="col-3 mt-2">End date</label>
+                                <div class="col-8">
+                                  <div class="d-flex">
+                                    <mat-form-field floatLabel='never' appearance="outline">
+                                      <input matInput [ngxMatDatetimePicker]="recurringEndDate" name="recurring_end_date" ngControl="recurring_end_date" [(ngModel)]="recurringInvoiceOptions.recurring_end_date" [disabled]="recurringInvoiceOptions.recurring_type === 'Never End'">
+                                      <mat-datepicker-toggle matSuffix [for]="$any(recurringEndDate)"></mat-datepicker-toggle>
+                                      <ngx-mat-datetime-picker #recurringEndDate [enableMeridian]="true"></ngx-mat-datetime-picker>
+                                    </mat-form-field>
+                                  </div>
+                                  <p id="emailHelp" class="form-text text-muted me-5 mt-2">The automatic sending of the {{boardType}} will stop at this date</p>
+                                </div>
+                              </div>
+                            </div>
+                          <div class="col-12 col-sm-12 col-md-4 invoice-set-date">
+                              <div class="row invoice-form-group">
+                                      <label class="form-label col-4 mt-2">Sending frequency</label>
+                                      <div class="col-8">
+                                          <select class="form-select form-select-sm" [(ngModel)]="recurringInvoiceOptions.recurring_sending_frequency" [ngModelOptions]="{standalone: true}">
+                                              <option value="" disabled selected>Sending frequency</option>
+                                              <option value="daily">Daily</option>
+                                              <option value="weekly">Weekly</option>
+                                              <option value="monthly">Monthly</option>
+                                              <option value="yearly">Yearly</option>
+                                              <option value="custom">Custom</option>
+                                          </select>
+                                      </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row mt-5">
+                          <div class="col-12 col-sm-12 col-md-4 invoice-set-toggle">
+                              <div class="row form-group mb-4">
+                                  <label for="repeatFrequency" class="col-3"></label>
+                                  <div class="d-flex align-items-center col-8">
+                                      <div class="switch blue-white-switch">
+                                          <label class="switch">
+                                              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" [checked]="recurringInvoiceOptions.recurring_type === 'Never End'" (change)="onRecurringTypeChange($event)">
+                                              <span class="slider round"></span>
+                                            </label>
+                                      </div>
+                                      <label class="ms-3">Never end</label>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-12 col-sm-12 col-md-4 invoice-set-toggle" *ngIf="recurringInvoiceOptions.recurring_sending_frequency === 'custom'">
+                              <div class="row invoice-form-group">
+                                <label class="col-3 mt-2">Repeat every</label>
+                                <div class="col-8">
+                                    <input type="number" class="form-control form-select-sm size-medium status-primary shape-rectangle" placeholder="1" [(ngModel)]="recurringInvoiceOptions.recurring_repeat_every" [ngModelOptions]="{standalone: true}">
+                                </div>
+                              </div>
+                          </div>
+                          <div class="col-12 col-sm-12 col-md-4 invoice-set-toggle" *ngIf="recurringInvoiceOptions.recurring_sending_frequency === 'custom'">
+                              <div class="row invoice-form-group">
+                                <label class="col-4">Repeat frequency</label>
+                                <div class="col-8">
+                                      <div class="col-8">
+                                          <select class="form-select form-select-sm" [(ngModel)]="recurringInvoiceOptions.recurring_repeat_frequency" [ngModelOptions]="{standalone: true}">
+                                              <option value="" disabled selected>Sending frequency</option>
+                                              <option value="Days">Days</option>
+                                              <option value="Weeks">Weeks</option>
+                                              <option value="Months">Months</option>
+                                              <option value="Years">Years</option>
+                                          </select>
+                                      </div>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                          <div class="d-flex">
+                            <div class="col-6 mb-5">
+                              <div>
+                                <label class="iqe-logo d-flex">
+                                        <img width="60px" height="60px" *ngIf="invoice?.logo" src="{{invoice?.logo}}">
+                                        <div><i class="fa-thin fa-circle-info"></i> Upload your logo</div>
+                                        <input (change)="processAttachment($event, 'logo')" id="logo-upload" type="file">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-5">
+                            </div>
+                          </div>
+                            <div class="col-sm-7">
+                                <div class="row align-items-center mb-3">
+                                    <div class="col-sm-6">
+                                        <label class="d-block">Customer</label>
+                                        <div *ngIf="!customerLoading">
+                                            <input type="text" *ngIf="type=='quotes-invoices'" name="item" ngControl="item" disabled value="data.row.item" [(ngModel)]="invoice.item"/>
+                                            <mat-form-field *ngIf="type=='invoice-form'" floatLabel="never" appearance="outline">
+                                            <input type="text"
+                                                    matInput
+                                                    [(ngModel)]="customer"
+                                                    name="item" ngControl="item"
+                                                    (ngModelChange)="onCustomerChange()"
+                                                    [matAutocomplete]="customerAutoComplete">
+                                            <mat-autocomplete autoActiveFirstOption #customerAutoComplete="matAutocomplete">
+                                                <mat-option *ngIf="!isLoadingCustomer && !filteredCustomers.length" [value]="">
+                                                No Customers Found
+                                                </mat-option>
+                                                <mat-option *ngIf="isLoadingCustomer" [value]="">
+                                                Loading...
+                                                </mat-option>
+                                                <mat-option *ngFor="let customer of filteredCustomers"
+                                                [value]="customer.item"
+                                                name="customer.item"
+                                                (click)="onCustomerSelect(customer)">
+                                                {{customer.item}}
+                                                </mat-option>
+                                            </mat-autocomplete>
+                                            </mat-form-field>
+                                        </div>
+                                        <i *ngIf="customerLoading" class="fa fa-spinner fa-spin"></i>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                  <!-- This button will be used later -->
+                                    <!-- <div class="col-sm-12">
+                                        <button (click)="showNewCustomer()" class="btn btn-sm btn-primary mb-2"><i class="fa-solid fa-plus me-2"></i>New Customer</button>
+                                    </div> -->
+                                    <div class="col-sm-6">
+                                        <div class="row align-items-center mb-3" *ngIf="type=='quotes-invoices' && addresses.length && editBillAddress">
+                                          <div class="col-sm-3">
+                                              <label class="col-form-label">Bill to</label>
+                                          </div>
+                                          <div class="col-sm-9">
+                                              <select class="form-select form-select-sm" name="billed_to" ngControl="billed_to" [(ngModel)]="invoice.billed_to" (ngModelChange)="setEditAddress('billing')">
+                                                  <option value="" selected>Select Address</option>
+                                                  <option *ngFor="let address of addresses" value="{{address[1]}}">
+                                                    {{address[0]}}
+                                                  </option>
+                                              </select>
+                                          </div>
+                                        </div>
+                                        <div class="row mt-4" *ngIf="(type=='invoice-form' || !addresses.length) && editBillAddress">
+                                            <div class="form-group mb-2">
+                                                <label for="customer"> Billed to</label>
+                                                <app-google-places name="billed_to" ngControl="billed_to" ngDefaultControl (setAddress)="getAddress($event, 'billing')" adressType="address" (currentLocation)="billTo"></app-google-places>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-4" *ngIf="invoice.billed_to">
+                                          <label for="customer" class="col-sm-3"> Bill to</label>
+                                          <div class="col-sm-9">
+                                              <div class="addresses">
+                                                  <span>
+                                                    {{invoice.billed_to}}
+                                                    <i class="fa fa-pencil-square-o ms-3" (click)="editBillAddress = true"></i>
+                                                  </span>
+                                              </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row align-items-center mb-3" *ngIf="type=='quotes-invoices' && addresses.length && editShipAddress">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Ship to</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <select class="form-select form-select-sm" name="ship_to" ngControl="ship_to" [(ngModel)]="invoice.ship_to" (ngModelChange)="setEditAddress('shipping')">
+                                                  <option value="" selected>Select Address</option>
+                                                  <option *ngFor="let address of addresses" value="{{address[1]}}">
+                                                    {{address[0]}}
+                                                  </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-4" *ngIf="(type=='invoice-form' || !addresses.length) && editShipAddress">
+                                            <div class="form-group mb-2">
+                                                <label for="customer"> Ship to</label>
+                                                <app-google-places name="ship_to" ngControl="ship_to" ngDefaultControl (setAddress)="getAddress($event, 'shipping')" adressType="address" (currentLocation)="shipTo"></app-google-places>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-4" *ngIf="invoice.ship_to">
+                                            <label for="customer" class="col-sm-3"> Ship to</label>
+                                            <div class="col-sm-9">
+                                                <div class="addresses">
+                                                    <span>
+                                                      {{invoice.ship_to}}
+                                                      <i class="fa fa-pencil-square-o ms-3" (click)="editShipAddress = true"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-4 mt-3 inline-form">
+                                <div class="d-flex align-items-center mb-2">
+                                    <label class="form-label me-2">Assign to</label>
+                                    <mat-form-field floatLabel="never" appearance="outline">
+                                      <input type="text"
+                                              matInput
+                                              [(ngModel)]="assignTo"
+                                              name="assignTo" ngControl="assignTo"
+                                              (ngModelChange)="onDealLeadChange(assignTo)"
+                                              [matAutocomplete]="user">
+                                      <mat-autocomplete autoActiveFirstOption #user="matAutocomplete">
+                                        <mat-option *ngIf="!filteredUsers.length" [value]="">
+                                          No Users Found
+                                        </mat-option>
+                                        <mat-option *ngFor="let user of filteredUsers"
+                                          [value]="user.display_name"
+                                          name="user.display_name"
+                                          (click)="onUserSelect(user)">
+                                          {{user.display_name}}
+                                        </mat-option>
+                                      </mat-autocomplete>
+                                    </mat-form-field>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <label class="form-label me-2">Date</label>
+                                    <!-- <input name="date" ngControl="date"  type="date" class="form-control form-control-sm"> -->
+                                    <mat-form-field floatLabel='never' appearance="outline">
+                                      <input matInput [ngxMatDatetimePicker]="pickerFrom" name="date" ngControl="date" [(ngModel)]="invoice.date">
+                                      <mat-datepicker-toggle matSuffix [for]="$any(pickerFrom)"></mat-datepicker-toggle>
+                                      <ngx-mat-datetime-picker #pickerFrom [enableMeridian]="true"></ngx-mat-datetime-picker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <label class="form-label me-2">Reference</label>
+                                    <input name="reference" ngControl="reference" [(ngModel)]="invoice.reference" type="text" class="form-control form-control-sm">
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <label class="form-label me-2">{{boardType === 'invoice'? 'Due Date': 'Exp. Date'}}</label>
+                                    <!-- <input name="due_date" ngControl="due_date" [(ngModel)]="invoice.due_date" type="date" class="form-control form-control-sm"> -->
+                                    <mat-form-field floatLabel='never' appearance="outline">
+                                      <input matInput [ngxMatDatetimePicker]="DueDate" name="due_date" ngControl="due_date" [(ngModel)]="invoice.due_date">
+                                      <mat-datepicker-toggle matSuffix [for]="$any(DueDate)"></mat-datepicker-toggle>
+                                      <ngx-mat-datetime-picker #DueDate [enableMeridian]="true"></ngx-mat-datetime-picker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <label class="form-label me-2">Pay Via</label>
+                                    <select class="form-select form-select-sm" [(ngModel)]="invoice.payVia" name="payVia" ngControl="payVia" >
+                                        <option value="PayPal">PayPal</option>
+                                        <option value="Stripe">Stripe</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 mt-4">
+                                <div class="product-table">
+                                    <h4 class="mb-0">Product & Services*</h4>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Type</th>
+                                                <th>Items</th>
+                                                <th>Category</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                                <th>Tax</th>
+                                                <th>Discount (%)</th>
+                                                <th>Total price</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of invoiceItems">
+                                                <td>{{item.type}}</td>
+                                                <td>{{item.item}}</td>
+                                                <td>{{item.category}}</td>
+                                                <td>{{item.quantity}}</td>
+                                                <td>{{item.price | currency}}</td>
+                                                <td>{{item.tax | currency}}</td>
+                                                <td>{{item.discount | currency}}</td>
+                                                <td>{{item.total_price | currency}}</td>
+                                                <td class="align-middle text-center"><i class="fa-light fa-xmark" (click)="deleteInvoiceItem(item.item)"></i></td>
+                                            </tr>
+
+                                            <tr *ngIf="isShowServices">
+                                                <td>
+                                                    <select [ngModel]="invoiceItem.type" (ngModelChange)="onInvoiceItemTypeSelect($event)" name="invoiceItem-type" class="form-select form-select-sm" style="width: 100px;">
+                                                        <option value="Product">Product</option>
+                                                        <option value="Service">Service</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select *ngIf="invoiceItem.type === 'Product'" [ngModel]="invoiceItem.id" (ngModelChange)="onProductSelect($event)" name="invoice-item-item" class="form-select form-select-sm" style="width: 100px;">
+                                                        <option *ngFor="let product of stateData.products;" [ngValue]="product.id">{{ product.item }}</option>
+                                                    </select>
+                                                    <select *ngIf="invoiceItem.type === 'Service'" [ngModel]="invoiceItem.id" (ngModelChange)="onServiceSelect($event)" name="invoice-item-item" class="form-select form-select-sm" style="width: 100px;">
+                                                        <option *ngFor="let service of stateData.services;" [ngValue]="service.id">{{ service.item }}</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input [ngModel]="invoiceItem.category" name="invoice-item-category" ngControl="invoice-item-category" class="form-control form-control-sm" disabled readonly>
+                                                </td>
+                                                <td>
+                                                    <input (keyup)="productTotalPrice()" [(ngModel)]="invoiceItem.quantity" name="invoice-item-quantity" ngControl="invoice-item-quantity" type="text" value="1" class="form-control form-control-sm">
+                                                </td>
+                                                <td>
+                                                    <input (keyup)="productTotalPrice()" [(ngModel)]="invoiceItem.price" name="invoice-item-price" ngControl="invoice-item-price" type="text" class="form-control form-control-sm" placeholder="Price" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                </td>
+                                                <td>
+                                                    <input (keyup)="productTotalPrice()" [(ngModel)]="invoiceItem.tax" name="invoice-item-tax" ngControl="invoice-item-tax" type="text" class="form-control form-control-sm" placeholder="Tax" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                </td>
+                                                <td>
+                                                    <input (keyup)="productTotalPrice()" [(ngModel)]="invoiceItem.discount" name="invoice-item-discount" ngControl="invoice-item-discount" type="number" value="0" class="form-control form-control-sm">
+                                                </td>
+                                                <td>
+                                                    <input [(ngModel)]="invoiceItem.total_price" name="invoice-item-total_price" ngControl="invoice-item-total_price" type="text" class="form-control form-control-sm" placeholder="0" aria-label="Small" aria-describedby="inputGroup-sizing-sm" disabled readonly>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <span (click)="onInvoiceItemCreate($event)" class="me-3"><i class="fa-light fa-check"></i></span>
+                                                    <span (click)="showServices('hide')"><i class="fa-light fa-xmark"></i></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div href="#" (click)="showServices('show')" class="invoice-add-item-btn d-flex justify-content-center align-items-center mb-3 mt-3">
+                                        <i class="fa-regular fa-plus"></i><span class="ms-2">Add an item</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-end mt-4">
+                                <div class="col-sm-6">
+                                    <ul class="list-group">
+                                        <li
+                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span class="subtotal">Subtotal</span>
+                                            <span class="subtotal-ammount">{{invoiceItemsSubTotal | currency}}</span>
+                                        </li>
+                                        <li
+                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span class="subtotal">Discount</span>
+                                            <span class="discount-ammount">{{totalDiscount | currency}}</span>
+                                        </li>
+                                        <li
+                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span class="total">Tax</span>
+                                            <span class="tax-amount">{{totalTax | currency}}</span>
+                                        </li>
+                                        <li
+                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span class="total">Total price:</span>
+                                            <span class="total-amount">{{totalPrice | currency}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-header">Associated Files</div>
+                    <div class="card-body">
+                        <div class="row align-items-center mb-3">
+                            <div class="col-sm-5">
+                                <label class="col-form-label">Contract Signed:</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <select [(ngModel)]="invoice.contract_signed" name="contract_signed" class="form-select form-select-sm">
+                                    <option value="No">No</option>
+                                    <option value="Yes">Yes</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row align-items-center mb-3">
+                            <div class="col-sm-5">
+                                <label class="col-form-label">Admin Notes:</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <textarea name="notes" ngControl="notes" [(ngModel)]="invoice.notes" class="form-control form-control-sm"></textarea>
+                            </div>
+                        </div>
+                        <div class="row align-items-center mb-3">
+                            <div class="col-sm-5">
+                                <label class="col-form-label">Terms:</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <textarea name="terms" ngControl="terms" [(ngModel)]="invoice.terms" class="form-control form-control-sm"></textarea>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-sm-5">
+                                <label class="col-form-label">Add File :</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <input (change)="processAttachment($event, 'file')" class="form-control form-control-sm" type="file">
+                                <small class="mt-2 d-block">(Optional) Accepted File Types : .Pdf, .Ppt, .Pptx, .Xls,
+                                    .Xlsx, .Csv, .Png, .Jpg, .Jpeg</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 mb-5 text-end">
+                <button type="submit" class="btn btn-primary">Save <i *ngIf="isLoading" class="fa fa-spinner fa-spin"></i></button>
+            </div>
+        </div>
+        <!--customer preview start-->
+        <div class="row" *ngIf="showInvoiceSec">
+            <div class="col-sm-12">
+                <div class="action-bttons mb-1 text-end">
+                    <button (click)="showInvoice('hide')" class="btn btn-sm btn-primary me-2"><i class="fa-light fa-print me-2"></i>Temp go back</button>
+                    <button class="btn btn-sm btn-primary me-2"><i class="fa-light fa-print me-2"></i>Print</button>
+                    <button class="btn btn-sm btn-primary"><i class="fa-light fa-download me-2"></i>Download</button>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-header d-flex justify-content-between">
+                        <div>Reference:<strong># {{invoiceResponse?.reference}}</strong></div>
+                        <div>Due Date: <strong>{{invoiceResponse?.due_date}}</strong></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="invoice-amount">
+                            <span><strong>Amount Due</strong></span>
+                            <h2>$ {{this.invoiceResponse?.total_price}}</h2>
+                        </div>
+                        <div class="payment-methods">
+                            <button class="btn-sm btn btn-primary me-2"><i class="fa-light fa-credit-card me-2"></i>Credit card payment</button>
+                            <span class="other-method me-2"><i class="fa-brands fa-cc-visa"></i></span>
+                            <span class="other-method me-2"><i class="fa-brands fa-cc-mastercard"></i></span>
+                            <span class="other-method me-2"><i class="fa-brands fa-cc-amex"></i></span>
+                            <span>and more...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bt-1 view-invoice">
+                    <div class="card-body px-5">
+                        <div class="invoice-header d-flex justify-content-between align-items-center">
+                            <div>
+                                <h2 class="mb-0">ATMOSai</h2>
+                                <span>your company tag line.</span>
+                            </div>
+                            <div><span class="invoice-text">{{ucFirst( boardType )}}</span></div>
+                        </div>
+                        <div class="row justify-content-between">
+                            <div class="col-sm-3 my-auto">
+                                <img src="./assets/img/atmos-logo-sidebar.png" width="200px">
+                            </div>
+                            <div class="col-sm-3">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex align-items-center justify-content-between p-1">Date: <span>{{invoiceResponse?.date}}</span></li>
+                                    <li class="list-group-item d-flex align-items-center justify-content-between p-1">{{ucFirst( boardType )}}#: <span>{{invoiceResponse?.reference}}</span></li>
+                                    <li class="list-group-item d-flex align-items-center justify-content-between p-1">Customer Id: <span>{{data.id}}</span></li>
+                                    <li class="list-group-item d-flex align-items-center justify-content-between p-1">Purchase order#: <span>1234556</span></li>
+                                    <li class="list-group-item d-flex align-items-center justify-content-between p-1">Payment due by: <span>{{invoiceResponse?.due_date}}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between mt-3">
+                            <div class="col-sm-3">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item invoice-heading">Bill to:</li>
+                                    <li class="list-group-item d-flex align-items-center justify-content-between p-1" *ngIf="invoiceResponse?.item">
+                                      {{invoiceResponse?.item}}
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center justify-content-between p-1" *ngIf="data?.row?.company">
+                                      {{data?.row?.company}}
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center justify-content-between p-1" *ngIf="invoiceResponse?.billed_to">
+                                      {{invoiceResponse?.billed_to}}
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center justify-content-between p-1" *ngIf="data?.row?.phone">
+                                      {{data?.row?.phone}}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-3">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item invoice-heading">Ship to (if different):</li>
+                                    <li class="list-group-item d-flex align-items-center justify-content-between p-1" *ngIf="invoiceResponse?.item">
+                                      {{invoiceResponse?.item}}
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center justify-content-between p-1" *ngIf="data?.row?.company">
+                                      {{data?.row?.company}}
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center justify-content-between p-1" *ngIf="invoiceResponse?.billed_to">
+                                      {{invoiceResponse?.billed_to}}
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center justify-content-between p-1" *ngIf="data?.row?.phone">
+                                      {{data?.row?.phone}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <table class="table table-sm table-striped mt-3 table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Items</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Discount</th>
+                                        <th>Total Price</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let product of getProducts()">
+                                        <td>{{product.category}}</td>
+                                        <td>{{product.item}}</td>
+                                        <td>{{product.quantity}}</td>
+                                        <td>{{product.price}}</td>
+                                        <td>{{product.discount}}</td>
+                                        <td>{{product.total_price}}</td>
+                                        <td>{{product.item}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Special note and instructions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="height:130px">
+                                                  {{invoiceResponse?.notes}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-sm-4">
+                                    <table class="table price table-bordered">
+                                        <tr>
+                                            <th>Subtotal</th>
+                                            <td>$ {{invoiceResponse?.sub_total}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Sale tax rate</th>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Sales tax</th>
+                                            <td>$ {{invoiceResponse?.tax}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Discount</th>
+                                            <td>$ {{invoiceResponse?.discount}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><strong>Total</strong></th>
+                                            <td><strong>$ {{invoiceResponse?.total_price}}</strong></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 invoice-footer">
+                            <p>Make all checks payable to my company name</p>
+                            <h3>Thanks for your Business!</h3>
+                            <p>Should you have any query concerning to this {{boardType}}, Please contact John Doe on 00-000-000-0000</p>
+                            <hr>
+                            <p>111 street Town/City, County, ST, 0000</p>
+                            <p>tell: 000-000-000-00, Fax: 000-000-000-0000, Email:abc@companyname.com, Web: yourcompany.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--customer preview end-->
+    </div>
+</div>
+</form>
+
+
+

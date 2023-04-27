@@ -1,0 +1,691 @@
+<div class="atmos-opening d-flex justify-content-between mt-3">
+    <div class="atmos-opening-left">
+        <h1>Opening Balances</h1>
+    </div>
+    <div class="atmos-opening-right">
+        <button class="btn btn-primary btn-sm me-3">Import Opening Balance</button>
+        <a href=""><i class="fa-light fa-lightbulb me-2"></i>Page Tips</a>
+    </div>
+</div>
+<div class="opening-checklist mt-4">
+    <div class="accordion accordion-flush" id="accordionOpeningFirst">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-openingFirst">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                Checklist before you enter your opening balances in AtmosAI Books
+            </button>
+          </h2>
+          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-openingFirst" data-bs-parent="#accordionOpeningFirst">
+            <div class="accordion-body">
+                <p class="mb-3"><i class="fa-light fa-circle-check me-2"></i>Generate the Trial Balance report in your previous accounting software on the date you’re migrating to AtmosAI Books.</p>
+                <p class="mb-3"><i class="fa-light fa-circle-check me-2"></i>Add all your bank and credit card accounts in the Banking module of AtmosAI Books. Once added, you can enter their balances.</p>
+                <p class="mb-3"><i class="fa-light fa-circle-check me-2"></i>Import all your items along with their opening stocks.</p>
+                <p class="mb-3"><i class="fa-light fa-circle-check me-2"></i>Import all your contacts along with their opening balances.</p>
+            </div>
+          </div>
+        </div>        
+    </div>
+    <div class="devider-opening mt-4"></div>
+</div>
+<div class="row opening-migration-date d-flex align-items-center ms-0 shadow-sm-light">
+    <div class="col-2 migration-date">
+        <i class="fa-light fa-calendar me-2"></i>Migration Date *
+    </div>
+    <div class="col-2 migration-calander">
+        <input placeholder="dd MMM yyyy" id="ember605"
+            class="ember-text-field zf-date-picker date-picker ember-view form-control" type="text">
+    </div>
+    <div class="col-8 opening-info d-flex mb-2"> <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0"
+            viewBox="0 0 512 512" xml:space="preserve"
+            class="icon icon-lg fill-draft white-bg position-absolute mt-1 migrationdate-info">
+            <path
+                d="M142.9 252.5L383 10.4c1.9-1.9 1.9-5 0-7-1.9-1.9-5.1-1.9-7 0l-247 249c-1.9 1.9-1.9 5 0 6.9l247 249c1.9 1.9 5 1.9 7 0 1.9-1.9 1.9-5 0-7L143 259.2c-2-1.7-2-4.7-.1-6.7z">
+            </path>
+        </svg>
+        <div class="rounded border shadow-sm px-3 py-2">
+            <div class="d-flex">                
+                <div class="ml-2 font-small"><i class="fa-light fa-circle-info me-2"></i></div>
+                <p class="m-0">The date on which you generated the Trial Balance report in your previous
+                    accounting software while migrating to AtmosAI Books.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accounts-receivable d-flex justify-content-between mt-4 shadow-sm-light">
+    <div class="oppening-receivable">
+        <i class="fa-light fa-building-columns me-2"></i>Accounts Receivable<i class="fa-light fa-circle-info ms-2"></i>
+    </div>
+    <div class="receivable-import">
+        <a href=""><i class="fa-light fa-download me-2"></i>Import</a>
+    </div>
+</div>
+<div class="accounts-receivable d-flex justify-content-between mt-4 shadow-sm-light">
+    <div class="oppening-receivable">
+        <i class="fa-light fa-building-columns me-2"></i>Accounts  Payable<i class="fa-light fa-circle-info ms-2"></i>
+    </div>
+    <div class="receivable-import">
+        <a href=""><i class="fa-light fa-download me-2"></i>Import</a>
+    </div>
+</div>
+<div class="opening-asset">
+    <div class="accordion accordion-flush mt-4" id="accordionFlushExample">
+        <div class="accordion-item shadow-sm-light">
+          <h2 class="accordion-header" id="flush-headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                <div class="oppening-receivable">
+                    <i class="fa-light fa-gem me-2"></i>Asset
+                </div>
+            </button>
+          </h2>
+          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <div class="row opening-bold">
+                    <div class="col-5">ACCOUNTS</div>
+                    <div class="col-3 text-center">AVAILABLE BALANCE<i class="fa-light fa-circle-info ms-2"></i></div>
+                    <div class="col-2 text-end">DEBIT (USD)</div>
+                    <div class="col-2 text-end">CREDIT (USD)</div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-5">Advance Tax</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Employee Advance</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Prepaid Expenses</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Petty Cash</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Undeposited Funds</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Furniture and Equipment</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Inventory Asset</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3 mb-2">
+                    <div class="col-12">
+                        <a href=""><i class="fa-light fa-plus me-2"></i>New Account</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="accordion accordion-flush mt-4" id="accordionFlushExample">
+        <div class="accordion-item shadow-sm-light">
+          <h2 class="accordion-header" id="flush-headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                <div class="oppening-receivable">
+                    <i class="fa-light fa-receipt me-2"></i>Expense
+                </div>
+            </button>
+          </h2>
+          <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <div class="row opening-bold">
+                    <div class="col-5">ACCOUNTS</div>
+                    <div class="col-3 text-center">AVAILABLE BALANCE<i class="fa-light fa-circle-info ms-2"></i></div>
+                    <div class="col-2 text-end">DEBIT (USD)</div>
+                    <div class="col-2 text-end">CREDIT (USD)</div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-5">Advertising And Marketing</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Automobile Expense</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Bad Debt</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Bank Fees and Charges</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Consultant Expense</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Credit Card Charges</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Depreciation Expense</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">IT and Internet Expenses</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Janitorial Expense</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Lodging</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Meals and Entertainment</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Office Supplies</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Other Expenses</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Postage</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Printing and Stationery</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Purchase Discounts</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Rent Expense</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Repairs and Maintenance</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Salaries and Employee Wages</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Telephone Expense</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Travel Expense</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Uncategorized</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Cost of Goods Sold</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Exchange Gain or Loss</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3 mb-2">
+                    <div class="col-12">
+                        <a href=""><i class="fa-light fa-plus me-2"></i>New Account</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="accordion accordion-flush mt-4" id="accordionFlushExample">
+        <div class="accordion-item shadow-sm-light">
+          <h2 class="accordion-header" id="flush-headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                <div class="oppening-receivable">
+                    <i class="fa-light fa-building-columns me-2"></i>Bank
+                </div>
+            </button>
+          </h2>
+          <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <div class="row opening-bold">
+                    <div class="col-5">ACCOUNTS</div>
+                    <div class="col-3 text-center">AVAILABLE BALANCE<i class="fa-light fa-circle-info ms-2"></i></div>
+                    <div class="col-2 text-end">DEBIT (USD)</div>
+                    <div class="col-2 text-end">CREDIT (USD)</div>
+                </div>                
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="accordion accordion-flush mt-4" id="accordionFlushExample">
+        <div class="accordion-item shadow-sm-light">
+          <h2 class="accordion-header" id="flush-headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                <div class="oppening-receivable">
+                    <i class="fa-light fa-basket-shopping me-2"></i>Liability
+                </div>
+            </button>
+          </h2>
+          <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <div class="row opening-bold">
+                    <div class="col-5">ACCOUNTS</div>
+                    <div class="col-3 text-center">AVAILABLE BALANCE<i class="fa-light fa-circle-info ms-2"></i></div>
+                    <div class="col-2 text-end">DEBIT (USD)</div>
+                    <div class="col-2 text-end">CREDIT (USD)</div>
+                </div>                
+                <div class="row mt-3">
+                    <div class="col-5">Employee Reimbursements</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Unearned Revenue</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>                
+                <div class="row mt-3 mb-2">
+                    <div class="col-12">
+                        <a href=""><i class="fa-light fa-plus me-2"></i>New Account</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="accordion accordion-flush mt-4" id="accordionFlushExample">
+        <div class="accordion-item shadow-sm-light">
+          <h2 class="accordion-header" id="flush-headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                <div class="oppening-receivable">
+                    <i class="fa-light fa-share-from-square me-2"></i>Equity
+                </div>
+            </button>
+          </h2>
+          <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <div class="row opening-bold">
+                    <div class="col-5">ACCOUNTS</div>
+                    <div class="col-3 text-center">AVAILABLE BALANCE<i class="fa-light fa-circle-info ms-2"></i></div>
+                    <div class="col-2 text-end">DEBIT (USD)</div>
+                    <div class="col-2 text-end">CREDIT (USD)</div>
+                </div>                
+                <div class="row mt-3">
+                    <div class="col-5">Drawings</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">Opening Balance Offset</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>                
+                <div class="row mt-3">
+                    <div class="col-5">Owner's Equity</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>                
+                <div class="row mt-3">
+                    <div class="col-5">Retained Earnings</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>                
+                <div class="row mt-3 mb-2">
+                    <div class="col-12">
+                        <a href=""><i class="fa-light fa-plus me-2"></i>New Account</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="accordion accordion-flush mt-4" id="accordionFlushExample">
+        <div class="accordion-item shadow-sm-light">
+          <h2 class="accordion-header" id="flush-headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
+                <div class="oppening-receivable">
+                    <i class="fa-light fa-money-bill me-2"></i>Income
+                </div>
+            </button>
+          </h2>
+          <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <div class="row opening-bold">
+                    <div class="col-5">ACCOUNTS</div>
+                    <div class="col-3 text-center">AVAILABLE BALANCE<i class="fa-light fa-circle-info ms-2"></i></div>
+                    <div class="col-2 text-end">DEBIT (USD)</div>
+                    <div class="col-2 text-end">CREDIT (USD)</div>
+                </div>                
+                <div class="row mt-3">
+                    <div class="col-5">Discount</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">General Income</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>                
+                <div class="row mt-3">
+                    <div class="col-5">Interest Income</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>                
+                <div class="row mt-3">
+                    <div class="col-5">Late Fee Income</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>                
+                <div class="row mt-3">
+                    <div class="col-5">Other Charges</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>                
+                <div class="row mt-3">
+                    <div class="col-5">Sales</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>                
+                <div class="row mt-3">
+                    <div class="col-5">Shipping Charge</div>
+                    <div class="col-3 text-center">-</div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>                
+                <div class="row mt-3 mb-2">
+                    <div class="col-12">
+                        <a href=""><i class="fa-light fa-plus me-2"></i>New Account</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="opening-total mb-4 shadow-sm-light">
+    <div class="row opening-total-first mt-4 pt-3">
+        <div class="col-6 opening-total-first-col">
+            <h3>Total</h3>
+            <p class="p-red mb-0">Opening Balance Adjustments</p>
+            <p class="p-font">This account will hold the difference in credit and debit.</p>
+        </div>
+        <div class="col-3 ">
+            <h3>0.00</h3>
+        </div>
+        <div class="col-3">
+            <h3>0.00</h3>
+            <p class="p-red">0.00</p>
+        </div>
+    </div>
+    <div class="devider-opening mt-4"></div>
+    <div class="row opening-total-first mt-4">
+        <div class="col-6 opening-total-first-col">
+            <h3 class="mb-0">TOTAL AMOUNT</h3>
+            <p class="fw-bold p-font">Includes Opening Balance Adjustment account</p>
+        </div>
+        <div class="col-3">
+            <h3>0.00</h3>
+        </div>
+        <div class="col-3">
+            <h3>0.00</h3>
+        </div>
+    </div>
+</div>

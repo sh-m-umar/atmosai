@@ -1,0 +1,849 @@
+<!--
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card my-profile-top-border">
+            <div class="card-body">
+                You don't have an agent Profile associated with your current user ID(11).
+            </div>
+        </div>
+    </div>
+</div>
+-->
+<div class="page-header">
+    <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+        <div class="header-lhs d-flex align-items-center">
+            <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                <span>My Profile</span>
+            </h4>
+            <span class="ms-2 me-2"  mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+            <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+        </div>
+        <div class="header-rhs d-flex align-items-center">
+            <div class="button-group ms-2">
+                <button type="button" class="btn btn-outline-secondary borderless dropdown-toggle-split" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                    <i class="fa-solid fa-ellipsis"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item">Console log</a></li>
+                    <li><a class="dropdown-item">Clear local cache only</a></li>
+                    <li><a class="dropdown-item">Clear cache and database both</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">
+        <span>This is description</span>
+        <i class="fa-solid fa-ellipsis"></i>
+    </div>
+    <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+        <div class="d-flex">
+            <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">My Profile</h5>
+        </div>
+        <div class="d-flex align-items-centere">
+            <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2" style="margin-top: -5px;">
+                <div class="button-group outlined borderless">
+                    <button type="button" class="btn collapsed btn-outline-secondary"><i
+                            class="fa-thin fa-envelope"></i> Bulk Emails
+                    </button>
+                    <button type="button"
+                            class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+                <div class="button-group ms-2">
+                    <button type="button" class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div (click)="headerToggle()" class="header-collapse-btn"><i class="fa-thin fa-angle-{{anglePos}}"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-3 for-right-content-position">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-body user-profile-border">
+                <i *ngIf="pageLoading" class="fa fa-spinner fa-spin"></i>
+                <div class="row" *ngIf="!pageLoading">
+                    <div class="col-3">
+                        <div class="update-profie-image-wrapper rounded p-2 shadow-sm mx-auto">
+                            <span class="dashicons-edit">
+                                <i class="fa-light fa-pencil"></i>
+                            </span>
+                            <span class="ant-avatar ant-avatar-square ant-avatar-image">
+                                <img class="rounded"
+                                    src="./assets/img/profile-dummy.jpeg">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <span class="user-info-edit me-1">
+                                <a data-toggle="modal" data-target="#edit-user-phone">
+                                  <span *ngIf="currentUser?.fname && currentUser?.lname">{{currentUser?.fname}} {{currentUser?.lname}}</span>
+                                  <span *ngIf="!currentUser?.fname || !currentUser?.lname">{{currentUser?.display_name}}</span>
+                                </a>
+                            </span>
+
+                            <a data-toggle="modal" data-target="#edit-user-phone"><i class="fa-thin fa-pencil"></i></a>
+                        </div>
+                        <div class="agnt-profile-details">
+                            <div class="">
+                                <div class="">
+
+                                  <div class="" *ngFor="let field of settings.user_profile_fields">
+                                    <div class="mb-2 agnt-profile-info-item d-flex">
+                                        <div class="agnt-pl-0 agnt-profile-info-item-label cursor-pointer" style="width: 155px;">
+                                            <i class="fa {{field.field_icon}}"></i>
+                                            <span class="text-muted ms-2">{{field.field_key}}:</span>
+                                        </div>
+                                        <div class="agnt-profile-info-item-value">
+                                            <span *ngIf="!isEditing( field.field_key )" class="font-weight-semibold">
+                                              <a (click)="updateEditing( field.field_key )" *ngIf="userMetaData[field.field_key]?.length">
+                                                {{userMetaData[field.field_key]}}
+                                                <i *ngIf="( field.field_key != 'email' )" class="fa-thin fa-pencil"></i>
+                                              </a>
+                                              <a (click)="updateEditing( field.field_key )" *ngIf="!userMetaData[field.field_key]?.length">
+                                                {{field.field_title}}
+                                              </a>
+                                            </span>
+                                            <input id="profile-field-{{field.field_key}}" *ngIf="isEditing( field.field_key )" (focusout)="updateUserMetaData()" (keyup.enter)="updateUserMetaData()" [(ngModel)]="userMetaData[field.field_key]" [readonly]="( field.field_key == 'email' )" type="text" placeholder="" class="new-item-field  ms-2"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                    <!--
+                                    <div class="">
+                                        <div class="mb-2" *ngFor="let field of settings.user_profile_fields">
+                                            <label class="form-label me-2" for="profile-{{field.field_key}}">{{field.field_title}} <span *ngIf="field.field_required == 'yes'" class="text-danger">*</span></label>
+                                            <input type="{{field.field_type}}" id="profile-{{field.field_key}}" name="{{field.field_key}}" [readonly]="( field.field_key == 'email' )" [(ngModel)]="userMetaData[field.field_key]" class="form-control form-control-sm" placeholder="{{field.placeholder}}">
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <button class="btn btn-sm btn-primary" [disabled]="savingMetaData" (click)="updateUserMetaData()">{{!savingMetaData ? 'Save changes':'Loading...'}}</button>
+                                    </div>
+                                    -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class=" text-right-content mt-5">
+                            <p class="mb-0">Created:
+                                <a class=""
+                                    href="">2022/11/15</a>
+                            </p>
+                            <p class="mb-0 na-status">Status:
+                                <span class="status-agent-view">{{workingStatus.status || 'N/A'}}</span>
+                            </p>
+                            <p class="mb-0 social-links">
+                                <a target="_blank" class="push-user-facebook" [href]="socialLinks.facebook" [style.pointer-events]="socialLinks.facebook? 'auto' : 'none'" ><i
+                                        class="fa-brands fa-facebook-f"></i></a>
+                                <a target="_blank" class="push-user-twitter" [href]="socialLinks.twitter" [style.pointer-events]="socialLinks.twitter? 'auto' : 'none'" ><i
+                                        class="fa-brands fa-twitter"></i></a>
+                                <a target="_blank" class="push-user-instagram" [href]="socialLinks.instagram" [style.pointer-events]="socialLinks.instagram? 'auto' : 'none'" ><i
+                                        class="fa-brands fa-instagram"></i></a>
+                                <a target="_blank" class="push-user-linkedin" [href]="socialLinks.linkedin" [style.pointer-events]="socialLinks.linkedin? 'auto' : 'none'" ><i
+                                        class="fa-brands fa-linkedin"></i></a>
+
+                                <a style="cursor: pointer" target="_blank" (click)="onEditSocialLinks()"><i class="fa-thin fa-pencil"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-8 mt-3">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-4 user-profile-bottom-tabs">
+                        <div class="card">
+                            <div class="card-body page-profile-border">
+                                <ul id="user-profile-tab" role="tablist" class="nav flex-column">
+                                    <li class="mb-3 nav-item-page">
+                                        <a href="#" class="">Pages</a>
+                                    </li>
+                                    <li class="nav-item mb-2">
+                                        <a href="#" id="working-status-tab" data-bs-toggle="tab" data-bs-target="#working-status" role="tab" aria-controls="working-status" aria-selected="true"
+                                        class="nav-link d-flex align-items-center active"><i class="fa-light fa-signal-bars me-2"></i>Working Status</a>
+                                    </li>
+                                    <!-- <li class="nav-item mb-2">
+                                        <a href="#" id="calendar-tab" data-bs-toggle="tab" data-bs-target="#calendar" role="tab" aria-controls="calendar" aria-selected="false"
+                                        class="nav-link d-flex align-items-center"><i class="fa-light fa-calendar me-2"></i>Calendar</a>
+                                    </li> -->
+                                    <li class="nav-item mb-2">
+                                        <a href="#" id="password-tab" data-bs-toggle="tab" data-bs-target="#password" role="tab" aria-controls="password" aria-selected="false"
+                                        class="nav-link d-flex align-items-center"><i class="fa-light fa-lock me-2"></i>Password</a>
+                                    </li>
+                                    <li class="nav-item mb-2">
+                                        <a href="#" id="security-questions-tab" data-bs-toggle="tab" data-bs-target="#security-questions" role="tab" aria-controls="security-questions" aria-selected="false"
+                                        class="nav-link d-flex align-items-center"><i class="fa-light fa-block-question me-2"></i>Security Questions</a>
+                                    </li>
+                                    <li class="nav-item mb-2">
+                                        <a href="#" id="documents-tab" data-bs-toggle="tab" data-bs-target="#documents" role="tab" aria-controls="documents" aria-selected="false"
+                                        class="nav-link d-flex align-items-center"><i class="fa-light fa-file me-2"></i>Documents</a>
+                                    </li>
+                                    <li class="nav-item mb-2">
+                                        <a href="#" id="manage-notifications-tab" data-bs-toggle="tab" data-bs-target="#manage-notifications" role="tab" aria-controls="manage-notifications" aria-selected="false"
+                                        class="nav-link d-flex align-items-center"><i class="fa-light fa-list-check me-2"></i>Manage Notifications</a>
+                                    </li>
+                                    <li class="nav-item mb-2">
+                                        <a href="#" id="manage-location-tab" data-bs-toggle="tab" data-bs-target="#manage-location" role="tab" aria-controls="manage-location" aria-selected="false"
+                                        class="nav-link d-flex align-items-center"><i class="fa-light fa-location-dot me-2"></i>Language and region</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="card">
+                            <div class="card-body status-profile-border">
+                                <div id="user-profile-tab" class="tab-content">
+                                    <div id="working-status" role="tabpanel" aria-labelledby="working-status-tab" class="tab-pane fade active show">
+                                      <ng-template *ngIf="isLoading.workingStatus" [ngTemplateOutlet]="loader"></ng-template>
+                                      <ng-container *ngIf="!isLoading.workingStatus">
+                                        <h1 class="modal-title" id="exampleModalLongTitle">Update your working status</h1>
+                                        <div class="mb-4">
+                                            <label class="form-label me-2">Let everyone know your status</label>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <div class="col-4 mb-2">
+                                                <label class="form-check-label d-flex align-items-center mb-2">
+                                                    <input type="radio" [(ngModel)]="workingStatus.status" (ngModelChange)="updateWorkingStatus()" name="wc_categories" value="in_the_office" class="form-check-input wc_category_filter me-2 mt-0">In the office
+                                                </label>
+                                            </div>
+                                            <div class="col-4 mb-2">
+                                                <label class="form-check-label d-flex align-items-center mb-2">
+                                                    <input type="radio" [(ngModel)]="workingStatus.status" (ngModelChange)="updateWorkingStatus()" name="wc_categories" value="working_from_home" class="form-check-input wc_category_filter me-2 mt-0">
+                                                     Work from home<i class="fa-light fa-house ms-2"></i>
+                                                </label>
+                                            </div>
+                                            <div class="col-4 mb-2">
+                                                <label class="form-check-label d-flex align-items-center mb-2">
+                                                    <input type="radio" [(ngModel)]="workingStatus.status" (ngModelChange)="updateWorkingStatus()" name="wc_categories" value="out_sick" class="form-check-input wc_category_filter me-2 mt-0">
+                                                    Out sick<i class="fa-light fa-plus ms-2"></i>
+                                                </label>
+                                            </div>
+                                            <div class="col-4 mb-2">
+                                                <label class="form-check-label d-flex align-items-center mb-2">
+                                                    <input type="radio" [(ngModel)]="workingStatus.status" (ngModelChange)="updateWorkingStatus()" name="wc_categories" value="on_break" class="form-check-input wc_category_filter me-2 mt-0">
+                                                    On break<i class="fa-light fa-alarm-snooze ms-2"></i>
+                                                </label>
+                                            </div>
+                                            <div class="col-4 mb-2">
+                                                <label class="form-check-label d-flex align-items-center mb-2">
+                                                    <input type="radio" [(ngModel)]="workingStatus.status" (ngModelChange)="updateWorkingStatus()" name="wc_categories" value="out_of_office" class="form-check-input wc_category_filter me-2 mt-0">
+                                                    Out of office<i class="fa-light fa-minus ms-2"></i>
+                                                </label>
+                                            </div>
+                                            <div class="col-4 mb-2">
+                                                <label class="form-check-label d-flex align-items-center mb-2">
+                                                    <input type="radio" [(ngModel)]="workingStatus.status" (ngModelChange)="updateWorkingStatus()" name="wc_categories" value="working_outside" class="form-check-input wc_category_filter me-2 mt-0">
+                                                    Working outside<i class="fa-light fa-bench-tree ms-2"></i>
+                                                </label>
+                                            </div>
+                                            <div class="col-4 mb-2">
+                                                <label class="form-check-label d-flex align-items-center mb-2">
+                                                    <input type="radio" [(ngModel)]="workingStatus.status" (ngModelChange)="updateWorkingStatus()" name="wc_categories" value="family_time" class="form-check-input wc_category_filter me-2 mt-0">
+                                                    Family time<i class="fa-light fa-family ms-2"></i>
+                                                </label>
+                                            </div>
+                                            <div class="col-4 mb-2">
+                                                <label class="form-check-label d-flex align-items-center mb-2">
+                                                    <input type="radio" [(ngModel)]="workingStatus.status" (ngModelChange)="updateWorkingStatus()" name="wc_categories" value="do_not_disturb" class="form-check-input wc_category_filter me-2 mt-0">
+                                                    Do not disturb<i class="fa-light fa-bell-slash ms-2"></i>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6 mb-2">
+                                              <mat-form-field floatLabel='never'>
+                                                <input matInput [ngxMatDatetimePicker]="statusEndTime" [(ngModel)]="workingStatus.status_end_time" (ngModelChange)="updateWorkingStatus()" placeholder="Choose Status end time">
+                                                <mat-datepicker-toggle matSuffix [for]="$any(statusEndTime)"></mat-datepicker-toggle>
+                                                <ngx-mat-datetime-picker #statusEndTime [enableMeridian]="true"></ngx-mat-datetime-picker>
+                                              </mat-form-field>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-check-label d-flex align-items-center mb-2">
+                                                    <input type="checkbox" [(ngModel)]="workingStatus.disable_ooo_notifications" (ngModelChange)="updateWorkingStatus()" name="wc_categories" value=true class="form-check-input wc_category_filter me-2 mt-0">
+                                                    Disable email and mobile notification while not in the office
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="mb-1 mt-4">
+                                            <label class="form-label me-2">User Activity Indication Control</label>
+                                        </div>
+                                        <label class="form-check-label d-flex align-items-center mb-2">
+                                            <input type="checkbox" [(ngModel)]="workingStatus.disable_online_indication" (ngModelChange)="updateWorkingStatus()" name="wc_categories" value=true class="form-check-input wc_category_filter me-2 mt-0">
+                                            Disable online indication (it also means that you won't see if other people are online)
+                                        </label>
+                                      </ng-container>
+                                    </div>
+                                    <div id="calendar" role="tabpanel" aria-labelledby="calendar-tab" class="tab-pane fade">
+                                        <img src="./assets/img/left-menu/calender-1.png" alt="">
+                                    </div>
+                                    <div id="password" role="tabpanel" aria-labelledby="password-tab" class="tab-pane fade">
+                                        <h1 class="modal-title" id="exampleModalLongTitle">Password</h1>
+                                        <div class="row ms-1">
+                                            <div class="col-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label me-2">Current Password</label>
+                                                    <input [(ngModel)]="resetPassword.old_password" placeholder="Current Password" type="text" class="form-control form-control-sm">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row ms-1">
+                                            <div class="col-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label me-2">New Password</label>
+                                                    <input [(ngModel)]="resetPassword.new_password" placeholder="New Password" type="text" class="form-control form-control-sm">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row ms-1">
+                                            <div class="col-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label me-2">Confirm Password</label>
+                                                    <input [(ngModel)]="resetPassword.confirm_password" placeholder="Confirm Password" type="text" class="form-control form-control-sm">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row ms-1 mb-3">
+                                            <div class="col-4">
+                                                <button class="btn-sm btn btn-primary me-3" [disabled]="resettingPassword" (click)="changePassword()">Save <i class="fa fa-spinner fa-spin ms-2" *ngIf="resettingPassword"></i></button>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="resetPasswordMessage" class="row ms-1">
+                                            <div class="col-4">
+                                                <p>{{resetPasswordMessage}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="security-questions" role="tabpanel" aria-labelledby="security-questions-tab" class="tab-pane fade">
+                                      <ng-template *ngIf="isLoading.securityQuestions" [ngTemplateOutlet]="loader"></ng-template>
+                                      <ng-container *ngIf="!isLoading.securityQuestions">
+                                        <h1 class="modal-title" id="exampleModalLongTitle">Security Questions</h1>
+                                        <h3 class="mt-4">Question 1:</h3>
+                                        <select class="form-select form-select-sm" [(ngModel)]="securityQuestions.question_1">
+                                            <option value="name" selected="" ng-reflect-value="name">Select</option>
+                                            <option value="What Is your favorite book?">What Is your favorite book?</option>
+                                            <option value="What is the name of the road you grew up on?">What is the name of the road you grew up on?</option>
+                                            <option value="What is your mother’s maiden name?">What is your mother’s maiden name?</option>
+                                            <option value="What was the name of your first/current/favorite pet?">What was the name of your first/current/favorite pet?</option>
+                                            <option selected="selected" value="What was the first company that you worked for?">What was the first company that you worked for?</option>
+                                            <option value="Where did you meet your spouse?">Where did you meet your spouse?</option>
+                                            <option value="Where did you go to high school/college?">Where did you go to high school/college?</option>
+                                            <option value="What is your favorite food?">What is your favorite food?</option>
+                                            <option value="What city were you born in?">What city were you born in?</option>
+                                            <option value="Where is your favorite place to vacation?">Where is your favorite place to vacation?</option>
+                                        </select>
+                                        <input type="text" [(ngModel)]="securityQuestions.answer_1">
+                                        <h3 class="mt-4">Question 2:</h3>
+                                        <select class="form-select form-select-sm" [(ngModel)]="securityQuestions.question_2">
+                                            <option value="name" selected="" ng-reflect-value="name">Select</option>
+                                            <option value="What Is your favorite book?">What Is your favorite book?</option>
+                                            <option value="What is the name of the road you grew up on?">What is the name of the road you grew up on?</option>
+                                            <option value="What is your mother’s maiden name?">What is your mother’s maiden name?</option>
+                                            <option value="What was the name of your first/current/favorite pet?">What was the name of your first/current/favorite pet?</option>
+                                            <option selected="selected" value="What was the first company that you worked for?">What was the first company that you worked for?</option>
+                                            <option value="Where did you meet your spouse?">Where did you meet your spouse?</option>
+                                            <option value="Where did you go to high school/college?">Where did you go to high school/college?</option>
+                                            <option value="What is your favorite food?">What is your favorite food?</option>
+                                            <option value="What city were you born in?">What city were you born in?</option>
+                                            <option value="Where is your favorite place to vacation?">Where is your favorite place to vacation?</option>
+                                        </select>
+                                        <input type="text" [(ngModel)]="securityQuestions.answer_2">
+                                        <h3 class="mt-4">Question 3:</h3>
+                                        <select class="form-select form-select-sm" [(ngModel)]="securityQuestions.question_3">
+                                            <option value="name" selected="" ng-reflect-value="name">Select</option>
+                                            <option value="What Is your favorite book?">What Is your favorite book?</option>
+                                            <option value="What is the name of the road you grew up on?">What is the name of the road you grew up on?</option>
+                                            <option value="What is your mother’s maiden name?">What is your mother’s maiden name?</option>
+                                            <option value="What was the name of your first/current/favorite pet?">What was the name of your first/current/favorite pet?</option>
+                                            <option selected="selected" value="What was the first company that you worked for?">What was the first company that you worked for?</option>
+                                            <option value="Where did you meet your spouse?">Where did you meet your spouse?</option>
+                                            <option value="Where did you go to high school/college?">Where did you go to high school/college?</option>
+                                            <option value="What is your favorite food?">What is your favorite food?</option>
+                                            <option value="What city were you born in?">What city were you born in?</option>
+                                            <option value="Where is your favorite place to vacation?">Where is your favorite place to vacation?</option>
+                                        </select>
+                                        <input type="text" [(ngModel)]="securityQuestions.answer_3">
+                                        <div class="row">
+                                            <div class="col-12 text-end mt-3">
+                                                <button class="btn btn-primary btn-sm ms-2" (click)="updateSecurityQuestions()">Update</button>
+                                            </div>
+                                        </div>
+                                      </ng-container>
+                                    </div>
+                                    <div id="documents" role="tabpanel" aria-labelledby="documents-tab" class="tab-pane fade">
+                                      <ng-template *ngIf="isLoading.documents" [ngTemplateOutlet]="loader"></ng-template>
+                                      <ng-container *ngIf="!isLoading.documents">
+                                        <h1 class="modal-title" id="exampleModalLongTitle">Documents</h1>
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <input placeholder="Search Documents" type="text" class="form-control form-control-sm">
+                                            </div>
+                                            <div class="col-3 text-end d-flex">
+                                                <!-- <button class="btn btn-primary btn-sm ms-2" (click)="updateFiles()">Update</button> -->
+                                                <label class="d-flex align-items-center" for="documentUpload">
+                                                  <!-- <span *ngIf="tempImage.isLoading" class="fa fa-spinner fa-spin"></span> -->
+                                                  <input type="file" class="screen-reader-text d-none" (change)="uploadFile($event)" id="documentUpload" name="documentUpload"/>
+                                                  <div class="i-con-text btn btn-primary btn-sm ms-2">
+                                                    <label for="documentUpload"><i class="fa-light fa-plus" style="cursor: pointer;"></i></label>
+                                                  </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <table class="table table-bordered align-middle mt-4">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="text-center"><i class="fa-light fa-file"></i></th>
+                                                    <th scope="col">Document</th>
+                                                    <th scope="col" class="text-center">
+                                                      <!-- <i class="fa-light fa-down-to-line me-2"></i>
+                                                      <i class="fa-light fa-box-archive"></i> -->
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                              <ng-container *ngFor="let document of documents">
+                                                <tr>
+                                                    <td colspan="1" class="text-center"><i class="fa-light fa-file"></i></td>
+                                                    <td>{{document?.file_name}}
+                                                     <br>{{document?.date}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                      <a target="_blank" [href]="document?.url" [download]="document?.name"  mat-raised-button matTooltip="Download" matTooltipPosition="above" matTooltipClass="above">
+                                                        <i class="fa-light fa-down-to-line me-2"></i>
+                                                      </a>
+                                                    </td>
+                                                </tr>
+                                              </ng-container>
+                                                <tr *ngIf="isLoading.documents" style="background-color: lightgrey;">
+                                                    <td colspan="1" class="text-center"><i class="fa-light fa-file"></i></td>
+                                                    <td>
+                                                      <i class="fa fa-spinner fa-spin"></i>
+                                                    </td>
+                                                    <td class="text-center"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                      </ng-container>
+                                    </div>
+                                    <div id="manage-notifications" role="tabpanel" aria-labelledby="manage-notifications-tab" class="tab-pane fade">
+                                      <ng-template *ngIf="isLoading.manageNotifications" [ngTemplateOutlet]="loader"></ng-template>
+                                      <ng-container *ngIf="!isLoading.manageNotifications">
+                                        <h1 class="modal-title" id="exampleModalLongTitle">Manage your notification settings</h1>
+                                        <div class="mb-4">
+                                            <label class="form-label me-2">We may still send you important notifications about your account and content outside of your preferred notification settings.</label>
+                                        </div>
+                                        <div class="row manage-notification-profile m-0">
+                                            <div class="col-1"><i class="fa-light fa-bells"></i></div>
+                                            <div class="col-7 mb-2 mt-2">
+                                                <h3 class="mb-0">Desktop notifications</h3>
+                                                <p>Receive notifications directly on my Windows</p>
+                                            </div>
+                                            <div class="col-4 mt-3">
+                                                <button (click)="subscribePushNotifications()" class="btn  btn-sm ms-2" [ngClass]="{'btn-primary': !isPushEnabled, 'btn-outline-primary': isPushEnabled}">{{isPushEnabled ? 'Disable notifications' : 'Enable notifications'}}</button>
+                                            </div>
+                                        </div>
+                                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                                            <div class="accordion-item mt-4">
+                                                <button class="accordion-button collapsed pe-2" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                  <div class="icon-title ms-4 me-4"><i class="fa-light fa-envelope"></i></div>
+                                                  <div class="icon-title mt-1">
+                                                    <h3 class="mb-0">Email Notification</h3>
+                                                    <p>Send me notifications via email when someone...</p>
+                                                </div>
+                                                </button>
+                                              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                <div class="accordion-body">
+                                                    <label class="form-check-label d-flex align-items-center mb-2">
+                                                        <input type="checkbox" name="wc_categories" [(ngModel)]="manageNotifications.email_notifications.assigns_to_item" (ngModelChange)="updateManageNotifications()" value=false  class="form-check-input wc_category_filter me-2 mt-0">Assigns me to an Item
+                                                    </label>
+                                                    <label class="form-check-label d-flex align-items-center mb-2">
+                                                        <input type="checkbox" name="wc_categories" [(ngModel)]="manageNotifications.email_notifications.mentions_reply_item" (ngModelChange)="updateManageNotifications()" value=false  class="form-check-input wc_category_filter me-2 mt-0">Mentions me in a post or reply
+                                                    </label>
+                                                    <hr class="dropdown-divider mb-3 mt-3">
+                                                    <label class="form-check-label d-flex align-items-center mb-2">
+                                                        <input type="checkbox" name="wc_categories" [(ngModel)]="manageNotifications.email_notifications.writes_update_item_owner" (ngModelChange)="updateManageNotifications()" value=false  class="form-check-input wc_category_filter me-2 mt-0">Writes an update on an Item I’m the owner of
+                                                    </label>
+                                                    <label class="form-check-label d-flex align-items-center mb-2">
+                                                        <input type="checkbox" name="wc_categories" [(ngModel)]="manageNotifications.email_notifications.writes_update_item_subscribed" (ngModelChange)="updateManageNotifications()" value=false  class="form-check-input wc_category_filter me-2 mt-0">Writes an update on an Item I’m subscribed to
+                                                    </label>
+                                                    <hr class="dropdown-divider mb-3 mt-3">
+                                                    <label class="form-check-label d-flex align-items-center mb-2">
+                                                        <input type="checkbox" name="wc_categories" [(ngModel)]="manageNotifications.email_notifications.replies_or_likes_conversation" (ngModelChange)="updateManageNotifications()" value=false  class="form-check-input wc_category_filter me-2 mt-0">Replies or likes a conversation I’m a part of
+                                                    </label>
+                                                    <label class="form-check-label d-flex align-items-center mb-2">
+                                                        <input type="checkbox" name="wc_categories" [(ngModel)]="manageNotifications.email_notifications.replies_to_update" (ngModelChange)="updateManageNotifications()" value=false  class="form-check-input wc_category_filter me-2 mt-0">Replies to my update
+                                                    </label>
+                                                    <hr class="dropdown-divider mb-3 mt-3">
+                                                    <label class="form-check-label d-flex align-items-center mb-2">
+                                                        <input type="checkbox" name="wc_categories" [(ngModel)]="manageNotifications.email_notifications.signs_up_after_invite" (ngModelChange)="updateManageNotifications()" value=false  class="form-check-input wc_category_filter me-2 mt-0">Signs up after I have invited them
+                                                    </label>
+                                                    <label class="form-check-label d-flex align-items-center mb-2">
+                                                        <input type="checkbox" name="wc_categories" [(ngModel)]="manageNotifications.email_notifications.does_not_sign_up_after_invite" (ngModelChange)="updateManageNotifications()" value=false  class="form-check-input wc_category_filter me-2 mt-0">Does not sign up after I have invited them
+                                                    </label>
+                                                    <hr class="dropdown-divider mb-3 mt-3">
+                                                    <label class="form-check-label d-flex align-items-center mb-2">
+                                                        <input type="checkbox" name="wc_categories" [(ngModel)]="manageNotifications.email_notifications.subscribes_board_item_team" (ngModelChange)="updateManageNotifications()" value=false  class="form-check-input wc_category_filter me-2 mt-0">Subscribes me to a Board/Item/Team
+                                                    </label>
+                                                    <label class="form-check-label d-flex align-items-center mb-2">
+                                                        <input type="checkbox" name="wc_categories" [(ngModel)]="manageNotifications.email_notifications.notifies_automations" (ngModelChange)="updateManageNotifications()" value=false  class="form-check-input wc_category_filter me-2 mt-0">Notifies me via automations
+                                                    </label>
+                                                    <hr class="dropdown-divider mb-3 mt-3">
+                                                    <label class="form-check-label d-flex align-items-center mb-2">
+                                                        <input type="checkbox" name="wc_categories" [(ngModel)]="manageNotifications.email_notifications.subscribes_new_item" (ngModelChange)="updateManageNotifications()" value=false  class="form-check-input wc_category_filter me-2 mt-0">Subscribes to a new Item I didn't write an update on yet (daily email)
+                                                    </label>
+                                                    <hr class="dropdown-divider mb-3 mt-3">
+                                                    <label class="form-check-label d-flex align-items-center mb-2">
+                                                        <input type="checkbox" name="wc_categories" [(ngModel)]="manageNotifications.email_notifications.highlights" (ngModelChange)="updateManageNotifications()" value=false  class="form-check-input wc_category_filter me-2 mt-0">My highlights (daily email) <span class="profile-learn-more ms-3">Learn more</span>
+                                                    </label>
+                                                      <div class="ms-4 mt-3" *ngIf="manageNotifications.email_notifications.highlights">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" value="all-dates" [(ngModel)]="manageNotifications.email_notifications.highlights_type" (ngModelChange)="updateManageNotifications()" name="flexRadioDefault" id="flexRadioDefault1">
+                                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                              Show all dates
+                                                            </label>
+                                                          </div>
+                                                          <div class="form-check">
+                                                            <input class="form-check-input" type="radio" value="only-deadlines" [(ngModel)]="manageNotifications.email_notifications.highlights_type" (ngModelChange)="updateManageNotifications()" name="flexRadioDefault" id="flexRadioDefault2">
+                                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                              Show only deadlines
+                                                            </label>
+                                                          </div>
+                                                      </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <!-- <div class="accordion-item mt-4">
+                                                <button class="accordion-button collapsed pe-2" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                  <div class="icon-title ms-4 me-3"><img class="slack-icon-width" src="./assets/img/slack-2x.png" alt=""></div>
+                                                  <div class="icon-title mt-1">
+                                                    <h3 class="mb-0">Slack notifications</h3>
+                                                    <p>Get a Slack notification when someone assigns or mentions me in an update</p>
+                                                  </div>
+                                                </button>
+                                              <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                <div class="accordion-body">
+                                                    <button data-bs-toggle="modal" data-bs-target="#" class="btn btn-primary btn-sm mb-3">Enable Slack notifications</button>
+                                                    <p>Example:</p>
+                                                    <img src="./assets/img/slack-notification-example-x.jpeg" alt="">
+                                                    <p class="mt-4">You can unsubscribe easily by going to the monday.com app in Slack.</p>
+                                                    <p>To ensure all notifications are delivered successfully to Slack, make sure your team is using the same email address both in Slack and in AtmosAI</p>
+                                                    <a class="slack-notification-more" data-toggle="modal" data-target="#slack-notifications">Learn more about Slack notifications</a>
+                                                </div>
+                                              </div>
+                                            </div> -->
+                                            <div class="accordion-item mt-4">
+                                              <h2 class="accordion-header" id="flush-headingTwo">
+                                                <button class="accordion-button collapsed pe-2" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwoo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                                    <div class="icon-title ms-4 me-4"><i class="fa-light fa-bell"></i></div>
+                                                    <div class="icon-title mt-1">
+                                                      <h3 class="mb-0">In AtmosAI</h3>
+                                                      <p>Send me notifications on atmosai.io when someone...</p>
+                                                    </div>
+                                                </button>
+                                              </h2>
+                                              <div id="flush-collapseTwoo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                                <div class="accordion-body">
+                                                    <label class="form-check-label d-flex align-items-center mb-3 mt-4">
+                                                        <input type="checkbox" [(ngModel)]="manageNotifications.in_app_notifications.likes_my_update" (ngModelChange)="updateManageNotifications()" name="wc_categories" value=false class="form-check-input wc_category_filter me-2 mt-0">
+                                                        Likes my update
+                                                    </label>
+                                                    <label class="form-check-label d-flex align-items-center mb-3">
+                                                        <input type="checkbox" [(ngModel)]="manageNotifications.in_app_notifications.replies_to_update" (ngModelChange)="updateManageNotifications()" name="wc_categories" value=false class="form-check-input wc_category_filter me-2 mt-0">
+                                                        Replies to my update
+                                                    </label>
+                                                    <label class="form-check-label d-flex align-items-center mb-3">
+                                                        <input type="checkbox" [(ngModel)]="manageNotifications.in_app_notifications.replies_or_likes_conversation" (ngModelChange)="updateManageNotifications()" name="wc_categories" value=false class="form-check-input wc_category_filter me-2 mt-0">
+                                                        Replies or likes a conversation I’m a part of
+                                                    </label>
+                                                    <label class="form-check-label d-flex align-items-center mb-3">
+                                                        <input type="checkbox" [(ngModel)]="manageNotifications.in_app_notifications.subscribes_board_item_team" (ngModelChange)="updateManageNotifications()" name="wc_categories" value=false class="form-check-input wc_category_filter me-2 mt-0">
+                                                        Subscribes me to a Board/Item/Team
+                                                    </label>
+                                                    <label class="form-check-label d-flex align-items-center mb-3">
+                                                        <input type="checkbox" [(ngModel)]="manageNotifications.in_app_notifications.assigns_to_item" (ngModelChange)="updateManageNotifications()" name="wc_categories" value=false class="form-check-input wc_category_filter me-2 mt-0">
+                                                        Assigns me to an Item
+                                                    </label>
+                                                    <label class="form-check-label d-flex align-items-center mb-3">
+                                                        <input type="checkbox" [(ngModel)]="manageNotifications.in_app_notifications.writes_update_item_subscribed" (ngModelChange)="updateManageNotifications()" name="wc_categories" value=false class="form-check-input wc_category_filter me-2 mt-0">
+                                                        Writes an update on an Item I’m subscribed to
+                                                    </label>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                      </ng-container>
+                                    </div>
+                                    <div id="manage-location" role="tabpanel" aria-labelledby="manage-location-tab" class="tab-pane fade">
+                                      <ng-template *ngIf="isLoading.language_region" [ngTemplateOutlet]="loader"></ng-template>
+                                      <ng-container *ngIf="!isLoading.language_region">
+                                       <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Language</label>
+                                                <select [(ngModel)]="language_region.language" (ngModelChange)="updateLanguageRegion()" class="form-select form-select-sm" data-placeholder="Choose a Language...">
+                                                    <option value="AF">Afrikaans</option>
+                                                    <option value="SQ">Albanian</option>
+                                                    <option value="AR">Arabic</option>
+                                                    <option value="HY">Armenian</option>
+                                                    <option value="EU">Basque</option>
+                                                    <option value="BN">Bengali</option>
+                                                    <option value="BG">Bulgarian</option>
+                                                    <option value="CA">Catalan</option>
+                                                    <option value="KM">Cambodian</option>
+                                                    <option value="ZH">Chinese (Mandarin)</option>
+                                                    <option value="HR">Croatian</option>
+                                                    <option value="CS">Czech</option>
+                                                    <option value="DA">Danish</option>
+                                                    <option value="NL">Dutch</option>
+                                                    <option value="EN">English</option>
+                                                    <option value="ET">Estonian</option>
+                                                    <option value="FJ">Fiji</option>
+                                                    <option value="FI">Finnish</option>
+                                                    <option value="FR">French</option>
+                                                    <option value="KA">Georgian</option>
+                                                    <option value="DE">German</option>
+                                                    <option value="EL">Greek</option>
+                                                    <option value="GU">Gujarati</option>
+                                                    <option value="HE">Hebrew</option>
+                                                    <option value="HI">Hindi</option>
+                                                    <option value="HU">Hungarian</option>
+                                                    <option value="IS">Icelandic</option>
+                                                    <option value="ID">Indonesian</option>
+                                                    <option value="GA">Irish</option>
+                                                    <option value="IT">Italian</option>
+                                                    <option value="JA">Japanese</option>
+                                                    <option value="JW">Javanese</option>
+                                                    <option value="KO">Korean</option>
+                                                    <option value="LA">Latin</option>
+                                                    <option value="LV">Latvian</option>
+                                                    <option value="LT">Lithuanian</option>
+                                                    <option value="MK">Macedonian</option>
+                                                    <option value="MS">Malay</option>
+                                                    <option value="ML">Malayalam</option>
+                                                    <option value="MT">Maltese</option>
+                                                    <option value="MI">Maori</option>
+                                                    <option value="MR">Marathi</option>
+                                                    <option value="MN">Mongolian</option>
+                                                    <option value="NE">Nepali</option>
+                                                    <option value="NO">Norwegian</option>
+                                                    <option value="FA">Persian</option>
+                                                    <option value="PL">Polish</option>
+                                                    <option value="PT">Portuguese</option>
+                                                    <option value="PA">Punjabi</option>
+                                                    <option value="QU">Quechua</option>
+                                                    <option value="RO">Romanian</option>
+                                                    <option value="RU">Russian</option>
+                                                    <option value="SM">Samoan</option>
+                                                    <option value="SR">Serbian</option>
+                                                    <option value="SK">Slovak</option>
+                                                    <option value="SL">Slovenian</option>
+                                                    <option value="ES">Spanish</option>
+                                                    <option value="SW">Swahili</option>
+                                                    <option value="SV">Swedish </option>
+                                                    <option value="TA">Tamil</option>
+                                                    <option value="TT">Tatar</option>
+                                                    <option value="TE">Telugu</option>
+                                                    <option value="TH">Thai</option>
+                                                    <option value="BO">Tibetan</option>
+                                                    <option value="TO">Tonga</option>
+                                                    <option value="TR">Turkish</option>
+                                                    <option value="UK">Ukrainian</option>
+                                                    <option value="UR">Urdu</option>
+                                                    <option value="UZ">Uzbek</option>
+                                                    <option value="VI">Vietnamese</option>
+                                                    <option value="CY">Welsh</option>
+                                                    <option value="XH">Xhosa</option>
+                                                </select>
+                                            </div>
+                                       </div>
+                                       <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Timezone</label>
+                                                <select [(ngModel)]="language_region.timezone" (ngModelChange)="updateLanguageRegion()" data-placeholder="Choose a time zone" class="form-select form-select-sm" aria-describedby="timezone-description">
+                                                  <ng-container *ngFor="let item of timeZones">
+                                                    <option [value]="item?.timezone">{{item?.name}}</option>
+                                                  </ng-container>
+                                                </select>
+                                            </div>
+                                       </div>
+                                       <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Time format</label>
+                                                <div class="form-check">
+                                                    <input [(ngModel)]="language_region.time_format" (ngModelChange)="updateLanguageRegion()" value="g:i a" class="form-check-input" type="radio" name="timeformat" id="timeformat1">
+                                                    <label class="form-check-label" for="timeformat1">
+                                                        12 Hours 7:41 PM
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <input [(ngModel)]="language_region.time_format" (ngModelChange)="updateLanguageRegion()" value="H:i" class="form-check-input" type="radio" name="timeformat" id="timeformat1" checked>
+                                                    <label class="form-check-label" for="timeformat1">
+                                                        24 Hours 19:41
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Date format</label>
+                                                <div class="form-check">
+                                                    <input [(ngModel)]="language_region.date_format" (ngModelChange)="updateLanguageRegion()" value="F j, Y" class="form-check-input" type="radio" name="dateformat" id="dateformat1">
+                                                    <label class="form-check-label" for="dateformat1">
+                                                        April 07, 2023
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <input [(ngModel)]="language_region.date_format" (ngModelChange)="updateLanguageRegion()" value="j F, Y" class="form-check-input" type="radio" name="dateformat" id="dateformat1" checked>
+                                                    <label class="form-check-label" for="dateformat1">
+                                                        07 April, 2023
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </ng-container>
+                                      </div>
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 right-side-content">
+        <div class="card right-tray-profile-border">
+            <div class="card-header">
+                Timeline
+            </div>
+            <div class="card-body">
+                <ul class="ant-timeline ml-3">
+                    <li class="ant-timeline-item ">
+                        <div class="ant-timeline-item-tail"></div>
+                        <div class="ant-timeline-item-head ant-timeline-item-head-blue">1</div>
+                        <div class="ant-timeline-item-content">
+                            <span class="antp-activity">Agent viewed calib agents profile</span>
+                            11/15/2022 2:15:35 PM
+                        </div>
+                    </li>
+                    <li class="ant-timeline-item ">
+                        <div class="ant-timeline-item-tail"></div>
+                        <div class="ant-timeline-item-head ant-timeline-item-head-blue">2</div>
+                        <div class="ant-timeline-item-content">
+                            <span class="antp-activity">Agent viewed calib agents profile</span>
+                            10/19/2022 6:25:48 PM
+                        </div>
+                    </li>
+                    <li class="ant-timeline-item ">
+                        <div class="ant-timeline-item-tail"></div>
+                        <div class="ant-timeline-item-head ant-timeline-item-head-blue">3</div>
+                        <div class="ant-timeline-item-content">
+                            <span class="antp-activity">Agent viewed calib agents profile</span>
+                            10/05/2022 1:56:49 PM
+                        </div>
+                    </li>
+                    <li class="ant-timeline-item ">
+                        <div class="ant-timeline-item-tail"></div>
+                        <div class="ant-timeline-item-head ant-timeline-item-head-blue">4</div>
+                        <div class="ant-timeline-item-content">
+                            <span class="antp-activity">Agent viewed calib agents profile</span>
+                            10/05/2022 1:56:42 PM
+                        </div>
+                    </li>
+                    <li class="ant-timeline-item ">
+                        <div class="ant-timeline-item-tail"></div>
+                        <div class="ant-timeline-item-head ant-timeline-item-head-blue">5</div>
+                        <div class="ant-timeline-item-content">
+                            <span class="antp-activity">Agent viewed calib agents profile</span>
+                            10/05/2022 1:56:42 PM
+                        </div>
+                    </li>
+                    <li class="ant-timeline-item ">
+                        <div class="ant-timeline-item-tail"></div>
+                        <div class="ant-timeline-item-head ant-timeline-item-head-blue">6</div>
+                        <div class="ant-timeline-item-content">
+                            <span class="antp-activity">Agent viewed calib agents profile</span>
+                            10/05/2022 1:56:36 PM
+                        </div>
+                    </li>
+                    <li class="ant-timeline-item ">
+                        <div class="ant-timeline-item-tail"></div>
+                        <div class="ant-timeline-item-head ant-timeline-item-head-blue">7</div>
+                        <div class="ant-timeline-item-content">
+                            <span class="antp-activity">Agent viewed calib agents profile</span>
+                            10/05/2022 1:56:36 PM
+                        </div>
+                    </li>
+                    <li class="ant-timeline-item ">
+                        <div class="ant-timeline-item-tail"></div>
+                        <div class="ant-timeline-item-head ant-timeline-item-head-blue">8</div>
+                        <div class="ant-timeline-item-content">
+                            <span class="antp-activity">Agent viewed calib agents profile</span>
+                            10/05/2022 1:56:29 PM
+                        </div>
+                    </li>
+                    <li class="ant-timeline-item ">
+                        <div class="ant-timeline-item-tail"></div>
+                        <div class="ant-timeline-item-head ant-timeline-item-head-blue">9</div>
+                        <div class="ant-timeline-item-content">
+                            <span class="antp-activity">Agent viewed calib agents profile</span>
+                            10/05/2022 1:56:29 PM
+                        </div>
+                    </li>
+                    <li class="ant-timeline-item ant-timeline-item-last pb-0">
+                        <div class="ant-timeline-item-tail"></div>
+                        <div class="ant-timeline-item-head ant-timeline-item-head-blue">10</div>
+                        <div class="ant-timeline-item-content">
+                            <span class="antp-activity">Agent viewed calib agents profile</span>
+                            10/05/2022 1:56:22 PM
+                        </div>
+                    </li>
+                </ul>
+            </div>
+          </div>
+    </div>
+</div>
+
+<ng-template #loader >
+  <div class='loader-container mt-auto h-10'>
+    <div class='loader'>
+        <div class='loader--dot'></div>
+        <div class='loader--dot'></div>
+        <div class='loader--dot'></div>
+        <div class='loader--dot'></div>
+        <div class='loader--dot'></div>
+        <div class='loader--dot'></div>
+    </div>
+  </div>
+</ng-template>
+
+

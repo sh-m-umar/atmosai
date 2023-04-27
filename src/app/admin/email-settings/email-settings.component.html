@@ -1,0 +1,550 @@
+<div class="admin-page-wrapper">
+  <div class="page-header">
+    <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+      <div class="header-lhs d-flex align-items-center">
+        <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+          <span>Email</span>
+        </h4>
+        <span class="ms-2 me-2" mat-raised-button matTooltip="Show board description" matTooltipPosition="above"
+          matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+        <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above"
+          matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+      </div>
+      <div class="header-rhs d-flex align-items-center">
+        <div class="button-group ms-2">
+          <button type="button" class="btn btn-outline-secondary borderless dropdown-toggle-split"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+            <i class="fa-solid fa-ellipsis"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item">Console log</a></li>
+            <li><a class="dropdown-item">Clear local cache only</a></li>
+            <li><a class="dropdown-item">Clear cache and database both</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">
+      <span>This is description</span>
+      <i class="fa-solid fa-ellipsis"></i>
+    </div>
+    <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+      <div class="d-flex">
+        <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">
+          Profile
+        </h5>
+        <ul class="tabslink nav boards-top-menu-style" id="nav-tab" role="tablist">
+          <li class="nav-item" [ngClass]="{ active: activeTab === 1 }" (click)="urlChange('manage')">
+            <div class="boards-top-menu-style-first p-0" id="nav-manage-tab" data-bs-toggle="tab"
+              data-bs-target="#nav-manage" type="button" role="tab" aria-controls="nav-manage" aria-selected="true">
+              <i class="fa-thin fa-file-user"></i> Manage Accounts
+            </div>
+          </li>
+          <li class="nav-item" [ngClass]="{ active: activeTab === 2 }" (click)="urlChange('outgoing')">
+            <div class="boards-top-menu-style-first p-0" id="nav-outgoing-tab" data-bs-toggle="tab"
+              data-bs-target="#nav-outgoing" type="button" role="tab" aria-controls="nav-outgoing"
+              aria-selected="false">
+              <i class="fa-thin fa-inbox-out"></i> Outgoing Emails
+            </div>
+          </li>
+          <li class="nav-item" [ngClass]="{ active: activeTab === 3 }" (click)="urlChange('tax')">
+            <div class="boards-top-menu-style-first p-0" id="nav-tax-tab" data-bs-toggle="tab" data-bs-target="#nav-tax"
+              type="button" role="tab" aria-controls="nav-tax" aria-selected="false">
+              <i class="fa-thin fa-file"></i> Tax
+            </div>
+          </li>
+          <li class="nav-item" [ngClass]="{ active: activeTab === 4 }" (click)="urlChange('sharing')">
+            <div class="boards-top-menu-style-first p-0" id="nav-sharing-tab" data-bs-toggle="tab"
+              data-bs-target="#nav-sharing" type="button" role="tab" aria-controls="nav-sharing" aria-selected="false">
+              <i class="fa-thin fa-share-from-square"></i> Sharing
+            </div>
+          </li>
+          <li class="nav-item" [ngClass]="{ active: activeTab === 5 }" (click)="urlChange('signature')">
+            <div class="boards-top-menu-style-first p-0" id="nav-signature-tab" data-bs-toggle="tab"
+              data-bs-target="#nav-signature" type="button" role="tab" aria-controls="nav-signature"
+              aria-selected="false">
+              <i class="fa-thin fa-file-signature"></i> Email Signature
+            </div>
+          </li>
+          <li class="nav-item" [ngClass]="{ active: activeTab === 6 }" (click)="urlChange('branding')">
+            <div class="boards-top-menu-style-first p-0" id="nav-branding-tab" data-bs-toggle="tab"
+              data-bs-target="#nav-branding" type="button" role="tab" aria-controls="nav-branding"
+              aria-selected="false">
+              <i class="fa-thin fa-envelope-circle-check"></i> Email Branding
+            </div>
+          </li>
+          <li class="nav-item" [ngClass]="{ active: activeTab === 7 }" (click)="urlChange('log')">
+            <div class="boards-top-menu-style-first p-0" id="nav-log-tab" data-bs-toggle="tab" data-bs-target="#nav-log"
+              type="button" role="tab" aria-controls="nav-log" aria-selected="false">
+              <i class="fa-thin fa-recycle"></i> Never Log
+            </div>
+          </li>
+        </ul>
+
+        <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+          <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view"
+            matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-thin fa-plus"></i>
+          </button>
+          <div class="dropdown-menu p-0 style-less">
+            <ul class="list-group list-group-flush list-group-sm">
+              <li class="list-group-item">
+                <div class="ls" data-bs-toggle="modal" data-bs-target="#viewcenter">
+                  <i class="fa-light fa fa-home"></i>
+                  <span class="ms-2">Apps</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex align-items-centere">
+        <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2" style="margin-top: -5px">
+          <div class="button-group outlined borderless">
+            <button type="button" class="btn collapsed btn-outline-secondary">
+              <i class="fa-thin fa-envelope"></i> Bulk Emails
+            </button>
+            <button type="button" class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a class="dropdown-item" href="#">Separated link</a></li>
+            </ul>
+          </div>
+          <div class="button-group ms-2">
+            <button type="button" class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="visually-hidden">Toggle Dropdown</span>
+              <i class="fa-solid fa-ellipsis"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a class="dropdown-item" href="#">Separated link</a></li>
+            </ul>
+          </div>
+        </div>
+        <div (click)="headerToggle()" class="header-collapse-btn">
+          <i class="fa-thin fa-angle-{{ anglePos }}"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="admin-page-content-wrapper">
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="nav-manage">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="accordion-collapse collapse show active">
+              <div class="accordion-body">
+                <div *ngFor="
+                    let account of emailSettings.connected_accounts;
+                    let i = index
+                  " class="form-check d-flex align-items-center">
+                  <span (click)="deleteConnectedAccount(account.type)" class="me-2"><i
+                      class="fa-light fa-trash"></i></span>
+                  <label class="form-check-label" for="flexCheckDefault-{{ i }}">
+                    <div class="d-flex align-items-center">
+                      <i class="fa-solid fa-envelope"></i>
+                      <span class="ms-2"><span class="text-capitalize">{{ account.type }}</span>
+                        - {{ account.email }}</span>
+                    </div>
+                  </label>
+                </div>
+                <span class="text-with-devider my-2 d-block">or add a new account</span>
+                <div class="d-flex align-item-center justify-content-center">
+                  <button (click)="connectAccount('google')" class="btn btn-sm me-2 btn-light px-3">
+                    <img src="./assets/img/gmail_full.png" alt="" />
+                  </button>
+                  <button (click)="connectAccount('microsoft')" class="btn btn-sm btn-primary px-3">
+                    <img src="./assets/img/outlook_full.png" alt="" />
+                  </button>
+                </div>
+                <div *ngIf="showLoadSetting" class="d-flex align-item-center justify-content-center">
+                  <button (click)="getEmailSettings(true)" class="btn btn-sm me-2 mt-3 btn-light px-3">
+                    {{ showLoadSettingBtnTxt }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h3>Connected Accounts</h3>
+          <div class="col-sm-6">
+            <div class="account-item mb-3 card shadow-sm">
+              <div class="d-flex p-3 align-items-center justify-content-between border rounded-3">
+                <div class="flex-shrink-0 w-75">
+                  <div class="d-flex align-items-center">
+                    <div class="me-3">
+                      <span class="mr-2 icon-side">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><title>Google Logo</title><path fill="#FBBC05" d="M1.7332228,11.1016467 C1.26344973,10.1681053 1,9.11559925 1,7.99999693 C1,6.88439737 1.26344926,5.83189299 1.73322154,4.89835236 L4.14245254,6.6986377 C4.00456633,7.10756746 3.93,7.54501903 3.93,7.99999693 C3.93,8.45506225 4.00452948,8.89253076 4.14235033,9.30143867 L1.7332228,11.1016467 Z"></path><path fill="#EA4335" d="M1.73322154,4.89835236 C2.89813489,2.58341388 5.33175182,0.999993873 8.163,0.999993873 C9.89559217,0.998403709 11.571067,1.61947572 12.884,2.75 L10.8,4.786 C10.0519509,4.18678258 9.12145318,3.86144361 8.163,3.864 C6.28470726,3.864 4.69857585,5.04934028 4.14245254,6.6986377 L1.73322154,4.89835236 L1.73322154,4.89835236 Z"></path><path fill="#34A853" d="M12.8317605,13.2564819 C11.579762,14.3942467 9.91005861,14.9999969 8.163,14.9999969 C5.33092793,14.9999969 2.89671856,13.4156614 1.7322049,11.0996231 L4.14029997,9.29533929 C4.69447358,10.9482355 6.28227802,12.136 8.163,12.136 C9.08326996,12.136 9.89875668,11.9242863 10.5445884,11.5261311 L12.8317605,13.2564819 L12.8317605,13.2564819 Z"></path><path fill="#4285F4" d="M12.8317946,13.2564509 L10.5446597,11.5260871 C11.2925349,11.0649973 11.8128957,10.3538862 12.005,9.432 L8.163,9.432 L8.163,6.727 L14.837,6.727 C14.935,7.14 15,7.586 15,7.99999693 C15,10.2815228 14.1460368,12.0621042 12.8317946,13.2564509 L12.8317946,13.2564509 Z"></path></svg>
+                      </span>
+                    </div>
+                    <h2 class="mb-0">Google</h2>
+                  </div>
+                </div>
+                <div class="flex-grow-1 d-flex justify-content-end">
+                  <button class="btn btn-sm btn-outline-secondary me-2"><i class="fa-light fa-pencil"></i></button>
+                  <button class="btn btn-sm btn-outline-secondary "><i class="fa-light fa-trash"></i></button>
+                </div>
+              </div>
+            </div>
+            <div class="account-item mb-3 card shadow-sm">
+              <div class="d-flex p-3 align-items-center justify-content-between border rounded-3">
+                <div class="flex-shrink-0 w-75">
+                  <div class="d-flex align-items-center">
+                    <div class="me-3">
+                      <span class="mr-2 icon-side">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23"><path fill="#f3f3f3" d="M0 0h23v23H0z"></path><path fill="#f35325" d="M1 1h10v10H1z"></path><path fill="#81bc06" d="M12 1h10v10H12z"></path><path fill="#05a6f0" d="M1 12h10v10H1z"></path><path fill="#ffba08" d="M12 12h10v10H12z"></path></svg>
+                      </span>
+                    </div>
+                    <h2 class="mb-0">Microsoft</h2>
+                  </div>
+                </div>
+                <div class="flex-grow-1 d-flex justify-content-end">
+                  <button class="btn btn-sm btn-outline-secondary me-2"><i class="fa-light fa-pencil"></i></button>
+                  <button class="btn btn-sm btn-outline-secondary "><i class="fa-light fa-trash"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-outgoing" role="tabpanel" aria-labelledby="nav-outgoing-tab">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="">
+              <div class="form-check mt-5">
+                <input type="checkbox" (change)="updateEmailSettings('email_remove_branding')"
+                  [(ngModel)]="emailSettings.email_remove_branding" id="flexCheckDefault1"
+                  class="form-check-input ng-untouched ng-pristine ng-valid" />
+                <label for="flexCheckDefault1" class="form-check-label">
+                  Create a new contact if the recipient email address does not
+                  exist in my atmosai.io account.
+                </label>
+              </div>
+              <div class="note-txt mt-4 admin-email-note">
+                Note: Changing this setting will affect all boards with the
+                Emails &amp; Activities app installed.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-tax" role="tabpanel" aria-labelledby="nav-tax-tab">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="">
+              <p>
+                Create automations (such as notifications) to save time and
+                streamline your workflows. Choose from pre-made automations or
+                customize your own.
+              </p>
+              <button type="submit" class="btn btn-primary" (click)="openNotificationSettings()">Setup Email Notifications</button>
+              <div class="note-txt mt-5 admin-email-note">
+                Note: Changes made to this setting will only affect this
+                specific board.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-sharing" role="tabpanel" aria-labelledby="nav-sharing-tab">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="">
+              <p class="mb-0"></p>
+              <div class="form-check mb-2">
+                <input (change)="updateEmailSettings('email_default_sharing')"
+                  [(ngModel)]="emailSettings.email_default_sharing" value="everyone" type="radio" name="default-sharing"
+                  id="flexRadioDefault1" class="form-check-input ng-untouched ng-pristine ng-valid" /><label
+                  for="flexRadioDefault1" class="form-check-label"><strong>Everyone</strong> - Your email messages and
+                  activities will be visible to everyone on your account.
+                </label>
+              </div>
+              <div class="form-check mb-2">
+                <input (change)="updateEmailSettings('email_default_sharing')"
+                  [(ngModel)]="emailSettings.email_default_sharing" value="just-me" type="radio" name="default-sharing"
+                  id="flexRadioDefault2" class="form-check-input ng-untouched ng-pristine ng-valid" /><label
+                  for="flexRadioDefault2" class="form-check-label"><strong>Just me</strong> - Your email messages and
+                  activities
+                  will be visible only to you.
+                </label>
+              </div>
+              <div class="note-txt mt-5 admin-email-note">
+                Note: Changes made to this setting will only affect your
+                personal account. Admins will still be able to see emails and
+                activities by all account users.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-signature" role="tabpanel" aria-labelledby="nav-signature-tab">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="accordion-body">
+              <label>Personal email signature</label> <br />
+
+              <label class="me-4 mt-2 mb-2"><input [(ngModel)]="emailSettingsEditorType.one" type="radio"
+                  name="personal_editor_type" value="simple" />
+                Simple</label>
+              <label><input [(ngModel)]="emailSettingsEditorType.one" type="radio" name="personal_editor_type"
+                  value="html" />
+                HTML</label>
+              <div *ngIf="emailSettingsEditorType.one == 'html'">
+                <textarea [(ngModel)]="emailSettings.email_signature" class="form-control" rows="3"></textarea>
+                <label class="mt-2">Preview</label>
+                <div [innerHtml]="emailSettings.email_signature" class="border-1 border p-3"></div>
+              </div>
+              <editor *ngIf="emailSettingsEditorType.one == 'simple'" cloudChannel="5" [disabled]="false"
+                [(ngModel)]="emailSettings.email_signature" [init]="{
+                  height: 200,
+                  plugins:
+                    'advcode a11ychecker autocorrect autolink editimage emoticons image link linkchecker lists mergetags powerpaste tinymcespellchecker',
+                  toolbar:
+                    'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+                  menubar: false,
+                  link_target_list: false,
+                  images_file_types: 'jpeg,jpg,png,gif',
+                  formats: {
+                    h1: {
+                      block: 'h1',
+                      styles: { fontSize: '24px', color: '#335dff' }
+                    },
+                    h2: { block: 'h2', styles: { fontSize: '18px' } },
+                    calltoaction: {
+                      selector: 'a',
+                      styles: {
+                        backgroundColor: '#335dff',
+                        padding: '12px 16px',
+                        color: '#ffffff',
+                        borderRadius: '4px',
+                        textDecoration: 'none',
+                        display: 'inline-block'
+                      }
+                    }
+                  },
+                  style_formats: [
+                    { title: 'Paragraph', format: 'p' },
+                    { title: 'Heading 1', format: 'h1' },
+                    { title: 'Heading 2', format: 'h2' },
+                    { title: 'Button styles' },
+                    { title: 'Call-to-action', format: 'calltoaction' }
+                  ],
+                  toolbar_mode: 'wrap',
+                  mergetags_list: [
+                    {
+                      title: 'Contact',
+                      menu: [
+                        {
+                          value: 'Contact.FirstName',
+                          title: 'Contact First Name'
+                        },
+                        {
+                          value: 'Contact.LastName',
+                          title: 'Contact Last Name'
+                        },
+                        {
+                          value: 'Contact.Email',
+                          title: 'Contact Email'
+                        }
+                      ]
+                    },
+                    {
+                      title: 'Sender',
+                      menu: [
+                        {
+                          value: 'Sender.FirstName',
+                          title: 'Sender First Name'
+                        },
+                        {
+                          value: 'Sender.LastName',
+                          title: 'Sender Last name'
+                        },
+                        {
+                          value: 'Sender.Email',
+                          title: 'Sender Email'
+                        }
+                      ]
+                    },
+                    {
+                      title: 'Subscription',
+                      menu: [
+                        {
+                          value: 'Subscription.UnsubscribeLink',
+                          title: 'Unsubscribe Link'
+                        },
+                        {
+                          value: 'Subscription.Preferences',
+                          title: 'Subscription Preferences'
+                        }
+                      ]
+                    }
+                  ]
+                }"></editor>
+
+              <label class="mt-3">Global email signature</label> <br />
+
+              <label class="me-4 mt-2 mb-2"><input [(ngModel)]="emailSettingsEditorType.two" type="radio"
+                  name="global_editor_type" value="simple" />
+                Simple</label>
+              <label><input [(ngModel)]="emailSettingsEditorType.two" type="radio" name="global_editor_type"
+                  value="html" />
+                HTML</label>
+              <div *ngIf="emailSettingsEditorType.two == 'html'">
+                <textarea [(ngModel)]="emailSettings.global_email_signature" class="form-control" rows="3"></textarea>
+                <label class="mt-2">Preview</label>
+                <div [innerHtml]="emailSettings.global_email_signature" class="border-1 border p-3"></div>
+              </div>
+
+              <editor *ngIf="emailSettingsEditorType.two == 'simple'" cloudChannel="5" [disabled]="false"
+                [(ngModel)]="emailSettings.global_email_signature" [init]="{
+                  height: 200,
+                  plugins:
+                    'advcode a11ychecker autocorrect autolink editimage emoticons image link linkchecker lists mergetags powerpaste tinymcespellchecker',
+                  toolbar:
+                    'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+                  menubar: false,
+                  link_target_list: false,
+                  images_file_types: 'jpeg,jpg,png,gif',
+                  formats: {
+                    h1: {
+                      block: 'h1',
+                      styles: { fontSize: '24px', color: '#335dff' }
+                    },
+                    h2: { block: 'h2', styles: { fontSize: '18px' } },
+                    calltoaction: {
+                      selector: 'a',
+                      styles: {
+                        backgroundColor: '#335dff',
+                        padding: '12px 16px',
+                        color: '#ffffff',
+                        borderRadius: '4px',
+                        textDecoration: 'none',
+                        display: 'inline-block'
+                      }
+                    }
+                  },
+                  style_formats: [
+                    { title: 'Paragraph', format: 'p' },
+                    { title: 'Heading 1', format: 'h1' },
+                    { title: 'Heading 2', format: 'h2' },
+                    { title: 'Button styles' },
+                    { title: 'Call-to-action', format: 'calltoaction' }
+                  ],
+                  toolbar_mode: 'wrap',
+                  mergetags_list: [
+                    {
+                      title: 'Contact',
+                      menu: [
+                        {
+                          value: 'Contact.FirstName',
+                          title: 'Contact First Name'
+                        },
+                        {
+                          value: 'Contact.LastName',
+                          title: 'Contact Last Name'
+                        },
+                        {
+                          value: 'Contact.Email',
+                          title: 'Contact Email'
+                        }
+                      ]
+                    },
+                    {
+                      title: 'Sender',
+                      menu: [
+                        {
+                          value: 'Sender.FirstName',
+                          title: 'Sender First Name'
+                        },
+                        {
+                          value: 'Sender.LastName',
+                          title: 'Sender Last name'
+                        },
+                        {
+                          value: 'Sender.Email',
+                          title: 'Sender Email'
+                        }
+                      ]
+                    },
+                    {
+                      title: 'Subscription',
+                      menu: [
+                        {
+                          value: 'Subscription.UnsubscribeLink',
+                          title: 'Unsubscribe Link'
+                        },
+                        {
+                          value: 'Subscription.Preferences',
+                          title: 'Subscription Preferences'
+                        }
+                      ]
+                    }
+                  ]
+                }"></editor>
+              <button (click)="updateEmailSettings('signature')" [disabled]="btnTxt === 'Updating..'" class="btn btn-sm btn-primary mt-2">
+                {{btnTxt}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-branding" role="tabpanel" aria-labelledby="nav-branding-tab">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="">
+              <div class="form-check">
+                <input (change)="updateEmailSettings('email_remove_branding')"
+                  [(ngModel)]="emailSettings.email_remove_branding" type="checkbox" value="" id="flexCheckDefault1"
+                  class="form-check-input ng-untouched ng-pristine ng-valid" /><label for="flexCheckDefault1"
+                  class="form-check-label">
+                  Remove atmosai.io branding from your emails.
+                  <i class="fa-light fa-circle-info ms-2"></i></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-log" role="tabpanel" aria-labelledby="nav-log-tab">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="">
+              <p>
+                Emails sent or received from the addresses defined below will
+                never be saved to your CRM, even if they exist as contacts in
+                your boards.
+              </p>
+              <div class="row g-3 mb-3 align-items-end">
+                <div class="col-sm-9">
+                  <label for="">Add email addresses to the Never log list:</label>
+                  <input type="text" [(ngModel)]="emailSettings.email_never_log"
+                    placeholder="Enter comma separated emails" class="form-control ng-untouched ng-pristine ng-valid" />
+                </div>
+                <div class="col-sm-3">
+                  <button (click)="updateEmailSettings('email_never_log')" type="button" class="btn btn-primary">
+                    Update
+                  </button>
+                </div>
+              </div>
+              <div class="note-txt admin-email-note">
+                Note: Changing this setting will affect all boards with the
+                Emails &amp; Activities app installed.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="invoice-upload-nav d-flex justify-content-between align-items-center">
+    <ul class="nav nav-pills mb-3 mt-4" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+                type="button" role="tab" aria-controls="pills-home" aria-selected="true">Uploaded Documents</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
+                type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Invoices</button>
+        </li>
+    </ul>
+    <div class="invoive-dead-learn">
+        <p class="mb-0">Learn how this works<i class="fa-light fa-arrow-up-right-from-square ms-2"></i></p>
+    </div>
+</div>
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div class="purchase-order-list mb-4">
+            <select class="form-select form-select-sm">
+                <option value="" ng-reflect-value="">Pending Documents</option>
+                <option value="" ng-reflect-value="">Doc 1</option>
+                <option value="" ng-reflect-value="">Doc 2</option>
+                <option value="" ng-reflect-value="">Doc 3</option>
+            </select>
+        </div>
+        <div class="uploaded-docs d-flex">
+            <div class="upload-doc-left me-4">
+                <div class="upload-doc-left-inner">
+                    <i class="fa-light fa-upload mb-3"></i>
+                    <p class="upload-drag mb-0">Drag and Drop Documents</p>
+                    <p class="upload-drag mb-0">or</p>
+                    <p class="upload-drag-blue mb-0">Upload Documentds</p>
+                </div>
+            </div>
+            <div class="upload-doc-right">
+                <div class="upload-doc-right-inner">
+                    <p class="upload-title mb-1">Invoice_INY-092_4485</p>
+                    <P class="upload-doc-date">04/08/2022 03:44 PM</P>
+                    <p class="upload-pending d-flex justify-content-between align-items-center"><span>PENDING</span><i class="fa-light fa-message"></i></p>
+                    <div class="uplaod-doc-img">
+                        <div class="uplaod-doc-img-inner text-center mt-5">
+                            <i class="fa-light fa-file-lines"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <div class="purchase-order-list mb-4">
+            <select class="form-select form-select-sm">
+                <option value="" ng-reflect-value="">All Invoices</option>
+                <option value="" ng-reflect-value="">Invoices 1</option>
+                <option value="" ng-reflect-value="">Invoices 2</option>
+                <option value="" ng-reflect-value="">Invoices 3</option>
+            </select>
+        </div>
+        <div class="vendor-purchase-order-details">
+            <div class="row purchase-order-row">
+                <div class="col-3">Invoices #</div>
+                <div class="col-3">Date</div>
+                <div class="col-3">Balance</div>
+                <div class="col-3">Status</div>
+            </div>
+            <div class="row purchase-order-list-row">
+                <div class="col-3 col-order">00002</div>
+                <div class="col-3">04/08/2020</div>
+                <div class="col-3">$85,00.00</div>
+                <div class="col-3 col-bill">Paid</div>
+            </div>
+            <div class="row purchase-order-list-row">
+                <div class="col-3 col-order">0001</div>
+                <div class="col-3">04/08/2020</div>
+                <div class="col-3">$835,00.00</div>
+                <div class="col-3 col-status-open">Billed</div>
+            </div>
+        </div>
+    </div>
+  </div>

@@ -1,0 +1,17 @@
+.cross {
+  width: 2px;
+  position: relative;
+  right: 40px;
+  font-size: 15px;
+  line-height: 40px;
+  cursor: pointer;
+  z-index: 1;
+  color: #03045fc7;
+}
+
+.select-input {
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: 213px;
+}

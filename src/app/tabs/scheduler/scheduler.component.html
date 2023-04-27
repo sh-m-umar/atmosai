@@ -1,0 +1,129 @@
+<div *ngIf="!loaded">Loading...</div>
+<div *ngIf="loaded" class="control-section">
+    <div class="drag-sample-wrapper">
+        <div class="schedule-container">
+            <div class="text-end cable" style="height:0px">
+                <div class="offcanvas card offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                    <div class="offcanvas-header">
+                        <button type="button" class="btn-close text-reset ms-0" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav>
+                            <div class="nav nav-pills pb-2 border-bottom" id="nav-tab" role="tablist">
+                                <button class="nav-link text-white active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Staff</button>
+                                <button *ngIf="areServices" class="nav-link text-white" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Services</button>
+                            </div>
+                        </nav>
+                        <div class="tab-content mt-4" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <div>
+                                    <label class="form-check-label d-flex align-items-center mb-2">
+                                        <input (change)="changeSelectAll()" type="checkbox" [(ngModel)]="selectedStaff.all" value="true" class="form-check-input wc_category_filter me-2 mt-0">
+                                        All staff
+                                    </label>
+<!--                                    <label (change)="changeSelection()" *ngFor="let user of boardsComponent.users; let i = index;" class="form-check-label d-flex align-items-center mb-2 margin-check-a">-->
+<!--                                        <input type="checkbox" name="staff_{{user.ID}}" [(ngModel)]="selectedStaff['userId_'+user.ID]" [value]="user.ID" class="form-check-input wc_category_filter me-2 mt-0">-->
+<!--                                        {{user.fname === '' && user.lname === '' ? user.display_name : user.fname + ' ' + user.lname}}-->
+<!--                                    </label>-->
+                                    <!--                                <label class="form-check-label d-flex align-items-center mb-2 margin-check-b">-->
+                                    <!--                                    <input type="checkbox" name="wc_categories" value="39" class="form-check-input wc_category_filter me-2 mt-0">-->
+                                    <!--                                     Nick Knight -->
+                                    <!--                                </label>-->
+
+                                    <div *ngFor="let category of usersArray; let i = index;">
+                                        <label class="form-check-label d-flex align-items-center mb-2 margin-check-a">
+                                            <input (change)="changeSelectAll('users', i)" [(ngModel)]="usersArray[i].selected" [value]="usersArray[i].selected" type="checkbox" class="form-check-input wc_category_filter me-2 mt-0">
+                                            {{category.cat}}
+                                        </label>
+
+                                        <label *ngFor="let user of category.users; let ii = index;" class="form-check-label d-flex align-items-center mb-2 margin-check-b">
+                                            <input (change)="changeSelection()" [(ngModel)]="usersArray[i].users[ii].selected" type="checkbox" name="wc_categories" class="form-check-input wc_category_filter me-2 mt-0">
+                                            {{user.fname === '' && user.lname === '' ? user.display_name : user.fname + ' ' + user.lname}}
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div *ngIf="areServices" class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                <div>
+                                    <label class="form-check-label d-flex align-items-center mb-2">
+                                        <input (change)="changeSelectAll('services')" [(ngModel)]="selectedServices['all']" type="checkbox" class="form-check-input wc_category_filter me-2 mt-0">
+                                        All services
+                                    </label>
+<!--                                    <label (change)="changeSelection()" *ngFor="let service of services" class="form-check-label d-flex align-items-center mb-2 margin-check-a">-->
+<!--                                        <input [(ngModel)]="selectedServices['service_'+service.id]" [value]="service.id" type="checkbox" class="form-check-input wc_category_filter me-2 mt-0">-->
+<!--                                        {{service.item}}-->
+<!--                                    </label>-->
+
+                                    <div *ngFor="let category of servicesArray; let i = index;">
+                                        <label class="form-check-label d-flex align-items-center mb-2 margin-check-a">
+                                            <input (change)="changeSelectAll('services', i)" [(ngModel)]="servicesArray[i].selected" [value]="servicesArray[i].selected" type="checkbox" class="form-check-input wc_category_filter me-2 mt-0">
+                                            {{category.cat}}
+                                        </label>
+
+                                        <label (change)="changeSelection()" *ngFor="let entry of category.entries; let ii = index;" class="form-check-label d-flex align-items-center mb-2 margin-check-b">
+                                            <input [(ngModel)]="selectedServices['service_'+entry.id]" [value]="entry.id" type="checkbox" name="wc_categories" value="39" class="form-check-input wc_category_filter me-2 mt-0">
+                                            {{entry.item}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <i class="fa-light fa-gear schedular-custom-settings" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></i>
+            </div>
+            <ejs-schedule *ngIf="reloaded" #scheduleObj
+                          cssClass='schedule-block-events'
+                          width='100%'
+                          height='{{contentAvailableAreaHeight}}'
+                          [group]="group"
+                          [currentView]="currentView"
+                          [selectedDate]="selectedDate"
+                          [eventSettings]="eventSettings"
+                          (popupOpen)="onPopupOpen($event)"
+                          (popupClose)="onPopupClose($event)"
+            >
+                <e-resources>
+                    <e-resource
+                            field='employeeId'
+                            title='Employees'
+                            name='Employee'
+                            [dataSource]='employeeDataSource'
+                            [allowMultiple]='allowMultiple'
+                            textField='text'
+                            idField='id'
+                            groupIDField="groupId"
+                            colorField='color'>
+                    </e-resource>
+                </e-resources>
+                <ng-template #resourceHeaderTemplate let-data>
+                    <div class="template-wrap">
+                        <div class="employee-category">
+                            <div>
+                                <img src="{{getEmployeePhoto(data)}}" class="employee-image"/>
+                            </div>
+                            <div class="employee-name">{{getEmployeeName(data)}}</div>
+                            <div class="employee-designation">{{getEmployeeDesignation(data)}}</div>
+                        </div>
+                    </div>
+                </ng-template>
+                <!--                <ng-template #dateHeaderTemplate let-data>-->
+                <!--                    <div class="date-text">{{getDateHeaderText(data.date)}}</div>-->
+                <!--                    <div [innerHTML]="getWeatherImage(data.date)"></div>-->
+                <!--                </ng-template>-->
+                <ng-template #eventSettingsTemplate let-data>
+                    <div class='template-wrap'>
+                        <div class="subject">{{data.subject}}</div>
+                    </div>
+                </ng-template>
+                <e-views>
+                    <e-view option="Day"></e-view>
+                    <e-view option="TimelineDay"></e-view>
+                    <e-view option="TimelineMonth"></e-view>
+                </e-views>
+            </ejs-schedule>
+        </div>
+    </div>
+</div>
+

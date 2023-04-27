@@ -1,0 +1,711 @@
+<div class="page-header">
+    <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+        <div class="header-lhs d-flex align-items-center">
+            <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                <span>Segments</span>
+            </h4>
+            <span class="ms-2 me-2"  mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+            <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+        </div>
+        <div class="header-rhs d-flex align-items-center">
+            <div class="button-group ms-2">
+                <button type="button" class="btn btn-outline-secondary borderless dropdown-toggle-split" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                    <i class="fa-solid fa-ellipsis"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item">Console log</a></li>
+                    <li><a class="dropdown-item">Clear local cache only</a></li>
+                    <li><a class="dropdown-item">Clear cache and database both</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">
+        <span>This is description</span>
+        <i class="fa-solid fa-ellipsis"></i>
+    </div>
+    <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+        <div class="d-flex">
+            <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">New Email Campaigns</h5>
+            <ul class="tabslink nav boards-top-menu-style" id="nav-tab" role="tablist">
+                <li class="nav-item active" id="nav-login-tab" data-bs-toggle="tab" data-bs-target="#nav-login" type="button" role="tab" aria-controls="nav-login" aria-selected="true">
+                    <div class="boards-top-menu-style-first"><i class="fa-thin fa-home"></i> All</div>
+                    <div class="boards-top-menu-style-third">
+                        <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                        <div class="dropdown-menu p-0 style-less">
+                            <ul class="list-group list-group-flush list-group-sm">
+                                <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item" id="nav-login-tab" data-bs-toggle="tab" data-bs-target="#nav-login" type="button" role="tab" aria-controls="nav-login" aria-selected="true">
+                    <div class="boards-top-menu-style-first"><i class="fa-thin fa-home"></i>Active</div>
+                    <div class="boards-top-menu-style-third">
+                        <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                        <div class="dropdown-menu p-0 style-less">
+                            <ul class="list-group list-group-flush list-group-sm">
+                                <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item" id="nav-login-tab" data-bs-toggle="tab" data-bs-target="#nav-login" type="button" role="tab" aria-controls="nav-login" aria-selected="true">
+                    <div class="boards-top-menu-style-first"><i class="fa-thin fa-home"></i> Paused</div>
+                    <div class="boards-top-menu-style-third">
+                        <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                        <div class="dropdown-menu p-0 style-less">
+                            <ul class="list-group list-group-flush list-group-sm">
+                                <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-thin fa-plus"></i>
+                </button>
+                <div class="dropdown-menu p-0 style-less">
+                    <ul class="list-group list-group-flush list-group-sm">
+                        <li class="list-group-item">
+                            <div class="ls" data-bs-toggle="modal" data-bs-target="#viewcenter" >
+                                <i class="fa-light fa fa-home"></i>
+                                <span class="ms-2">Apps</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex align-items-centere">
+            <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2" style="margin-top: -5px;">
+                <div class="button-group outlined borderless">
+                    <button type="button" class="btn collapsed btn-outline-secondary"><i
+                            class="fa-thin fa-envelope"></i> Bulk Emails
+                    </button>
+                    <button type="button"
+                            class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+                <div class="button-group ms-2">
+                    <button type="button" class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div (click)="headerToggle()" class="header-collapse-btn"><i class="fa-thin fa-angle-{{anglePos}}"></i>
+            </div>
+        </div>
+    </div>
+    <div class="header-filter-area d-flex leads-drop-popup">
+        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#segmentEditor">+ New Segment</button>
+        <div class="button-group outlined single-btn-in-group ms-2">
+            <button type="button" class="btn btn-outline-secondary borderless" data-bs-toggle="dropdown"
+                    aria-expanded="false" (click)="filterSearch()" *ngIf="!isSrarch">
+                <i class="fa-thin fa-search"></i> Search
+            </button>
+            <div class="input-group input-group-sm input-group-search" *ngIf="isSrarch">
+                <input type="text" class="form-control" placeholder="Search">
+                <div class="input-group-append" (click)="filterSearchClose()">
+                    <span class="input-group-text bg-white" id="basic-addon2"><i class="fa-thin fa-search"></i></span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div class="page-wrapper">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Push</th>
+                                <th>SMS</th>
+                                <th>Email</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="segment-name-wrp">
+                                        <h4 class="mb-0 fw-bold">Subscribed Users</h4>
+                                    </div>
+                                </td>
+                                <td><span class="badge active">Active</span></td>
+                                <td>1</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <span data-bs-toggle="dropdown" aria-expanded="false" class="btn btn-sm btn-outline-secondary"><i class="fa-light fa-ellipsis"></i></span>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                          <li><a class="dropdown-item" href="#">View user</a></li>
+                                          <li><a class="dropdown-item" href="#">Edit</a></li>
+                                          <li><a class="dropdown-item" href="#">Paus</a></li>
+                                          <li><a class="dropdown-item" href="#">Set as default</a></li>
+                                          <li><a class="dropdown-item" href="#">Duplicate</a></li>
+                                          <li><a class="dropdown-item" href="#">Delete</a></li>
+                                        </ul>
+                                      </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="segment-name-wrp">
+                                        <h4 class="mb-0 fw-bold">Inactive Users</h4>
+                                        <ul>
+                                            <li><span><i class="fa-light fa-arrow-right-to-line me-2"></i>Last Session less than 168 hours ago</span></li>
+                                            <li><span><i class="fa-light fa-list me-2"></i>Session Count greater than 4 sessions</span></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td><span class="badge active">Active</span></td>
+                                <td>1</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <span data-bs-toggle="dropdown" aria-expanded="false" class="btn btn-sm btn-outline-secondary"><i class="fa-light fa-ellipsis"></i></span>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                          <li><a class="dropdown-item" href="#">View user</a></li>
+                                          <li><a class="dropdown-item" href="#">Edit</a></li>
+                                          <li><a class="dropdown-item" href="#">Paus</a></li>
+                                          <li><a class="dropdown-item" href="#">Set as default</a></li>
+                                          <li><a class="dropdown-item" href="#">Duplicate</a></li>
+                                          <li><a class="dropdown-item" href="#">Delete</a></li>
+                                        </ul>
+                                      </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="segment-name-wrp">
+                                        <h4 class="mb-0 fw-bold">All SMS Subscribers</h4>
+                                        <ul>
+                                            <li><span><i class="fa-light fa-mobile me-2"></i>Device Type is SMS </span></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td><span class="badge paused">Paused</span></td>
+                                <td>1</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <span data-bs-toggle="dropdown" aria-expanded="false" class="btn btn-sm btn-outline-secondary"><i class="fa-light fa-ellipsis"></i></span>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                          <li><a class="dropdown-item" href="#">View user</a></li>
+                                          <li><a class="dropdown-item" href="#">Edit</a></li>
+                                          <li><a class="dropdown-item" href="#">Paus</a></li>
+                                          <li><a class="dropdown-item" href="#">Set as default</a></li>
+                                          <li><a class="dropdown-item" href="#">Duplicate</a></li>
+                                          <li><a class="dropdown-item" href="#">Delete</a></li>
+                                        </ul>
+                                      </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="segment-name-wrp">
+                                        <h4 class="mb-0 fw-bold">All Email Subscribers</h4>
+                                        <ul>
+                                            <li><span><i class="fa-light fa-mobile me-2"></i>Device Type is Email </span></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td><span class="badge paused">Paused</span></td>
+                                <td>1</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <span data-bs-toggle="dropdown" aria-expanded="false" class="btn btn-sm btn-outline-secondary"><i class="fa-light fa-ellipsis"></i></span>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                          <li><a class="dropdown-item" href="#">View user</a></li>
+                                          <li><a class="dropdown-item" href="#">Edit</a></li>
+                                          <li><a class="dropdown-item" href="#">Paus</a></li>
+                                          <li><a class="dropdown-item" href="#">Set as default</a></li>
+                                          <li><a class="dropdown-item" href="#">Duplicate</a></li>
+                                          <li><a class="dropdown-item" href="#">Delete</a></li>
+                                        </ul>
+                                      </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="segment-name-wrp">
+                                        <h4 class="mb-0 fw-bold">Active Users</h4>
+                                        <ul>
+                                            <li><span><i class="fa-light fa-arrow-right-to-line me-2"></i>Last Session less than 168 hours ago</span></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td><span class="badge active">Active</span></td>
+                                <td>1</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <span data-bs-toggle="dropdown" aria-expanded="false" class="btn btn-sm btn-outline-secondary"><i class="fa-light fa-ellipsis"></i></span>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                          <li><a class="dropdown-item" href="#">View user</a></li>
+                                          <li><a class="dropdown-item" href="#">Edit</a></li>
+                                          <li><a class="dropdown-item" href="#">Paus</a></li>
+                                          <li><a class="dropdown-item" href="#">Set as default</a></li>
+                                          <li><a class="dropdown-item" href="#">Duplicate</a></li>
+                                          <li><a class="dropdown-item" href="#">Delete</a></li>
+                                        </ul>
+                                      </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--modal for segment editor-->
+<div class="modal fade" id="segmentEditor" tabindex="-1" aria-labelledby="segmentEditorLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="mb-0">Segment Editor</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body segment-rules">
+            <div class="d-flex justify-content-between mb-3">
+                <div class="">
+                    <label>Name of segment</label>
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="text-end">
+                    <span>Total subscriptions (estimate)</span>
+                    <h3>Pending</h3>
+                </div>
+            </div>
+            <span class="d-block mb-4">Users in this segment must meet these rules:</span>
+            <!--selected rules start-->
+            <!--and rules-->
+            <div class="selected-rules-wrapper" *ngIf="!rulesList">
+                <div class="rule-item rounded-0 mb-0 d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><g fill="currentColor"><path d="M9.995 8.997a.333.333 0 00-.334.333v2.4a.666.666 0 01-.377.599.686.686 0 01-.706-.08L3.913 8.515a.666.666 0 010-1.04l4.665-3.733a.666.666 0 011.083.52v2.401a.333.333 0 00.334.334h5.544a.334.334 0 00.334-.388A8.011 8.011 0 007.952 0 8.072 8.072 0 00.007 7.671a7.997 7.997 0 0015.867 1.714.338.338 0 00-.333-.388H9.995z"></path></g></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">First Session</span>
+                    </div>
+                    <div class="rule-detail align-items-center d-flex justify-content-between w-100">
+                        <div class="d-flex align-items-center">
+                            <select class="form-select form-select-sm me-3">
+                                <option value="after">less than</option>
+                                <option value="before">greater than</option>
+                            </select>
+                            <input type="number" class="form-control form-control-sm me-2">
+                            <span class="w-100">hours ago</span>
+                        </div>
+                        <span class="me-2"><i class="fa-light fa-xmark"></i></span>
+                    </div>
+                </div>
+                <div class="rule-item rounded-0 mb-0 d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><g fill="currentColor"><path d="M1 .498h1.667a1 1 0 011 1v1.667a1 1 0 01-1 1H1a1 1 0 01-1-1V1.498a1 1 0 011-1zM1 6.165h1.667a1 1 0 011 1V8.83a1 1 0 01-1 1H1a1 1 0 01-1-1V7.165a1 1 0 011-1zM2.667 11.831H1a1 1 0 00-1 1v1.667a1 1 0 001 1h1.667a1 1 0 001-1v-1.667a1 1 0 00-1-1zM6.667.498H15a1 1 0 011 1v1.667a1 1 0 01-1 1H6.667a1 1 0 01-1-1V1.498a1 1 0 011-1zM15 6.165H6.667a1 1 0 00-1 1V8.83a1 1 0 001 1H15a1 1 0 001-1V7.165a1 1 0 00-1-1zM6.667 11.831H15a1 1 0 011 1v1.667a1 1 0 01-1 1H6.667a1 1 0 01-1-1v-1.667a1 1 0 011-1z"></path></g></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">Last Session</span>
+                    </div>
+                    <div class="rule-detail align-items-center d-flex justify-content-between w-100">
+                        <div class="d-flex align-items-center">
+                            <select class="form-select form-select-sm me-3">
+                                <option value="after">less than</option>
+                                <option value="before">greater than</option>
+                            </select>
+                            <input type="number" class="form-control form-control-sm me-2">
+                            <span class="w-100">hours ago</span>
+                        </div>
+                        <span class="me-2"><i class="fa-light fa-xmark"></i></span>
+                    </div>
+                </div>
+                <div class="rule-item rounded-0 mb-0 d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><g fill="currentColor"><path d="M1 .498h1.667a1 1 0 011 1v1.667a1 1 0 01-1 1H1a1 1 0 01-1-1V1.498a1 1 0 011-1zM1 6.165h1.667a1 1 0 011 1V8.83a1 1 0 01-1 1H1a1 1 0 01-1-1V7.165a1 1 0 011-1zM2.667 11.831H1a1 1 0 00-1 1v1.667a1 1 0 001 1h1.667a1 1 0 001-1v-1.667a1 1 0 00-1-1zM6.667.498H15a1 1 0 011 1v1.667a1 1 0 01-1 1H6.667a1 1 0 01-1-1V1.498a1 1 0 011-1zM15 6.165H6.667a1 1 0 00-1 1V8.83a1 1 0 001 1H15a1 1 0 001-1V7.165a1 1 0 00-1-1zM6.667 11.831H15a1 1 0 011 1v1.667a1 1 0 01-1 1H6.667a1 1 0 01-1-1v-1.667a1 1 0 011-1z"></path></g></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">Session Count</span>
+                    </div>
+                    <div class="rule-detail align-items-center d-flex justify-content-between w-100">
+                        <div class="d-flex align-items-center">
+                            <select class="form-select form-select-sm me-3">
+                                <option value="is">is</option>
+                                <option value="after">less than</option>
+                                <option value="before">greater than</option>
+                            </select>
+                            <input type="number" class="form-control form-control-sm me-2">
+                            <span class="w-100">sessions</span>
+                        </div>
+                        <span class="me-2"><i class="fa-light fa-xmark"></i></span>
+                    </div>
+                </div>
+                <div class="rule-item rounded-0 mb-0 d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><path d="M8.5 8.667a.167.167 0 00.167-.167V1a1 1 0 00-1-1H1a1 1 0 00-1 1v6.667a1 1 0 001 1h7.5zM4 4.833A.167.167 0 003.833 5v1.333a.5.5 0 11-1 0v-3a1.5 1.5 0 013 0v3a.5.5 0 11-1 0V5a.167.167 0 00-.166-.167H4zm.333-2a.5.5 0 00-.5.5v.334A.167.167 0 004 3.833h.667a.167.167 0 00.166-.166v-.334a.5.5 0 00-.5-.5zM15 7.333H9.833a.167.167 0 00-.166.167v1.667a.5.5 0 01-.5.5h-2A.167.167 0 007 9.833V15a1 1 0 001 1h7a1 1 0 001-1V8.333a1 1 0 00-1-1zM9.667 10.5H11a.167.167 0 00.167-.167V10a.5.5 0 111 0v.333a.167.167 0 00.166.167h1.334a.5.5 0 010 1h-.418a.166.166 0 00-.162.128c-.112.457-.31.888-.584 1.27a.165.165 0 00-.028.133.164.164 0 00.079.109c.288.165.595.292.915.38a.5.5 0 11-.271.963 4.703 4.703 0 01-1.435-.667.166.166 0 00-.192 0 4.703 4.703 0 01-1.435.667.5.5 0 11-.27-.963c.32-.088.626-.215.914-.38a.166.166 0 00.08-.178.169.169 0 00-.029-.064 3.675 3.675 0 01-.584-1.27.165.165 0 00-.162-.128h-.418a.5.5 0 010-1zm1.815 1a.168.168 0 00-.137.072.167.167 0 00-.019.154c.055.142.122.279.2.41a.166.166 0 00.287 0c.078-.131.145-.268.2-.41a.168.168 0 00-.079-.207.168.168 0 00-.077-.019h-.375z" fill="currentColor"></path></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">Language</span>
+                    </div>
+                    <div class="rule-detail align-items-center d-flex justify-content-between w-100">
+                        <div class="d-flex align-items-center">
+                            <select class="form-select form-select-sm me-3">
+                                <option value="is">is</option>
+                                <option value="is_not">is not</option>
+                            </select>
+                            <select class="form-select form-select-sm">
+                                <option value="en">English</option>
+                                <option value="ar">Arabic</option>
+                                <option value="az">Azerbaijani</option>
+                                <option value="bs">Bosnian</option>
+                                <option value="ca">Catalan</option>
+                                <option value="zh-Hans">Chinese (Simplified)</option>
+                                <option value="zh-Hant">Chinese (Traditional)</option>
+                                <option value="hr">Croatian</option>
+                                <option value="cs">Czech</option>
+                                <option value="da">Danish</option>
+                                <option value="nl">Dutch</option>
+                                <option value="et">Estonian</option>
+                                <option value="fi">Finnish</option>
+                                <option value="fr">French</option>
+                                <option value="ka">Georgian</option>
+                                <option value="bg">Bulgarian</option>
+                                <option value="de">German</option>
+                                <option value="el">Greek</option>
+                                <option value="hi">Hindi</option>
+                                <option value="he">Hebrew</option>
+                                <option value="hu">Hungarian</option>
+                                <option value="id">Indonesian</option>
+                                <option value="it">Italian</option>
+                                <option value="ja">Japanese</option>
+                                <option value="ko">Korean</option>
+                                <option value="lv">Latvian</option>
+                                <option value="lt">Lithuanian</option>
+                                <option value="ms">Malay</option>
+                                <option value="nb">Norwegian</option>
+                                <option value="pl">Polish</option>
+                                <option value="fa">Persian</option>
+                                <option value="pt">Portuguese</option>
+                                <option value="pa">Punjabi</option>
+                                <option value="ro">Romanian</option>
+                                <option value="ru">Russian</option>
+                                <option value="sr">Serbian</option>
+                                <option value="sk">Slovak</option>
+                                <option value="es">Spanish</option>
+                                <option value="sv">Swedish</option>
+                                <option value="th">Thai</option>
+                                <option value="tr">Turkish</option>
+                                <option value="uk">Ukrainian</option>
+                                <option value="vi">Vietnamese</option>
+                            </select>
+                        </div>
+                        <span class="me-2"><i class="fa-light fa-xmark"></i></span>
+                    </div>
+                </div>
+                <span (click)="rulesList = !rulesList" class="add-filter fw-bold d-block link cable"><i class="fa-light fa-circle-plus me-2"></i>Add Filter</span>
+            </div>
+            <span (click)="isOr = !isOr" class="add-filter fw-bold d-block link cable" *ngIf="!isOr && !rulesList"><i class="fa-light fa-circle-plus me-2"></i>Add OR</span>
+            <!--OR rules-->
+            <div class="pos-rel" *ngIf="isOr && !rulesList">
+                <div class="or-devider">OR</div>
+            </div>
+            <div class="selected-rules-wrapper" *ngIf="isOr && !rulesList">
+                <div class="rule-item rounded-0 mb-0 d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><g fill="currentColor"><path d="M9.995 8.997a.333.333 0 00-.334.333v2.4a.666.666 0 01-.377.599.686.686 0 01-.706-.08L3.913 8.515a.666.666 0 010-1.04l4.665-3.733a.666.666 0 011.083.52v2.401a.333.333 0 00.334.334h5.544a.334.334 0 00.334-.388A8.011 8.011 0 007.952 0 8.072 8.072 0 00.007 7.671a7.997 7.997 0 0015.867 1.714.338.338 0 00-.333-.388H9.995z"></path></g></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">First Session</span>
+                    </div>
+                    <div class="rule-detail align-items-center d-flex justify-content-between w-100">
+                        <div class="d-flex align-items-center">
+                            <select class="form-select form-select-sm me-3">
+                                <option value="after">less than</option>
+                                <option value="before">greater than</option>
+                            </select>
+                            <input type="number" class="form-control form-control-sm me-2">
+                            <span class="w-100">hours ago</span>
+                        </div>
+                        <span class="me-2"><i class="fa-light fa-xmark"></i></span>
+                    </div>
+                </div>
+                <div class="rule-item rounded-0 mb-0 d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><g fill="currentColor"><path d="M1 .498h1.667a1 1 0 011 1v1.667a1 1 0 01-1 1H1a1 1 0 01-1-1V1.498a1 1 0 011-1zM1 6.165h1.667a1 1 0 011 1V8.83a1 1 0 01-1 1H1a1 1 0 01-1-1V7.165a1 1 0 011-1zM2.667 11.831H1a1 1 0 00-1 1v1.667a1 1 0 001 1h1.667a1 1 0 001-1v-1.667a1 1 0 00-1-1zM6.667.498H15a1 1 0 011 1v1.667a1 1 0 01-1 1H6.667a1 1 0 01-1-1V1.498a1 1 0 011-1zM15 6.165H6.667a1 1 0 00-1 1V8.83a1 1 0 001 1H15a1 1 0 001-1V7.165a1 1 0 00-1-1zM6.667 11.831H15a1 1 0 011 1v1.667a1 1 0 01-1 1H6.667a1 1 0 01-1-1v-1.667a1 1 0 011-1z"></path></g></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">Last Session</span>
+                    </div>
+                    <div class="rule-detail align-items-center d-flex justify-content-between w-100">
+                        <div class="d-flex align-items-center">
+                            <select class="form-select form-select-sm me-3">
+                                <option value="after">less than</option>
+                                <option value="before">greater than</option>
+                            </select>
+                            <input type="number" class="form-control form-control-sm me-2">
+                            <span class="w-100">hours ago</span>
+                        </div>
+                        <span class="me-2"><i class="fa-light fa-xmark"></i></span>
+                    </div>
+                </div>
+                <div class="rule-item rounded-0 mb-0 d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><g fill="currentColor"><path d="M1 .498h1.667a1 1 0 011 1v1.667a1 1 0 01-1 1H1a1 1 0 01-1-1V1.498a1 1 0 011-1zM1 6.165h1.667a1 1 0 011 1V8.83a1 1 0 01-1 1H1a1 1 0 01-1-1V7.165a1 1 0 011-1zM2.667 11.831H1a1 1 0 00-1 1v1.667a1 1 0 001 1h1.667a1 1 0 001-1v-1.667a1 1 0 00-1-1zM6.667.498H15a1 1 0 011 1v1.667a1 1 0 01-1 1H6.667a1 1 0 01-1-1V1.498a1 1 0 011-1zM15 6.165H6.667a1 1 0 00-1 1V8.83a1 1 0 001 1H15a1 1 0 001-1V7.165a1 1 0 00-1-1zM6.667 11.831H15a1 1 0 011 1v1.667a1 1 0 01-1 1H6.667a1 1 0 01-1-1v-1.667a1 1 0 011-1z"></path></g></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">Session Count</span>
+                    </div>
+                    <div class="rule-detail align-items-center d-flex justify-content-between w-100">
+                        <div class="d-flex align-items-center">
+                            <select class="form-select form-select-sm me-3">
+                                <option value="is">is</option>
+                                <option value="after">less than</option>
+                                <option value="before">greater than</option>
+                            </select>
+                            <input type="number" class="form-control form-control-sm me-2">
+                            <span class="w-100">sessions</span>
+                        </div>
+                        <span class="me-2"><i class="fa-light fa-xmark"></i></span>
+                    </div>
+                </div>
+                <div class="rule-item rounded-0 mb-0 d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><path d="M8.5 8.667a.167.167 0 00.167-.167V1a1 1 0 00-1-1H1a1 1 0 00-1 1v6.667a1 1 0 001 1h7.5zM4 4.833A.167.167 0 003.833 5v1.333a.5.5 0 11-1 0v-3a1.5 1.5 0 013 0v3a.5.5 0 11-1 0V5a.167.167 0 00-.166-.167H4zm.333-2a.5.5 0 00-.5.5v.334A.167.167 0 004 3.833h.667a.167.167 0 00.166-.166v-.334a.5.5 0 00-.5-.5zM15 7.333H9.833a.167.167 0 00-.166.167v1.667a.5.5 0 01-.5.5h-2A.167.167 0 007 9.833V15a1 1 0 001 1h7a1 1 0 001-1V8.333a1 1 0 00-1-1zM9.667 10.5H11a.167.167 0 00.167-.167V10a.5.5 0 111 0v.333a.167.167 0 00.166.167h1.334a.5.5 0 010 1h-.418a.166.166 0 00-.162.128c-.112.457-.31.888-.584 1.27a.165.165 0 00-.028.133.164.164 0 00.079.109c.288.165.595.292.915.38a.5.5 0 11-.271.963 4.703 4.703 0 01-1.435-.667.166.166 0 00-.192 0 4.703 4.703 0 01-1.435.667.5.5 0 11-.27-.963c.32-.088.626-.215.914-.38a.166.166 0 00.08-.178.169.169 0 00-.029-.064 3.675 3.675 0 01-.584-1.27.165.165 0 00-.162-.128h-.418a.5.5 0 010-1zm1.815 1a.168.168 0 00-.137.072.167.167 0 00-.019.154c.055.142.122.279.2.41a.166.166 0 00.287 0c.078-.131.145-.268.2-.41a.168.168 0 00-.079-.207.168.168 0 00-.077-.019h-.375z" fill="currentColor"></path></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">Language</span>
+                    </div>
+                    <div class="rule-detail align-items-center d-flex justify-content-between w-100">
+                        <div class="d-flex align-items-center">
+                            <select class="form-select form-select-sm me-3">
+                                <option value="is">is</option>
+                                <option value="is_not">is not</option>
+                            </select>
+                            <select class="form-select form-select-sm">
+                                <option value="en">English</option>
+                                <option value="ar">Arabic</option>
+                                <option value="az">Azerbaijani</option>
+                                <option value="bs">Bosnian</option>
+                                <option value="ca">Catalan</option>
+                                <option value="zh-Hans">Chinese (Simplified)</option>
+                                <option value="zh-Hant">Chinese (Traditional)</option>
+                                <option value="hr">Croatian</option>
+                                <option value="cs">Czech</option>
+                                <option value="da">Danish</option>
+                                <option value="nl">Dutch</option>
+                                <option value="et">Estonian</option>
+                                <option value="fi">Finnish</option>
+                                <option value="fr">French</option>
+                                <option value="ka">Georgian</option>
+                                <option value="bg">Bulgarian</option>
+                                <option value="de">German</option>
+                                <option value="el">Greek</option>
+                                <option value="hi">Hindi</option>
+                                <option value="he">Hebrew</option>
+                                <option value="hu">Hungarian</option>
+                                <option value="id">Indonesian</option>
+                                <option value="it">Italian</option>
+                                <option value="ja">Japanese</option>
+                                <option value="ko">Korean</option>
+                                <option value="lv">Latvian</option>
+                                <option value="lt">Lithuanian</option>
+                                <option value="ms">Malay</option>
+                                <option value="nb">Norwegian</option>
+                                <option value="pl">Polish</option>
+                                <option value="fa">Persian</option>
+                                <option value="pt">Portuguese</option>
+                                <option value="pa">Punjabi</option>
+                                <option value="ro">Romanian</option>
+                                <option value="ru">Russian</option>
+                                <option value="sr">Serbian</option>
+                                <option value="sk">Slovak</option>
+                                <option value="es">Spanish</option>
+                                <option value="sv">Swedish</option>
+                                <option value="th">Thai</option>
+                                <option value="tr">Turkish</option>
+                                <option value="uk">Ukrainian</option>
+                                <option value="vi">Vietnamese</option>
+                            </select>
+                        </div>
+                        <span class="me-2"><i class="fa-light fa-xmark"></i></span>
+                    </div>
+                </div>
+                <span class="add-filter fw-bold d-block link cable"><i class="fa-light fa-circle-plus me-2"></i>Add OR</span>
+            </div>
+            <!--selected rules end-->
+            <!--available rules start-->
+            <div class="segments-rules-wrapper" *ngIf="rulesList">
+                <div (click)="rulesList = !rulesList" class="rule-item d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><g fill="currentColor"><path d="M9.995 8.997a.333.333 0 00-.334.333v2.4a.666.666 0 01-.377.599.686.686 0 01-.706-.08L3.913 8.515a.666.666 0 010-1.04l4.665-3.733a.666.666 0 011.083.52v2.401a.333.333 0 00.334.334h5.544a.334.334 0 00.334-.388A8.011 8.011 0 007.952 0 8.072 8.072 0 00.007 7.671a7.997 7.997 0 0015.867 1.714.338.338 0 00-.333-.388H9.995z"></path></g></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">First Session</span>
+                    </div>
+                    <div class="rule-detail d-flex justify-content-between w-100">
+                        <span>The first date/time the device communicated with our servers</span>
+                        <span><i class="fa-light fa-plus"></i></span>
+                    </div>
+                </div>
+                <div (click)="rulesList = !rulesList" class="rule-item d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><g fill="currentColor"><path d="M7.985 0A8.014 8.014 0 00.063 6.613.333.333 0 00.396 7h5.547a.333.333 0 00.333-.333v-2.4a.667.667 0 011.083-.52l4.667 3.732a.667.667 0 010 1.042L7.36 12.254a.668.668 0 01-.416.146.673.673 0 01-.667-.667v-2.4A.333.333 0 005.943 9H.4a.337.337 0 00-.333.389 8 8 0 0015.866-1.715A8.075 8.075 0 007.985 0z"></path></g></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">Last Session</span>
+                    </div>
+                    <div class="rule-detail d-flex justify-content-between w-100">
+                        <span>The most recent date/time the device communicated with our servers</span>
+                        <span><i class="fa-light fa-plus"></i></span>
+                    </div>
+                </div>
+                <div (click)="rulesList = !rulesList" class="rule-item d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><g fill="currentColor"><path d="M1 .498h1.667a1 1 0 011 1v1.667a1 1 0 01-1 1H1a1 1 0 01-1-1V1.498a1 1 0 011-1zM1 6.165h1.667a1 1 0 011 1V8.83a1 1 0 01-1 1H1a1 1 0 01-1-1V7.165a1 1 0 011-1zM2.667 11.831H1a1 1 0 00-1 1v1.667a1 1 0 001 1h1.667a1 1 0 001-1v-1.667a1 1 0 00-1-1zM6.667.498H15a1 1 0 011 1v1.667a1 1 0 01-1 1H6.667a1 1 0 01-1-1V1.498a1 1 0 011-1zM15 6.165H6.667a1 1 0 00-1 1V8.83a1 1 0 001 1H15a1 1 0 001-1V7.165a1 1 0 00-1-1zM6.667 11.831H15a1 1 0 011 1v1.667a1 1 0 01-1 1H6.667a1 1 0 01-1-1v-1.667a1 1 0 011-1z"></path></g></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">Session Count</span>
+                    </div>
+                    <div class="rule-detail d-flex justify-content-between w-100">
+                        <span>Total number of times the device has opened your app or website</span>
+                        <span><i class="fa-light fa-plus"></i></span>
+                    </div>
+                </div>
+                <div (click)="rulesList = !rulesList" class="rule-item d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><path d="M8.5 8.667a.167.167 0 00.167-.167V1a1 1 0 00-1-1H1a1 1 0 00-1 1v6.667a1 1 0 001 1h7.5zM4 4.833A.167.167 0 003.833 5v1.333a.5.5 0 11-1 0v-3a1.5 1.5 0 013 0v3a.5.5 0 11-1 0V5a.167.167 0 00-.166-.167H4zm.333-2a.5.5 0 00-.5.5v.334A.167.167 0 004 3.833h.667a.167.167 0 00.166-.166v-.334a.5.5 0 00-.5-.5zM15 7.333H9.833a.167.167 0 00-.166.167v1.667a.5.5 0 01-.5.5h-2A.167.167 0 007 9.833V15a1 1 0 001 1h7a1 1 0 001-1V8.333a1 1 0 00-1-1zM9.667 10.5H11a.167.167 0 00.167-.167V10a.5.5 0 111 0v.333a.167.167 0 00.166.167h1.334a.5.5 0 010 1h-.418a.166.166 0 00-.162.128c-.112.457-.31.888-.584 1.27a.165.165 0 00-.028.133.164.164 0 00.079.109c.288.165.595.292.915.38a.5.5 0 11-.271.963 4.703 4.703 0 01-1.435-.667.166.166 0 00-.192 0 4.703 4.703 0 01-1.435.667.5.5 0 11-.27-.963c.32-.088.626-.215.914-.38a.166.166 0 00.08-.178.169.169 0 00-.029-.064 3.675 3.675 0 01-.584-1.27.165.165 0 00-.162-.128h-.418a.5.5 0 010-1zm1.815 1a.168.168 0 00-.137.072.167.167 0 00-.019.154c.055.142.122.279.2.41a.166.166 0 00.287 0c.078-.131.145-.268.2-.41a.168.168 0 00-.079-.207.168.168 0 00-.077-.019h-.375z" fill="currentColor"></path></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">Language</span>
+                    </div>
+                    <div class="rule-detail d-flex justify-content-between w-100">
+                        <span>The language of the user's device</span>
+                        <span><i class="fa-light fa-plus"></i></span>
+                    </div>
+                </div>
+                <div (click)="rulesList = !rulesList" class="rule-item d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><g fill="currentColor"><path d="M6.983 1.96A3.49 3.49 0 004.667 1H2.284a.167.167 0 01-.15-.239A1.33 1.33 0 013.333 0h3.333a2.5 2.5 0 011.608.663l7.333 7.334a1.334 1.334 0 010 1.884l-.44.44a.165.165 0 01-.232.005.165.165 0 01-.045-.072 2.314 2.314 0 00-.574-.961L6.983 1.959z"></path><path d="M8.432 15.9A1.32 1.32 0 018 15.608L.667 8.276A2.495 2.495 0 010 6.666V3.334A1.333 1.333 0 011.333 2h3.334a2.5 2.5 0 011.61.668l7.333 7.333a1.333 1.333 0 010 1.885L9.886 15.61a1.323 1.323 0 01-.943.39c-.175 0-.349-.034-.51-.1zM4.222 4.834a1 1 0 10-1.11 1.663 1 1 0 001.11-1.663z"></path></g></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">User Tag</span>
+                    </div>
+                    <div class="rule-detail d-flex justify-content-between w-100">
+                        <span>Tags you have added to the user's device</span>
+                        <span><i class="fa-light fa-plus"></i></span>
+                    </div>
+                </div>
+                <div (click)="rulesList = !rulesList" class="rule-item d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><g fill="currentColor"><path d="M16 8a8 8 0 10-8 8h.083A7.925 7.925 0 0016 8.083v-.042V8zm-1.333 0c0 .593-.081 1.184-.24 1.755a.332.332 0 01-.454.218 2.323 2.323 0 01-1.011-.846L11.483 6.91a1.666 1.666 0 00-1.386-.742h-.289a1.833 1.833 0 110-3.667h1.848c.069 0 .136.021.193.061A6.662 6.662 0 0114.667 8zM1.453 6.77a.333.333 0 01.327-.267h2.891a2.318 2.318 0 011.65.684l.746.746a2.333 2.333 0 01.093 3.2l-.906 1.02c-.271.305-.42.7-.42 1.108v.551a.334.334 0 01-.467.305A6.666 6.666 0 011.333 8c.001-.413.041-.825.12-1.23z"></path></g></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">Country</span>
+                    </div>
+                    <div class="rule-detail d-flex justify-content-between w-100">
+                        <span>Country the device was in the last time it communicated with our servers</span>
+                        <span><i class="fa-light fa-plus"></i></span>
+                    </div>
+                </div>
+                <div (click)="rulesList = !rulesList" class="rule-item d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><path d="M13.6666 12.8933 10.7599 8a.6659.6659 0 0 1-.0933-.34V1.6667a.3334.3334 0 0 1 .3333-.3334h1a.6666.6666 0 1 0 0-1.3333h-8a.6667.6667 0 1 0 0 1.3333h1a.3333.3333 0 0 1 .3333.3334v6a.6667.6667 0 0 1-.0933.34l-2.88 4.8466a2.0003 2.0003 0 0 0 .602 2.8571c.313.1897.672.2898 1.038.2896h8a1.9999 1.9999 0 0 0 1.66-3.1067h.0067Zm-7.8867-2.2266a.3343.3343 0 0 1-.2867-.1667.3336.3336 0 0 1 0-.3333l1.08-1.8267A.6668.6668 0 0 0 6.6666 8V1.6667a.3334.3334 0 0 1 .3333-.3334h2a.3333.3333 0 0 1 .3333.3334V3.5A.3333.3333 0 0 1 9 3.8333h-.88a.5.5 0 0 0 0 1h.88a.3333.3333 0 0 1 .3333.3334v.6666A.3333.3333 0 0 1 9 6.1667h-.88a.5.5 0 0 0 0 1h.88a.3333.3333 0 0 1 .3333.3333V8c0 .1197.0323.2371.0934.34l1.0733 1.8267a.3129.3129 0 0 1 0 .3333.3463.3463 0 0 1-.2933.1667H5.7799Z" fill="currentColor"></path></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">Test Users</span>
+                    </div>
+                    <div class="rule-detail d-flex justify-content-between w-100">
+                        <span>Includes all test users, which can be set up in All Users page</span>
+                        <span><i class="fa-light fa-plus"></i></span>
+                    </div>
+                </div>
+                <div (click)="rulesList = !rulesList" class="rule-item d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><g fill="currentColor"><path d="M10.262 7.667c0 .028.011.055.03.076l.458.494a.929.929 0 01-.887 1.537l-.654-.15a.109.109 0 00-.127.073l-.197.646a.925.925 0 01-1.77 0l-.197-.646a.108.108 0 00-.127-.074l-.654.15a.928.928 0 01-.886-1.537l.457-.493a.113.113 0 000-.152l-.458-.494a.929.929 0 01.887-1.537l.658.15a.107.107 0 00.126-.073l.197-.646a.925.925 0 011.77 0l.197.645a.107.107 0 00.127.075l.655-.151a.928.928 0 01.882 1.537l-.457.494a.113.113 0 00-.03.076zm-2.818.831a1 1 0 101.112-1.663 1 1 0 00-1.112 1.663z"></path><path d="M4.667 0h6.666a2 2 0 012 2v12a2 2 0 01-2 2H4.667a2 2 0 01-2-2V2a2 2 0 012-2zm7.235 12.902a.333.333 0 00.098-.235V2.333A.333.333 0 0011.667 2H4.333A.333.333 0 004 2.333v10.334a.333.333 0 00.333.333h7.334a.333.333 0 00.235-.098z"></path></g></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">App Version</span>
+                    </div>
+                    <div class="rule-detail d-flex justify-content-between w-100">
+                        <span>Version of your app</span>
+                        <span><i class="fa-light fa-plus"></i></span>
+                    </div>
+                </div>
+                <div (click)="rulesList = !rulesList" class="rule-item d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><path d="M11.333.023H4.667a2 2 0 00-2 2v11.954a2 2 0 002 2h6.666a2 2 0 002-2V2.023a2 2 0 00-2-2zM8 14.977a.666.666 0 110-1.332.666.666 0 010 1.332zm4-3a.667.667 0 01-.667.667H4.667A.667.667 0 014 11.977V2.356a.667.667 0 01.667-.667h6.666a.667.667 0 01.667.667v9.621z" fill="currentColor"></path></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">Device Type</span>
+                    </div>
+                    <div class="rule-detail d-flex justify-content-between w-100">
+                        <span>Device operating system</span>
+                        <span><i class="fa-light fa-plus"></i></span>
+                    </div>
+                </div>
+                <div (click)="rulesList = !rulesList" class="rule-item d-flex justify-content-between align-items-center">
+                    <div class="rule-name">
+                        <span class="me-2">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" class="sc-bczRLJ bYsFEe"><path fill="currentColor" d="M7.44797 7.02565a.96794.96794 0 0 0 .552.17281.967987.967987 0 0 0 .552-.17281l6.63843-4.9792c.0453-.03547.0825-.08029.1091-.1314a.4022.4022 0 0 0 .0446-.16486c.0029-.05751-.0067-.11497-.0279-.16849-.0213-.05351-.0538-.10182-.0954-.14165-.441-.40886-1.0195-.637267-1.6208-.640001H2.39997c-.60137.002734-1.1798.231141-1.620803.640001a.398318.398318 0 0 0-.100136.14264.398383.398383 0 0 0-.029668.17173.398377.398377 0 0 0 .046476.16797.398474.398474 0 0 0 .113728.13206l6.638403 4.9712Z"></path><path fill="currentColor" d="M9.5104 8.30403c-.43843.32038-.96738.49304-1.5104.49304s-1.07197-.17266-1.5104-.49304L.64 3.91843a.400005.400005 0 0 0-.204078-.07839.399932.399932 0 0 0-.214807.04062A.39997.39997 0 0 0 0 4.23843V12.8c0 .6365.252856 1.247.702944 1.6971C1.15303 14.9472 1.76348 15.2 2.4 15.2h11.2c.6365 0 1.247-.2528 1.6971-.7029.45-.4501.7029-1.0606.7029-1.6971V4.23843c0-.07429-.0207-.14711-.0597-.2103a.400608.400608 0 0 0-.1614-.14747c-.0665-.03323-.1408-.04729-.2148-.04062-.074.00667-.1447.03382-.2041.07839l-5.8496 4.3856Z"></path></svg>
+                        </span>
+                        <span class="fs-6 fw-bold">Email</span>
+                    </div>
+                    <div class="rule-detail d-flex justify-content-between w-100">
+                        <span>Email address of user, used for device matching</span>
+                        <span><i class="fa-light fa-plus"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Create Segment</button>
+        </div>
+      </div>
+    </div>
+</div>

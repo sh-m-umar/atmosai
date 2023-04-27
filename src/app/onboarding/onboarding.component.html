@@ -1,0 +1,1048 @@
+<div class="atmos-sales-report-header sticky-top card rounded-0 shadow-sm py-3">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="sales-header-ls">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                        <img src="./assets/img/fa-home-agent.png" class="me-2" width="50px">
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <small class="text-muted">Wed, Dec 21, 2022</small>
+                        <h2 class="mb-0 fw-bold">Good afternoon, {{user?.display_name}}</h2>
+                        <span>A quick lunch break to recharge, then back to HoneyBook to take charge! 💪</span>
+                    </div>
+                </div>
+            </div>
+            <div class="sales-header-rs">
+                <small class="text-muted d-block">7 days left in trial</small>
+                <span>Check out our <span class="link cable">pricing</span></span>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="pt-5 pb-5 for-add-agent-onboarding-accordion">    
+    <div class="container">
+        <div class="text-end mb-4 me-3">
+            <button *ngIf="isAdmin" type="button" data-bs-toggle="dropdown" aria-expanded="false" class="btn btn-outline-secondary dropdown-toggle">Select User</button>
+            <ul class="dropdown-menu">
+                <li *ngFor="let user of users">
+                    <a href="#" (click)="setUser( user.ID )" class="dropdown-item">{{user.display_name}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card shadow">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <div class="ls d-flex align-items-center w-100">
+                    <h3 class="mb-0 me-3 fw-bold">Let's get you up and running</h3>
+                    <button (click)="isProfileComplete = !isProfileComplete" class="btn btn-sm btn-outline-secondary">Mark as complete</button>
+                </div>
+                <div class="rs d-flex align-items-center w-100 justify-content-end">
+                    <div class="progress me-2 my-0 w-50">
+                        <div role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar" style="width: {{dataProgress()}}%;">{{dataProgress()}}%</div>
+                    </div>
+                    <div>
+                        <p class="m-0">{{dataProgress()}}% &nbsp; Completed</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 border-right pe-0">
+                        <ul class="nav nav-pills flex-column" id="setup-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0 active" id="pills-account-tab" data-bs-toggle="pill" data-bs-target="#pills-account" type="button" role="tab" aria-controls="pills-account" aria-selected="true">
+                                    <span class="tab-number">1</span>
+                                    <span>Welcome</span>
+                                </a>
+                            </li>                            
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0" id="pills-connect-tab" data-bs-toggle="pill" data-bs-target="#pills-connect" type="button" role="tab" aria-controls="pills-connect" aria-selected="false">
+                                    <span class="tab-number">2</span>
+                                    <span>Licenses</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0" id="pills-banking-tab" data-bs-toggle="pill" data-bs-target="#pills-banking" type="button" role="tab" aria-controls="pills-banking" aria-selected="false">
+                                    <span class="tab-number">3</span>
+                                    <span>Driver's License & Car Insurance</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link d-flex align-items-center justif-content-start btn fs-6 btn-outline-secondary btn-sm rounded-0" id="pills-telephony-tab" data-bs-toggle="pill" data-bs-target="#pills-telephony" type="button" role="tab" aria-controls="pills-telephony" aria-selected="false">
+                                    <span class="tab-number">4</span>
+                                    <span>Sign Agreement</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link d-flex align-items-center justif-content-start btn fs-6 btn-outline-secondary btn-sm rounded-0" id="pills-review-tab" data-bs-toggle="pill" data-bs-target="#pills-review" type="button" role="tab" aria-controls="pills-Review" aria-selected="false">
+                                    <span class="tab-number">5</span>
+                                    <span>Review</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link d-flex align-items-center justif-content-start btn fs-6 btn-outline-secondary btn-sm rounded-0" id="pills-complete-tab" data-bs-toggle="pill" data-bs-target="#pills-complete" type="button" role="tab" aria-controls="pills-complete" aria-selected="false">
+                                    <span class="tab-number">6</span>
+                                    <span>Complete</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-9 col-md-9 pt-4">
+                        <div class="tab-content" id="setup-tabContent">
+                            <div class="tab-pane fade show active mb-3" id="pills-account" role="tabpanel" aria-labelledby="pills-account-tab" tabindex="0">
+                                <div class="ondoarding-step-one">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="card">
+                                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                                    <div class="accordion-item pb-1 border">
+                                                      <h2 class="accordion-header" id="flush-headingOne">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                            <h3 class="mb-0">Summary of Onboarding</h3>
+                                                        </button>
+                                                      </h2>
+                                                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                        <div class="accordion-body">
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">First Name</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <p class="mb-0">{{user?.fname || '-'}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">Last Name</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <p class="mb-0">{{user?.lname || '-'}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">Email</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <p class="mb-0">{{user?.user_email || '-'}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="accordion-item pb-1 border">
+                                                      <h2 class="accordion-header" id="flush-headingTwo">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                                            <h3 class="mb-0">Add Your Information</h3>
+                                                        </button>
+                                                      </h2>
+                                                      <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                                        <div class="accordion-body">
+                                                            ...
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="accordion-item pb-1 border">
+                                                      <h2 class="accordion-header" id="flush-headingThree">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                                            <h3 class="mb-0">Add Real Estate License</h3>
+                                                        </button>
+                                                      </h2>
+                                                      <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                                        <div class="accordion-body">
+                                                            ...
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="accordion-item pb-1 border">
+                                                        <h2 class="accordion-header" id="flush-headingFour">
+                                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                                            <h3 class="mb-0">Add Driver's License and Car Insurance</h3>
+                                                          </button>
+                                                        </h2>
+                                                        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                                                          <div class="accordion-body">
+                                                              ...
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion-item pb-1 border">
+                                                        <h2 class="accordion-header" id="flush-headingFive">
+                                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                                                            <h3 class="mb-0">Sign Agreement</h3>
+                                                          </button>
+                                                        </h2>
+                                                        <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                                                          <div class="accordion-body">
+                                                              ...
+                                                          </div>
+                                                        </div>
+                                                    </div>                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-7">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h1 class="mb-0 text-center">Welcome</h1>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-4 d-flex align-items-center">
+                                                            <p class="fw-bold mb-0 ps-2">Phone Number:</p>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <input type="text" [(ngModel)]="userMetaData.phone" placeholder="(212) 939 2992" class="form-control form-control-sm">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-4 d-flex align-items-center">
+                                                            <p class="fw-bold mb-0 ps-2">Website</p>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <input type="text" [(ngModel)]="userMetaData.website" placeholder="Optional" class="form-control form-control-sm">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row align-items-baseline">
+                                                        <div class="col-4 pe-0">
+                                                            <p class="fw-bold mb-0 ps-2">Add a Profile Photo:</p>
+                                                            <p class="text-muted mb-0 ps-2">(Optional)</p>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <div class="upload">
+                                                                <div class="d-flex align-items-center ps-0">
+                                                                    <input type="file" class="screen-reader-text d-none" id="user-photo-upload" (change)="fileUpload( $event, 'user_photo' )" name="user-photo-upload" accept="image/*" />
+                                                                    <div class="i-con-text me-2 fw-normal">
+                                                                        <label for="user-photo-upload">Upload your Photo</label>
+                                                                    </div>
+                                                                    <div class="i-con">
+                                                                        <label for="user-photo-upload">
+                                                                            <i class="fa-light fa-arrow-up-from-square"></i>    
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-4 d-flex align-items-center">
+                                                            <p class="fw-bold mb-0 ps-2">Address:</p>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <input type="text" [(ngModel)]="userMetaData.address" placeholder="101 Main St" class="form-control form-control-sm">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-4 d-flex align-items-center">
+                                                            <p class="fw-bold mb-0 ps-2">City:</p>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <input type="text" [(ngModel)]="userMetaData.city" placeholder="Enter City" class="form-control form-control-sm">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-4 d-flex align-items-center">
+                                                            <p class="fw-bold mb-0 ps-2">Zip/Postal Code:</p>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <input type="text" [(ngModel)]="userMetaData.zip" placeholder="94109" class="form-control form-control-sm">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-4 d-flex align-items-center">
+                                                            <p class="fw-bold mb-0 ps-2">Country:</p>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <select class="form-select form-select-sm" [(ngModel)]="userMetaData.country">
+                                                                <option value="" [selected]="!userMetaData.country">Select Country</option>
+                                                                <option *ngFor="let country of countriesList" [selected]="userMetaData.country == country.name" value="{{country.name}}">{{country.name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-4 d-flex align-items-center">
+                                                            <p class="fw-bold mb-0 ps-2">State:</p>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <input type="text" [(ngModel)]="userMetaData.state" placeholder="Enter State" class="form-control form-control-sm">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                                <div class="setup-profile-btn me-4">
+                                    <button class="btn btn-outline-secondary mb-3">Cancel</button>
+                                    <button class="btn btn-primary ms-2 mb-3" [disabled]="( activateWelcomeNext() || tabLoading )" (click)="saveWelcomeData()">Continue <i *ngIf="tabLoading" class="fa fa-spinner fa-spin"></i></button>
+                                </div>                      
+                            </div>                            
+                            <div class="tab-pane fade mb-3" id="pills-connect" role="tabpanel" aria-labelledby="pills-connect-tab" tabindex="0">
+                                <div class="ondoarding-step-three">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="card">
+                                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                                    <div class="accordion-item pb-1 border">
+                                                      <h2 class="accordion-header" id="flush-headingOne">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                            <h3 class="mb-0">Summary of Onboarding</h3>
+                                                        </button>
+                                                      </h2>
+                                                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                        <div class="accordion-body">
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">First Name</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <p class="mb-0">{{user?.fname || '-'}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">Last Name</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <p class="mb-0">{{user?.lname || '-'}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">Email</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <p class="mb-0">{{user?.user_email || '-'}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="accordion-item pb-1 border">
+                                                      <h2 class="accordion-header" id="flush-headingTwo">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                                            <h3 class="mb-0">Add Your Information</h3>
+                                                        </button>
+                                                      </h2>
+                                                      <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                                        <div class="accordion-body">
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">Phone Number</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <p class="mb-0">{{userMetaData?.phone || '-'}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">Website</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <p class="mb-0">{{userMetaData?.website || '-'}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">Profile</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <img src="{{userMetaData.user_photo || './assets/img/profile-dummy.jpeg'}}" class="rounded float-start" width="75px" alt="...">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="accordion-item pb-1 border">
+                                                      <h2 class="accordion-header" id="flush-headingThree">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                                            <h3 class="mb-0">Add Real Estate License</h3>
+                                                        </button>
+                                                      </h2>
+                                                      <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                                        <div class="accordion-body">
+                                                            ...
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="accordion-item pb-1 border">
+                                                        <h2 class="accordion-header" id="flush-headingFour">
+                                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                                            <h3 class="mb-0">Add Driver's License and Car Insurance</h3>
+                                                          </button>
+                                                        </h2>
+                                                        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                                                          <div class="accordion-body">
+                                                              ...
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion-item pb-1 border">
+                                                        <h2 class="accordion-header" id="flush-headingFive">
+                                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                                                            <h3 class="mb-0">Sign Agreement</h3>
+                                                          </button>
+                                                        </h2>
+                                                        <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                                                          <div class="accordion-body">
+                                                              ...
+                                                          </div>
+                                                        </div>
+                                                    </div>                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-7">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h1 class="mb-0 text-center">Add Real Estate License</h1>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-4 d-flex align-items-center pe-0">
+                                                            <p class="fw-bold mb-0 ps-2">Real Estate License #:</p>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <input type="text" [(ngModel)]="userMetaData.license_number" placeholder="0000000" class="form-control form-control-sm">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-4 d-flex align-items-center pe-0">
+                                                            <p class="fw-bold mb-0 ps-2">License Expiration:</p>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <input type="text" [(ngModel)]="userMetaData.license_expiry" placeholder="02/23/2016" class="form-control form-control-sm">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-4 d-flex align-items-center pe-0">
+                                                            <p class="fw-bold mb-0 ps-2">Add Real Estate License:</p>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <div class="upload">
+                                                                <div class="d-flex align-items-center ps-0">
+                                                                    <input type="file" class="screen-reader-text d-none" id="real-estate-license-file" (change)="fileUpload( $event, 'real_estate_license' )" name="real-estate-license-file" accept="image/*" />
+                                                                    <div class="i-con-text me-2">
+                                                                        <label for="real-estate-license-file">Upload your License</label>
+                                                                    </div>
+                                                                    <div class="i-con">
+                                                                        <label for="real-estate-license-file">
+                                                                            <i class="fa-solid fa-arrow-up-from-square"></i>    
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                                <div class="setup-profile-btn me-4">
+                                    <button class="btn btn-outline-secondary mb-3" (click)="previousTab( 'pills-account-tab' )">Previous Step</button>
+                                    <button class="btn btn-primary ms-2 mb-3" [disabled]="( activateLicenseNext() || tabLoading )" (click)="saveLicenseData()">Next Step <i *ngIf="tabLoading" class="fa fa-spinner fa-spin"></i></button>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade pb-3 mb-3" id="pills-banking" role="tabpanel" aria-labelledby="pills-banking-tab" tabindex="0">
+                                <div class="ondoarding-step-four">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="card">
+                                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                                    <div class="accordion-item pb-1 border">
+                                                        <h2 class="accordion-header" id="flush-headingOne">
+                                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                              <h3 class="mb-0">Summary of Onboarding</h3>
+                                                          </button>
+                                                        </h2>
+                                                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                          <div class="accordion-body">
+                                                              <div class="row">
+                                                                  <div class="col-5">
+                                                                      <p class="fw-bold mb-0">First Name</p>
+                                                                  </div>
+                                                                  <div class="col-7 ps-0 pe-0">
+                                                                      <p class="mb-0">{{user?.fname || '-'}}</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="row">
+                                                                  <div class="col-5">
+                                                                      <p class="fw-bold mb-0">Last Name</p>
+                                                                  </div>
+                                                                  <div class="col-7 ps-0 pe-0">
+                                                                      <p class="mb-0">{{user?.lname || '-'}}</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="row">
+                                                                  <div class="col-5">
+                                                                      <p class="fw-bold mb-0">Email</p>
+                                                                  </div>
+                                                                  <div class="col-7 ps-0 pe-0">
+                                                                      <p class="mb-0">{{user?.user_email || '-'}}</p>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="accordion-item pb-1 border">
+                                                        <h2 class="accordion-header" id="flush-headingTwo">
+                                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                                              <h3 class="mb-0">Add Your Information</h3>
+                                                          </button>
+                                                        </h2>
+                                                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                                          <div class="accordion-body">
+                                                              <div class="row">
+                                                                  <div class="col-5">
+                                                                      <p class="fw-bold mb-0">Phone Number</p>
+                                                                  </div>
+                                                                  <div class="col-7 ps-0 pe-0">
+                                                                      <p class="mb-0">{{userMetaData?.phone || '-'}}</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="row">
+                                                                  <div class="col-5">
+                                                                      <p class="fw-bold mb-0">Website</p>
+                                                                  </div>
+                                                                  <div class="col-7 ps-0 pe-0">
+                                                                      <p class="mb-0">{{userMetaData?.website || '-'}}</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="row">
+                                                                  <div class="col-5">
+                                                                      <p class="fw-bold mb-0">Profile</p>
+                                                                  </div>
+                                                                  <div class="col-7 ps-0 pe-0">
+                                                                      <img src="{{userMetaData.user_photo || './assets/img/profile-dummy.jpeg'}}" class="rounded float-start" width="75px" alt="...">
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    <div class="accordion-item pb-1 border">
+                                                      <h2 class="accordion-header" id="flush-headingThree">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                                            <h3 class="mb-0">Add Real Estate License</h3>
+                                                        </button>
+                                                      </h2>
+                                                      <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                                        <div class="accordion-body">
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">Real Estate License #</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <p class="mb-0">{{userMetaData?.license_number || '-'}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">License Expiration</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <p class="mb-0">{{userMetaData?.license_expiry || '-'}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">Estate License</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <a *ngIf="( userMetaData.real_estate_license && !isImage( userMetaData.real_estate_license ) )" href="{{userMetaData.real_estate_license}}" target="_blank">License</a>
+                                                                    <img *ngIf="( userMetaData.real_estate_license && isImage( userMetaData.real_estate_license ) )" src="{{userMetaData.real_estate_license}}" class="rounded float-start" width="75px" alt="...">
+                                                                    <span *ngIf="!userMetaData.real_estate_license">-</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="accordion-item pb-1 border">
+                                                        <h2 class="accordion-header" id="flush-headingFour">
+                                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                                            <h3 class="mb-0">Add Driver's License and Car Insurance</h3>
+                                                          </button>
+                                                        </h2>
+                                                        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                                                          <div class="accordion-body">
+                                                              ...
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion-item pb-1 border">
+                                                        <h2 class="accordion-header" id="flush-headingFive">
+                                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                                                            <h3 class="mb-0">Sign Agreement</h3>
+                                                          </button>
+                                                        </h2>
+                                                        <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                                                          <div class="accordion-body">
+                                                              ...
+                                                          </div>
+                                                        </div>
+                                                    </div>                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-7">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h1 class="mb-0 text-center">Add Driver's License and Car Insurance</h1>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-5 d-flex align-items-center pe-0">
+                                                            <p class="fw-bold mb-0 ps-2">Add Driver's License #:</p>
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <div class="upload">
+                                                                <div class="d-flex align-items-center ps-0">
+                                                                    <input type="file" class="screen-reader-text d-none" id="driver-license-field" (change)="fileUpload( $event, 'driving_license' )" name="driver-license-field" accept="image/*" />
+                                                                    <div class="i-con-text me-2">
+                                                                        <label for="driver-license-field">Upload your License</label>
+                                                                    </div>
+                                                                    <div class="i-con">
+                                                                        <label for="driver-license-field">
+                                                                            <i class="fa-solid fa-arrow-up-from-square"></i>    
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-5 d-flex align-items-center pe-0">
+                                                            <p class="fw-bold mb-0 ps-2">Add Car Insurance:</p>
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <div class="upload">
+                                                                <div class="d-flex align-items-center ps-0">
+                                                                    <input type="file" class="screen-reader-text d-none" id="car-insurance-field" (change)="fileUpload( $event, 'car_insurance' )" name="car-insurance-field" accept="image/*" />
+                                                                    <div class="i-con-text me-2">
+                                                                        <label for="car-insurance-field">Upload your License</label>
+                                                                    </div>
+                                                                    <div class="i-con">
+                                                                        <label for="car-insurance-field">
+                                                                            <i class="fa-solid fa-arrow-up-from-square"></i>    
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>                                                    
+                                                </div>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                                <div class="setup-profile-btn me-4">
+                                    <button class="btn btn-outline-secondary mb-3" (click)="previousTab( 'pills-connect-tab' )">Previous Step</button>
+                                    <button class="btn btn-primary ms-2 mb-3" [disabled]="activateDriversNext()" (click)="saveDriversData()">Next Step <i *ngIf="tabLoading" class="fa fa-spinner fa-spin"></i></button>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-telephony" role="tabpanel" aria-labelledby="pills-telephony-tab" tabindex="0">
+                                <div class="ondoarding-step-five">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="card">
+                                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                                    <div class="accordion-item pb-1 border">
+                                                        <h2 class="accordion-header" id="flush-headingOne">
+                                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                              <h3 class="mb-0">Summary of Onboarding</h3>
+                                                          </button>
+                                                        </h2>
+                                                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                          <div class="accordion-body">
+                                                              <div class="row">
+                                                                  <div class="col-5">
+                                                                      <p class="fw-bold mb-0">First Name</p>
+                                                                  </div>
+                                                                  <div class="col-7 ps-0 pe-0">
+                                                                      <p class="mb-0">{{user?.fname || '-'}}</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="row">
+                                                                  <div class="col-5">
+                                                                      <p class="fw-bold mb-0">Last Name</p>
+                                                                  </div>
+                                                                  <div class="col-7 ps-0 pe-0">
+                                                                      <p class="mb-0">{{user?.lname || '-'}}</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="row">
+                                                                  <div class="col-5">
+                                                                      <p class="fw-bold mb-0">Email</p>
+                                                                  </div>
+                                                                  <div class="col-7 ps-0 pe-0">
+                                                                      <p class="mb-0">{{user?.user_email || '-'}}</p>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="accordion-item pb-1 border">
+                                                        <h2 class="accordion-header" id="flush-headingTwo">
+                                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                                              <h3 class="mb-0">Add Your Information</h3>
+                                                          </button>
+                                                        </h2>
+                                                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                                          <div class="accordion-body">
+                                                              <div class="row">
+                                                                  <div class="col-5">
+                                                                      <p class="fw-bold mb-0">Phone Number</p>
+                                                                  </div>
+                                                                  <div class="col-7 ps-0 pe-0">
+                                                                      <p class="mb-0">{{userMetaData?.phone || '-'}}</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="row">
+                                                                  <div class="col-5">
+                                                                      <p class="fw-bold mb-0">Website</p>
+                                                                  </div>
+                                                                  <div class="col-7 ps-0 pe-0">
+                                                                      <p class="mb-0">{{userMetaData?.website || '-'}}</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="row">
+                                                                  <div class="col-5">
+                                                                      <p class="fw-bold mb-0">Profile</p>
+                                                                  </div>
+                                                                  <div class="col-7 ps-0 pe-0">
+                                                                      <img src="{{userMetaData.user_photo || './assets/img/profile-dummy.jpeg'}}" class="rounded float-start" width="75px" alt="...">
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    <div class="accordion-item pb-1 border">
+                                                      <h2 class="accordion-header" id="flush-headingThree">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                                            <h3 class="mb-0">Add Real Estate License</h3>
+                                                        </button>
+                                                      </h2>
+                                                      <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                                        <div class="accordion-body">
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">Real Estate License #</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <p class="mb-0">{{userMetaData?.license_number || '-'}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">License Expiration</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <p class="mb-0">{{userMetaData?.license_expiry || '-'}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">Estate License</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <a *ngIf="( userMetaData.real_estate_license && !isImage( userMetaData.real_estate_license ) )" href="{{userMetaData.real_estate_license}}" target="_blank">License</a>
+                                                                    <img *ngIf="( userMetaData.real_estate_license && isImage( userMetaData.real_estate_license ) )" src="{{userMetaData.real_estate_license}}" class="rounded float-start" width="75px" alt="...">
+                                                                    <span *ngIf="!userMetaData.real_estate_license">-</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="accordion-item pb-1 border">
+                                                        <h2 class="accordion-header" id="flush-headingFour">
+                                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                                            <h3 class="mb-0">Add Driver's License and Car Insurance</h3>
+                                                          </button>
+                                                        </h2>
+                                                        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                                                          <div class="accordion-body">
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">Driver's License</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <a *ngIf="( userMetaData.driving_license && !isImage( userMetaData.driving_license ) )" href="{{userMetaData.driving_license}}" target="_blank">License</a>
+                                                                    <img *ngIf="( userMetaData.driving_license && isImage( userMetaData.driving_license ) )" src="{{userMetaData.driving_license}}" class="rounded float-start" width="75px" alt="...">
+                                                                    <span *ngIf="!userMetaData.driving_license">-</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-5">
+                                                                    <p class="fw-bold mb-0">Car Insurance</p>
+                                                                </div>
+                                                                <div class="col-7 ps-0 pe-0">
+                                                                    <a *ngIf="( userMetaData.car_insurance && !isImage( userMetaData.car_insurance ) )" href="{{userMetaData.car_insurance}}" target="_blank">License</a>
+                                                                    <img *ngIf="( userMetaData.car_insurance && isImage( userMetaData.car_insurance ) )" src="{{userMetaData.car_insurance}}" class="rounded float-start" width="75px" alt="...">
+                                                                    <span *ngIf="!userMetaData.car_insurance">-</span>
+                                                                </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion-item pb-1 border">
+                                                        <h2 class="accordion-header" id="flush-headingFive">
+                                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                                                            <h3 class="mb-0">Sign Agreement</h3>
+                                                          </button>
+                                                        </h2>
+                                                        <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                                                          <div class="accordion-body">
+                                                              ...
+                                                          </div>
+                                                        </div>
+                                                    </div>                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-7">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h1 class="mb-0 text-center">Sign Agreement</h1>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-12 d-flex align-items-center pe-0">
+                                                            <p class="mb-0 ">Please read and sign the following agreement.</p>
+                                                        </div>                                                        
+                                                    </div>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-sm-12d-flex align-items-center pe-0">
+                                                            <p class="mb-0 ">Your signature required on indendent Contractor Agreement - California <span>Check out our <span
+                                                                        data-bs-toggle="modal" data-bs-target="#exampleModal" class="link cable">Click here to
+                                                                        sign</span></span></p>
+                                                        </div>
+                                                    </div>                                                                                                                                                           
+                                                </div>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                                <div class="setup-profile-btn me-4">
+                                    <button class="btn btn-outline-secondary mb-3">Previous Step</button>
+                                    <button class="btn btn-primary ms-2 mb-3">Next Step</button>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab" tabindex="0">
+                                <div class="setup-account-title mb-5 mt-3">
+                                    <p class="setup-account-title-head">Review</p>
+                                    <div class="row align-items-center">
+                                        <div class="col-5">
+                                            <p class="fw-bold mb-0">First Name</p>
+                                        </div>
+                                        <div class="col-7 ps-0 pe-0 d-flex justify-content-center">
+                                            <p class="mb-0">{{user?.fname || '-'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-5">
+                                            <p class="fw-bold mb-0">Last Name</p>
+                                        </div>
+                                        <div class="col-7 ps-0 pe-0 d-flex justify-content-center">
+                                            <p class="mb-0">{{user?.lname || '-'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-5">
+                                            <p class="fw-bold mb-0">Email</p>
+                                        </div>
+                                        <div class="col-7 ps-0 pe-0 d-flex justify-content-center">
+                                            <p class="mb-0">{{user?.user_email || '-'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-5">
+                                            <p class="fw-bold mb-0">Phone Number</p>
+                                        </div>
+                                        <div class="col-7 ps-0 pe-0 d-flex justify-content-center">
+                                            <p class="mb-0">{{userMetaData?.phone || '-'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-5">
+                                            <p class="fw-bold mb-0">Website</p>
+                                        </div>
+                                        <div class="col-7 ps-0 pe-0 d-flex justify-content-center">
+                                            <p class="mb-0">{{userMetaData?.website || '-'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-5">
+                                            <p class="fw-bold mb-0">Profile</p>
+                                        </div>
+                                        <div class="col-7 ps-0 pe-0 d-flex justify-content-center">
+                                            <img src="{{userMetaData.user_photo || './assets/img/profile-dummy.jpeg'}}" class="rounded float-start" width="75px" alt="...">
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-5">
+                                            <p class="fw-bold mb-0">Real Estate License #</p>
+                                        </div>
+                                        <div class="col-7 ps-0 pe-0 d-flex justify-content-center">
+                                            <p class="mb-0">{{userMetaData?.license_number || '-'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-5">
+                                            <p class="fw-bold mb-0">License Expiration</p>
+                                        </div>
+                                        <div class="col-7 ps-0 pe-0 d-flex justify-content-center">
+                                            <p class="mb-0">{{userMetaData?.license_expiry || '-'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-5">
+                                            <p class="fw-bold mb-0">Estate License</p>
+                                        </div>
+                                        <div class="col-7 ps-0 pe-0 d-flex justify-content-center">
+                                            <a *ngIf="( userMetaData.real_estate_license && !isImage( userMetaData.real_estate_license ) )" href="{{userMetaData.real_estate_license}}" target="_blank">License</a>
+                                            <img *ngIf="( userMetaData.real_estate_license && isImage( userMetaData.real_estate_license ) )" src="{{userMetaData.real_estate_license}}" class="rounded float-start" width="75px" alt="...">
+                                            <span *ngIf="!userMetaData.real_estate_license">-</span>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-5">
+                                            <p class="fw-bold mb-0">Driver's License</p>
+                                        </div>
+                                        <div class="col-7 ps-0 pe-0 d-flex justify-content-center">
+                                            <a *ngIf="( userMetaData.driving_license && !isImage( userMetaData.driving_license ) )" href="{{userMetaData.driving_license}}" target="_blank">License</a>
+                                            <img *ngIf="( userMetaData.driving_license && isImage( userMetaData.driving_license ) )" src="{{userMetaData.driving_license}}" class="rounded float-start" width="75px" alt="...">
+                                            <span *ngIf="!userMetaData.driving_license">-</span>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-5">
+                                            <p class="fw-bold mb-0">Car Insurance</p>
+                                        </div>
+                                        <div class="col-7 ps-0 pe-0 d-flex justify-content-center">
+                                            <a *ngIf="( userMetaData.car_insurance && !isImage( userMetaData.car_insurance ) )" href="{{userMetaData.car_insurance}}" target="_blank">License</a>
+                                            <img *ngIf="( userMetaData.car_insurance && isImage( userMetaData.car_insurance ) )" src="{{userMetaData.car_insurance}}" class="rounded float-start" width="75px" alt="...">
+                                            <span *ngIf="!userMetaData.car_insurance">-</span>
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="tab-pane fade" id="pills-complete" role="tabpanel" aria-labelledby="pills-complete-tab" tabindex="0">
+                                <div class="setup-account-title">
+                                    <p class="setup-account-title-head">Thank You!</p>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="mt-5 pt-5 pb-5 bg-white-light">
+    <div class="container pt-4 pb-4">
+        <div class="row" [ngClass]="{'faded': isProfileComplete}">
+            <div class="col-sm-12 text-center mb-5">
+                <h1 class="mb-2">Explore useful features and set up AtmosAI Books</h1>
+                <p class="mb-0">AtmosAi Books is your easy-to-use online accounting software. Let us help you set up AtmosAi Books and get it up and running for your business.</p>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 pt-2">
+                                <i class="fa-light fa-users fa-2x"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h3 class="mb-1 fw-bold">Invite other team members</h3>
+                                <p class="mb-3">Get started building your team. Invite your team to either become members, have viewing access only or</p>
+                                <button data-bs-toggle="modal" data-bs-target="#inviteModal" class="btn btn-primary btn-sm">Configure</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 pt-2">
+                                <i class="fa-light fa-file-import fa-2x"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h3 class="mb-1 fw-bold"> Set up your first lead or import existing leads</h3>
+                                <p class="mb-3">Add apps to your CRM to enhance your business. Apps like invoices and quo Campaigns to engage customers and leads, Power and predictive dialer to give your sales team everything it needs.</p>
+                                <button data-bs-toggle="modal" data-bs-target="#importleads" class="btn btn-primary btn-sm">Configure</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 pt-2">
+                                <i class="fa-light fa-rocket-launch fa-2x"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h3 class="mb-1 fw-bold"> Add apps like Quotes and Invoices or campaigns</h3>
+                                <p class="mb-3"> Add apps to your CRM to enhance your business. Apps like invoices and quotes, Campaigns to engage customers and leads, Power and predictive dialer to give your sales team everything it needs.</p>
+                                <button data-bs-toggle="modal" data-bs-target="#appstoremodal" class="btn btn-primary btn-sm">Configure</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 pt-2">
+                                <i class="fa-light fa-envelopes-bulk fa-2x"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h3 class="mb-1 fw-bold">Sync your Gmail or Outlook</h3>
+                                <p class="mb-3">Set up your mail accounts to the atmos system and enjoy everything in one inbox.</p>
+                                <button data-bs-toggle="modal" data-bs-target="#" class="btn btn-primary btn-sm">Configure</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 pt-2">
+                                <i class="fa-light fa-shop fa-2x"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h3 class="mb-1 fw-bold"> Customize your sales pipeline one easy step</h3>
+                                <p class="mb-3"> Add apps to your CRM to enhance your business. Apps like invoices and quotes, Campaigns to engage customers and leads, Power and predictive dialer to give your sales team everything it needs.</p>
+                                <button routerLink="/boards/2/kanban" class="btn btn-primary btn-sm">Configure</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 pt-2">
+                                <i class="fa-light fa-file-invoice-dollar fa-2x"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h3 class="mb-1 fw-bold">Add apps like Quotes and Invoices or campaigns</h3>
+                                <p class="mb-3">Add your employees, time-sheet staff, and accountants as users to AtmosAi Books by configuring different
+                                    roles and permissions for them. <a href="" class="">Learn More</a>
+                                </p>
+                                <button data-bs-toggle="modal" data-bs-target="#" class="btn btn-primary btn-sm">Configure</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

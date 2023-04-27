@@ -1,0 +1,300 @@
+<div class="pipeline-container" cdkDropListGroup *ngIf="statuses.length">
+    <div *ngFor="let status of statuses; let i = index;" [ngClass]="{'colfolded': status.folded === true, 'd-none': [outStatus.lost, outStatus.won, outStatus.abandoned].includes(status.id)}" class="pipeline-col">
+        <div class="pipeline-header mb-2">
+            <div class="first-row purple" style="background:{{status.color}};">
+                <span class="unfold-icon" (click)="foldCol(i, false)"><i class="fas fa-arrow-right"></i></span>
+                <div class="col-heading">
+                    <span *ngIf="status.isEdit !== true || status.folded === true" (click)="status.isEdit = true" class="title">{{status.name}}</span>
+                    <div class="border rounded-3" *ngIf="status.isEdit === true && status.folded !== true">
+                        <div class="status-color-picker dropdown">
+                            <span #colorPicker (mouseover)="colorPicker.click()" class="selected-color color-selected" style="background: {{status.color}}" data-bs-toggle="dropdown" aria-expanded="false"></span>
+                            <div class="dropdown-menu color-options">
+                                <ul>
+                                    <li *ngFor="let color of boardsComponent.getAvailablePallets(statuses)" (click)="status.color = color; updateStatusColumn(i)" class="color-item"><span style="background: {{color}};"></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <input class="custom-kanban-input" (focusout)="updateStatusColumn(i)" (keyup.enter)="updateStatusColumn(i)" [(ngModel)]="status.name"/>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center actionz">
+                    <div>
+                        <span data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-gear"></i></span>
+                        <ul class="dropdown-menu">
+                            <li><span (click)="foldCol(i)" class="dropdown-item">Fold</span></li>
+                            <li><span (click)="status.isEdit = true" class="dropdown-item">Edit</span></li>
+                            <li><span (click)="deleteColumn(i)" class="dropdown-item">Delete</span></li>
+                        </ul>
+                    </div>
+                    <span (click)="addNewEntry(status.id)" class="ms-2"><i class="fa-solid fa-plus"></i></span>
+                </div>
+            </div>
+            <div class="pipeline-count">
+                {{entriesObj['st_' + status.id].length}} Opportunities
+            </div>
+            <div class="pipeline-vlaue text-uppercase">
+                <span>Annualized value</span><span class="divider horizontal"></span><span>${{getValueSum(status.id)}}</span>
+            </div>
+            <div *ngIf="boardsComponent.selectedOptionKanban !== 'minimal'" class="pipeline-vlaue text-uppercase">
+                <span>Monthly value</span><span class="divider horizontal"></span><span>${{getValueSum(status.id, 'monthly')}}</span>
+            </div>
+            <hr class="my-1 seperator">
+            <div *ngIf="boardsComponent.selectedOptionKanban !== 'minimal'" class="pipeline-vlaue text-uppercase">
+                <span>Annual value</span><span class="divider horizontal"></span><span>${{getValueSum(status.id, 'annual')}}</span>
+            </div>
+            <div *ngIf="boardsComponent.selectedOptionKanban !== 'minimal'" class="pipeline-vlaue text-uppercase">
+                <span>One time value</span><span class="divider horizontal"></span><span>${{getValueSum(status.id, 'one-time')}}</span>
+            </div>
+        </div>
+        <div class="pipeline-body" cdkDropList [cdkDropListData]="entriesObj['st_' + status.id]" (cdkDropListDropped)="drop($event, status.id)">
+            <div class="card" *ngFor="let item of entriesObj['st_' + status.id]; let iEntry = index;" cdkDrag (cdkDragStarted)="dragStart($event)" [cdkDragDisabled]="item.isEdit">
+                <div class="card-header mb-1 d-flex justify-content-between align-items-center">
+                    <span>{{item.item}}</span>
+                    <span class="cable" (click)="boardsComponent.showDetailPopup( item )">
+                        <svg _ngcontent-mpr-c469="" viewBox="0 0 20 20" fill="currentColor" width="24" height="24" aria-hidden="true" class="icon_component chat-without-update icon_component--no-focus-style"><path _ngcontent-mpr-c469="" d="M10.4339 1.94996C11.5976 1.94797 12.7458 2.21616 13.7882 2.7334C14.8309 3.25083 15.7393 4.00335 16.4416 4.93167C17.144 5.85999 17.6211 6.93874 17.8355 8.08291C18.0498 9.22707 17.9956 10.4054 17.6769 11.525C17.3583 12.6446 16.7839 13.6749 15.9992 14.5347C15.2145 15.3945 14.2408 16.0604 13.1549 16.4797C12.069 16.8991 10.9005 17.0605 9.7416 16.9513C8.72154 16.8552 7.7334 16.5518 6.83723 16.0612L4.29494 17.2723C3.23222 17.7785 2.12271 16.6692 2.62876 15.6064L3.83948 13.0636C3.26488 12.0144 2.94833 10.8411 2.91898 9.64114C2.88622 8.30169 3.21251 6.97789 3.86399 5.8071C4.51547 4.63631 5.4684 3.66119 6.62389 2.98294C7.77902 2.30491 9.09451 1.94825 10.4339 1.94996ZM10.4339 1.94996C10.4343 1.94996 10.4348 1.94996 10.4352 1.94996L10.4341 2.69996L10.4327 1.94996C10.4331 1.94996 10.4335 1.94996 10.4339 1.94996ZM13.1214 4.07707C12.2868 3.66289 11.3673 3.44821 10.4355 3.44996L10.433 3.44996C9.36086 3.44842 8.30784 3.73382 7.38321 4.27655C6.45858 4.81929 5.69605 5.59958 5.17473 6.53645C4.65341 7.47332 4.39232 8.53263 4.41853 9.60446C4.44475 10.6763 4.75732 11.7216 5.32382 12.6318C5.45888 12.8489 5.47411 13.1197 5.36422 13.3505L4.28601 15.615L6.55002 14.5365C6.78078 14.4266 7.05164 14.4418 7.26869 14.5768C8.05992 15.0689 8.95463 15.3706 9.88231 15.458C10.81 15.5454 11.7453 15.4161 12.6145 15.0805C13.4838 14.7448 14.2631 14.2118 14.8913 13.5236C15.5194 12.8353 15.9791 12.0106 16.2342 11.1144C16.4893 10.2182 16.5327 9.27499 16.3611 8.35913C16.1895 7.44328 15.8076 6.57978 15.2454 5.8367C14.6832 5.09362 13.9561 4.49125 13.1214 4.07707Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path><path _ngcontent-mpr-c469="" d="M11.25 6.5C11.25 6.08579 10.9142 5.75 10.5 5.75C10.0858 5.75 9.75 6.08579 9.75 6.5V8.75H7.5C7.08579 8.75 6.75 9.08579 6.75 9.5C6.75 9.91421 7.08579 10.25 7.5 10.25H9.75V12.5C9.75 12.9142 10.0858 13.25 10.5 13.25C10.9142 13.25 11.25 12.9142 11.25 12.5V10.25H13.5C13.9142 10.25 14.25 9.91421 14.25 9.5C14.25 9.08579 13.9142 8.75 13.5 8.75H11.25V6.5Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex" *ngIf="!item.isEdit">
+                        <div class="flex-shrink-0">
+                            <div class="initials text-uppercase" style="background:{{status.color}};color:#fff;">{{item.created !== undefined ? item.created.fname[0] + item.created.lname[0] : ''}}</div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h5>${{item.deal_value !== undefined ? item.deal_value : 0}} {{item.frequency !== undefined ? item.frequency : ''}}</h5>
+                                    <p>{{item.confidence !== undefined ? item.confidence : 0}}% on {{item.created !== undefined ? item.created.date : ''}}</p>
+                                </div>
+                                <div class="ms-2">
+                                    <span (click)="editEntry(status.id,iEntry)" class="pipline-edit"><i class="fa-solid fa-pencil"></i></span>
+                                    <span (click)="deleteEntry(status.id,iEntry)" class="pipline-delete ms-2"><i class="fa-solid fa-trash"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-edit row" *ngIf="item.isEdit">
+                        <div class="add-opportunity-wrp">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group mb-2">
+                                        <label>Deal title</label>
+                                        <input [(ngModel)]="entryObj.item" class="form-control form-control-sm"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label>Company</label>
+                                <input class="form-control form-control-sm" [(ngModel)]="entryObj.company"/>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group mb-2">
+                                        <label for="">Contact</label>
+                                        <select [(ngModel)]="entryObj.contacts" class="form-select form-select-sm">
+                                            <option *ngFor="let contact of connectedContacts" value="{{contact.id}}">{{contact.item}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group mb-2 primary-rounded-datepicker">
+                                        <label for="">Estimated close date</label>
+                                        <mat-form-field floatLabel="never">
+                                            <input matInput [ngxMatDatetimePicker]="pickerFrom" [(ngModel)]="entryObj.expected_close_date">
+                                            <mat-datepicker-toggle matSuffix [for]="$any(pickerFrom)"></mat-datepicker-toggle>
+                                            <ngx-mat-datetime-picker #pickerFrom [enableMeridian]="true"></ngx-mat-datetime-picker>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 mt-2">
+                                    <div class="form-group mb-2">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <label>Confidence</label>
+                                            <span><b>{{entryObj.confidence}}%</b></span>
+                                        </div>
+                                        <mat-slider [(ngModel)]="entryObj.confidence" tickInterval="1" step="1" min="0" max="100" aria-label="units"></mat-slider>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group mb-2">
+                                        <label for="">Deal Value ($)</label>
+                                        <input [(ngModel)]="entryObj.deal_value" type="number" class="form-control form-control-sm">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group mb-2">
+                                        <label for="">Frequency</label>
+                                        <select [(ngModel)]="entryObj.frequency" class="form-select form-select-sm">
+                                            <option value="One time">One time</option>
+                                            <option value="Monthly">Monthly</option>
+                                            <option value="Annual">Annual</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="">Owner</label>
+                                <select [(ngModel)]="entryObj.owner" class="form-select form-select-sm">
+                                    <option *ngFor="let user of this.boardsComponent.users" value="{{user.ID}}">{{user.display_name}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span (click)="deleteEntry(status.id,iEntry)" class="remove-task cable cable"><i class="fa-light fa-trash"></i></span>
+                                    <div>
+                                        <button (click)="editEntry(status.id,iEntry, false)" class="btn btn-sm btn-outlined-secondary me-2">Cancel</button>
+                                        <button (click)="updateEntry()" class="btn btn-sm btn-primary">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pipeline-default-cols-wrp drag-center" id="drap-override-popup" [ngClass]="{'d-none-visiblity': !defaultdropCols}">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-body shadow">
+                    <div class="row text-center">
+                        <div class="col-sm-4">
+                            <div cdkDropList [cdkDropListData]="entriesObj['st_' + outStatus.abandoned]" (cdkDropListDropped)="dropTo($event, outStatus.abandoned, 'abandoned')" class="colz">
+                                <span class="dragbox-placeholder">Abandoned</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div cdkDropList [cdkDropListData]="entriesObj['st_' + outStatus.lost]" (cdkDropListDropped)="dropTo($event, outStatus.lost, 'lost')" class="colz">
+                                <span class="dragbox-placeholder">Lost</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div cdkDropList [cdkDropListData]="entriesObj['st_' + outStatus.won]" (cdkDropListDropped)="dropTo($event, outStatus.won, 'won')" class="colz">
+                                <span class="dragbox-placeholder">Won</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pipeline-col add-new-col">
+        <div class="d-flex" *ngIf="addNewCol">
+            <input [(ngModel)]="newStatusName" type="text" class="form-control form-control-sm" placeholder="Title">
+            <!--            <select class="form-control form-control-sm ms-2">-->
+            <!--                <option selected>Active</option>-->
+            <!--                <option value="1">Won</option>-->
+            <!--                <option value="2">Lost</option>-->
+            <!--            </select>-->
+            <button (click)="createNewStatus()" class="btn btn-primary btn-sm ms-2">Save</button>
+            <button class="btn btn-primary btn-sm ms-2" (click)="addNewCol = false">Cancel</button>
+        </div>
+        <div class="media d-flex align-items-center" *ngIf="!addNewCol" (click)="addNewCol = true">
+            <span class="add-icon fs-5 cable"><i class="fa-light fa-plus"></i></span>
+            <div class="media-body ms-2 cable">
+                <h6 class="mt-0 mb-0 fs-6">Add New</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--modal for add lead to start-->
+<div class="modal fade" id="addlead" tabindex="-1" aria-labelledby="addlead" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mb-0" id="exampleModalLabel">Add New Lead</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="add-opportunity-wrp">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group mb-2">
+                                <label>Deal title</label>
+                                <input [(ngModel)]="entryObj.item" class="form-control form-control-sm"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Company</label>
+                        <input class="form-control form-control-sm" [(ngModel)]="entryObj.company"/>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group mb-2">
+                                <label for="">Contact</label>
+                                <select [(ngModel)]="entryObj.contacts" class="form-select form-select-sm">
+                                    <option *ngFor="let contact of connectedContacts" value="{{contact.id}}">{{contact.item}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group mb-2">
+                                <label for="">Stage</label>
+                                <select [(ngModel)]="entryObj.stage" class="form-select form-select-sm">
+                                    <option value="">-- select stage --</option>
+                                    <option *ngFor="let status of getSubBoardColumnStatus(boardsComponent.columns, 'stage')" value="{{status.id}}">{{status.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group mb-2">
+                                <label for="">Estimated close date</label>
+                                <mat-form-field floatLabel='never'>
+                                    <input matInput [ngxMatDatetimePicker]="pickerFrom" [(ngModel)]="entryObj.expected_close_date">
+                                    <mat-datepicker-toggle matSuffix [for]="$any(pickerFrom)"></mat-datepicker-toggle>
+                                    <ngx-mat-datetime-picker #pickerFrom [enableMeridian]="true"></ngx-mat-datetime-picker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group mb-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <label>Confidence</label>
+                                    <span><b>{{entryObj.confidence}}%</b></span>
+                                </div>
+                                <mat-slider [(ngModel)]="entryObj.confidence" tickInterval="1" step="1" min="0" max="100" aria-label="units"></mat-slider>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group mb-2">
+                                <label for="">Deal Value ($)</label>
+                                <input [(ngModel)]="entryObj.deal_value" type="number" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group mb-2">
+                                <label for="">Frequency</label>
+                                <select [(ngModel)]="entryObj.frequency" class="form-select form-select-sm">
+                                    <option value="One time">One time</option>
+                                    <option value="Monthly">Monthly</option>
+                                    <option value="Annual">Annual</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="">Owner</label>
+                        <select [(ngModel)]="entryObj.owner" class="form-select form-select-sm">
+                            <option *ngFor="let user of this.boardsComponent.users" value="{{user.ID}}">{{user.display_name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <button data-bs-dismiss="modal" aria-label="Close" class="btn btn-sm btn-outlined-secondary me-2">Cancel</button>
+                                <button (click)="updateEntry()" data-bs-dismiss="modal" aria-label="Close" class="btn btn-sm btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--modal for add lead to end-->

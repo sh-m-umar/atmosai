@@ -1,0 +1,182 @@
+<div class="back-to-estimates d-flex justify-content-between align-items-center mt-4">
+    <div class="estimate-left">
+        <a href="customer-portal/home" class="back-to-estimate-btn text-decoration-none"> < Back to Estimates </a>
+    </div>
+    <div class="estimate-right d-flex align-items-center">
+        <button class="btn btn-primary btn-sm me-2">Accept</button>
+        <div class="dropdown">
+            <button class="template-btn btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-light fa-chevron-down ms-2"></i></button>
+            <div class="dropdown-menu p-0 style-less">
+                <ul class="list-group list-group-flush list-group-sm">
+                    <li class="list-group-item">Forward</li>
+                    <li class="list-group-item">Download PDF</li>
+                    <li class="list-group-item">Print</li>
+                    <li class="list-group-item">
+                        <button type="button" class="border-0 bg-transparent p-0" data-bs-toggle="modal" data-bs-target="#declineModal">
+                            Decline
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Decline Modal Start -->
+<div class="decline-modal-estimate">
+    <div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="declineModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title mb-1 mt-1" id="declineModalLabel">Decline - EST-000015</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body mt-3 mb-3">
+                <textarea name="notes" ngcontrol="notes" class="form-control form-control-sm ng-valid ng-dirty ng-touched" ng-reflect-name="notes" ng-reflect-model=""></textarea>
+            </div>
+            <div class="modal-footer justify-content-start">        
+              <button type="button" class="btn btn-primary">Decline</button>
+              <button type="button" class="btn btn-secondary border" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+<!-- Decline Modal End -->
+<div class="customer-portal-estimate-invoice mt-4">
+    <div class="card bt-1 view-invoice">
+        <div class="card-body px-5">
+          <div class="invoice-header d-flex justify-content-between align-items-center">
+            <div class="mb-3">
+              <h2 class="mb-0">
+                <img src="./assets/img/atmos-logo.png" style="width: 40%;"></h2>
+                <span>109 E 17th Street Cheyenne, WY 82001</span>
+            </div>
+            <div><span class="invoice-text">Invoice</span></div>
+          </div>
+          <div class="row row-logo row-bill-ship justify-content-between">
+            <div class="col-sm-3 my-auto">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item invoice-heading">Bill to:</li>
+                <li
+                  class="list-group-item d-flex align-items-center justify-content-between p-1 ng-star-inserted"> 1 </li>
+                <li
+                  class="list-group-item d-flex align-items-center justify-content-between p-1 ng-star-inserted"> Abbot Kinney
+                  Blvd, Los Angeles, CA, USA </li>
+              </ul>
+            </div>
+            <div class="col-sm-3">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex align-items-center justify-content-between p-1">Date:
+                  <span>2022-12-21</span></li>
+                <li class="list-group-item d-flex align-items-center justify-content-between p-1">
+                  Invoice#: <span>003</span></li>
+                <li class="list-group-item d-flex align-items-center justify-content-between p-1">
+                  Customer Id: <span></span></li>
+                <li class="list-group-item d-flex align-items-center justify-content-between p-1">
+                  Purchase order#: <span>1234556</span></li>
+                <li class="list-group-item d-flex align-items-center justify-content-between p-1">
+                  Payment due by: <span>2022-12-23</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row row-bill-ship justify-content-between mt-3">
+            <div class="col-sm-3">
+              <!-- <ul class="list-group list-group-flush">
+                <li class="list-group-item invoice-heading">Bill to:</li>
+                <li
+                  class="list-group-item d-flex align-items-center justify-content-between p-1 ng-star-inserted"> 1 </li>
+                <li
+                  class="list-group-item d-flex align-items-center justify-content-between p-1 ng-star-inserted"> Abbot Kinney
+                  Blvd, Los Angeles, CA, USA </li>
+              </ul> -->
+            </div>
+            <div class="col-sm-3">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item invoice-heading">Ship to (if different):</li>
+                <li
+                  class="list-group-item d-flex align-items-center justify-content-between p-1 ng-star-inserted"> 1 </li>
+                <li
+                  class="list-group-item d-flex align-items-center justify-content-between p-1 ng-star-inserted"> Abbot Kinney
+                  Blvd, Los Angeles, CA, USA </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <table class="table table-sm table-striped mt-3 table-bordered">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Items</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Discount</th>
+                  <th>Total Price</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="ng-star-inserted">
+                  <td>Category A</td>
+                  <td>Item A</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>Item A</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="row">
+              <div class="col-sm-8">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Special note and instructions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="height: 130px;"> This </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-sm-4">
+                <table class="table price table-bordered">
+                  <tr>
+                    <th>Subtotal</th>
+                    <td>$ </td>
+                  </tr>
+                  <tr>
+                    <th>Sale tax rate</th>
+                    <td>-</td>
+                  </tr>
+                  <tr>
+                    <th>Sales tax</th>
+                    <td>$ 1</td>
+                  </tr>
+                  <tr>
+                    <th>Discount</th>
+                    <td>$ 1</td>
+                  </tr>
+                  <tr>
+                    <th><strong>Total</strong></th>
+                    <td><strong>$ 1</strong></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 invoice-footer">
+            <p>Make all checks payable to my company name</p>
+            <h3>Thanks for your Business!</h3>
+            <p>Should you have any query concerning to this invoive, Please contact John Doe on
+              00-000-000-0000</p>
+            <hr>
+            <p>111 street Town/City, County, ST, 0000</p>
+            <p>tell: 000-000-000-00, Fax: 000-000-000-0000, Email:abc@companyname.com, Web:
+              yourcompany.com</p>
+          </div>
+        </div>
+    </div>
+</div>

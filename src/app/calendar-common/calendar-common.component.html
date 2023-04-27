@@ -1,0 +1,13 @@
+<ejs-schedule
+        class="common-calendar"
+        *ngIf="loaded"
+        width="100%"
+        height="500px"
+        [rowAutoHeight]="true"
+        [selectedDate]="selectedDate"
+        [eventSettings]="eventSettings"
+        [showQuickInfo]="true"
+        (eventRendered)="onEventRendered($event)"
+        [(currentView)]="currentView">
+</ejs-schedule>
+<div *ngIf="!loaded"><i class="fa fa-spinner fa-spin"></i></div>

@@ -1,0 +1,38 @@
+<!--manage duplicate modal start-->
+<div class="modal fade" id="itemTerminologyModal" tabindex="-1" aria-labelledby="itemTerminologyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-3">
+            <div class="modal-body">
+                <span type="button" id="modal-close-btn-terminology" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa-light fa-xmark fa-2x"></i></span>
+                <h2 class="mb-0">Change item terminology</h2>
+                <p>Make your board terminology relevant to your board's content</p>
+                <div class="checkbox-set mt-3">
+                    <div class="row">
+                        <div *ngFor="let item of terminologies" class="col-6 mb-3">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                <input (change)="changeTerminology()" [(ngModel)]="terminology" [value]="item" class="form-check-input" type="radio" name="terminology">
+                                    {{item}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="form-check">
+                                <input (click)="terminology = ''" [checked]="!terminologies.includes(terminology)" value="custom" class="form-check-input mt-2" type="radio" name="terminology">
+                                <label class="form-check-label">
+                                    <input *ngIf="terminologies.includes(terminology) && terminology !== ''" (click)="terminology = ''" type="text" class="form-control form-control-sm">
+                                    <input *ngIf="!terminologies.includes(terminology)" [(ngModel)]="terminology" type="text" class="form-control form-control-sm">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 text-end mt-4">
+                            <button class="btn btn-sm btn-outline-secondary">Cancel</button>
+                            <button (click)="saveTerminology()" class="btn btn-sm btn-primary ms-3">Change</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--manage duplicate modal end-->

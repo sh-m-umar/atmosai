@@ -1,0 +1,325 @@
+<div class="admin-page-wrapper">
+    <div class="page-header">
+        <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+            <div class="header-lhs d-flex align-items-center">
+                <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                    <span>New Segments</span>
+                </h4>
+                <span class="ms-2 me-2" mat-raised-button matTooltip="Show board description" matTooltipPosition="above"
+                    matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+                <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above"
+                    matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+            </div>
+            <div class="header-rhs d-flex align-items-center">
+                <div class="button-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary borderless dropdown-toggle-split"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Console log</a></li>
+                        <li><a class="dropdown-item">Clear local cache only</a></li>
+                        <li><a class="dropdown-item">Clear cache and database both</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">
+            <span>This is description</span>
+            <i class="fa-solid fa-ellipsis"></i>
+        </div>
+        <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+                <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">New Email Campaigns</h5>
+                <ul class="tabslink nav boards-top-menu-style" id="nav-tab" role="tablist">
+                    <li class="nav-item active" id="nav-login-tab" data-bs-toggle="tab" data-bs-target="#nav-login"
+                        type="button" role="tab" aria-controls="nav-login" aria-selected="true">
+                        <div class="boards-top-menu-style-first"><i class="fa-thin fa-home"></i> Email Campaigns</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i
+                                    class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add
+                                            to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span
+                                            class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span
+                                            class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set
+                                            as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button
+                        matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-thin fa-plus"></i>
+                    </button>
+                    <div class="dropdown-menu p-0 style-less">
+                        <ul class="list-group list-group-flush list-group-sm">
+                            <li class="list-group-item">
+                                <div class="ls" data-bs-toggle="modal" data-bs-target="#viewcenter">
+                                    <i class="fa-light fa fa-home"></i>
+                                    <span class="ms-2">Apps</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex align-items-centere">
+                <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2"
+                    style="margin-top: -5px;">
+                    <div class="button-group outlined borderless">
+                        <button type="button" class="btn collapsed btn-outline-secondary"><i
+                                class="fa-thin fa-envelope"></i> Bulk Emails
+                        </button>
+                        <button type="button"
+                            class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <div class="button-group ms-2">
+                        <button type="button"
+                            class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div (click)="headerToggle()" class="header-collapse-btn"><i class="fa-thin fa-angle-{{anglePos}}"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="admin-page-content-wrapper">
+        <div class="tab-content mb-5" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-api" role="tabpanel" aria-labelledby="nav-api-tab">
+                <div class="email-campaign-wrapper">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-8">
+                            <div class="email-campaign-header mb-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="d-flex me-4">
+                                                <h2 class="mb-0">Testing T2</h2>
+                                                <span class="ms-2 mt-2"><i class="fa-light fa-pencil"></i></span>
+                                            </div>
+                                            <span><i class="fa-light fa-folder me-2"></i><span class="cable">Add
+                                                    Folder</span></span>
+                                        </div>
+                                        <span class="mt-2"><i class="fa-solid fa-square me-2"></i>Draft | Created on Dec
+                                            08, 2022 01:41 PM </span>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button routerLink="/boards/36/main" type="button"
+                                            class="btn btn-outline-secondary me-3">Back to main segment</button>
+                                        <button type="button" class="btn btn-outline-secondary dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-expanded="false">More</button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Leads</a></li>
+                                            <li><a class="dropdown-item" href="#">Opportunities</a></li>
+                                            <li><a class="dropdown-item" href="#">Contanct</a></li>
+                                            <li><a class="dropdown-item" href="#">Accounts</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="email-campaign-content-wrp shadow">
+                                <ul class="list-group">
+                                    <li class="list-group-item p-0">
+                                        <div class="wrp">
+                                            <div class="card border-0">
+                                                <div
+                                                    class="card-header d-flex align-items-center justify-content-between">
+                                                    <div class="ls d-flex align-items-center w-100">
+                                                        <h3 class="mb-0 me-3 fw-bold">Let's get you up and running</h3>
+                                                        <button class="btn btn-sm btn-outline-secondary">Mark as
+                                                            complete</button>
+                                                    </div>
+                                                    <div class="rs d-flex align-items-center w-100 justify-content-end">
+                                                        <div class="progress me-2 my-0 w-50">
+                                                            <div role="progressbar" aria-valuenow="25" aria-valuemin="0"
+                                                                aria-valuemax="100" class="progress-bar"
+                                                                style="width: 15%;">15%</div>
+                                                        </div>
+                                                        <div>
+                                                            <p class="m-0">15% &nbsp; Completed</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body p-0">
+                                                    <div class="row">
+                                                        <div class="col-sm-3 col-md-3 border-right pe-0">
+                                                            <ul class="nav nav-pills flex-column" id="setup-tab"
+                                                                role="tablist">
+                                                                <li class="nav-item" role="presentation">
+                                                                    <a class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0 active"
+                                                                        id="pills-account-tab" data-bs-toggle="pill"
+                                                                        data-bs-target="#pills-account" type="button"
+                                                                        role="tab" aria-controls="pills-account"
+                                                                        aria-selected="true">
+                                                                        <span class="tab-number me-1">1</span>
+                                                                        <span>Details</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="nav-item" role="presentation">
+                                                                    <a class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0"
+                                                                        id="pills-connect-tab" data-bs-toggle="pill"
+                                                                        data-bs-target="#pills-connect" type="button"
+                                                                        role="tab" aria-controls="pills-connect"
+                                                                        aria-selected="false">
+                                                                        <span class="tab-number me-1">2</span>
+                                                                        <span>Filter</span>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-sm-9 col-md-9">
+                                                            <div class="tab-content" id="setup-tabContent">
+                                                                <div class="tab-pane fade show active"
+                                                                    id="pills-account" role="tabpanel"
+                                                                    aria-labelledby="pills-account-tab" tabindex="0">
+                                                                    <div class="campaign-item-wrp topic-wrp p-3 segment-step-one">
+                                                                        <div class="advance-filter-container">
+                                                                            <div class="filter-container">
+                                                                                <div class="filter-header d-flex align-items-center justify-content-between mt-2">
+                                                                                    <div class="ls d-flex align-items-center">
+                                                                                        <div class="filter-heading">
+                                                                                            Advance Filter</div>
+                                                                                        <div class="filter-item-selected ms-2 me-2">Showing 20 of 20 leads</div>
+                                                                                        <div class="filter-info">
+                                                                                            <i class="fa-thin fa-circle-info"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="rs d-flex align-items-center">
+                                                                                        <div class="filter-info">
+                                                                                            <i class="fa-light fa-square-heart"></i>
+                                                                                        </div>
+                                                                                        <button class="btn btn-sm btn-outline-secondary px-2 ms-2 me-2">Clear</button>
+                                                                                        <button class="btn btn-sm btn-outline-secondary bordered">Save to view</button>
+                                                                                    </div>
+                                                                                </div> 
+                                                                                <div class="filter-content mt-4">
+                                                                                    <div class="sorting-item d-flex align-items-center justify-content-between mt-1">
+                                                                                        <div class="where me-2">Where</div>
+                                                                                        <div class="sort-col-name me-2">
+                                                                                            <div class="input-group">
+                                                                                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="sort-col-name me-2">
+                                                                                            <div class="input-group">
+                                                                                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="sort-col-name me-2">
+                                                                                            <div class="input-group">
+                                                                                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="delete-rule">
+                                                                                            <i class="fa-light fa-xmark"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="mt-3">
+                                                                                        <button class="btn btn-sm btn-outline-secondary">
+                                                                                            <i class="fa-solid fa-plus"></i>
+                                                                                            <span class="ms-2">Add a new filter</span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>  
+                                                                                <div class="filter-footer border-top mt-4 pt-4">
+                                                                                    <button class="btn btn-sm btn-outline-secondary">Switch to quick filter</button>
+                                                                                </div>                                                                             
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tab-pane fade mb-3" id="pills-connect" role="tabpanel" aria-labelledby="pills-connect-tab" tabindex="0">
+                                                                    <div class="campaign-item-wrp topic-wrp p-3">
+                                                                        <div class="advance-filter-second-step">
+                                                                            <p>Choose type and name of filter</p>
+                                                                            <div class="filter-name-filed align-items-center mb-3 w-75">
+                                                                                <label class="form-label me-2">Name</label>
+                                                                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                                                            </div>
+                                                                            <div class="advance-filter-second-step-checkbox segment-second-step d-flex mb-4">
+                                                                                <div class="second-step-checkbox">
+                                                                                    <h3 class="checkbox-title mb-2">Sharing Options</h3>
+                                                                                    <div class="ms-2 segment-second-step-font">
+                                                                                        <div class="filter-check-box mb-2">
+                                                                                            <label class="form-check-label d-flex align-items-center">
+                                                                                                <input type="checkbox" value="everyone" class="form-check-input wc_category_filter me-2 mt-0">Share with everyone in AtmosAi</label>
+                                                                                        </div>
+                                                                                        <div class="filter-check-box mb-2">
+                                                                                            <label class="form-check-label d-flex align-items-center">
+                                                                                            <input type="checkbox" value="specific-users" class="form-check-input wc_category_filter me-2 mt-0">Share with specific users</label>
+                                                                                        </div>
+                                                                                        <div class="filter-check-box mb-2">
+                                                                                            <label class="form-check-label d-flex align-items-center">
+                                                                                            <input type="checkbox" value="private" class="form-check-input wc_category_filter me-2 mt-0">Keep it private - only visible to you</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="second-step-checkbox-second">
+                                                                                    <h3 class="checkbox-title mb-2">Select type Filter</h3>
+                                                                                    <div class="ms-2 segment-second-step-font">
+                                                                                        <div class="filter-check-box mb-2">
+                                                                                            <label class="form-check-label d-flex align-items-center">
+                                                                                            <input type="radio" value="clear-view" class="form-check-input wc_category_filter me-2 mt-0 ng-untouched ng-pristine ng-valid" ng-reflect-value="clear-view" ng-reflect-model="clear-view">Clear Views</label>
+                                                                                        </div>
+                                                                                        <div class="filter-check-box mb-2">
+                                                                                            <label class="form-check-label d-flex align-items-center">
+                                                                                            <input type="radio" value="segment" class="form-check-input wc_category_filter me-2 mt-0 ng-untouched ng-pristine ng-valid" ng-reflect-value="segment" ng-reflect-model="clear-view">Segment</label>
+                                                                                        </div>
+                                                                                        <div class="filter-check-box mb-2">
+                                                                                            <label class="form-check-label d-flex align-items-center">
+                                                                                            <input type="radio" value="campaign" class="form-check-input wc_category_filter me-2 mt-0 ng-untouched ng-pristine ng-valid" ng-reflect-value="campaign" ng-reflect-model="clear-view">campaigns</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="mt-5 pt-5 pb-5 bg-white-light" style="min-height: 500px;"></section>
+</div>

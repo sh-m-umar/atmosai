@@ -1,0 +1,581 @@
+<div class="edit-seq-wrp">
+    <div class="page-header">
+        <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+            <div class="header-lhs d-flex align-items-center">
+                <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                    <span>New Sequence</span>
+                </h4>
+                <span class="ms-2 me-2"  mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+                <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+            </div>
+            <div class="header-rhs d-flex align-items-center"></div>
+        </div>
+        <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true"><span>New Sequence Description</span>
+            <i class="fa-solid fa-ellipsis"></i>
+        </div>
+        <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+                <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">New Sequence</h5>
+                <ul class="tabslink nav boards-top-menu-style">
+                    <li class="nav-item active">
+                        <div class="boards-top-menu-style-first" type="button"><i class="fa-thin fa-home"></i> Main View</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-thin fa-plus"></i>
+                    </button>
+                    <div class="dropdown-menu p-0 style-less">
+                        <ul class="list-group list-group-flush list-group-sm">
+                            <li class="list-group-item">
+                                <div class="ls">
+                                    <i class="fa-light fa-star"></i>
+                                    <span class="ms-2">Tab name</span>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="ls" data-bs-toggle="modal" data-bs-target="#viewcenter" >
+                                    <i class="fa-light fa fa-home"></i>
+                                    <span class="ms-2">Apps</span>
+                                </div>                                
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex align-items-centere">
+                <div (click)="headerToggle()" class="header-collapse-btn">
+                    <i class="fa-thin fa-angle-{{anglePos}}"></i>
+                </div>
+            </div>
+        </div>
+        <div class="header-filter-area d-flex leads-drop-popup">
+            <div class="button-group outlined">
+                <button (click)="isNewSequence = !isNewSequence" type="button" class="btn btn-primary">+ Sequence</button>
+            </div>
+            <div class="button-group outlined single-btn-in-group ms-2">
+                <button type="button" class="btn btn-outline-secondary borderless" data-bs-toggle="dropdown" aria-expanded="false" (click)="isSrarch = true" *ngIf="!isSrarch">
+                    <i class="fa-thin fa-search"></i> Search
+                </button>
+                <div class="input-group input-group-sm input-group-search" *ngIf="isSrarch">
+                    <input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append" (click)="isSrarch = false">
+                        <span class="input-group-text bg-white" id="basic-addon2"><i class="fa-thin fa-search"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sequence-content-wrp row">
+        <div class="col-sm-9">
+            <div class="sequence-list">
+                <div class="card secquence-item" *ngIf="isNewSequence">
+                    <span class="timeline-icon bg-purple"><i class="fa-light fa-envelope"></i></span>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div class="seq-lhs d-flex align-items-center">
+                            <h4 class="mb-0">Email</h4>
+                            <button class="btn btn-sm btn-outline-secondary ms-3">Day 1</button>
+                        </div>
+                        <div class="seq-rhs d-flex align-items-center">
+                            <span class="me-3 cable"><i class="fa-solid fa-trash"></i></span>
+                            <div class="me-3">
+                                <select class="form-select form-select-sm">
+                                    <option value="immediately" selected="">Start immediately</option>
+                                    <option value="delay">Start after a delay</option>
+                                </select>
+                            </div>
+                            <span class="cable"><i class="fa-light fa-circle-info"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="emailto">
+                            <div class="input-group input-group-sm mb-2 align-items-center">
+                                <span class="input-group-text bg-white">To</span>
+                                <input [(ngModel)]="emailData.to" type="text" class="form-control" placeholder="tim@example.com">
+                                <span class="acc ms-2 me-2 cable" (click)="ccShowHide()">Add CC</span>
+                                <span class="Bcc cable" (click)="bccShowHide()">Add BCC</span>
+                            </div>
+                            <div class="input-group input-group-sm mb-2 align-items-center" *ngIf="acc">
+                                <span class="input-group-text bg-white cable">CC</span>
+                                <input [(ngModel)]="emailData.toCc" type="text" class="form-control" placeholder="tim@example.com">
+                                <span class="comma-seprated ms-2"><small>add comma seperated emails</small></span>
+                            </div>
+                            <div class="input-group input-group-sm mb-2 align-items-center" *ngIf="bcc">
+                                <span class="input-group-text bg-white cable">BCC</span>
+                                <input [(ngModel)]="emailData.toBcc" type="text" class="form-control" placeholder="tim@example.com">
+                                <span class="comma-seprated ms-2"><small>add comma seperated emails</small></span>
+                            </div>
+                        </div>
+                        <div class="subject mb-2">
+                            <input [(ngModel)]="emailData.subject" type="text" class="form-control form-control-sm" placeholder="Subject">
+                        </div>
+                        <div class="type-template d-flex align-items-center mb-2">
+                            <label class="col-3">Email Template</label>
+                            <select [(ngModel)]="emailData.templateType" class="form-select form-select-sm me-3">
+                                <option value="text">Text</option>
+                                <option value="visual">Visual</option>
+                            </select>
+                            <select (change)="selectEmailTemplate()" [(ngModel)]="emailData.template" class="form-select form-select-sm me-3 sequence-bg-blue">
+                                <option value="">Choose Template</option>
+                                <option *ngFor="let template of getEmailTemplateList(emailSettings.email_templates)" value="{{template.id}}]">{{template.name}}</option>
+                            </select>
+                            <select (change)="selectShortcode()" [(ngModel)]="shortcode" class="form-select form-select-sm">
+                                <option value="">+ Shortcode</option>
+                                <option *ngFor="let shortcode of shortcodes" value="[{{shortcode}}]">[{{shortcode}}]</option>
+                            </select>
+                        </div>
+                        <div *ngIf="templateLoadingTxt != ''" class="m-3 text-center">{{templateLoadingTxt}}</div>
+                        <div class="email-body mb-2">
+                            <editor
+                                    cloudChannel="5"
+                                    [disabled]="false"
+                                    [(ngModel)]="emailData.content"
+                                    [init]="{
+                                        height: 500,
+                                        menubar: 'file edit view insert format tools table tc help',
+                                        plugins: [
+                                        'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons'
+                                        ],
+                                        toolbar:'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl'
+
+                                    }"
+                            ></editor>
+                        </div>
+                        <div class="choose-file mb-2">
+                            <input (change)="processAttachment($event)" class="form-control form-control-sm" type="file" id="formFile">
+                        </div>
+                        <div class="no-reply-box d-flex align-items-center">
+                            <div class="form-check mb-0 me-2 w-150px">
+                                <input [(ngModel)]="emailData.reminder" class="form-check-input" type="checkbox" value="" id="noreply">
+                                <label class="form-check-label" for="noreply">
+                                    If no reply on
+                                </label>
+                            </div>
+                            <input [(ngModel)]="emailData.reminderDate" type="date" class="form-control form-control-sm me-2">
+                            <select [(ngModel)]="emailData.reminderType" class="form-select form-select-sm">
+                                <option value="follow_up">Remind me to follow up</option>
+                                <option value="email_sequence">Send and email sequence</option>
+                            </select>
+                        </div>
+                        <div class="email-actions mt-3 d-flex align-items-center justify-content-between">
+                            <div>
+                                <button (click)="sendEmail()" class="btn btn-sm btn-primary me-2">Send</button>
+                                <button (click)="emailData.sendLater = true" type="button" class="btn btn-sm btn-primary">Send later</button>
+                                <div *ngIf="emailData.sendLater" class="no-reply-box d-flex align-items-center">
+                                    <input [(ngModel)]="emailData.schedule" type="date" class="form-control form-control-sm me-2">
+                                    <select [(ngModel)]="emailData.scheduleTime" class="form-select form-select-sm me-2">
+                                        <!-- <option value="00:00:00">Select Time</option> -->
+                                        <option value="00:00:00">12:00 AM</option>
+                                        <option value="00:15:00">12:15 AM</option>
+                                        <option value="00:30:00">12:30 AM</option>
+                                        <option value="00:45:00">12:45 AM</option>
+                                        <option value="01:00:00">01:00 AM</option>
+                                        <option value="01:15:00">01:15 AM</option>
+                                        <option value="01:30:00">01:30 AM</option>
+                                        <option value="01:45:00">01:45 AM</option>
+                                        <option value="02:00:00">02:00 AM</option>
+                                        <option value="02:15:00">02:15 AM</option>
+                                        <option value="02:30:00">02:30 AM</option>
+                                        <option value="02:45:00">02:45 AM</option>
+                                        <option value="03:00:00">03:00 AM</option>
+                                        <option value="03:15:00">03:15 AM</option>
+                                        <option value="03:30:00">03:30 AM</option>
+                                        <option value="03:45:00">03:45 AM</option>
+                                        <option value="04:00:00">04:00 AM</option>
+                                        <option value="04:15:00">04:15 AM</option>
+                                        <option value="04:30:00">04:30 AM</option>
+                                        <option value="04:45:00">04:45 AM</option>
+                                        <option value="05:00:00">05:00 AM</option>
+                                        <option value="05:15:00">05:15 AM</option>
+                                        <option value="05:30:00">05:30 AM</option>
+                                        <option value="05:45:00">05:45 AM</option>
+                                        <option value="06:00:00">06:00 AM</option>
+                                        <option value="06:15:00">06:15 AM</option>
+                                        <option value="06:30:00">06:30 AM</option>
+                                        <option value="06:45:00">06:45 AM</option>
+                                        <option value="07:00:00">07:00 AM</option>
+                                        <option value="07:15:00">07:15 AM</option>
+                                        <option value="07:30:00">07:30 AM</option>
+                                        <option value="07:45:00">07:45 AM</option>
+                                        <option value="08:00:00">08:00 AM</option>
+                                        <option value="08:15:00">08:15 AM</option>
+                                        <option value="08:30:00">08:30 AM</option>
+                                        <option value="08:45:00">08:45 AM</option>
+                                        <option value="09:00:00">09:00 AM</option>
+                                        <option value="09:15:00">09:15 AM</option>
+                                        <option value="09:30:00">09:30 AM</option>
+                                        <option value="09:45:00">09:45 AM</option>
+                                        <option value="10:00:00">10:00 AM</option>
+                                        <option value="10:15:00">10:15 AM</option>
+                                        <option value="10:30:00">10:30 AM</option>
+                                        <option value="10:45:00">10:45 AM</option>
+                                        <option value="11:00:00">11:00 AM</option>
+                                        <option value="11:15:00">11:15 AM</option>
+                                        <option value="11:30:00">11:30 AM</option>
+                                        <option value="11:45:00">11:45 AM</option>
+                                        <option value="12:00:00">12:00 PM</option>
+                                        <option value="12:15:00">12:15 PM</option>
+                                        <option value="12:30:00">12:30 PM</option>
+                                        <option value="12:45:00">12:45 PM</option>
+                                        <option value="13:00:00">01:00 PM</option>
+                                        <option value="13:15:00">01:15 PM</option>
+                                        <option value="13:30:00">01:30 PM</option>
+                                        <option value="13:45:00">01:45 PM</option>
+                                        <option value="14:00:00">02:00 PM</option>
+                                        <option value="14:15:00">02:15 PM</option>
+                                        <option value="14:30:00">02:30 PM</option>
+                                        <option value="14:45:00">02:45 PM</option>
+                                        <option value="15:00:00">03:00 PM</option>
+                                        <option value="15:15:00">03:15 PM</option>
+                                        <option value="15:30:00">03:30 PM</option>
+                                        <option value="15:45:00">03:45 PM</option>
+                                        <option value="16:00:00">04:00 PM</option>
+                                        <option value="16:15:00">04:15 PM</option>
+                                        <option value="16:30:00">04:30 PM</option>
+                                        <option value="16:45:00">04:45 PM</option>
+                                        <option value="17:00:00">05:00 PM</option>
+                                        <option value="17:15:00">05:15 PM</option>
+                                        <option value="17:30:00">05:30 PM</option>
+                                        <option value="17:45:00">05:45 PM</option>
+                                        <option value="18:00:00">06:00 PM</option>
+                                        <option value="18:15:00">06:15 PM</option>
+                                        <option value="18:30:00">06:30 PM</option>
+                                        <option value="18:45:00">06:45 PM</option>
+                                        <option value="19:00:00">07:00 PM</option>
+                                        <option value="19:15:00">07:15 PM</option>
+                                        <option value="19:30:00">07:30 PM</option>
+                                        <option value="19:45:00">07:45 PM</option>
+                                        <option value="20:00:00">08:00 PM</option>
+                                        <option value="20:15:00">08:15 PM</option>
+                                        <option value="20:30:00">08:30 PM</option>
+                                        <option value="20:45:00">08:45 PM</option>
+                                        <option value="21:00:00">09:00 PM</option>
+                                        <option value="21:15:00">09:15 PM</option>
+                                        <option value="21:30:00">09:30 PM</option>
+                                        <option value="21:45:00">09:45 PM</option>
+                                        <option value="22:00:00">10:00 PM</option>
+                                        <option value="22:15:00">10:15 PM</option>
+                                        <option value="22:30:00">10:30 PM</option>
+                                        <option value="22:45:00">10:45 PM</option>
+                                        <option value="23:00:00">11:00 PM</option>
+                                        <option value="23:15:00">11:15 PM</option>
+                                        <option value="23:30:00">11:30 PM</option>
+                                        <option value="23:45:00">11:45 PM</option>
+                                    </select>
+                                    <select [(ngModel)]="emailData.scheduleTimezone" class="form-select form-select-sm" aria-describedby="timezone-description">
+                                        <option value="-12">GMT -12:00</option>
+                                        <option value="-11">GMT -11:00</option>
+                                        <option value="-10">GMT -10:00</option>
+                                        <option value="-9.5">GMT -9:30</option>
+                                        <option value="-9">GMT -9:00</option>
+                                        <option value="-8">GMT -8:00</option>
+                                        <option value="-7">GMT -7:00</option>
+                                        <option value="-6">GMT -6:00</option>
+                                        <option value="-5">GMT -5:00</option>
+                                        <option value="-4.5">GMT -4:30</option>
+                                        <option value="-4">GMT -4:00</option>
+                                        <option value="-3.5">GMT -3:30</option>
+                                        <option value="-3">GMT -3:00</option>
+                                        <option value="-2">GMT -2:00</option>
+                                        <option value="-1">GMT -1:00</option>
+                                        <option value="1">GMT +1:00</option>
+                                        <option value="2">GMT +2:00</option>
+                                        <option value="3">GMT +3:00</option>
+                                        <option value="3.5">GMT +3:30</option>
+                                        <option value="4">GMT +4:00</option>
+                                        <option value="4.5">GMT +4:30</option>
+                                        <option value="5">GMT +5:00</option>
+                                        <option value="5.5">GMT +5:30</option>
+                                        <option value="5.75">GMT +5:45</option>
+                                        <option value="6">GMT +6:00</option>
+                                        <option value="6.5">GMT +6:30</option>
+                                        <option value="7">GMT +7:00</option>
+                                        <option value="8">GMT +8:00</option>
+                                        <option value="8.75">GMT +8:45</option>
+                                        <option value="9">GMT +9:00</option>
+                                        <option value="9.5">GMT +9:30</option>
+                                        <option value="10">GMT +10:00</option>
+                                        <option value="10.5">GMT +10:30</option>
+                                        <option value="11">GMT +11:00</option>
+                                        <option value="11.5">GMT +11:30</option>
+                                        <option value="12">GMT +12:00</option>
+                                        <option value="12.75">GMT +12:45</option>
+                                        <option value="13">GMT +13:00</option>
+                                        <option value="14">GMT +14:00</option>
+                                    </select>
+                                    <button (click)="sendEmailLater()" type="button" class="btn btn-sm btn-primary content-fit-in m-2">Save for later</button>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="delete-eamil-box cable" (click)="isNewSequence = !isNewSequence"><i class="fa-solid fa-trash"></i></span>
+                                <span class="attachifle ms-3 me-3 cable"><i class="fa-solid fa-link"></i></span>
+                                <button (click)="sendEmail('email_draft')" class="btn btn-sm btn-primary">Draft</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card secquence-item">
+                    <span class="timeline-icon bg-green"><i class="fa-light fa-message"></i></span>
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                       <div class="pt-1"><h4 class="mb-0"><span class="border border-1 seq-count me-3">1</span>Invoice created</h4></div>
+                       <div class="log-rhs">
+                            <span class="cable del me-3">
+                                <i class="fa-solid fa-trash"></i>
+                            </span>
+                            <span>
+                                <span class="me-2">TimSmart</span>
+                                <span class="initials purple">TS</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                       <div class="group"><span></span></div>
+                       <small>SMS to 3 months age</small>
+                    </div>
+                </div>
+                <div class="card secquence-item">
+                    <span class="timeline-icon bg-green"><i class="fa-light fa-message"></i></span>
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                       <div class="pt-1"><h4 class="mb-0"><span class="border border-1 seq-count me-3">2</span>Invoice created</h4></div>
+                       <div class="log-rhs">
+                            <span class="cable del me-3">
+                                <i class="fa-solid fa-trash"></i>
+                            </span>
+                            <span>
+                                <span class="me-2">TimSmart</span>
+                                <span class="initials purple">TS</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                       <div class="group"><span></span></div>
+                       <small>SMS to 3 months age</small>
+                    </div>
+                </div>
+                <div class="card secquence-item">
+                    <span class="timeline-icon bg-green"><i class="fa-light fa-message"></i></span>
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                       <div class="pt-1"><h4 class="mb-0"><span class="border border-1 seq-count me-3">3</span>Invoice created</h4></div>
+                       <div class="log-rhs">
+                            <span class="cable del me-3">
+                                <i class="fa-solid fa-trash"></i>
+                            </span>
+                            <span>
+                                <span class="me-2">TimSmart</span>
+                                <span class="initials purple">TS</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                       <div class="group"><span></span></div>
+                       <small>SMS to 3 months age</small>
+                    </div>
+                </div>
+                <div class="card secquence-item">
+                    <span class="timeline-icon bg-green"><i class="fa-light fa-message"></i></span>
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                       <div class="pt-1"><h4 class="mb-0"><span class="border border-1 seq-count me-3">1</span>Invoice created</h4></div>
+                       <div class="log-rhs">
+                            <span class="cable del me-3">
+                                <i class="fa-solid fa-trash"></i>
+                            </span>
+                            <span>
+                                <span class="me-2">TimSmart</span>
+                                <span class="initials purple">TS</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                       <div class="group"><span></span></div>
+                       <small>SMS to 3 months age</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card mb-3">
+                <div class="card-header"><h4 class="mb-0"><i class="fa-light fa-floppy-disk me-2"></i>Actions</h4></div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <button class="btn btn-sm btn-primary">Preview</button>
+                        <button class="btn btn-sm btn-primary">Cancel</button>
+                    </div>
+                    <button class="btn btn-sm btn-primary w-100">Save Sequence</button>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="v-tab mb-3">
+                        <button *ngIf="isTrigger != 'trigger'" (click)="useSequenceType('trigger')" class="sequence-btn-clr btn btn-lg btn-outline-secondary rounded-0 w-100 bg-gray">Select Trigger</button>
+                        <div *ngIf="isTrigger == 'trigger'">
+                            <div class="form-group mb-2">
+                                <label for="">Select Email From</label>
+                                <select class="form-select form-select-sm">
+                                    <option selected>Open this select menu</option>
+                                    <option value="0">Global</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="">Select Trigger</label>
+                                <select class="form-select form-select-sm">
+                                    <option value="">Select Status</option>
+                                    <option value="11">Qualified</option>
+                                    <option value="12">Bad Fit</option>
+                                    <option value="13">Not Interested</option>
+                                    <option value="14">Interested</option>
+                                    <option value="15">Customer</option>
+                                    <option value="16">Potential</option>
+                                    <option value="36">Maybe</option>
+                                    <option value="38">New Lead</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="v-tab mb-3">
+                        <button *ngIf="isTrigger != 'segment'" (click)="useSequenceType('segment')" class="sequence-btn-clr btn btn-lg btn-outline-secondary rounded-0 w-100 bg-gray">Use Segment</button>
+                        <div *ngIf="isTrigger == 'segment'">
+                            <div class="form-group mb-2">
+                                <label for="">Send to a Segment <small class="d-block">You do not have any segments yet. Get started by creating a segment.</small></label>
+                                <select class="form-select form-select-sm">
+                                    <option value="0">Select segment</option>
+                                    <option value="13">WC</option>
+                                    <option value="12">WCS Active</option>
+                                    <option value="11">Segment Test 7.22</option>
+                                    <option value="10">wru t</option>
+                                    <option value="9">Test 6.28</option>
+                                    <option value="8">Test 6.27</option>
+                                    <option value="7">Pending Agents</option>
+                                    <option value="6">On Hold Agents</option>
+                                    <option value="5">test segment</option>
+                                    <option value="4">Active Agents</option>
+                                    <option value="3">Pending Agents</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="v-tab mb-3">
+                        <button *ngIf="isTrigger != 'tags'" (click)="useSequenceType('tags')" class="sequence-btn-clr btn btn-lg btn-outline-secondary rounded-0 w-100 bg-gray">Use Tags</button>
+                        <div *ngIf="isTrigger == 'tags'">
+                            <div class="form-group mb-2">
+                                <label for="">Send based on Tags</label>
+                                <select class="form-select form-select-sm">
+                                    <option value="">Select tag</option>
+                                    <option value="66">Additional Feature</option>
+                                    <option value="64">Additional User</option>
+                                    <option value="62">Atmosai Subscription</option>
+                                    <option value="60">Business</option>
+                                    <option value="58">All-in-One Business Operating System - Starter</option>
+                                    <option value="56">All-in-One Business Operating System - Professional</option>
+                                    <option value="54">New product</option>
+                                    <option value="52">Sharity Ministries-Wellness - Member, 18-29</option>
+                                    <option value="50">Sharity Ministries-Secure - 18-29, Member</option>
+                                    <option value="48">Sharity Ministries-Wellness - Family of 4-7, 30-39</option>
+                                    <option value="46">Sharity Ministries-Spectrum - 30-39, Member +1</option>
+                                    <option value="44">Covenant Healthshare-Crisis($5k)</option>
+                                    <option value="40">Sharity Ministries-Wellness</option>
+                                    <option value="38">Covenant Healthshare-Core($5k) (Copy)</option>
+                                    <option value="36">Sharity Ministries-Spectrum - 30-39, Member</option>
+                                    <option value="32">Sharity Ministries-Wellness - Member, 50-59</option>
+                                    <option value="30">Covenant Healthshare-Crisis</option>
+                                    <option value="28">Sharity Ministries-Spectrum - 18-29, Member</option>
+                                    <option value="26">Sharity Ministries-Wellness - Member +1, 50-59</option>
+                                    <option value="24">Covenant Healthshare-Core($2k)</option>
+                                    <option value="22">Sharity Ministries-Wellness - Family of 4-7, 18-29</option>
+                                    <option value="20">Sharity Ministries-Wellness - Member, 30-39</option>
+                                    <option value="18">Covenant Healthshare-Core($5k)</option>
+                                    <option value="16">Sharity Ministries-Secure - 30-39, Member</option>
+                                    <option value="14">Sharity Ministries-Secure - 30-39, Family of 4-7</option>
+                                    <option value="12">My Telemedicine</option>
+                                    <option value="11">Covenant Healthshare-Crisis($10k)</option>
+                                    <option value="8">Sharity Ministries-Secure</option>
+                                    <option value="6">First Call Telemedicine</option>
+                                    <option value="5">Sharity Ministries-Secure - 40-49, Member</option>
+                                    <option value="2">Covenant Healthshare-Daily</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Choose one of the above actions to send your sequence. Workflow will be an automatic sequence sent in the event one of the conditions is met of a workflow automation. Using a segment provides you the ability to target a specific segment of leads, etc.... and Using tags also allows you to target a specific group of individuals you may have tagged for filtering.</p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group mb-2">
+                                <label for="">Date<small class="d-block">Enter schedule start date.</small></label>
+                                <input type="date" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group mb-2">
+                                <label for="">Time<small class="d-block">Enter schedule start time.</small></label>
+                                <input type="time" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group mb-2">
+                                <label for="">Timezone<small class="d-block">Select Timezone</small></label>
+                                <select class="form-select form-select-sm">
+                                    <option value="-12">GMT -12:00</option>
+                                    <option value="-11">GMT -11:00</option>
+                                    <option value="-10" selected="selected">GMT -10:00</option>
+                                    <option value="-9.5">GMT -9:30</option>
+                                    <option value="-9">GMT -9:00</option>
+                                    <option value="-8">GMT -8:00</option>
+                                    <option value="-7">GMT -7:00</option>
+                                    <option value="-6">GMT -6:00</option>
+                                    <option value="-5">GMT -5:00</option>
+                                    <option value="-4.5">GMT -4:30</option>
+                                    <option value="-4">GMT -4:00</option>
+                                    <option value="-3.5">GMT -3:30</option>
+                                    <option value="-3">GMT -3:00</option>
+                                    <option value="-2">GMT -2:00</option>
+                                    <option value="-1">GMT -1:00</option>
+                                    <option value="1">GMT +1:00</option>
+                                    <option value="2">GMT +2:00</option>
+                                    <option value="3">GMT +3:00</option>
+                                    <option value="3.5">GMT +3:30</option>
+                                    <option value="4">GMT +4:00</option>
+                                    <option value="4.5">GMT +4:30</option>
+                                    <option value="5">GMT +5:00</option>
+                                    <option value="5.5">GMT +5:30</option>
+                                    <option value="5.75">GMT +5:45</option>
+                                    <option value="6">GMT +6:00</option>
+                                    <option value="6.5">GMT +6:30</option>
+                                    <option value="7">GMT +7:00</option>
+                                    <option value="8">GMT +8:00</option>
+                                    <option value="8.75">GMT +8:45</option>
+                                    <option value="9">GMT +9:00</option>
+                                    <option value="9.5">GMT +9:30</option>
+                                    <option value="10">GMT +10:00</option>
+                                    <option value="10.5">GMT +10:30</option>
+                                    <option value="11">GMT +11:00</option>
+                                    <option value="11.5">GMT +11:30</option>
+                                    <option value="12">GMT +12:00</option>
+                                    <option value="12.75">GMT +12:45</option>
+                                    <option value="13">GMT +13:00</option>
+                                    <option value="14">GMT +14:00</option>
+                                </select>
+                                <small>Selected timezone time now: Nov 30 2022, 01:37 AM</small>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-3">
+                    <div class="text-center">
+                        <button class="btn btn-sm text-white bg-success"><i class="fa-light fa-eye me-2"></i>Preview Audience</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

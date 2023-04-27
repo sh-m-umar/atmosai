@@ -1,0 +1,60 @@
+<div class="header-archive">
+    <div class="archive-header d-flex justify-content-between mb-4">
+        <div class="archive-left">
+            <h1 class="mb-1"><i class="fa-thin fa-trash me-2"></i>Recycle Bin</h1>
+            <p class="mb-0" >You can see here items deleted from your account in the last 30 days</p>
+        </div>
+        <div class="archive-right">
+            <div class="input-group mt-1">
+                <input class="form-control border-end-0 border" type="search" placeholder="search" id="example-search-input"><i class="fa-light fa-magnifying-glass"></i>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!loaded" class='loader-container mt-auto'>
+        <div class='loader'>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+        </div>
+    </div>
+    <div *ngIf="loaded && items.length === 0" class=""><p>No items in recycle bin.</p></div>
+    <div *ngFor="let item of items" class="d-flex align-items-center justify-content-between for-recyle">
+        <div class="body-archive mb-4 w-100 me-2">
+            <div class="recycle-bin-item d-flex align-items-center">
+                <div class="item-type-icon">
+                    <div class="item-type-icon-inner text-center text-capitalize">
+                        <i class="fa-light fa-clapperboard mb-2"></i>
+                        <p>{{item.type}}</p>
+                    </div>
+                </div>
+                <div class="user-image-container d-flex align-items-center justify-content-between ms-2 w-100 me-4">
+                    <div class="d-flex align-items-center">
+                        <div class="user-image-container-inner text-center mt-1">
+                            <span class="initials big" style="background-color: {{item.done_by.avatar_color}};">{{item.done_by.first_name[0]}}{{item.done_by.last_name[0]}}</span>
+                        </div>
+                        <div class="item-text mt-3">
+                            <div class="item-text-inner">
+                                <p class="item-text-inner-p mb-1"><span class="item-text-inner-a me-1" href="">{{item.done_by.first_name}} {{item.done_by.last_name}}</span> deleted the {{item.type}} <span class="innter-bold ms-1">{{item.name}}</span> </p>
+                                <p class="item-text-inner-pp"><i class="fa-light fa-timer me-1"></i>{{item.done_at | date: 'medium'}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restore-button">
+                        <div class="restore-button-inner d-flex">
+                            <button type="button" class="template-btn btn btn-sm"> View </button>
+                            <button type="button" class="btn btn-primary btn-sm ms-4" (click)="restore(item)"> Restore </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="recycle-bin-x">
+            <div class="recycle-bin-x-inner">
+                <i class="fa-light fa-x" (click)="deletePermanently(item)"></i>
+            </div>
+        </div>
+    </div>
+</div>

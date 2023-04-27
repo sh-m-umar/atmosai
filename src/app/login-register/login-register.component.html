@@ -1,0 +1,227 @@
+<div *ngIf="autoLogin" class="autologin-placeholder"></div>
+<div *ngIf="!autoLogin" class="login-register-page">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="page-rhs-wrp">
+                <div class="register-form for-login d-md-none" *ngIf="!invitedUser && loginRegisterView == 'login'">
+                    <div class="login-wrp">
+                        <div class="d-flex align-items-end mb-4">
+                            <h1 class="mb-0 text-orange">LOGIN</h1>
+                        </div>
+                        <div class="form-group mb-4">
+                            <h4 class="mb-0">BUSINESS EMAIL</h4>
+                            <input [(ngModel)]="formModel.username" type="text" class="form-control form-control-lg rounded-0">
+                        </div>
+                        <div class="form-group mb-4">
+                            <h4 class="mb-0">PASSWORD</h4>
+                            <div class="pos-rel">
+                                <input [(ngModel)]="formModel.password" type="{{isPasswordView}}" class="form-control form-control-lg rounded-0">
+                                <span (click)="passwordView()" class="p-view"><i class="fa-solid {{eyeStyle}} fa-2x"></i></span>
+                            </div>
+                        </div>
+                        <button (click)="login()" [disabled]="disableLogin" [innerHTML]="loginBtnTxt" class="log-reg-btn"></button>
+                        <p *ngIf="msg !== ''" [innerHTML]="msg" class="alert alert-danger text-white" role="alert"></p>
+                        <div class="other-ways mt-4" *ngIf="msg == ''">
+                            <div class="enter-with-social">
+                                <p class="text-gray">
+                                    By submitting this form, you confirm that you agree to the storing and processing of your personal data by creating as described in this <span class="span cable">privacy policy</span> and your agree to the <span class="span cable">Free trial terms and conditions</span>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rhs-shape"></div>
+                <div class="inner-content-area text-center">
+                    <img src="./assets/img/left-menu/crm.png" alt="">
+                    <h4 class="text-start">Why Us...?</h4>
+                    <p class="mt-0 mb-0 text-start">AtmosAI is the only platform that allows companies in every industry sector to use data and Al-driven solutions within their own ecosystems – which makes for an easier way of doing business while also reducing the cost of it. Multiple products for multiple markets, powered by one</p>
+                </div>
+                <img class="dashpic" src="./assets/img/lead-dark.png" alt="">
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 my-auto px-5 px-sm-0">
+            <div class="px-5 mx-5 mx-sm-0">
+                <div *ngIf="autoLogin" class="register-form for-login px-5 mx-5 mx-sm-0">
+                    Logging you in, please wait...
+                </div>
+                <div class="register-form for-login px-5 mx-5 mx-sm-0" *ngIf="!invitedUser && !autoLogin && loginRegisterView == 'login'">
+                    <div class="login-wrp">
+
+                        <ng-container *ngIf="!forgetForm">
+                            <div class="d-flex align-items-end mb-4">
+                                <h1 class="mb-0 text-orange">LOGIN</h1>
+                            </div>
+                            <div class="form-group mb-4">
+                                <h4 class="mb-0">BUSINESS EMAIL</h4>
+                                <input [(ngModel)]="formModel.username" type="text" class="form-control form-control-lg rounded-0">
+                            </div>
+                            <div class="form-group mb-2">
+                                <h4 class="mb-0">PASSWORD</h4>
+                                <div class="pos-rel">
+                                    <input [(ngModel)]="formModel.password" type="{{isPasswordView}}" class="form-control form-control-lg rounded-0">
+                                    <span (click)="passwordView()" class="p-view"><i class="fa-solid {{eyeStyle}} fa-2x"></i></span>
+                                </div>
+                            </div>
+
+                            <a (click)="enableRestFields()" class="cable mb-3 d-inline-block">Forgot Password?</a>
+
+                            <button (click)="login()" [disabled]="disableLogin" class="log-reg-btn">{{loginBtnTxt}}</button>
+
+                            
+                        </ng-container>
+
+                        <ng-container *ngIf="forgetForm">
+
+                            <div class="d-flex align-items-end mb-4">
+                                <h1 class="mb-0 text-orange">Reset Password</h1>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <h4 class="mb-0">BUSINESS EMAIL</h4>
+                                <input [(ngModel)]="formModel.username" type="text" class="form-control form-control-lg rounded-0">
+                            </div>
+
+                            <div *ngIf="resetEmailSent" class="form-group mb-4">
+                                <h4 class="mb-0">4 Digits Code</h4>
+                                <input [(ngModel)]="securityCode" type="text" class="form-control form-control-lg rounded-0">
+                            </div>
+
+                            <div *ngIf="resetEmailSent" class="form-group mb-4">
+                                <h4 class="mb-0">New Password</h4>
+                                <div class="pos-rel">
+                                    <input [(ngModel)]="formModel.password" autocomplete="new-password" type="{{isPasswordView}}" class="form-control form-control-lg rounded-0">
+                                    <span (click)="passwordView()" class="p-view"><i class="fa-solid {{eyeStyle}} fa-2x"></i></span>
+                                </div>
+                            </div>
+
+                            <button (click)="resetPassword()" [disabled]="disableLogin" class="log-reg-btn">Reset Password <i class="fa fa-spinner fa-spin ms-2" *ngIf="disableLogin"></i></button>
+                        </ng-container>
+
+                        <p *ngIf="msg !== ''" [innerHTML]="msg" class="alert alert-danger" role="alert"></p>
+                        <div class="other-ways mt-4">
+                            <div class="enter-with-social">
+                                <span class="text-center d-block"><strong>or login using</strong></span>
+                                <div class="text-gray d-flex align-items-center justify-content-center mt-2 mb-4">
+                                    <div class="social-item text-center">
+                                        <img src="./assets/img/linkedin.png">
+                                        <span>Linkedin</span>
+                                    </div>
+                                    <div class="social-item text-center">
+                                        <img class="google" src="./assets/img/google_connect.png">
+                                        <span>Google</span>
+                                    </div>
+                                    <div class="social-item text-center">
+                                        <img src="./assets/img/facebook.png">
+                                        <span>Facebook</span>
+                                    </div>
+                                </div>
+                                <p class="text-gray">
+                                    By submitting this form, you confirm that you agree to the storing and processing of your personal data by creating as described in this <span class="span cable">privacy policy</span> and your agree to the <span class="span cable">Free trial terms and conditions</span>.
+                                </p>
+                                <!--                                <div class="text-center">-->
+                                <!--                                    <h4 >Don't have an account?</h4>-->
+                                <!--                                    <span (click)="registerOrLogin('register')" class="cable">SIGN UP</span>-->
+                                <!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="register-form for-login px-5 mx-5 mx-sm-0" *ngIf="invitedUser">
+                    <div class="login-wrp">
+                        <!-- step 1 -->
+                        <div class="step1" *ngIf="step == 1">
+                            <div class="d-flex align-items-end mb-4">
+                                <h1 class="mb-0 text-orange">SIGN UP</h1>
+                                <span class="text-gray d-none">step 1 of 2</span>
+                            </div>
+                            <div class="form-group mb-4">
+                                <h4 class="mb-0">FULL NAME</h4>
+                                <input [(ngModel)]="signUpUser.name" type="text" class="form-control form-control-lg rounded-0" placeholder="">
+                            </div>
+                            <div class="form-group mb-4">
+                                <h4 class="mb-0">BUSINESS EMAIL</h4>
+                                <input [(ngModel)]="signUpUser.email" type="text" class="form-control form-control-lg rounded-0" placeholder="">
+                            </div>
+                            <div class="form-group mb-4">
+                                <h4 class="mb-0">PASSWORD</h4>
+                                <div class="pos-rel">
+                                    <input [(ngModel)]="signUpUser.password" type="{{isPasswordView}}" class="form-control form-control-lg rounded-0" placeholder="">
+                                    <span (click)="passwordView()" class="p-view"><i class="fa-solid {{eyeStyle}} fa-2x"></i></span>
+                                </div>
+                            </div>
+                            <div *ngIf="loading" class='loader-container mt-auto'>
+                                <div class='loader'>
+                                  <div class='loader--dot'></div>
+                                  <div class='loader--dot'></div>
+                                  <div class='loader--dot'></div>
+                                  <div class='loader--dot'></div>
+                                  <div class='loader--dot'></div>
+                                  <div class='loader--dot'></div>
+                                </div>
+                            </div>
+                            <button (click)="signUpSubmit()" *ngIf="!loading" class="log-reg-btn">SIGN UP</button>
+                            <p *ngIf="msg" [innerHTML]="msg" class="alert alert-danger" role="alert"></p>
+                        </div>
+
+                        <!-- step 2 -->
+                        <div class="step1" *ngIf="step == 2">
+                            <div class="d-flex align-items-end mb-4">
+                                <h1 class="mb-0 text-orange">SIGN UP</h1>
+                                <span class="text-gray">step 2 of 2</span>
+                            </div>
+                            <div class="form-group mb-4">
+                                <h4 class="mb-0">FULL NAME</h4>
+                                <input type="text" class="form-control form-control-lg rounded-0" placeholder="">
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6 mb-4">
+                                    <h4 class="mb-0">COMPANY</h4>
+                                    <input type="text" class="form-control form-control-lg rounded-0" placeholder="">
+                                </div>
+                                <div class="form-group col-sm-6 mb-4">
+                                    <h4 class="mb-0">POSITION</h4>
+                                    <input type="text" class="form-control form-control-lg rounded-0" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <h4 class="mb-0">COUNTRY</h4>
+                                <input type="text" class="form-control form-control-lg rounded-0" placeholder="">
+                            </div>
+                            <div class="form-group mb-4">
+                                <h4 class="mb-0">PHONE</h4>
+                                <input type="text" class="form-control form-control-lg rounded-0" placeholder="+1 __ __ __">
+                            </div>
+                            <button (click)="step = 1" class="log-reg-btn">SIGN UP</button>
+                        </div>
+                        <div class="other-ways mt-4">
+                            <div class="enter-with-social">
+                                <span class="text-center d-block"><strong>or signup using</strong></span>
+                                <div class="text-gray d-flex align-items-center justify-content-center mt-2 mb-4">
+                                    <div class="social-item text-center">
+                                        <img src="./assets/img/linkedin.png">
+                                        <span>Linkedin</span>
+                                    </div>
+                                    <div class="social-item text-center">
+                                        <img class="google" src="./assets/img/google_connect.png">
+                                        <span>Google</span>
+                                    </div>
+                                    <div class="social-item text-center">
+                                        <img src="./assets/img/facebook.png">
+                                        <span>Facebook</span>
+                                    </div>
+                                </div>
+                                <p class="text-gray">
+                                    By submitting this form, you confirm that you agree to the storing and processing of your personal data by Creatio as described in thes <span class="span cable">Privacy policy</span> and your agree to the <span class="span cable">Free trial terms and conditions</span>.
+                                </p>
+                                <div class="text-center">
+                                    <h4 >Have an account?</h4>
+                                    <span (click)="registerOrLogin('login')" class="cable">LOGIN</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

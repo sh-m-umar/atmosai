@@ -1,0 +1,86 @@
+<div class="e-header-text">{{data.title}}</div>
+<div class="header-border">
+    <div class="fa-pull-right selected-menu dropdown">
+        <div class="menu-active d-flex align-items-center justify-content-between me-2 pointer" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-ellipsis"></i>
+        </div>
+        <ul class="dropdown-menu w-100 p-0">
+            <li class="app-items">
+                <button class="btn btn-default w-100">
+                    <i class="fa-pull-left fa-solid fa-pencil"></i>
+                    <span>Settings</span>
+                </button>
+            </li>
+            <li class="app-items">
+                <button class="btn btn-default w-100">
+                    <i class="fa-pull-left fa-solid fa-trash"></i>
+                    <span>Delete</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="panel-content">
+    <div *ngIf="data.type === 'numbers'">
+        <h5 class="large-text p-2 numbers-value">0</h5>
+        <div class="mx-auto w-400px dropdown">
+            <div class="menu-active d-flex align-items-center justify-content-between" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-primary">Count</button>
+            </div>
+            <div class="dropdown-menu w-100 p-2">
+                <div class="numeric-units-component">
+                    <div class="units-title">Unit</div>
+                    <div class="units-content">
+                        <div class="numeric-symbols-component">
+                            <div class="symbol-item symbol-none ">None</div>
+                            <div class="symbol-item symbol-$ ">$</div>
+                            <div class="symbol-item symbol-€ selected">€</div>
+                            <div class="symbol-item symbol-£ ">£</div>
+                            <div class="symbol-item symbol-% ">%</div>
+                            <div class="symbol-item symbol-custom-item "><input placeholder="Type your own" value=""></div>
+                        </div>
+                        <div class="numeric-directions-component">
+                            <div class="direction-item selected">L</div>
+                            <div class="direction-item ">R</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="numeric-functions-component">
+                    <div class="functions-title">Function</div>
+                    <div class="function-items-container">
+                        <div class="function-item-component ">
+                            <div class="ds-text-component" dir="auto"><span>Sum</span></div>
+                        </div>
+                        <div class="function-item-component ">
+                            <div class="ds-text-component" dir="auto"><span>Average</span></div>
+                        </div>
+                        <div class="function-item-component ">
+                            <div class="ds-text-component" dir="auto"><span>Median</span></div>
+                        </div>
+                        <div class="function-item-component ">
+                            <div class="ds-text-component" dir="auto"><span>Min</span></div>
+                        </div>
+                        <div class="function-item-component ">
+                            <div class="ds-text-component" dir="auto"><span>Max</span></div>
+                        </div>
+                        <div class="function-item-component selected">
+                            <div class="ds-text-component" dir="auto"><span>Count</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="data.type === 'funnel'">
+        <h5 class="large-text p-2">Funnel</h5>
+    </div>
+    <div *ngIf="data.type === 'spline'">
+        <h5 class="large-text p-2">Spline area</h5>
+    </div>
+    <div *ngIf="data.type === 'column'">
+        <h5 class="large-text p-2">Column</h5>
+    </div>
+    <div *ngIf="data.type === 'blank'">
+        <h5 class="large-text p-2">Blank Content Only with button</h5>
+    </div>
+</div>

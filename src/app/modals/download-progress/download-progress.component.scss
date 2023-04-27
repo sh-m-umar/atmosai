@@ -1,0 +1,26 @@
+#downloadModal.modal {
+    position: absolute;
+    right: 20px;
+    bottom: 30px;
+    width: 500px;
+    height: auto;
+    left: unset;
+    top: unset;
+    .modal-dialog {
+        margin: 0;
+        .modal-body{
+            max-height: 200px;
+            overflow: auto;
+            .file-type{
+                width: 85px;
+                height: 85px;
+                text-align: center;
+                line-height: 85px;
+                color: #fff;
+            }
+            .progress {
+                height: 9px;
+            }
+        }
+    }
+}

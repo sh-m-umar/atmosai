@@ -1,0 +1,169 @@
+<div class="admin-page-wrapper">
+    <div class="page-header">
+        <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+            <div class="header-lhs d-flex align-items-center">
+                <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                    <span>Cross Account Copier</span>
+                </h4>
+                <span class="ms-2 me-2"  mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+                <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+            </div>
+            <div class="header-rhs d-flex align-items-center">
+                <div class="button-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary borderless dropdown-toggle-split" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Console log</a></li>
+                        <li><a class="dropdown-item">Clear local cache only</a></li>
+                        <li><a class="dropdown-item">Clear cache and database both</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">
+            <span>Copy boards and dashboards to another account</span>
+            <i class="fa-solid fa-ellipsis"></i>
+        </div>
+        <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+                <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">Cross Account Copier</h5>
+                <!-- <ul class="tabslink nav boards-top-menu-style" id="nav-tab" role="tablist">
+                    <li class="nav-item active" id="nav-apps-tab" data-bs-toggle="tab" data-bs-target="#nav-apps" type="button" role="tab" aria-controls="nav-apps" aria-selected="true">
+                        <div class="boards-top-menu-style-first"><i class="fa-thin fa-home"></i> Apps</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-thin fa-plus"></i>
+                    </button>
+                    <div class="dropdown-menu p-0 style-less">
+                        <ul class="list-group list-group-flush list-group-sm">
+                            <li class="list-group-item">
+                                <div class="ls" data-bs-toggle="modal" data-bs-target="#viewcenter" >
+                                    <i class="fa-light fa fa-home"></i>
+                                    <span class="ms-2">Apps</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div> -->
+            </div>
+            <div class="d-flex align-items-centere">
+                <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2" style="margin-top: -5px;">
+                    <div class="button-group outlined borderless">
+                        <button type="button" class="btn collapsed btn-outline-secondary"><i
+                                class="fa-thin fa-envelope"></i> Bulk Emails
+                        </button>
+                        <button type="button"
+                                class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <div class="button-group ms-2">
+                        <button type="button" class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div (click)="headerToggle()" class="header-collapse-btn"><i class="fa-thin fa-angle-{{anglePos}}"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="admin-page-content-wrapper row">
+        <div class="col-sm-12 col-md-5">
+            <div class="note-wrp rounded-3 d-flex align-items-center mb-4 p-2 bg-ligth-gray">
+                <i class="fa-light fa-circle-info me-2"></i>
+                <small>First, move the content you want to copy into a folder. Only main boards and dashboards can be copied. <span class="cable link">Learn more</span></small>
+            </div>
+            <h3 class="mb-0">1. Select a folder</h3>
+            <div class="input-group input-group-sm mb-3 w-50">
+                <input type="text" class="form-control border-end-0" placeholder="Search for a folder">
+                <span class="input-group-text bg-transparent"><i class="fa-light fa-search"></i></span>
+            </div>
+            <table class="table table-sm align-middle mb-4">
+                <thead>
+                    <tr>
+                        <th>Folder Name</th>
+                        <th>Workspace</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CRM 8</td>
+                        <td>Main Workspace</td>
+                        <td class="text-end show-on-row-hover"><button class="btn btn-sm btn-outline-secondary">View folder content</button></td>
+                    </tr>
+                    <tr>
+                        <td>CRM 9</td>
+                        <td>Main Workspace</td>
+                        <td class="text-end show-on-row-hover"><button class="btn btn-sm btn-outline-secondary">View folder content</button></td>
+                    </tr>
+                    <tr>
+                        <td>CRM 10</td>
+                        <td>Main Workspace</td>
+                        <td class="text-end show-on-row-hover"><button class="btn btn-sm btn-outline-secondary">View folder content</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3 class="mb-0">2. Which account should we copy the boards to?</h3>
+            <div class="mb-3 note-wrp rounded-3 d-flex align-items-center mb-4 p-2 bg-ligth-gray">
+                <i class="fa-light fa-circle-info me-2"></i>
+                <small>You need to be an Admin with the same email in both accounts</small>
+            </div>
+            <div class="d-flex align-items-center mb-4">
+                <div class="form-group">
+                    <label for="">Current account:</label>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control rounded-3" placeholder="Calib-team">
+                        <span class="input-group-text bg-transparent border-0">.atmosai.io</span>
+                    </div>
+                </div>
+                <div class="mx-4 mt-3 pt-2"><i class="fa-light fa-arrow-right"></i></div>
+                <div class="form-group">
+                    <label for="">Destination account:</label>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control rounded-3" placeholder="Calib-team">
+                        <span class="input-group-text bg-transparent border-0">.atmosai.io</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-end">
+                <button class="btn btn-sm btn-primary">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>

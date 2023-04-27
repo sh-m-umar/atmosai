@@ -1,0 +1,64 @@
+.fieldset-wrp {
+    max-height: 60vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .selection-wrp{
+        position: relative;
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+        .circle-left-btn{
+            position: absolute;
+            left: 5px;
+            &.center{
+                left: calc(50% - 17px);
+            }
+        }
+        .show-on-hover{
+            visibility: hidden;
+        }
+        .dependency-wrp span.dependency-plus{
+            left: 5px;
+        }
+        .dependency-wrp .dependency-text-wrp{
+            max-width: 80% !important;
+            width: 80% !important;
+            line-height: 30px;
+            height: 30px;
+            border-left: 4px solid var(--at-primary);
+            &:hover{
+                background: var(--at-card-bg);
+            }
+        }
+        .selectedRatingStars {
+            color: #ffb000;
+        }
+        .item-wrapper-bg-color {
+            height: 30px;
+            line-height: 26px;
+        }
+        .tag-input{
+            .tag-input-edit{
+                margin-bottom: 10px;
+            }
+            .tag-delete{
+                position: absolute;
+                right: 8px;
+                top: -3px;  
+            }
+        }
+        .progress{
+            background: var(--at-font-color);
+        }
+        &:hover{
+            .show-on-hover{
+                visibility: visible;
+            }
+            .cleardate{
+                width: 50px;
+            }
+        }
+
+    }
+}

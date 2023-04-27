@@ -1,0 +1,230 @@
+.atmos-sales-report-header.sticky-top.card {
+    margin-left: -37px;
+    margin-right: -14px;
+    z-index: 3;
+}
+span.tab-number {
+    display: block;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    background: var(--at-app-bg);
+    border-radius: 50%;
+    color: var(--at-font-color);
+    margin-right: 15px;
+    border: 1px solid var(--at-border-color);
+}
+span.calling-icon {
+    width: 70px;
+    height: 70px;
+    border: 1px solid var(--at-border-color);
+    display: block;
+    margin: 0 auto 15px;
+    background: var(--at-app-bg);
+    border-radius: 50%;
+    line-height: 70px;
+    font-size: 45px;
+}
+.setup-account-title {
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+
+    .setup-account-title-head {
+        font-size: 24px;
+    }
+}
+.tab-content {
+
+    .tab-pane {
+
+        
+
+        .row {
+            padding: 0.4rem 1.25rem;
+
+            .js-select-account-label-wrap {
+                border-left: 1px dashed;
+                border-top: 1px dashed;
+                border-bottom: 1px dashed;
+                border-color: var(--at-border-color);
+                text-align: center;
+                padding: 15px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #eaeaea;
+                }
+
+                .js-select-account-label {
+                    cursor: pointer;
+                    img {
+                        height: 65px;
+                        object-fit: contain;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+
+                    .connect {
+
+                        img {
+                            height: 40px;
+                            object-fit: contain;
+                            display: block;
+                            margin-top: 20px;
+                        }
+                    }
+                }
+            }
+
+            .js-select-account-label-wrap-third {
+                border-right: 1px dashed var(--at-border-color);
+            }
+        }
+
+        .connect-twilio {
+
+            .agnt-col-md {
+
+                .calling-opt-sec {
+
+                    .calling-box {
+                        padding: 15px 10px;
+                        display: flex;
+                        flex-flow: wrap;
+                        align-items: center;
+                        border: 1px solid var(--at-border-color);
+                        .text-calling {
+                            width: 66%;
+                            display: flex;
+                            align-items: center;
+                            text-decoration: none;
+                            color: var(--at-font-color);
+
+                            img {
+                                height: 30px;
+                                object-fit: contain;
+                                margin-right: 20px;
+                            }
+
+                            .calling-box-text-two {
+                                font-size: 12px;
+                            }
+                        }
+
+                        .btn-account {
+                            width: 28%;
+                            color: var(--at-font-color);
+
+                            span {
+                                color: var(--at-font-color);
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .enable-email {
+            padding: 0.4rem 1.25rem;
+            .align-items-center {
+
+                label {
+                    font-weight: 600;
+                }
+            }
+
+            .form-check {
+
+                input {
+                    margin-top: 2px;
+                    &:focus {
+                        background-color: #0d6efd;
+                        box-shadow: none;
+                    }
+                }
+
+                label {
+                    font-weight: 600;
+                }
+            }
+        }
+
+        .upload {
+            margin-top: -12px;
+            margin-bottom: 8px;
+
+            .d-flex {
+                font-size: 16px;
+                font-weight: 600;
+                padding: 0.4rem 1.25rem;
+                margin-top: 25px;
+
+                .i-con-text {
+
+                    label {
+                        cursor: pointer;
+                    }
+                }
+
+                label {
+
+                    .setup_wizard_data_logo {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .accordion-flush {
+
+            .accordion-item {
+
+                .accordion-header {
+
+                    .accordion-button {
+                        padding: 0.4rem 1.25rem;
+                    }
+                }
+            }
+        }
+
+        .setup-profile-btn {
+            margin-top: 16px;
+            text-align: end;
+            margin-right: 18px;
+        }
+
+        .contact-email-form {
+            padding: 0.4rem 1.25rem;
+
+            .inline-form {
+
+                .align-items-center {
+
+                    label {
+                        font-weight: 600;
+                    }
+                }
+
+                .form-check {
+
+                    input {
+                        margin-top: 2px;
+                        &:focus {
+                            background-color: #0d6efd;
+                            box-shadow: none;
+                        }
+                    }
+
+                    label {
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+}

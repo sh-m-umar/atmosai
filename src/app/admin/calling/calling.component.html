@@ -1,0 +1,322 @@
+<div class="admin-page-wrapper">
+    <div class="page-header">
+        <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+            <div class="header-lhs d-flex align-items-center">
+                <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                    <span>Calling</span>
+                </h4>
+                <span class="ms-2 me-2"  mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+                <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+            </div>
+            <div class="header-rhs d-flex align-items-center">
+                <div class="button-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary borderless dropdown-toggle-split" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Console log</a></li>
+                        <li><a class="dropdown-item">Clear local cache only</a></li>
+                        <li><a class="dropdown-item">Clear cache and database both</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">
+            <span>This is description</span>
+            <i class="fa-solid fa-ellipsis"></i>
+        </div>
+        <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+                <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">Profile</h5>
+                <ul class="tabslink nav boards-top-menu-style" id="nav-tab" role="tablist">
+                    <li class="nav-item" [ngClass]="{'active':activeTab===1}" (click)="urlChange('manage')">
+                            <div class="boards-top-menu-style-first p-0" id="nav-manage-tab" data-bs-toggle="tab" data-bs-target="#nav-manage" type="button" role="tab" aria-controls="nav-manage" aria-selected="true" ><i class="fa-thin fa-phone"></i> Setup Phone Numbers</div>                            
+                    </li>
+                    <li class="nav-item" [ngClass]="{'active':activeTab===2}" (click)="urlChange('outgoing')">
+                        <div class="boards-top-menu-style-first p-0" id="nav-outgoing-tab" data-bs-toggle="tab" data-bs-target="#nav-outgoing" type="button" role="tab" aria-controls="nav-outgoing" aria-selected="false" ><i class="fa-thin fa-diagram-successor"></i> Setup Predictive Dialer</div>                        
+                    </li>
+                    <li class="nav-item" [ngClass]="{'active':activeTab===3}" (click)="urlChange('tax')">
+                        <div class="boards-top-menu-style-first p-0" id="nav-tax-tab" data-bs-toggle="tab" data-bs-target="#nav-tax" type="button" role="tab" aria-controls="nav-tax" aria-selected="false" ><i class="fa-thin fa-user-check"></i> Approve Users as You</div>                        
+                    </li>
+                    <li class="nav-item" [ngClass]="{'active':activeTab===4}" (click)="urlChange('sharing')">
+                        <div class="boards-top-menu-style-first p-0" id="nav-sharing-tab" data-bs-toggle="tab" data-bs-target="#nav-sharing" type="button" role="tab" aria-controls="nav-sharing" aria-selected="false" ><i class="fa-thin fa-network-wired"></i> Twilio Connect</div>                        
+                    </li>                    
+                </ul>
+
+                <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-thin fa-plus"></i>
+                    </button>
+                    <div class="dropdown-menu p-0 style-less">
+                        <ul class="list-group list-group-flush list-group-sm">
+                            <li class="list-group-item">
+                                <div class="ls" data-bs-toggle="modal" data-bs-target="#viewcenter" >
+                                    <i class="fa-light fa fa-home"></i>
+                                    <span class="ms-2">Apps</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex align-items-centere">
+                <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2" style="margin-top: -5px;">
+                    <div class="button-group outlined borderless">
+                        <button type="button" class="btn collapsed btn-outline-secondary"><i
+                                class="fa-thin fa-envelope"></i> Bulk Emails
+                        </button>
+                        <button type="button"
+                                class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <div class="button-group ms-2">
+                        <button type="button" class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div (click)="headerToggle()" class="header-collapse-btn"><i class="fa-thin fa-angle-{{anglePos}}"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="admin-page-content-wrapper">
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-manage" role="tabpanel" aria-labelledby="nav-manage-tab">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="">
+                            <div class="mb-2 d-flex align-items-center justify-content-between">
+                                <h3 class="mb-0">Personal Number</h3><button class="btn btn-sm btn-primary"><i
+                                        class="fa-light fa-plus me-1"></i>Add</button>
+                            </div>
+                            <div class="card card-inside-card">
+                                <div class="card-body admin-email-note">
+                                    <div class="no-phone-added text-center"><i class="fa-solid fa-circle-phone mb-2"></i>
+                                        <h4>No Phone Number</h4>
+                                        <p>Rent on through us or bring your own.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4">
+                            <div class="mb-2 d-flex align-items-center justify-content-between">
+                                <h3 class="mb-0">Create new lead for unknown number</h3>
+                            </div>
+                            <div class="card card-inside-card admin-email-note">
+                                <div class="card-body">
+                                    <div class="form-check"><input type="checkbox" value="" id="flexCheckDefault"
+                                            class="form-check-input"><label for="flexCheckDefault" class="form-check-label"> Enable </label>
+                                    </div>
+                                    <div class="text-end"><button class="btn btn-sm btn-primary">Update</button></div>
+                                </div>
+                            </div>
+                            <hr class="my-4">
+                            <div class="mb-2 d-flex align-items-center justify-content-between">
+                                <h3 class="mb-0">Group Numbers</h3><button class="btn btn-sm btn-primary"><i class="fa-light fa-plus me-1"></i>
+                                    Add</button>
+                            </div>
+                            <div class="card card-inside-card admin-email-note">
+                                <div class="card-header d-flex align-items-center justify-content-between admin-email-note">
+                                    <div><strong>+123456789</strong><span class="ms-2 cable link"><i class="fa-light fa-pencil"></i></span>
+                                    </div><span class="cable link"><i class="fa-light fa-trash"></i></span>
+                                </div>
+                                <div class="card-body">
+                                    <div>Voicemail Greeting: <span class="ms-2 cable link">Enable...</span></div>
+                                    <div>Call Forwarding: <span class="ms-2 cable link">Enable...</span></div>
+                                    <div>Members: WQ AS JD<span class="ms-2 cable link"><i class="fa-light fa-pencil"></i></span></div>
+                                </div>
+                            </div>
+                            <span class="cable link d-block mt-2">Learn about group numbers.</span>
+                            <hr class="my-4">
+                            <div class="mb-2">
+                                <h3 class="mb-0">Pre-Recorded Voicemail Drop</h3>
+                                <p>Voicmail drop allows you to leave a pre-recorded voicemail message when making outgoing calls.</p><button
+                                    class="btn btn-sm btn-primary">New Voicemail Drop</button><span class="cable link mt-2 d-block mb-5">Learn about
+                                    voicemail drops.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-outgoing" role="tabpanel" aria-labelledby="nav-outgoing-tab">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="">
+                            <div class="d-flex predictive-setup-wrapper">
+                                <div class="container-fluid px-0">
+                                    <div class="close-setting-wrapper">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="card card-inside-card admin-email-note admin-email-note-top">
+                                                            <div class="card-body">
+                                                                <h3 class="mb-3">Call Leads Simultaneously</h3>
+                                                                <p>Calling multiple Leads at once means more conversations and more deals. The
+                                                                    more people calling, the more calls per person.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="card card-inside-card h-100 admin-email-note admin-email-note-top">
+                                                            <div class="card-body">
+                                                                <h3 class="mb-3">Avoid Wasted Calls</h3>
+                                                                <p>Never see a bad number—every call you get is a connection. Never wait to see
+                                                                    if someone answers.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row pb-4">
+                                                    <div class="col-sm-8 mb-3 mt-3"><small> Depending on the country you or your customers are
+                                                            in, there may be regulations that your team should follow. To learn more how the
+                                                            Predictive Dialer helps you stay compliant, and what additional steps you might need
+                                                            to take, you can read the Predictive Dialer FAQ. </small></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="caller-group-wrapper card card-inside-card admin-email-signature-dialer mb-5">
+                                            <div class="row caller-step active dialer-row">
+                                                <div class="col-lg-12 dialer-row-col">
+                                                    <h3>Set Group Caller ID</h3>
+                                                    <p>Predictive Calling requires a Group Number to use as the caller ID. This is because the
+                                                        system is making calls rather than individuals.</p><a href="">Learn about Group
+                                                        Numbers</a><a href="">Learn how Predictive Calling works</a><br><button
+                                                        class="btn btn-sm btn-primary mt-4">Create a Group Number</button>
+                                                </div>
+                                            </div>
+                                            <div class="row caller-step dialer-row">
+                                                <div class="col-lg-12 voicemail-parent-div voicemails dialer-row-col">
+                                                    <h3>Record the Abandonment Message</h3>
+                                                    <p>The abandonment message is what your Contacts hear instead of silence if they answer the
+                                                        phone and no one from your company is available.</p>
+                                                    <h5>The message must contain:</h5>
+                                                    <ul class="list-unstyled mumber-points mb-3">
+                                                        <li><span>1</span>The name of your organization</li>
+                                                        <li><span>2</span>A contact telephone number</li>
+                                                    </ul>
+                                                    <div data-phone_number="pre_recorded" class="d-flex push-audio-controls"><button
+                                                            type="button" class="btn btn-sm btn-primary">New Voicemail Drop</button></div>
+                                                </div>
+                                            </div>
+                                            <div class="row caller-step dialer-row">
+                                                <div class="col-lg-12 dialer-row-col">
+                                                    <h3>Setup Complete</h3>
+                                                    <p class="mb-3">Now that Predictive calling is available you can start calling any Clear
+                                                        View with more efficiency. You can invite others from the options drop-down.</p><a
+                                                        href="#" class="btn btn-sm btn-outline-secondary radius-20">Return to clear view <i
+                                                            class="fa-solid fa-arrow-right-long ms-3"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-tax" role="tabpanel" aria-labelledby="nav-tax-tab">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="">
+                            <div class="mb-2 d-flex align-items-center justify-content-between">
+                                <div>
+                                    <div class="input-group input-group-sm"><input type="text" placeholder="Filter User"
+                                            class="form-control admin-email-note"><span class="input-group-text admin-email-note"><i class="fa-light fa-search"></i></span></div>
+                                </div><button class="btn btn-sm btn-primary"><i class="fa-light fa-plus me-1"></i>Add User</button>
+                            </div>
+                            <div class="card card-inside-card admin-email-note">
+                                <div class="card-body">
+                                    <div class="no-phone-added text-center"><i class="fa-solid fa-circle-user mb-2"></i>
+                                        <h4>Nobody Can Send as You</h4>
+                                        <p>Users who allow to send as you will appear here.</p><span class="cable link mt-2 d-block">Learn more
+                                            about send as.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                        
+            <div class="tab-pane fade" id="nav-sharing" role="tabpanel" aria-labelledby="nav-sharing-tab">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="">
+                            <p>Welcome to Twilio settings. You need a Twilio account and number for communication including Phone, Voicemail and
+                                SMS</p>
+                            <table class="table twillo-table table-bordered admin-email-note">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2" class="text-center"><strong>Twillo Settings</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th width="160"><strong>Twillo accound SSID:</strong>
+                                            <p class="mb-0">Your Account SID from www.twilio.com/console</p>
+                                        </th>
+                                        <td><input type="text" value="" class="form-control form-control-sm"></td>
+                                    </tr>
+                                    <tr>
+                                        <th width="160"><strong>Twilio Account Token:</strong>
+                                            <p class="mb-0">Your Auth Token from www.twilio.com/console</p>
+                                        </th>
+                                        <td><input type="text" value="" class="form-control form-control-sm"></td>
+                                    </tr>
+                                    <tr>
+                                        <th width="160"><strong>Twilio Number:</strong>
+                                            <p class="mb-0">Enter your Twilio Number www.twilio.com/console</p>
+                                        </th>
+                                        <td><input type="text" value="" class="form-control form-control-sm"></td>
+                                    </tr>
+                                    <tr>
+                                        <th width="160"><strong>Twilio Api Key SID:</strong>
+                                            <p class="mb-0">Your Revocable Api Key SID from www.twilio.com/console</p>
+                                        </th>
+                                        <td><input type="text" value="" class="form-control form-control-sm"></td>
+                                    </tr>
+                                    <tr>
+                                        <th width="160"><strong>Twilio Api Key Secret:</strong>
+                                            <p class="mb-0">Your Revocable Api Key Secret from www.twilio.com/console</p>
+                                        </th>
+                                        <td><input type="text" value="" class="form-control form-control-sm"></td>
+                                    </tr>
+                                    <tr>
+                                        <th width="160"><strong>Twilio Twiml App SID:</strong>
+                                            <p class="mb-0">Your Twiml App SID from www.twilio.com/console</p>
+                                        </th>
+                                        <td><input type="text" value="" class="form-control form-control-sm"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-center"><button class="btn btn-sm btn-primary">Save Settings</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>                                                           
+        </div>
+    </div>
+</div>

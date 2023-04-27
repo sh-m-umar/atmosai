@@ -1,0 +1,157 @@
+<div class="welcom-vendor mt-4 mb-4">
+    <p>Welcom to Vendor Portal!</p>
+</div>
+<div class="vendor-price-status mb-5">
+    <div class="vender-price-status-inner d-flex justify-content-between">
+        <div class="v-price-status-left">
+            <p class="mb-0">OUTSTANDING INVOICES</p>
+            <h1 class="mb-1">$85,00.00</h1>
+            <span class="mb-1">Number of Outstanding Invoices: 1</span>
+        </div>
+        <div class="v-price-status-mid">
+            <p class="mb-0">AVAILABLE CREDITS</p>
+            <h1 class="mb-1">$84,00.00</h1>
+        </div>
+        <div class="v-price-status-right">
+            <p class="">OPEN PURCHASE ORDERS</p>
+            <span class="mb-1">1</span>
+        </div>
+    </div>
+</div>
+<div class="v-price-details">
+    <div class="row">
+        <div class="col-6">
+            <div class="vender-left-width">
+                <p class="v-last-paymrnt">Last Payment Received</p>
+            <div class="v-last-payment">
+                <div class="v-last-payment-inner d-flex justify-content-between">
+                    <div class="last-payment-left">
+                        <h1 class="mb-1">$6,00,00.00</h1>
+                        <p class="mb-0">Received for <span class="">00002.</span></p>
+                    </div>
+                    <div class="last-payment-right mt-1">
+                        <p class="mb-2">Received On</p>
+                        <p class="mb-0">04/08/2020</p>
+                    </div>
+                </div>
+            </div>
+            <p class="v-last-paymrnt mt-4">My Account Details</p>
+            <div class="v-account-details">
+                <div class="v-account-details-inner d-flex justify-content-between">
+                    <div *ngIf="!isEdit" class="v-account-left">
+                        <p class="v-account-monile">Mobile Traders</p>
+                        <p class="v-account-name mb-1">Suresh Sinha</p>
+                        <p class="v-account-email">rilav37059@intsv.net</p>
+                    </div>
+                    <div *ngIf="isEdit" class="v-account-left">
+                        <input type="text" class="form-control form-control-sm mb-2">
+                        <input type="text" class="form-control form-control-sm mb-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="v-account-right">
+                        <i (click)="isEdit = true" class="fa-light fa-pen"></i>
+                    </div>
+                </div>
+                <div class="top-border ms-3 me-3"></div>
+                <div class="v-account-details-second d-flex justify-content-between">
+                    <div *ngIf="!isEdit" class="v-account-left">
+                        <p class="v-account-info mb-3">GST ONFORMATION</p>
+                        <p class="v-account-gst mb-1"><span>GST Treatment:</span> Registered Business - Regular</p>
+                        <p class="v-account-gst mb-1"><span>Business GSTIN:</span> 32AAAA0000A1Z7</p>
+                    </div>
+                    <div *ngIf="isEdit" class="v-account-left">
+                        <p class="v-account-info mb-3">GST ONFORMATION</p>
+                        <p class="v-account-gst mb-1"><span>GST Treatment:</span> <input type="text" class="form-control form-control-sm"></p>
+                        <p class="v-account-gst mb-1"><span>Business GSTIN:</span> <input type="text" class="form-control form-control-sm"></p>
+                    </div>
+                    <div class="v-account-right">
+                        <i (click)="isEdit = true" class="fa-light fa-pen"></i>
+                    </div>
+                </div>
+                <div class="top-border ms-3 me-3 mb-2"></div>
+                <div class="v-details-last d-flex justify-content-between">
+                    <div *ngIf="!isEdit" class="details-last-left">
+                        <p class="content-edits">BILLING ADDRESS<i (click)="isEdit = true" class="fa-light fa-pen ms-2"></i></p>
+                        <p class="mb-1">46, Plot No, Sector, Mahavir</p>
+                        <p class="mb-1">Shopping Complex</p>
+                        <p class="mb-1">Kochi</p>
+                        <p class="mb-1">Kerala</p>
+                        <p class="mb-1">India</p>
+                        <p class="mb-1">400706</p>
+                    </div>
+                    <div *ngIf="isEdit" class="details-last-left">
+                        <p class="content-edits">BILLING ADDRESS<i (click)="isEdit = true" class="fa-light fa-pen ms-2"></i></p>
+                        <input type="text" class="form-control form-control-sm mb-2">
+                        <input type="text" class="form-control form-control-sm mb-2">
+                        <input type="text" class="form-control form-control-sm mb-2">
+                        <input type="text" class="form-control form-control-sm mb-2">
+                        <input type="text" class="form-control form-control-sm mb-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div *ngIf="!isEdit" class="details-last-right">
+                        <p class="content-edits">BILLING ADDRESS<i (click)="isEdit = true" class="fa-light fa-pen ms-2"></i></p>
+                        <p class="mb-1">46, Plot No, Sector, Mahavir</p>
+                        <p class="mb-1">Shopping Complex</p>
+                        <p class="mb-1">Kochi</p>
+                        <p class="mb-1">Kerala</p>
+                        <p class="mb-1">India</p>
+                        <p class="mb-1">400706</p>
+                    </div>
+                    <div *ngIf="isEdit" class="details-last-right">
+                        <p class="content-edits">BILLING ADDRESS<i (click)="isEdit = true" class="fa-light fa-pen ms-2"></i></p>
+                        <input type="text" class="form-control form-control-sm mb-2">
+                        <input type="text" class="form-control form-control-sm mb-2">
+                        <input type="text" class="form-control form-control-sm mb-2">
+                        <input type="text" class="form-control form-control-sm mb-2">
+                        <input type="text" class="form-control form-control-sm mb-2">
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="vender-right-width">
+                <p class="v-last-paymrnt">Documents</p>
+                <div class="v-last-doc">
+                    <div class="v-last-doc-inner d-flex justify-content-between">
+                        <div class="last-payment-left">
+                            <h1 class="mb-1">1</h1>
+                            <p class="mb-0">Pending Documents</p>
+                        </div>
+                        <div class="last-payment-left mt-1">
+                            <h1 class="mb-1">0</h1>
+                            <p class="mb-0">Pending Documents</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="v-last-paymrnt mt-4">Contact persons</p>
+                <div class="contact-person">
+                    <div class="contact-person-inner">
+                        <div class="contact-person-details d-flex">
+                            <div class="person-image me-3">
+                                <img
+                                    src="https://secure.gravatar.com/avatar/2ccb949d707d8da634d1b151bbda0614?s=40&amp;d=mm&amp;r=g">
+                            </div>
+                            <div class="person-name-address">
+                                <p class="name-add mb-1">Suresh Sinha</p>
+                                <p class="email-add mb-0">rilav37059@intsv.net</p>
+                            </div>
+                        </div>
+                        <div class="top-border ms-3 me-3 mt-3 mb-3"></div>
+                        <div class="contact-person-details d-flex">
+                            <div class="person-image me-3">
+                                <img
+                                    src="https://secure.gravatar.com/avatar/2ccb949d707d8da634d1b151bbda0614?s=40&amp;d=mm&amp;r=g">
+                            </div>
+                            <div class="person-name-address">
+                                <p class="name-add mb-1">Rupesh</p>
+                                <p class="email-add mb-0">xxxxx@intsv.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

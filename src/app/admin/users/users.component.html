@@ -1,0 +1,613 @@
+<div class="admin-page-wrapper">
+    <div class="page-header">
+        <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+            <div class="header-lhs d-flex align-items-center">
+                <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                    <span>Users</span>
+                </h4>
+                <span class="ms-2 me-2"  mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+                <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+            </div>
+            <div class="header-rhs d-flex align-items-center">
+                <div class="button-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary borderless dropdown-toggle-split" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Console log</a></li>
+                        <li><a class="dropdown-item">Clear local cache only</a></li>
+                        <li><a class="dropdown-item">Clear cache and database both</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">
+            <span>This is description</span>
+            <i class="fa-solid fa-ellipsis"></i>
+        </div>
+        <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+                <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">Users</h5>
+                <ul class="tabslink nav boards-top-menu-style" id="nav-tab" role="tablist">
+                    <li class="nav-item" [ngClass]="{active: activeTab === 'users'}" id="nav-users-tab" type="button">
+                        <div class="boards-top-menu-style-first" (click)="switchTab('users')"><i class="fa-thin fa-home"></i> Users</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" [ngClass]="{active: activeTab === 'boardOwnership'}" id="nav-boardownership-tab" type="button">
+                        <div class="boards-top-menu-style-first" (click)="switchTab('boardOwnership')"><i class="fa-thin fa-home"></i> Board Ownership</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" [ngClass]="{active: activeTab === 'automationOwnership'}" id="nav-autmationownership-tab" type="button">
+                        <div class="boards-top-menu-style-first" (click)="switchTab('automationOwnership')"><i class="fa-thin fa-home"></i> Automation Ownership</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-thin fa-plus"></i>
+                    </button>
+                    <div class="dropdown-menu p-0 style-less">
+                        <ul class="list-group list-group-flush list-group-sm">
+                            <li class="list-group-item">
+                                <div class="ls" data-bs-toggle="modal" data-bs-target="#viewcenter" >
+                                    <i class="fa-light fa fa-home"></i>
+                                    <span class="ms-2">Apps</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex align-items-centere">
+                <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2" style="margin-top: -5px;">
+                    <div class="button-group outlined borderless">
+                        <button type="button" class="btn collapsed btn-outline-secondary"><i
+                                class="fa-thin fa-envelope"></i> Bulk Emails
+                        </button>
+                        <button type="button"
+                                class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <div class="button-group ms-2">
+                        <button type="button" class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div (click)="headerToggle()" class="header-collapse-btn"><i class="fa-thin fa-angle-{{anglePos}}"></i>
+                </div>
+            </div>
+        </div>
+        <div class="header-filter-area d-flex justify-content-between align-items-center" *ngIf="activeTab === 'users'">
+            <div class="user-filter d-flex align-items-end">
+                <div class="input-group">
+                    <input type="text" [(ngModel)]="searchTerm" class="form-control" placeholder="Search">
+                    <span (click)="updateFilterValues( 'searchTerm', searchTerm )" class="input-group-text border-left-0"><i class="fa-light fa-search"></i></span>
+                </div>
+                <div class="dropdown ms-2">
+                    <button type="button" data-bs-toggle="dropdown" aria-expanded="false" mat-raised-button="" mattooltip="Filter by anyting" mattooltipposition="above" mattooltipclass="above" class="mat-tooltip-trigger btn btn-outline-secondary borderless d-flex align-items-center" ng-reflect-message="Filter by anyting" ng-reflect-position="above" ng-reflect-tooltip-class="above" aria-describedby="cdk-describedby-message-3" cdk-describedby-host="0">
+                        <i class="fa-thin fa-filter me-2"></i> Filter
+                      </button>
+                    <div class="dropdown-menu sidebar-filer px-3 py-2" onclick="event.stopPropagation()">
+                        <div class="filer-header d-flex align-items-center justify-content-between mb-3">
+                            <div class="filter-heading d-flex align-items-center">
+                                <h2 class="m-0 me-2">Filter</h2>
+                                <span>Showing 1 of 1</span>
+                            </div>
+                            <div class="filter-action">
+                                <button (click)="resetFilterValues()" class="btn btn-outline-secondary btn-sm me-2">Clear all</button>
+                            </div>
+                        </div>
+                        <div class="filter-body d-flex justify-content-between">
+                            <div class="filter-section w-100 me-3">
+                                <label>User Type</label>
+                                <ul class="filters-list">
+                                    <li *ngFor="let userType of userTypes" class="list-item mt-2 {{( filterValues['type'] && filterValues['type'].includes( userType.toLowerCase() ) ? 'filter-active' : '' )}}" (click)="updateFilterValues( 'type', userType )">
+                                        <span>{{userType | titlecase}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="filter-section w-100 me-3">
+                                <label>Status</label>
+                                <ul class="filters-list">
+                                    <li *ngFor="let userStatus of userStatuses" class="list-item mt-2 {{( filterValues['status'] && filterValues['status'].includes( userStatus.toLowerCase() ) ? 'filter-active' : '' )}}" (click)="updateFilterValues( 'status', userStatus )">
+                                        <span>{{userStatus | titlecase}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="filter-section w-100 me-3">
+                                <label>Products</label>
+                                <ul class="filters-list">
+                                    <li *ngFor="let module of modules"
+                                    class="list-item d-flex align-items-center mt-2 {{( filterValues['modules'] && filterValues['modules'].includes( module.module.toLowerCase() ) ? 'filter-active' : '' )}}"
+                                    (click)="updateFilterValues( 'modules', module.module )">
+                                        <img *ngIf="module.icon" src="./assets/img/left-menu/{{module.icon}}" width="20px">
+                                        <span>{{module.title}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!--
+                            <div class="filter-section w-100">
+                                <label>Teams</label>
+                                <ul class="filters-list">
+                                    <li class="list-item p-0 mt-2">
+                                        <div class="input-group">
+                                            <input type="text" [(ngModel)]="searchTerm" class="form-control" placeholder="Search">
+                                            <span (click)="updateFilterValues( 'searchTerm', searchTerm )" class="input-group-text border-left-0"><i class="fa-light fa-search"></i></span>
+                                        </div>
+                                    </li>
+                                    <li class="list-item d-flex align-items-center mt-2">
+                                        <span class="initials me-3">CA</span>
+                                        <span>Calib</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" (click)="toggleInviteModel(true)" data-bs-target="#inviteModal" [disabled]="sendingInviteToUsers">
+                  <i class="fa-light fa-user me-2"></i>
+                  {{sendingInviteToUsers? 'Sending Invitation' : 'Invite'}}
+                  <i class="fa fa-spinner fa-spin ms-2" *ngIf="sendingInviteToUsers"></i>
+                </button>
+
+                <!-- Invite modal start -->
+                <div class="modal fade invite-modal show d-block" style="background: rgba(0, 0, 0, 0.5);" *ngIf="inviteObject.showModal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="invite-modal-header">
+                                    <h5 class="agnt-modal-title mb-0 mt-1">Invite to AtmosAI Work OS</h5>
+                                    <button type="button" class="close">
+                                        <span (click)="toggleInviteModel(false)">×</span>
+                                    </button>
+                                </div>
+                                <div class="m-body-wrapper">
+                                    <div class="form-group mb-4">
+                                        <label for="">Include product(s) to include</label>
+                                        <div class="form-select form-select-sm">
+                                        <div value="marketing" *ngFor="let module of modules">
+                                            <input type="checkbox" (change)="onChangeInviteModules($event, module)" [checked]="inviteObject.products.includes(module.module)">
+                                            {{module.title}}
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for=""><i class="fa-solid fa-envelope"></i> Invite with email</label>
+                                        <tag-input [(ngModel)]="inviteObject.emails"
+                                        placeholder='Enter a new email' [secondaryPlaceholder]="'Enter a new email'"
+                                        [modelAsStrings]="true">
+                                        </tag-input>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="admin" value="admin" [(ngModel)]="inviteObject.user_kind">
+                                        <label class="form-check-label" for="admin">Admin</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="member" value="member" [(ngModel)]="inviteObject.user_kind">
+                                        <label class="form-check-label" for="member">Member</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="viewer" value="viewer" [(ngModel)]="inviteObject.user_kind">
+                                        <label class="form-check-label" for="viewer">Viewer readonly <span class="free-tag">Free</span></label>
+                                    </div>
+                                    <div class="text-end">
+                                        <button class="btn btn-sm btn-primary" (click)="onInviteSend()">
+                                        <i class="fa fa-spinner fa-spin" *ngIf="inviteObject.isLoading"></i>
+                                        <span *ngIf="!inviteObject.isLoading">Invite</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Invite modal end-->
+            </div>
+        </div>
+    </div>
+    <div class="admin-page-content-wrapper">
+        <div class="tab-content mb-5" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-users" *ngIf="activeTab === 'users'">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="d-flex justify-content-between align-items-center mb-5 d-none">
+                            <h3 class="mb-0">User management</h3>
+                            <div>
+                                <button class="btn btn-sm btn-outline-secondary border-0">See billed users</button>
+                                <button class="btn btn-sm btn-outline-secondary border-0 me-3 ms-3">Manage Teams</button>
+                                <button class="btn btn-sm btn-outline-secondary border-0">Download CVS</button>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span>Showing: {{users?.length}} results</span>
+                        </div>
+                        <div class="table-wrap card mt-3">
+                            <div class="card-body">
+                                <table class="table table-sm align-middle">
+                                    <thead>
+                                    <tr>
+                                        <th><input type="checkbox" (change)="addAllUserToInviteList($event)" [checked]="usersToInvite.length === users?.length"></th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>User Permission Level</th>
+                                        <th>Product</th>
+                                        <th>Status</th>
+                                        <th>Teams</th>
+                                        <th>Skill/Dept Category</th>
+                                        <th>Joined</th>
+                                        <th>Invited By</th>
+                                        <th>Last Active</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let user of users; let i = index">
+                                          <td><input type="checkbox" (change)="addUserToInviteList($event, user)" [checked]="usersToInvite.includes(user?.user_email)"></td>
+                                          <td>
+                                              <div class="d-flex align-items-center">
+                                                <div *ngIf="!user.photo">
+                                                    <span class="initials me-3" *ngIf="user?.fname[0] && user?.lname">{{user?.fname[0]}}{{user?.lname[0]}}</span>
+                                                    <span class="initials me-3" *ngIf="!user?.fname[0] || !user?.lname">{{user?.display_name[0]}}</span>
+                                                </div>
+                                                <div *ngIf="user.photo" class="initials big" style="line-height: 34px;">
+                                                    <img src="{{user.photo}}" alt="">
+                                                </div>
+                                                
+                                                <span>{{user?.display_name}}</span>
+                                              </div>
+                                          </td>
+                                          <td>{{user?.user_email}}</td>
+                                          <td>
+                                              <select class="form-select form-select-sm" (change)="changeUserRole( $event, user?.ID )">
+                                                  <option [selected]="( user?.user_roles?.administrator == 'Admin' )" value="Admin">Admin</option>
+                                                  <option [selected]="( user?.user_roles?.atmos_member == 'Member' )" value="Member">Member</option>
+                                                  <option [selected]="( user?.user_roles?.atmos_viewer == 'Viewer' )" value="Viewer">Viewer</option>
+                                              </select>
+                                          </td>
+                                          <td>
+                                              <div class="product-users">
+                                                  <span *ngFor="let product of user?.activated_products.slice( 0, 2 );" class="product-item">
+                                                      <img *ngIf="getModuleIcon( product )" src="./assets/img/left-menu/{{getModuleIcon( product )}}" width="25px">
+                                                  </span>
+                                                  <span *ngIf="( user?.activated_products.length > 2 )" class="product-item last">
+                                                      +{{( user?.activated_products.length - 2 )}}
+                                                  </span>
+                                                  <i *ngIf="( user?.activated_products.length < 1 )">-</i>
+                                              </div>
+                                          </td>
+                                          <td>
+                                            <span class="badge" [ngStyle]="{'background': user?.status =='active' ? 'green':'purple'}">{{user?.status | titlecase}}</span>
+                                          </td>
+                                          <td>
+                                              <div class="text-center">
+                                                <div class="dropdown">
+                                                    <span class="product-item initials" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fa-regular fa-user-group"></i>
+                                                    </span>
+                                                    <ul class="dropdown-menu p-3" style="width:400px;">
+                                                        <div class="input-group input-group-sm m-0 w-100">
+                                                            <input type="text" class="form-control border-end-0" placeholder="Search Team">
+                                                            <span class="input-group-text bg-transparent"><i class="fa-light fa-search p-0 border-0"></i></span>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                              </div>
+                                          </td>
+                                          <td>
+                                            <div (click)="setEditCategories(user, i)" *ngIf="showEditCategories != i">
+                                              {{user?.categories?.[0]}}
+                                              <span *ngIf="( user?.categories.length > 1 )" class="product-item last">
+                                                +{{( user?.categories.length )}}
+                                              </span>
+                                            </div>
+                                            <div *ngIf="showEditCategories === i" class="card shadow" style="width: 300px; position: absolute; border-radius: 5px; padding: 10px">
+                                              <!-- <tag-input [ngModel]="editUserCategories"
+                                                    [addOnBlur]="true"
+                                                    [clearOnBlur]="true">
+                                                  <tag-input-dropdown [autocompleteItems]="userCategories">
+                                                  </tag-input-dropdown>
+                                              </tag-input> -->
+                                              <tag-input [(ngModel)]="editUserCategories" [allowDupes]="false" [onlyFromAutocomplete]="false" placeholder='Enter a category'>
+                                                <tag-input-dropdown [showDropdownIfEmpty]="true"
+                                                                    [focusFirstElement]="true"
+                                                                    [displayBy]="'name'"
+                                                                    [identifyBy]="'slug'"
+                                                                    [autocompleteItems]="userCategories"
+                                                                    [appendToBody]="false">
+                                                    <ng-template let-item="item" let-index="index">
+                                                        {{ item.name }}
+                                                    </ng-template>
+                                                </tag-input-dropdown>
+                                              </tag-input>
+                                              <div class="text-end mt-2">
+                                                <button type="button" class="btn btn-sm btn-primary me-3" (click)="saveUserCategories(user, i)">Save</button>
+                                                <button type="button" class="btn btn-sm btn-outline-secondary" (click)="cancelUserCategories()">Cancel</button>
+                                              </div>
+                                              
+                                            </div>
+                                          </td>
+                                          <td>{{user?.joined}}</td>
+                                          <td>{{( user?.invited_by.id ? user?.invited_by.first_name + ' ' + user?.invited_by.last_name : '-' )}}</td>
+                                          <td>{{user?.last_active || '-'}}</td>
+                                          <td>
+                                              <div class="dropstart">
+                                                  <span data-bs-toggle="dropdown" aria-expanded="true"><i class="fa-solid fa-ellipsis"></i></span>
+                                                  <ul class="dropdown-menu p-0">
+                                                    <ul class="list-group list-group-flush list-group-sm">
+                                                      <!--
+                                                      <li class="list-group-item"><span>Edit email address</span></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      -->
+                                                      <li class="list-group-item" (click)="changeUserStatus( user?.ID )" title="{{( ( user != undefined && currentUser.ID == user.ID ) ? 'You can not deactivate your own account' : '' )}}"><span [ngClass]="( ( user != undefined && currentUser.ID == user.ID ) ? 'text-muted' : '' )">{{( user?.status == 'active' ? 'Deactivate user' : 'Activate user' )}}</span></li>
+                                                      <li *ngIf="user?.status == 'inactive'" class="list-group-item" (click)="deleteUserDetail( user?.ID )"><span>Delete user detail</span></li>
+                                                      <li *ngIf="user?.status != 'inactive'" class="list-group-item" title="Deactivate user first" ><span class="text-muted">Delete user detail</span></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li class="list-group-item" (click)="resetTwoFactorAuth( user?.ID )"><span>Reset Two-Factor Authentication</span></li>
+                                                      <!--
+                                                      <li class="list-group-item"><span>Reset SSO UID</span></li>
+                                                      -->
+                                                    </ul>
+                                                  </ul>
+                                              </div>
+                                          </td>
+                                      </tr>
+                                      <tr *ngIf="users?.length < 1"><td colspan="11" class="text-center"><strong>No users found, try changing your filters</strong></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade show active" id="nav-boardownership" *ngIf="activeTab === 'boardOwnership'">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h3 class="mb-0">Manage Board Owners</h3>
+                        <small>Did someone leave your account? Add a new owner to their boards (including shareable and private boards).</small>
+                        <div class="mt-4 form-group row">
+                            <label class="col-sm-4">Current owner</label>
+                            <div class="custom-select dropdown col-sm-8">
+                              <mat-form-field floatLabel="never" appearance="outline">
+                                <input type="text"
+                                        matInput
+                                        [(ngModel)]="assignBoardOwnershipTo.current_owner"
+                                        name="assign_to" ngControl="assign_to"
+                                        (ngModelChange)="onDealLeadChange(assignBoardOwnershipTo.current_owner)"
+                                        [matAutocomplete]="currentOwner">
+                                <mat-autocomplete autoActiveFirstOption #currentOwner="matAutocomplete">
+                                  <mat-option *ngIf="!filteredUsers?.length" [value]="">
+                                    No Users Found
+                                  </mat-option>
+                                  <mat-option *ngFor="let user of filteredUsers"
+                                    [value]="user.display_name"
+                                    name="user.display_name"
+                                    (click)="onUserSelect(user, 'board', 'current_owner')">
+                                    <div class="suggested-item d-flex align-items-center mb-2">
+                                      <div class="initials" style="background: purple" *ngIf="user.fname[0] && user.lname">{{user.fname[0]}}{{user.lname[0]}}</div>
+                                      <div class="initials" style="background: purple" *ngIf="!user.fname[0] || !user.lname">{{user.display_name[0]}}</div>
+                                      <div class="item-name">{{user.display_name}}</div>
+                                    </div>
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="mt-4 mb-3 form-group row">
+                            <label class="col-sm-4">New owner</label>
+                            <div class="custom-select dropdown col-sm-8">
+                              <mat-form-field floatLabel="never" appearance="outline">
+                                <input type="text"
+                                        matInput
+                                        [(ngModel)]="assignBoardOwnershipTo.new_owner"
+                                        name="assign_to" ngControl="assign_to"
+                                        (ngModelChange)="onDealLeadChange(assignBoardOwnershipTo.new_owner)"
+                                        [matAutocomplete]="newOwner">
+                                <mat-autocomplete autoActiveFirstOption #newOwner="matAutocomplete">
+                                  <mat-option *ngIf="!filteredUsers?.length" [value]="">
+                                    No Users Found
+                                  </mat-option>
+                                  <mat-option *ngFor="let user of filteredUsers"
+                                    [value]="user.display_name"
+                                    name="user.display_name"
+                                    (click)="onUserSelect(user, 'board', 'new_owner')">
+                                    <div class="suggested-item d-flex align-items-center mb-2">
+                                      <div class="initials" style="background: purple" *ngIf="user.fname[0] && user.lname">{{user.fname[0]}}{{user.lname[0]}}</div>
+                                      <div class="initials" style="background: purple" *ngIf="!user.fname[0] || !user.lname">{{user.display_name[0]}}</div>
+                                      <div class="item-name">{{user.display_name}}</div>
+                                    </div>
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                            </div>
+                        </div>
+                        <button data-bs-toggle="modal" data-bs-target="#ownerModal" class="btn btn-outline-secondary btn-sm" [disabled]="!assignBoardOwnershipTo.new_owner || !assignBoardOwnershipTo.current_owner">Add new owner</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade show active" id="nav-autmationownership" *ngIf="activeTab === 'automationOwnership'">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h3 class="mb-0">Manage Automation Ownership</h3>
+                        <small>Transfer automation ownership between users in your account.</small>
+                        <div class="mt-4 form-group row">
+                            <label class="col-sm-4">Current owner</label>
+                            <div class="custom-select dropdown col-sm-8">
+                              <mat-form-field floatLabel="never" appearance="outline">
+                                <input type="text"
+                                        matInput
+                                        [(ngModel)]="assignAutomationOwnershipTo.current_owner"
+                                        name="assign_to" ngControl="assign_to"
+                                        (ngModelChange)="onDealLeadChange(assignAutomationOwnershipTo.current_owner)"
+                                        [matAutocomplete]="currentAutoOwner">
+                                <mat-autocomplete autoActiveFirstOption #currentAutoOwner="matAutocomplete">
+                                  <mat-option *ngIf="!filteredUsers?.length" [value]="">
+                                    No Users Found
+                                  </mat-option>
+                                  <mat-option *ngFor="let user of filteredUsers"
+                                    [value]="user.display_name"
+                                    name="user.display_name"
+                                    (click)="onUserSelect(user, 'automation', 'current_owner')">
+                                    <div class="suggested-item d-flex align-items-center mb-2">
+                                      <div class="initials" style="background: purple" *ngIf="user.fname[0] && user.lname">{{user.fname[0]}}{{user.lname[0]}}</div>
+                                      <div class="initials" style="background: purple" *ngIf="!user.fname[0] || !user.lname">{{user.display_name[0]}}</div>
+                                      <div class="item-name">{{user.display_name}}</div>
+                                    </div>
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="mt-4 mb-3 form-group row">
+                            <label class="col-sm-4">New owner</label>
+                            <div class="custom-select dropdown col-sm-8">
+                              <mat-form-field floatLabel="never" appearance="outline">
+                                <input type="text"
+                                        matInput
+                                        [(ngModel)]="assignAutomationOwnershipTo.new_owner"
+                                        name="assign_to" ngControl="assign_to"
+                                        (ngModelChange)="onDealLeadChange(assignAutomationOwnershipTo.new_owner)"
+                                        [matAutocomplete]="newAutoOwner">
+                                <mat-autocomplete autoActiveFirstOption #newAutoOwner="matAutocomplete">
+                                  <mat-option *ngIf="!filteredUsers?.length" [value]="">
+                                    No Users Found
+                                  </mat-option>
+                                  <mat-option *ngFor="let user of filteredUsers"
+                                    [value]="user.display_name"
+                                    name="user.display_name"
+                                    (click)="onUserSelect(user, 'automation', 'new_owner')">
+                                    <div class="suggested-item d-flex align-items-center mb-2">
+                                      <div class="initials" style="background: purple" *ngIf="user.fname[0] && user.lname">{{user.fname[0]}}{{user.lname[0]}}</div>
+                                      <div class="initials" style="background: purple" *ngIf="!user.fname[0] || !user.lname">{{user.display_name[0]}}</div>
+                                      <div class="item-name">{{user.display_name}}</div>
+                                    </div>
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#automationOwnerModal" [disabled]="!assignAutomationOwnershipTo.new_owner || !assignAutomationOwnershipTo.current_owner">Change owner</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--owner modal start-->
+<div class="modal fade" id="ownerModal" tabindex="-1" aria-labelledby="ownerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body p-5 pb-4">
+            <span class="modal-close-btn cable" data-bs-dismiss="modal" aria-label="Close"><i class="fa-light fa-xmark"></i></span>
+            <div class="d-flex align-items-center justify-content-center mb-3">
+                <span class="initials big">{{changeCurrentOwner.short_name}}</span>
+                <span class="me-3 ms-3"><i class="fa-light fa-angle-right"></i></span>
+                <span class="initials big">{{changeNewOwner.short_name}}</span>
+            </div>
+            <div *ngIf="!ownerChanged" class="text-center">
+                <h1 class="fw-normal">Add <strong class="link">{{changeNewOwner.user_email}}</strong> as an owner?</h1>
+                <p><span class="link cable">{{changeNewOwner.user_email}}</span> will now share ownership of all boards owned by <span class="link cable">{{changeCurrentOwner.display_name}}</span> including private and shared boards.</p>
+                <div class="buttons-group mt-4">
+                    <button class="btn btn-sm btn-primary me-3" [disabled]="isUpdatingOwnership" (click)="updateOwnership('board')">Add as owner <i class="fa fa-spinner fa-spin" *ngIf="isUpdatingOwnership"></i></button>
+                    <button class="btn btn-sm btn-outline-secondary border-0" data-bs-dismiss="modal" aria-label="Close">No, take me back</button>
+                </div>
+            </div>
+            <div *ngIf="ownerChanged" class="text-center">
+                <h1 class="fw-normal">You have successfully added an owner</h1>
+                <p><span class="link cable">{{changeNewOwner.display_name}}</span> now shares ownership on all of <span class="link cable">{{changeCurrentOwner.display_name}}</span>'s boards.</p>
+                <div class="buttons-group mt-4">
+                    <button class="btn btn-sm btn-primary me-3" data-bs-dismiss="modal" aria-label="Close" (click)="resetOwnerChangeData()">Got it</button>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--owner modal end-->
+
+<!-- automation owner modal start-->
+<div class="modal fade" id="automationOwnerModal" tabindex="-1" aria-labelledby="ownerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body p-5 pb-4">
+            <span class="modal-close-btn cable" data-bs-dismiss="modal" aria-label="Close"><i class="fa-light fa-xmark"></i></span>
+            <div class="d-flex align-items-center justify-content-center mb-3">
+                <span class="initials big">{{changeCurrentOwner.short_name}}</span>
+                <span class="me-3 ms-3"><i class="fa-light fa-angle-right"></i></span>
+                <span class="initials big">{{changeNewOwner.short_name}}</span>
+            </div>
+            <div *ngIf="!ownerChanged" class="text-center">
+                <p>All automation created by <span class="link cable">{{changeCurrentOwner.display_name}}</span> will be transferred to <span class="link cable">{{changeNewOwner.display_name}}</span></p>
+                <div class="buttons-group mt-4">
+                    <button class="btn btn-sm btn-primary me-3" [disabled]="isUpdatingOwnership" (click)="updateOwnership('automation')">Change ownership <i class="fa fa-spinner fa-spin" *ngIf="isUpdatingOwnership"></i></button>
+                    <button class="btn btn-sm btn-outline-secondary border-0" data-bs-dismiss="modal" aria-label="Close">No, take me back</button>
+                </div>
+            </div>
+            <div *ngIf="ownerChanged" class="text-center">
+                <h1 class="fw-normal">You have successfully changed automation ownership</h1>
+                <p><span class="link cable">{{changeNewOwner.display_name}}</span> has ownership on all of <span class="link cable">{{changeCurrentOwner.display_name}}</span>'s automation.</p>
+                <div class="buttons-group mt-4">
+                    <button class="btn btn-sm btn-primary me-3" data-bs-dismiss="modal" aria-label="Close" (click)="resetOwnerChangeData()">Got it</button>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- automation owner modal end-->
+

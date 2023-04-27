@@ -1,0 +1,167 @@
+<!--board members modal start-->
+<div class="modal fade invite-modal pt-5" id="members-popup" tabindex="-1" aria-labelledby="members-popupModal" aria-hidden="true">
+    <div class="modal-dialog pt-5 mt-5 modal-xl">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 pe-5 border-end">
+                        <div class="invite-modal-header">
+                            <div>
+                                <h2 class="modal-title mt-0 mb-0">Board Members</h2>
+                                <p class="mb-0">Subscribe people from your organization</p>
+                            </div>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="m-body-wrapper">
+                            <div class="subscriber-search">
+                              <mat-form-field floatLabel="never" appearance="outline">
+                                <input type="text"
+                                        matInput
+                                        [(ngModel)]="user"
+                                        name="user" ngControl="user"
+                                        (ngModelChange)="onUserChange(user)"
+                                        [matAutocomplete]="userOpt">
+                                <mat-autocomplete autoActiveFirstOption #userOpt="matAutocomplete">
+                                  <mat-option *ngIf="!filteredUsers.length" [value]="">
+                                    No Users Found
+                                  </mat-option>
+                                  <mat-option *ngFor="let user of filteredUsers"
+                                    [value]="user.display_name"
+                                    name="user.display_name"
+                                    (click)="onUserSelect(user)">
+                                    {{user.display_name}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                              <i class="fa fa-spinner fa-spin" *ngIf="isAddingSubscriber"></i>
+                            </div>
+                            <div class="subscriber-list mt-3">
+                                <div class="subscriber-list mt-3">
+                                  <ng-container *ngFor="let subscriber of subscribers; let i = index">
+                                    <div class="d-flex align-items-center justify-content-between mb-3">
+                                      <div class="d-flex align-items-center">
+                                        <div class="initials" style="background: blueviolet;">{{getShortName(subscriber)}}</div>
+                                        <span class="username">{{subscriber.user.fname}} {{subscriber.user.lname}}</span>
+                                      </div>
+                                      <div>
+                                        <span (click)="setSubscriberAsOwner(subscriber?.user_id, subscriber?.type === 'owner'? '': 'owner', i)" class="owner-of-list me-3" mat-raised-button matTooltip="Make {{subscriber?.user.fname}} {{subscriber?.user.lname}} as owner of this item" matTooltipPosition="above"><i class="fa-solid fa-crown" [ngStyle]="{color: subscriber?.type === 'owner'? 'gold': '#323338'}"></i></span>
+                                        <span *ngIf="subscribers.length > 1" (click)="deleteSubscriber(subscriber?.id)" class="remove-item" mat-raised-button matTooltip="Remove {{subscriber?.user?.fname}} {{subscriber?.user?.lname}} as owner of this item" matTooltipPosition="above"><i class="fa-solid fa-circle-xmark"></i></span>
+                                      </div>
+                                    </div>
+                                  </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ps-5">
+                        <div class="invite-modal-header">
+                            <div>
+                                <h2 class="modal-title mt-0 mb-0">Board Guests</h2>
+                                <p class="mb-0">Subscribe people outside your organization (clients, freelancers, etc.)
+                                    Learn more</p>
+                            </div>
+
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="m-body-wrapper">
+                            <div class="subscriber-search">
+                              <input type="text" placeholder="Enter email" [(ngModel)]="guestEmails">
+                              <br/>
+                              <small>Enter comma separated emails.</small>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-sm" (click)="onInviteSend('viewer', guestEmails)">
+                              Send
+                            </button>
+                            <!-- <div class="subscriber-list mt-3">
+                                <div class="subscriber-list mt-3 d-none">
+                                    <div class="d-flex align-items-center justify-content-between mb-3 p-2 border rounded-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="initials" style="background: blueviolet;">TM</div>
+                                            <span class="username">Tim Moses</span>
+                                        </div>
+                                        <div>
+                                            <span class="owner-of-list me-3 cable" mat-raised-button matTooltip="Make  as owner of this item" matTooltipPosition="above"><i class="fa-solid fa-crown gold"></i></span>
+                                            <span class="remove-item cable" mat-raised-button matTooltip="Remove Tim Moses as owner of this item" matTooltipPosition="above"><i class="fa-solid fa-xmark"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="no-guests">
+                                    <p>There are currently no guests subscribed to this board</p>
+                                    <div class="text-center">
+                                        <img src="./assets/img/color-bot.png" alt="" style="width: 80px;">
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  <!--board members modal end-->
+
+
+
+  <!-- backup of old modal -->
+  <!--
+<div class="modal fade invite-modal pt-5" id="members-popup" tabindex="-1" aria-labelledby="members-popupModal" aria-hidden="true">
+    <div class="modal-dialog pt-5 mt-5">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="invite-modal-header">
+                    <h2 class="modal-title mt-0 mb-1">Board Members</h2>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="m-body-wrapper">
+                  <div class="subscriber-search">
+                    <mat-form-field floatLabel="never" appearance="outline">
+                      <input type="text"
+                              matInput
+                              [(ngModel)]="boardMember"
+                              name="board_member" ngControl="board_member"
+                              (ngModelChange)="onBoardMemberInputChange()"
+                              [matAutocomplete]="user">
+                      <mat-autocomplete autoActiveFirstOption #user="matAutocomplete">
+                        <mat-option *ngIf="!filteredUsers.length" [value]="">
+                          No Users Found
+                        </mat-option>
+                        <mat-option *ngFor="let user of filteredUsers"
+                          [value]="user.display_name"
+                          name="user.display_name"
+                          (click)="addSubscriber(user)">
+                          {{user.display_name}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </div>
+                  <div class="subscriber-list mt-3">
+                    <h3 class=""><img src="./assets/img/atmos-logo-sidebar.png" style="width: 25px;vertical-align: top;margin-right-5px;"/>Any one at <span class="fw-bold">Atmos account</span> can find and access this board</h3>
+                    <div class="subscriber-list mt-3">
+                      <h3 class="">Team Subscribers list:</h3>
+                      <div *ngIf="!subscribers.length">No Subscribers</div>
+                      <ng-container *ngFor="let subscriber of subscribers">
+                        <div class="d-flex align-items-center justify-content-between mb-3 p-2 border rounded-3">
+                            <div class="d-flex align-items-center">
+                                <div class="initials" style="background: blueviolet;">{{getShortName(subscriber)}}</div>
+                                <span class="username">{{subscriber.fname}} {{subscriber.lname}}</span>
+                            </div>
+                            <div>
+                                <span class="owner-of-list me-3 cable" mat-raised-button matTooltip="Make {{subscriber.fname}} {{subscriber.lname}} as owner of this item" matTooltipPosition="above"><i class="fa-solid fa-crown gold"></i></span>
+                                <span (click)="deleteSubscriber(subscriber.id)" class="remove-item cable" mat-raised-button matTooltip="Remove {{subscriber.fname}} {{subscriber.lname}} as owner of this item" matTooltipPosition="above"><i class="fa-solid fa-xmark"></i></span>
+                            </div>
+                        </div>
+                      </ng-container>
+                  </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>-->

@@ -1,0 +1,191 @@
+<div *ngIf="isLoading" class="wrapper-loader wrapper-loader-middle">
+  <div class="fa-3x wrapper-loader-middle-inner text-center">
+    <div class='loader-container mt-auto'>
+      <div class='loader'>
+        <div class='loader--dot'></div>
+        <div class='loader--dot'></div>
+        <div class='loader--dot'></div>
+        <div class='loader--dot'></div>
+        <div class='loader--dot'></div>
+        <div class='loader--dot'></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!isLoading">
+  <div class="tray-header">
+    <div class="d-flex align-items-center justify-content-between">
+        <h4>Notifications</h4>
+        <div class="tray-action">
+          <div class="dropdown">
+            <button class="btn btn-scondary btn-sm" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
+            <ul class="dropdown-menu">
+                <li class="dropdown-item" (click)="markAllNotificationsAsRead()">
+                  <span>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Mark all as read
+                  </span>
+                </li>
+                <li class="dropdown-item" (click)="deleteAllNotifications()"><i class="fa-solid fa-trash-can"></i> Delete all</li>
+            </ul>
+          </div>
+          <button class="btn btn-scondary btn-sm" (click)="showNotification('hide')"><i class="fa-solid fa-close"></i></button>
+        </div>
+    </div>
+    <div class="navtab">
+        <ul class="nav">
+            <li class="nav-item"><a class="nav-link" [ngClass]="{active: selectedTab == 'all'}"  id="all-tab" (click)="filterNotifications('all')">All</a></li>
+            <li class="nav-item"><a class="nav-link" [ngClass]="{active: selectedTab == 'unread'}"  id="unread-tab" (click)="filterNotifications('unread')">Unread</a></li>
+            <li class="nav-item"><a class="nav-link" [ngClass]="{active: selectedTab == 'mentions'}"  id="iwasmentioned-tab" (click)="filterNotifications('mentions')">I was mentioned</a></li>
+            <li class="nav-item"><a class="nav-link" [ngClass]="{active: selectedTab == 'assigned'}"  id="assignedtome-tab" (click)="filterNotifications('assigned')">Assigned to me</a></li>
+        </ul>
+    </div>
+  </div>
+  <div class="tray-content">
+    <div class="tab-content pt-3">
+        <div class="tab-pane active" id="all">
+            <ng-container *ngIf="filteredNotifications.length === 0">
+              <div class="text-center">
+                <h5 class="mt-3">No notifications</h5>
+                <p class="mb-0">You don't have any notifications yet.</p>
+              </div>
+            </ng-container>
+            <ng-container *ngFor="let notification of filteredNotifications">
+              <div class="notification-item" [ngClass]="{'unread':notification?.status==='0'}" (click)="onNotificationClick(notification, 'all')">
+                  <div class="d-flex">
+                      <div class="notification-icon initials big">
+                          <!-- <i class="fa-solid fa-robot"></i> -->
+                          <span *ngIf="notification?.user?.fname">{{notification?.user?.fname[0] | uppercase}}</span>
+                          <span *ngIf="notification?.user?.lname">{{notification?.user?.lname[0] | uppercase}}</span>
+                          <span *ngIf="!notification?.user?.fname || !notification?.user?.lname">-</span>
+                      </div>
+                      <div class="notification-contetn w-100">
+                          <h5 class="mb-0">{{notification?.settings?.user_name}} <small>{{notification?.created_on}}</small></h5>
+                          <p>{{notification?.message}}</p>
+                          <div class="notification-actions d-flex align-items-center justify-content-between mt-2">
+                              <p class="mb-0">{{notification?.entity_type}}</p>
+                              <div class="notification-action-btns d-flex visible-0">
+                                  <button type="button" class="btn btn-scondary btn-sm" (click)="markNotificationsReadUnread(notification?.id)" onclick="event.stopPropagation()">
+                                    <i class="fa-solid fa-circle" *ngIf="notification?.status === '0'"></i>
+                                    <i class="fa-solid fa-circle-check" *ngIf="notification?.status === '1'"></i>
+                                  </button>
+                                  <button type="button" class="btn btn-scondary btn-sm" (click)="deleteNotifications(notification?.id)" onclick="event.stopPropagation()"><i class="fa-solid fa-trash-can"></i></button>
+                                  <div class="dropdown">
+                                      <button type="button" class="btn btn-scondary btn-sm" data-bs-toggle="dropdown" aria-expanded="false" onclick="event.stopPropagation()"><i class="fa-solid fa-ellipsis"></i></button>
+                                      <ul class="dropdown-menu">
+                                          <li class="dropdown-item" (click)="markNotificationsReadUnread(notification?.id)" onclick="event.stopPropagation()">
+                                            <span *ngIf="notification?.status === '0'">
+                                              <i class="fa-solid fa-circle"></i>
+                                              Mark as unRead
+                                            </span>
+                                            <span *ngIf="notification?.status === '1'">
+                                              <i class="fa-solid fa-circle-check"></i>
+                                              Mark as read
+                                            </span>
+                                          </li>
+                                          <li class="dropdown-item" *ngIf="notification?.settings?.board_id" (click)="openNotificationModal(notification)" onclick="event.stopPropagation()"><i class="fa-solid fa-gear"></i> Manage these notification</li>
+                                          <li class="dropdown-item" (click)="deleteNotifications(notification?.id)" onclick="event.stopPropagation()"><i class="fa-solid fa-trash-can"></i> Delete</li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </ng-container>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- board notifications modal start -->
+<div class="modal fade show" *ngIf="showNotificationModal" style="display: block; background-color: rgba(0, 0, 0, 0.6);">
+  <div class="modal-dialog modal-dialog-centered permissions-width">
+    <div class="modal-content" *ngIf="!isNotificationSettingsLoading">
+      <div class="modal-header border-0">
+        <div class="d-flex align-items-baseline">
+          <h1 class="mb-0 modal-title">Board notifications</h1>
+          <p class="mb-0 ms-2">for "Leads" board</p>
+        </div>
+        <button type="button" class="btn-close" (click)="closeNotificationModal()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-between">
+          <div class="board-permissions w-100">
+            <div class="viewing-permisions">
+              <p class="notification-sun-h">Mute my notifications</p>
+              <p class="mb-2">Define which notifications you will receive from this board</p>
+              <div class="card">
+                <div class="card-body">
+                  <div class="">
+                    <div class="mb-4">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" [(ngModel)]="notificationSettings.type" value="mute" (click)="addNotificationSubscriber('mute')">
+                        <label class="form-check-label">
+                          Mute all notifications
+                        </label>
+                      </div>
+                      <p class="mb-0 text-muted">Receive no notifications from this board</p>
+                    </div>
+                    <div class="mb-4">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" [(ngModel)]="notificationSettings.type" value="mention" (click)="addNotificationSubscriber('mention')">
+                        <label class="form-check-label">
+                          Receive notifications only for mentions and assigns
+                        </label>
+                      </div>
+                      <p class="mb-0 text-muted">Only receive notifications when you or your team are mentioned in or assigned to an item on this board</p>
+                    </div>
+                    <div class="">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" [(ngModel)]="notificationSettings.type" value="" (click)="addNotificationSubscriber('')">
+                        <label class="form-check-label">
+                          Receive all notifications
+                        </label>
+                      </div>
+                      <p class="mb-0 text-muted">Receive notifications including mentions, tasks assigned, replies, automations, and more</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="viewing-permisions mt-4">
+              <p class="notification-sun-h">Mute notifications for other board members</p>
+              <p class="mb-2">Only board owners with permission can change this setting, board members will not be able to reverse this action for themselves</p>
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <p class="text-muted mb-0">Mute all notifications from this board for all board members</p>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled>
+                      <label class="form-check-label" for="flexSwitchCheckDisabled"></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeNotificationModal()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="closeNotificationModal()">Save</button>
+      </div>
+    </div>
+    <div *ngIf="isNotificationSettingsLoading" class="wrapper-loader wrapper-loader-middle">
+      <div class="fa-3x wrapper-loader-middle-inner text-center">
+        <div class='loader-container mt-auto'>
+          <div class='loader'>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- board notifications modal end -->

@@ -1,0 +1,1292 @@
+<div *ngIf="pageLoading" class="wrapper-loader wrapper-loader-middle">
+    <div class="fa-3x wrapper-loader-middle-inner text-center">
+      <div class='loader-container mt-auto'>
+        <div class='loader'>
+          <div class='loader--dot'></div>
+          <div class='loader--dot'></div>
+          <div class='loader--dot'></div>
+          <div class='loader--dot'></div>
+          <div class='loader--dot'></div>
+          <div class='loader--dot'></div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div *ngIf="!pageLoading" class="admin-page-wrapper">
+    <div class="page-header">
+        <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+            <div class="header-lhs d-flex align-items-center">
+                <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                    <span>Sequence</span>
+                </h4>
+                <span class="ms-2 me-2"  mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+                <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+            </div>
+            <div class="header-rhs d-flex align-items-center">
+                <div class="button-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary borderless dropdown-toggle-split" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Console log</a></li>
+                        <li><a class="dropdown-item">Clear local cache only</a></li>
+                        <li><a class="dropdown-item">Clear cache and database both</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">
+            <span>This is description</span>
+            <i class="fa-solid fa-ellipsis"></i>
+        </div>
+        <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+                <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">Secquence</h5>
+                <ul class="tabslink nav boards-top-menu-style" id="nav-tab" role="tablist">
+                    <li class="nav-item active" id="nav-login-tab" data-bs-toggle="tab" data-bs-target="#nav-login" type="button" role="tab" aria-controls="nav-login" aria-selected="true">
+                        <div class="boards-top-menu-style-first"><i class="fa-thin fa-home"></i> Secquence</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-thin fa-plus"></i>
+                    </button>
+                    <div class="dropdown-menu p-0 style-less">
+                        <ul class="list-group list-group-flush list-group-sm">
+                            <li class="list-group-item">
+                                <div class="ls" data-bs-toggle="modal" data-bs-target="#viewcenter" >
+                                    <i class="fa-light fa fa-home"></i>
+                                    <span class="ms-2">Apps</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex align-items-centere">
+                <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2" style="margin-top: -5px;">
+                    <div class="button-group outlined borderless">
+                        <button type="button" class="btn collapsed btn-outline-secondary"><i
+                                class="fa-thin fa-envelope"></i> Bulk Emails
+                        </button>
+                        <button type="button"
+                                class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <div class="button-group ms-2">
+                        <button type="button" class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div (click)="headerToggle()" class="header-collapse-btn"><i class="fa-thin fa-angle-{{anglePos}}"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="admin-page-content-wrapper">
+        <div class="tab-content mb-5" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-api" role="tabpanel" aria-labelledby="nav-api-tab">
+                <div class="email-campaign-wrapper">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-8">
+                            <div class="email-campaign-header mb-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="d-flex me-4">
+                                                <h2 class="mb-0">{{emailRow.title}}</h2>
+                                                <span class="ms-2 mt-2"><i class="fa-light fa-pencil"></i></span>
+                                            </div>
+                                            <span><i class="fa-light fa-folder me-2"></i><span class="cable">Add Folder</span></span>
+                                        </div>
+                                        <span class="mt-2"><i class="fa-solid fa-square me-2"></i>Draft | Created on Dec 08, 2022 01:41 PM  </span>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button routerLink="/boards/{{boardID}}/main" type="button" class="btn btn-outline-secondary me-3">Back to main campaign</button>
+                                        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">More</button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Clone Campaign</a></li>
+                                            <li><a class="dropdown-item" href="#">Delete Campaign</a></li>
+                                            <li><a class="dropdown-item" href="#">Campaign Archive</a></li>
+                                            <li><a class="dropdown-item" href="#">Make this campaign dormant</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="email-campaign-content-wrp shadow">
+                                <ul class="list-group">
+                                    <li class="list-group-item p-0">
+                                        <div class="wrp">
+                                            <div class="card border-0">
+                                                <div class="card-header d-flex align-items-center justify-content-between">
+                                                    <div class="ls d-flex align-items-center w-100">
+                                                        <h3 class="mb-0 me-3 fw-bold">Let's get you up and running</h3>
+                                                        <button class="btn btn-sm btn-outline-secondary">Mark as complete</button>
+                                                    </div>
+                                                    <div class="rs d-flex align-items-center w-100 justify-content-end">
+                                                        <div class="progress me-2 my-0 w-50">
+                                                            <div role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar" style="width: {{progress()}}%;">{{progress()}}%</div>
+                                                        </div>
+                                                        <div>
+                                                            <p class="m-0">{{progress()}}% &nbsp; Completed</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body p-0">
+                                                    <div class="row">
+                                                        <div class="col-sm-3 col-md-3 border-right pe-0">
+                                                            <ul class="nav nav-pills flex-column" id="setup-tab" role="tablist">
+                                                                <li class="nav-item" role="presentation">
+                                                                    <a (click)="changeTab( 1 )" onclick="event.preventDefault()" class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0 {{currentTab == 1 ? 'active' : ''}}" id="pills-account-tab">
+                                                                        <span class="tab-number">1</span>
+                                                                        <span>Name & Topic</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="nav-item" role="presentation">
+                                                                    <a (click)="changeTab( 2 )" onclick="event.preventDefault()" class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0 {{currentTab == 2 ? 'active' : ''}}" id="pills-connect-tab">
+                                                                        <span class="tab-number">2</span>
+                                                                        <span>Subject</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="nav-item" role="presentation">
+                                                                    <a (click)="changeTab( 3 )" onclick="event.preventDefault()" class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0 {{currentTab == 3 ? 'active' : ''}}" id="pills-banking-tab">
+                                                                        <span class="tab-number">3</span>
+                                                                        <span>Sender</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="nav-item" role="presentation">
+                                                                    <a (click)="changeTab( 4 )" onclick="event.preventDefault()" class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0 {{currentTab == 4 ? 'active' : ''}}" id="recipient-tab-tab">
+                                                                        <span class="tab-number">4</span>
+                                                                        <span>Recipient</span>
+                                                                    </a>
+                                                                </li>
+                                                                <!-- <li class="nav-item" role="presentation">
+                                                                    <a class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0" id="campaign-tab-tab" data-bs-toggle="pill" data-bs-target="#campaign-tab" type="button" role="tab" aria-controls="campaign-tab" aria-selected="false">
+                                                                        <span class="tab-number">5</span>
+                                                                        <span>Type Of Campaigns</span>
+                                                                    </a>
+                                                                </li> -->
+                                                                <li class="nav-item" role="presentation">
+                                                                    <a (click)="changeTab( 5 )" onclick="event.preventDefault()" class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0 {{currentTab == 5 ? 'active' : ''}}" id="content-tab-tab">
+                                                                        <span class="tab-number">5</span>
+                                                                        <span>Content</span>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-sm-9 col-md-9">
+                                                            <div class="tab-content" id="setup-tabContent">
+
+                                                                <!-- error message area -->
+                                                                <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+                                                                    {{errorMessage}}
+                                                                </div>
+
+                                                                <div class="tab-pane fade {{currentTab == 1 ? 'show active' : ''}}" id="pills-account">
+                                                                    <div class="campaign-item-wrp topic-wrp p-3">
+                                                                        <!-- <div class="selected-campaign-content" *ngIf="!isNameEdit">
+                                                                            <div class="d-flex justify-content-center align-items-center">
+                                                                                <div style="width:85%"><h3 class="mb-0">Testing T2</h3></div>
+                                                                                <div class="text-end" style="width:15%">
+                                                                                    <button (click)="isNameEdit = !isNameEdit" class="btn-sm btn btn-outline-secondary">Edit Name</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div> -->
+                                                                        <div class="edit-campaign-content">
+                                                                            <div class="setup-account-title text-center py-3">
+                                                                                <p class="setup-account-title-head mb-2 fs-24">Name & Topic</p>
+                                                                                <p class="setup-account-title-pera mb-0">Categorize your contacts under different topics to send them the right emails.</p>
+                                                                            </div>
+                                                                            <div class="mt-3 row justify-content-center">
+                                                                                <div class="col-sm-8">
+                                                                                    <div class="row mb-2">
+                                                                                        <label class="col-sm-3 col-form-label">Campaign Name</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <input type="text" [(ngModel)]="emailRow.title" class="mb-3 form-control form-control-sm">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row mb-3">
+                                                                                        <label class="col-sm-3 col-form-label">Select Topic</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <select [(ngModel)]="emailRow.topic" class="form-select form-select-sm mb-4">
+                                                                                                <option *ngFor="let topic of getSubBoardColumnStatus( boardData.columns, 'topic', 'settings' )" value="{{topic}}">{{topic}}</option>
+                                                                                            </select>
+                                                                                            <button class="btn-sm btn btn-primary me-3" [disabled]="isProcessing" (click)="createCampaign()">Save <i class="fa fa-spinner fa-spin ms-2" *ngIf="isProcessing"></i></button>
+                                                                                            <button routerLink="/boards/34/main" class="btn-sm btn btn-outline-secondary">Cancel</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>                  
+                                                                </div>
+                                                                <div class="tab-pane fade mb-3 {{currentTab == 2 ? 'show active' : ''}}" id="pills-connect">
+                                                                    <div class="campaign-item-wrp topic-wrp p-3">
+                                                                        <!-- <div class="selected-campaign-content" *ngIf="!isSubjectEdit">
+                                                                            <div class="d-flex justify-content-center align-items-center">
+                                                                                <div style="width:85%"><h3 class="mb-0">My Campaign</h3></div>
+                                                                                <div class="text-end" style="width:15%">
+                                                                                    <button (click)="isSubjectEdit = !isSubjectEdit" class="btn-sm btn btn-outline-secondary">Edit Subject</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div> -->
+                                                                        <div class="edit-campaign-content">
+                                                                            <div class="setup-account-title text-center py-3">
+                                                                                <p class="setup-account-title-head mb-2 fs-24">Subject</p>
+                                                                                <p class="setup-account-title-pera mb-0">Give a suitable subject line to this campaign.</p>
+                                                                            </div>
+                                                                            <div class="mt-3 row">
+                                                                                <div class="col-sm-8">
+                                                                                    <div class="row mb-3">
+                                                                                        <label class="col-sm-3 col-form-label">Subject</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <div class="input-group input-group-sm">
+                                                                                                <input type="text" [(ngModel)]="emailRow.subject" class="form-control form-control-sm" placeholder="">
+                                                                                                <span class="input-group-text">
+                                                                                                    <div class="btn-group">
+                                                                                                        <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Personalize</span>
+                                                                                                        <ul class="dropdown-menu">
+                                                                                                            <li><a class="dropdown-item" href="#">Abc Def</a></li>
+                                                                                                            <li><a class="dropdown-item" href="#">Xyz Nyc</a></li>
+                                                                                                        </ul>
+                                                                                                    </div>
+                                                                                                </span>
+                                                                                            </div>
+                                                                                            <small>Every successful email campaign starts with a great subject line.</small>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row mb-3">
+                                                                                        <label class="col-sm-3 col-form-label">Preheader</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <div class="form-group mb-3">
+                                                                                                <input type="text" [(ngModel)]="emailRow.preheader" class="form-control form-control-sm">
+                                                                                                <small>Your email's preheader will follow the subject line briefly summarizing the email's content.</small>
+                                                                                            </div>
+                                                                                            <button class="btn-sm btn btn-primary me-3" (click)="updateCampaign( 3 )">Save</button>
+                                                                                            <button routerLink="/boards/34/main" class="btn-sm btn btn-outline-secondary">Cancel</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    <div class="card">
+                                                                                        <div class="card-body px-2">
+                                                                                            <h4 class="mb-0 lineh-16">Best Practice for email subject lines</h4>
+                                                                                            <small class="mb-3 d-block lineh-16">A great subject line gives your audience a reason to open your email</small>
+                                                                                            <small class="mb-2 d-block lineh-16"><i class="fa-light fa-circle-check me-2 text-success"></i>Try to use not more than nine words.</small>
+                                                                                            <small class="mb-2 d-block lineh-16"><i class="fa-light fa-circle-check me-2 text-success"></i>Emojis looks great at its minimal use.</small>
+                                                                                            <small class="mb-2 d-block lineh-10"><i class="fa-light fa-circle-check me-2 text-success"></i>Avoid using more than 150 characters.</small>
+                                                                                            <small class="mb-2 d-block lineh-16"><i class="fa-light fa-triangle-exclamation me-2 text-warning"></i>Avoid using more than three punctuation marks.</small>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tab-pane fade pb-3 mb-3 {{currentTab == 3 ? 'show active' : ''}}" id="pills-banking">
+                                                                    <div class="campaign-item-wrp topic-wrp p-3">
+                                                                        <!-- <div class="selected-campaign-content" *ngIf="!isSenderEdit">
+                                                                            <div class="d-flex justify-content-center align-items-center">
+                                                                                <div style="width:10%"><h3 class="mb-0">Sender</h3></div>
+                                                                                <div style="width:75%">timmoses@mail.com</div>
+                                                                                <div class="text-end" style="width:15%">
+                                                                                    <button (click)="isSenderEdit = !isSenderEdit" class="btn-sm btn btn-outline-secondary">Edit Sender</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div> -->
+                                                                        <div class="edit-campaign-content">
+                                                                            <div class="setup-account-title text-center py-3">
+                                                                                <p class="setup-account-title-head mb-2 fs-24">Sender</p>
+                                                                                <p class="setup-account-title-pera mb-0">Who is sending this email campaign?</p>
+                                                                            </div>
+                                                                            <div class="mt-3 row justify-content-center">
+                                                                                <div class="col-sm-8">
+                                                                                    <div class="row mb-3">
+                                                                                        <label class="col-sm-3 col-form-label">Sender Name</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <div class="form-group">
+                                                                                                <input type="text" (change)="setSender( $event, false )" value="{{getSender( false )}}" class="form-control form-control-sm">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row mb-3">
+                                                                                        <label class="col-sm-3 col-form-label">Sender Email</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <div class="form-group">
+                                                                                                <input type="text" (change)="setSender( $event, true )" class="form-control form-control-sm" value="{{getSender( true )}}" placeholder="">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row mb-3">
+                                                                                        <label class="col-sm-3 col-form-label"></label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <div class="border card p-2">
+                                                                                                <span><i class="fa-solid fa-circle-info me-2"></i><small>We recommend you to authenticate your email domain to improve email deliverability</small><small class="cable link ms-1">Learn more</small>.</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row mb-3">
+                                                                                        <label class="col-sm-3 col-form-label"></label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <span (click)="isReReply = !isReReply" class="d-block cable link">Show reply-to address details</span>
+                                                                                            <div class="mt-2" *ngIf="( isReReply || emailRow.reply_tracking || emailRow.reply_to )">
+                                                                                                <div class="row mb-3">
+                                                                                                    <label class="col-sm-3 col-form-label">Reply Tracking</label>
+                                                                                                    <div class="col-sm-9 pt-2">
+                                                                                                        <div class="form-check form-switch">
+                                                                                                            <input [(ngModel)]="emailRow.reply_tracking" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="row g-1">
+                                                                                                    <label class="col-sm-3 col-form-label">Reply-to Address</label>
+                                                                                                    <div class="col-sm-9">
+                                                                                                        <div class="form-group">
+                                                                                                            <input [(ngModel)]="emailRow.reply_to" type="text" class="form-control form-control-sm" placeholder="">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row mb-3">
+                                                                                        <label class="col-sm-3 col-form-label"></label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <button (click)="updateCampaign( 4 )" class="btn-sm btn btn-primary me-3">Save</button>
+                                                                                            <button routerLink="/boards/34/main" class="btn-sm btn btn-outline-secondary">Cancel</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tab-pane fade {{currentTab == 4 ? 'show active' : ''}}" id="recipient-tab">
+                                                                    <div class="campaign-item-wrp topic-wrp p-3">                                                                        
+                                                                        <div *ngIf="!showList && !showSegments && !showifList && !showClearView" class="edit-campaign-content pos-rel">
+                                                                            <div class="setup-account-title text-center py-3">
+                                                                                <p class="setup-account-title-head mb-2 fs-24">Recipient</p>
+                                                                                <p class="setup-account-title-pera mb-0">Add the contacts you want to send this email to.</p>
+                                                                            </div>
+                                                                            <div class="recipient-email mt-2">
+                                                                                <div class="row">
+                                                                                    <div (click)="showClearView = !showClearView" class="col-6 cable">
+                                                                                        <div class="recipient-email-inner  border rounded d-flex p-2">
+                                                                                            <div class="recipient-email-icon me-2"><i class="fa-light fa-flux-capacitor"></i></div>
+                                                                                            <div class="recipient-email-content">
+                                                                                                <h3 class="mb-2">Clear View</h3>
+                                                                                                <p>If you want your emails to go to persons when a certain event/status occurs use automation events.</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div (click)="showList = !showList" class="col-6">                                                                                        
+                                                                                        <div class="recipient-email-inner border rounded d-flex p-2 cable">
+                                                                                            <div class="recipient-email-icon me-2"><i class="fa-light fa-list-ul"></i></div>
+                                                                                            <div class="recipient-email-content">
+                                                                                                <h3 class="mb-2">List</h3>
+                                                                                                <p>Send the campaign to contacts stored as mailist list.</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div (click)="showSegments = !showSegments" class="col-6 mt-4">
+                                                                                        <div class="recipient-email-inner border rounded d-flex p-2 cable">
+                                                                                            <div class="recipient-email-icon me-2"><i class="fa-light fa-sitemap"></i></div>
+                                                                                            <div class="recipient-email-content">
+                                                                                                <h3 class="mb-2">Segment</h3>
+                                                                                                <p>Send campaigns to a targeted audience based on already created segments.</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-6 mt-4">
+                                                                                        <div class="recipient-email-inner  border rounded d-flex p-2">
+                                                                                            <div class="recipient-email-icon me-2"><i class="fa-light fa-tags"></i></div>
+                                                                                            <div class="recipient-email-content">
+                                                                                                <h3 class="mb-2">Tags</h3>
+                                                                                                <p>Send campaigns to audience based on the tags they are associated to.</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>                                                                                    
+                                                                                </div>
+                                                                                <div class="text-end mt-5">
+                                                                                    <button (click)="updateCampaign( 5 )" class="btn-sm btn btn-primary me-3">Save</button>
+                                                                                    <button routerLink="/boards/34/main" class="btn-sm btn btn-outline-secondary">Cancel</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- select clear views popup start -->
+                                                                        <div *ngIf="showClearView" class="">
+                                                                            <div class="d-flex justify-content-between">
+                                                                                <h1 class="mb-3">My Clear Views</h1>
+                                                                                <div (click)="showClearView = !showClearView">
+                                                                                    <i class="fa-regular fa-xmark fa-2x cable"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="clear-views-list">
+                                                                                <div *ngFor="let view of clearViews" class="row mb-3">
+                                                                                    <label class="col-sm-3 col-form-label" for="clear-veiw-id-{{view.id}}">{{view.name}}</label>
+                                                                                    <div class="col-sm-9 pt-2">
+                                                                                        <div class="form-check form-switch">
+                                                                                            <input [checked]="isViewSelected( view.id )" (change)="selectView( $event, view.id )" class="form-check-input" value="{{view.id}}" type="checkbox" id="clear-veiw-id-{{view.id}}">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div *ngIf="( !clearViews.length)" class="d-flex flex-column align-items-center">
+                                                                                <i class="fa-light fa-flux-capacitor fa-4x"></i>                                                                       
+                                                                                <p class="mt-3 fw-bold">No clear views available</p>                                                                           
+                                                                            </div>
+                                                                            <div class="text-center mt-5">
+                                                                                <button (click)="showClearView = !showClearView" class="btn btn-sm btn-outline-secondary bordered see-all-temp-btn">Close</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- select clear views popup end -->
+
+                                                                        <!-- select segments popup start -->
+                                                                        <div *ngIf="showSegments" class="">
+                                                                            <div class="d-flex justify-content-between">
+                                                                                <h1 class="mb-3">My Segments</h1>
+                                                                                <div (click)="showSegments = !showSegments">
+                                                                                    <i *ngIf="showSegments"class="fa-regular fa-xmark fa-2x cable"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div *ngIf="segmentsBoard" class="select-segments-list">
+                                                                                <div *ngFor="let group of segmentsBoard?.groups" class="segments-groups">
+                                                                                    <label *ngIf="group.entries.length"><strong>{{group.name}}</strong></label>
+                                                                                    <div *ngFor="let entry of group?.entries" class="row mb-3">
+                                                                                        <label class="col-sm-3 col-form-label" for="segment-id-{{entry.id}}">{{entry.item}}</label>
+                                                                                        <div class="col-sm-9 pt-2">
+                                                                                            <div class="form-check form-switch">
+                                                                                                <input [checked]="isSegmentSelected( entry.id )" (change)="selectSegment( $event, entry.id )" class="form-check-input" value="{{entry.id}}" type="checkbox" id="segment-id-{{entry.id}}">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div *ngIf="!hasSegment" class="d-flex flex-column align-items-center">
+                                                                                <i class="fa-light fa-sitemap fa-4x"></i>                                                                       
+                                                                                <p class="mt-3 fw-bold">No segments available</p>   
+                                                                                <div class="dropdown">
+                                                                                    <button class="btn-sm btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                      Create segment
+                                                                                    </button>
+                                                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                                                      <li><a class="dropdown-item" href="#">Action</a></li>
+                                                                                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                                                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                                                    </ul>
+                                                                                  </div>                                                                             
+                                                                            </div>
+                                                                            <div class="text-center mt-5">
+                                                                                <button (click)="showSegments = !showSegments" class="btn btn-sm btn-outline-secondary bordered see-all-temp-btn">Close</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- select segments popup end -->
+
+                                                                        <div *ngIf="showList" class="campaign-list">
+                                                                            <div class="d-flex justify-content-between">
+                                                                                <h1 class="mb-5">My Lists</h1>
+                                                                                <div (click)="showList = !showList">
+                                                                                    <i *ngIf="showList"class="fa-regular fa-xmark fa-2x cable"></i>
+                                                                                </div>                                                                               
+                                                                            </div>
+                                                                            <div class="d-flex flex-column align-items-center">
+                                                                                <p class="mb-3">Send a campaign to your inbox first before sending it to your contacts</p>
+                                                                                <button class="btn-sm btn btn-primary">Use my email address</button>
+                                                                                <p class="mt-3">(or)</p>
+                                                                                <p>Send a campaign to your contacts by adding them to a mailing list</p>
+                                                                                <a href="">Create my first mailing list</a>
+                                                                            </div>
+                                                                            <div class="text-center mt-5">
+                                                                                <button class="btn btn-sm btn-outline-secondary bordered see-all-temp-btn">Cancel</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                        <div *ngIf="showifList" class="if-lists-campaign">
+                                                                            <div class="d-flex justify-content-between">
+                                                                                <h1 class="mb-5">My Lists</h1>
+                                                                                <div (click)="showifList = !showifList">
+                                                                                    <i *ngIf="showifList"class="fa-regular fa-xmark fa-2x cable"></i>
+                                                                                </div>                                                                               
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-6">
+                                                                                    <div class="card">
+                                                                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                                                                            <h1 class="mb-0">
+                                                                                                <label class="form-check-label d-flex align-items-center">
+                                                                                                    <input type="checkbox" name="wc_categories" value="39" class="form-check-input wc_category_filter me-2 mt-0">
+                                                                                                    My Lists
+                                                                                                </label>
+                                                                                            </h1>    
+                                                                                            <div class="d-flex align-items-center">
+                                                                                                <div class="shadow-sm p-3 rounded cable me-2"><i class="fa-light fa-magnifying-glass"></i></div>
+                                                                                                <div class="shadow-sm p-3 rounded cable"><i class="fa-light fa-plus"></i></div>
+                                                                                            </div>                                                                                        
+                                                                                        </div>                                                                                        
+                                                                                        <div class="card-body">                                                                                            
+                                                                                            <div class="d-flex justify-content-between mb-3">
+                                                                                                <label class="form-check-label d-flex align-items-center">
+                                                                                                    <input type="checkbox" name="wc_categories" value="39" class="form-check-input wc_category_filter me-2 mt-0">
+                                                                                                    List 1
+                                                                                                </label>
+                                                                                                <i class="fa-light fa-user-plus"></i>
+                                                                                            </div>                                                                                                                                                                                        
+                                                                                            <div class="d-flex justify-content-between mb-3">
+                                                                                                <label class="form-check-label d-flex align-items-center">
+                                                                                                    <input type="checkbox" name="wc_categories" value="39" class="form-check-input wc_category_filter me-2 mt-0">
+                                                                                                    List 1
+                                                                                                </label>
+                                                                                                <i class="fa-light fa-user-plus"></i>
+                                                                                            </div>                                                                                                                                                                                        
+                                                                                            <div class="d-flex justify-content-between mb-3">
+                                                                                                <label class="form-check-label d-flex align-items-center">
+                                                                                                    <input type="checkbox" name="wc_categories" value="39" class="form-check-input wc_category_filter me-2 mt-0">
+                                                                                                    List 1
+                                                                                                </label>
+                                                                                                <i class="fa-light fa-user-plus"></i>
+                                                                                            </div>                                                                                                                                                                                        
+                                                                                        </div>
+                                                                                      </div>
+                                                                                </div>                                                                                
+                                                                                <div class="col-6">
+                                                                                    <div class="card">
+                                                                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                                                                            <h1 class="mb-0">Selected Lists</h1>                                                                                                                                                                                       
+                                                                                        </div>                                                                                        
+                                                                                        <div class="card-body">                                                                                            
+                                                                                            <div class="text-center">
+                                                                                                <i class="fa-thin fa-list fa-4x mb-3"></i>
+                                                                                                <p>Choose mailing list you wish to send the campaign to.</p>
+                                                                                            </div>                                                                                                                                                                                      
+                                                                                        </div>
+                                                                                      </div>
+                                                                                </div>  
+                                                                                <div class="d-flex justify-content-center mt-5">
+                                                                                    <button class="btn-sm btn btn-primary me-3">Save</button>
+                                                                                    <button class="btn btn-sm btn-outline-secondary bordered see-all-temp-btn">Cancel</button>
+                                                                                </div>                                                                              
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tab-pane fade pb-3 mb-3" id="campaign-tab">
+                                                                    <div class="campaign-item-wrp topic-wrp p-3">
+                                                                        <p (click)="showifSequence = !showifSequence" class="text-end">If Sequence</p>
+                                                                        <div *ngIf="showifSequence" class="if-lists-campaign">
+                                                                            <div class="d-flex justify-content-between">
+                                                                                <h1 class="mb-5">My Sequence</h1>
+                                                                                <div (click)="showifSequence = !showifSequence">
+                                                                                    <i *ngIf="showifSequence"class="fa-regular fa-xmark fa-2x cable"></i>
+                                                                                </div>                                                                               
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-6">
+                                                                                    <div class="card">
+                                                                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                                                                            <h1 class="mb-0">
+                                                                                                <label class="form-check-label d-flex align-items-center">
+                                                                                                    <input type="checkbox" name="wc_categories" value="39" class="form-check-input wc_category_filter me-2 mt-0">
+                                                                                                    My Sequence
+                                                                                                </label>
+                                                                                            </h1>    
+                                                                                            <div class="d-flex align-items-center">
+                                                                                                <div class="shadow-sm p-3 rounded cable me-2"><i class="fa-light fa-magnifying-glass"></i></div>
+                                                                                                <div class="shadow-sm p-3 rounded cable"><i class="fa-light fa-plus"></i></div>
+                                                                                            </div>                                                                                        
+                                                                                        </div>                                                                                        
+                                                                                        <div class="card-body">                                                                                            
+                                                                                            <div class="d-flex justify-content-between mb-3">
+                                                                                                <label class="form-check-label d-flex align-items-center">
+                                                                                                    <input type="checkbox" name="wc_categories" value="39" class="form-check-input wc_category_filter me-2 mt-0">
+                                                                                                    Sequence 1
+                                                                                                </label>
+                                                                                                <i class="fa-light fa-user-plus"></i>
+                                                                                            </div>                                                                                                                                                                                        
+                                                                                            <div class="d-flex justify-content-between mb-3">
+                                                                                                <label class="form-check-label d-flex align-items-center">
+                                                                                                    <input type="checkbox" name="wc_categories" value="39" class="form-check-input wc_category_filter me-2 mt-0">
+                                                                                                    Sequence 1
+                                                                                                </label>
+                                                                                                <i class="fa-light fa-user-plus"></i>
+                                                                                            </div>                                                                                                                                                                                        
+                                                                                            <div class="d-flex justify-content-between mb-3">
+                                                                                                <label class="form-check-label d-flex align-items-center">
+                                                                                                    <input type="checkbox" name="wc_categories" value="39" class="form-check-input wc_category_filter me-2 mt-0">
+                                                                                                    Sequence 1
+                                                                                                </label>
+                                                                                                <i class="fa-light fa-user-plus"></i>
+                                                                                            </div>                                                                                                                                                                                        
+                                                                                        </div>
+                                                                                      </div>
+                                                                                </div>                                                                                
+                                                                                <div class="col-6">
+                                                                                    <div class="card">
+                                                                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                                                                            <h1 class="mb-0">Selected Lists</h1>                                                                                                                                                                                       
+                                                                                        </div>                                                                                        
+                                                                                        <div class="card-body">                                                                                            
+                                                                                            <div class="text-center">
+                                                                                                <i class="fa-thin fa-list fa-4x mb-3"></i>
+                                                                                                <p>Choose mailing list you wish to send the campaign to.</p>
+                                                                                            </div>                                                                                                                                                                                      
+                                                                                        </div>
+                                                                                      </div>
+                                                                                </div>  
+                                                                                <div class="d-flex justify-content-center mt-5">
+                                                                                    <button class="btn-sm btn btn-primary me-3">Save</button>
+                                                                                    <button class="btn btn-sm btn-outline-secondary bordered see-all-temp-btn">Cancel</button>
+                                                                                </div>                                                                              
+                                                                            </div>
+                                                                        </div>
+                                                                        <div *ngIf="!showBroadcast && !showSequence !showifSequence" class="recipient-email mt-2">
+                                                                            <div class="row">
+                                                                                <div (click)="showBroadcast = !showBroadcast" class="col-6">
+                                                                                    <div class="recipient-email-inner  border rounded d-flex p-2">
+                                                                                        <div class="recipient-email-icon me-2"><i class="fa-light fa-podcast"></i></div>
+                                                                                        <div class="recipient-email-content">
+                                                                                            <h3 class="mb-2">Broadcast</h3>
+                                                                                            <p>If broadcast, then the steps you have work on content moving to content next.</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div (click)="showSequence = !showSequence" class="col-6">
+                                                                                    <div class="recipient-email-inner  border rounded d-flex p-2">
+                                                                                        <div class="recipient-email-icon me-2"><i class="fa-light fa-diagram-nested"></i></div>
+                                                                                        <div class="recipient-email-content">
+                                                                                            <h3 class="mb-2">Sequence</h3>
+                                                                                            <p>If sequence will need to go to another step to decide between automation, segment, tags our standard sequence flow here</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div *ngIf="showBroadcast" class="campaign-list">
+                                                                            <div class="d-flex justify-content-between">
+                                                                                <h1 class="mb-5">My Broadcast</h1>
+                                                                                <div (click)="showBroadcast = !showBroadcast">
+                                                                                    <i *ngIf="showBroadcast"class="fa-regular fa-xmark fa-2x cable"></i>
+                                                                                </div>                                                                               
+                                                                            </div>
+                                                                            <div class="d-flex flex-column align-items-center">
+                                                                                <p class="mb-3">Send a campaign to your inbox first before sending it to your contacts</p>
+                                                                                <button class="btn-sm btn btn-primary">Use my email address</button>
+                                                                                <p class="mt-3">(or)</p>
+                                                                                <p>Send a campaign to your contacts by adding them to a mailing list</p>
+                                                                                <a href="">Create my first mailing list</a>
+                                                                            </div>
+                                                                            <div class="text-center mt-5">
+                                                                                <button class="btn btn-sm btn-outline-secondary bordered see-all-temp-btn">Cancel</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div *ngIf="showSequence" class="campaign-list">
+                                                                            <div class="d-flex justify-content-between">
+                                                                                <h1 class="mb-5">My Sequence</h1>
+                                                                                <div (click)="showSequence = !showSequence">
+                                                                                    <i *ngIf="showSequence"class="fa-regular fa-xmark fa-2x cable"></i>
+                                                                                </div>                                                                               
+                                                                            </div>
+                                                                            <div class="d-flex flex-column align-items-center">
+                                                                                <p class="mb-3">Send a campaign to your inbox first before sending it to your contacts</p>
+                                                                                <button class="btn-sm btn btn-primary">Use my email address</button>
+                                                                                <p class="mt-3">(or)</p>
+                                                                                <p>Send a campaign to your contacts by adding them to a mailing list</p>
+                                                                                <a href="">Create my first mailing list</a>
+                                                                            </div>
+                                                                            <div class="text-center mt-5">
+                                                                                <button class="btn btn-sm btn-outline-secondary bordered see-all-temp-btn">Cancel</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tab-pane fade pb-3 mb-3 {{currentTab == 5 ? 'show active' : ''}}" id="content-tab" role="tabpanel" aria-labelledby="content-tab-tab" tabindex="0">
+                                                                    <div class="campaign-item-wrp topic-wrp p-3">
+                                                                        <div class="selected-campaign-content d-flex justify-content-around">
+                                                                            <div class="text-center mt-3" (click)="showEmailContent = !showEmailContent">
+                                                                                <img src="./assets/img/pencil.png">
+                                                                                <p class="mt-4">Create the content of your text email campaign.</p>
+                                                                                <button data-bs-toggle="modal" data-bs-target="#emailContentModal" class="btn btn-outline-secondary mb-3">Create Content</button>
+                                                                            </div>
+
+                                                                            <div class="text-center mt-3">
+                                                                                <img src="./assets/img/choose-email.png">
+                                                                                <p class="mt-4">Choose from template.</p>
+                                                                                <button data-bs-toggle="modal" data-bs-target="#emailContentModal" class="btn btn-outline-secondary mb-3">Choose Tempelate</button>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li *ngIf="showEmailContent" class="list-group-item p-0">
+                                        <div class="email-section p-3">
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <!--
+                                                    <div class="card shadow-sm mb-4 cable">
+                                                        <div class="card-body text-center">
+                                                            <i class="fa-light fa-envelope fa-2x mb-3"></i>
+                                                            <h3 class="mb-0 fw-bold">Add New Email Step</h3>
+                                                            <span>Schedule and send an email template automatically.</span>
+                                                        </div>
+                                                    </div>
+                                                    -->
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-2">
+                                                            <label for="">Start Date</label>
+                                                            <mat-form-field floatLabel='never' appearance="outline">
+                                                                <input matInput [ngxMatDatetimePicker]="StartDate" [(ngModel)]="emailRow.start_date">
+                                                                <mat-datepicker-toggle matSuffix [for]="$any(StartDate)"></mat-datepicker-toggle>
+                                                                <ngx-mat-datetime-picker #StartDate></ngx-mat-datetime-picker>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="col-md-6 mb-2">
+                                                            <label for="">End Date</label>
+                                                            <mat-form-field floatLabel='never' appearance="outline">
+                                                                <input matInput [ngxMatDatetimePicker]="EndDate" [(ngModel)]="emailRow.end_date">
+                                                                <mat-datepicker-toggle matSuffix [for]="$any(EndDate)"></mat-datepicker-toggle>
+                                                                <ngx-mat-datetime-picker #EndDate></ngx-mat-datetime-picker>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label for="">Time Zone</label>
+                                                            <select class="form-control form-control-sm" [(ngModel)]="emailRow.timezone" name="timezone" data-value="-5" required="required">
+                                                                <option value="-12">GMT -12:00</option>
+                                                                <option value="-11">GMT -11:00</option>
+                                                                <option value="-10">GMT -10:00</option>
+                                                                <option value="-9.5">GMT -9:30</option>
+                                                                <option value="-9">GMT -9:00</option>
+                                                                <option value="-8">GMT -8:00</option>
+                                                                <option value="-7">GMT -7:00</option>
+                                                                <option value="-6">GMT -6:00</option>
+                                                                <option value="-5">GMT -5:00</option>
+                                                                <option value="-4.5">GMT -4:30</option>
+                                                                <option value="-4">GMT -4:00</option>
+                                                                <option value="-3.5">GMT -3:30</option>
+                                                                <option value="-3">GMT -3:00</option>
+                                                                <option value="-2">GMT -2:00</option>
+                                                                <option value="-1">GMT -1:00</option>
+                                                                <option value="1">GMT +1:00</option>
+                                                                <option value="2">GMT +2:00</option>
+                                                                <option value="3">GMT +3:00</option>
+                                                                <option value="3.5">GMT +3:30</option>
+                                                                <option value="4">GMT +4:00</option>
+                                                                <option value="4.5">GMT +4:30</option>
+                                                                <option value="5">GMT +5:00</option>
+                                                                <option value="5.5">GMT +5:30</option>
+                                                                <option value="5.75">GMT +5:45</option>
+                                                                <option value="6">GMT +6:00</option>
+                                                                <option value="6.5">GMT +6:30</option>
+                                                                <option value="7">GMT +7:00</option>
+                                                                <option value="8">GMT +8:00</option>
+                                                                <option value="8.75">GMT +8:45</option>
+                                                                <option value="9">GMT +9:00</option>
+                                                                <option value="9.5">GMT +9:30</option>
+                                                                <option value="10">GMT +10:00</option>
+                                                                <option value="10.5">GMT +10:30</option>
+                                                                <option value="11">GMT +11:00</option>
+                                                                <option value="11.5">GMT +11:30</option>
+                                                                <option value="12">GMT +12:00</option>
+                                                                <option value="12.75">GMT +12:45</option>
+                                                                <option value="13">GMT +13:00</option>
+                                                                <option value="14">GMT +14:00</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <div class="compose-email-template card">
+                                                        <div class="card">
+                                                            <ng-container *ngFor="let data of contentData; let i = index">
+                                                            <div class="card-header cable py-1 d-flex align-items-center justify-content-between" style="background:var(--at-app-bg);">
+                                                                <div class="ls d-flex align-items-center">
+                                                                    <span (click)="changeEmailTab( i )" title="{{activeEmailTab == i ? 'Collapse' : 'Expand'}}" class="initials bg-transparent"><i class="fa-solid {{activeEmailTab == i ? 'fa-chevron-up' : 'fa-chevron-down'}} fa-fw"></i></span>
+                                                                    <span (click)="changeEmailTab( i )" class="initials me-2 bg-transparent">{{i+1}}</span>
+                                                                    <span class="initials bg-transparent"><i class="fa-light fa-envelope"></i></span>
+                                                                    <span class="fw-bold">Email</span>
+                                                                    <span class="border px-2 py-1 ms-3">Day {{getNumberOfDays( i )}}</span>
+                                                                </div>
+                                                                <div class="rs d-flex align-items-center">
+                                                                    <label *ngIf="contentData[i].startFrom == 'delay' || i > 0"> {{ i < 1 ? "Delay (days)" : "day(s)
+                                                                        after the previous step"}}
+                                                                        <input type="text" [(ngModel)]="contentData[i].delay">
+                                                                    </label>
+                                                                    <select *ngIf="i < 1" [(ngModel)]="contentData[i].startFrom" class="form-select form-select-sm ms-3 me-3">
+                                                                        <option value="delay">Start after a delay</option>
+                                                                        <option value="immediately">Start immediately</option>
+                                                                    </select>
+                                                                    <span class="cable fw-bold"><i class="fa-light fa-circle-info"></i></span>
+                                                                    <div *ngIf="contentData.length > 1" title="Remove row" (click)="removeContent( i )" class="close-email-temolate ms-3 cable"><i class="fa-solid fa-xmark"></i></div>
+                                                                </div>
+                                                            </div>
+                                                            <div *ngIf="activeEmailTab == i" class="card-header py-1 d-flex align-items-center justify-content-between">
+                                                                <span>Compose Email</span>
+                                                                <div class="d-flex align-items-center">
+                                                                    <select [(ngModel)]="contentData[i].sendAs" name="emailSender" class="form-select form-select-sm">
+                                                                        <option value="global">Global</option>
+                                                                        <option *ngIf="(contentData[i].sendAs && !is_numeric( contentData[i].sendAs ))" value="{{contentData[i].sendAs}}">{{contentData[i].sendAs}}</option>
+                                                                        <option *ngFor="let senderType of connectedAccounts" value="{{senderType.sender_id}}"><span class="text-capitalize">{{senderType.type}}</span> {{senderType.email}}</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div *ngIf="activeEmailTab == i" class="card-body">
+                                                                <div class="subject mb-2">
+                                                                    <input type="text" [(ngModel)]="contentData[i].subject" class="form-control form-control-sm" placeholder="Subject">
+                                                                </div>
+                                                                <div class="type-template d-flex align-items-center mb-2">
+                                                                    <label class="col-3">Email Template</label>
+                                                                    <select [(ngModel)]="contentData[i].emailType" class="form-select form-select-sm me-3">
+                                                                        <option value="text">Text</option>
+                                                                        <option value="visual">Visual</option>
+                                                                    </select>
+                                                                    <select [(ngModel)]="contentData[i].emailTemplate" class="form-select form-select-sm me-3">
+                                                                        <option value="">Choose Template</option>
+                                                                        <option *ngFor="let template of getEmailTemplateList(emailSettings.email_templates, i)" value="{{template.id}}">{{template.name}}</option>
+                                                                    </select>
+                                                                    <select (change)="selectShortcode()" [(ngModel)]="shortcode" class="form-select form-select-sm">
+                                                                        <option value="">+ Shortcode</option>
+                                                                        <option *ngFor="let shortcode of shortcodes" value="[{{shortcode}}]">[{{shortcode}}]</option>
+                                                                    </select>
+                                                                    <button (click)="selectEmailTemplate( i )" class="btn btn-sm btn-primary w-100 ms-2">Edit Template</button>
+                                                                </div>
+                                                                <div class="pos-rel">
+                                                                    <div class="custom-editor-button">
+                                                                        <button class="tox-tbtn tox-custom" (click)="triggerMedia( 'preview' )">
+                                                                            <img src="./assets/img/eye.png" style="width: 32px;" />
+                                                                        </button>
+                                                                        <button class="tox-tbtn tox-custom" (click)="triggerMedia( 'image' )">
+                                                                            <img src="./assets/img/img-icon.png" style="width: 28px;" />
+                                                                        </button>
+                                                                        <button class="tox-tbtn tox-custom" (click)="triggerMedia( 'media' )">
+                                                                            <img src="./assets/img/play.png" style="width: 30px;" />
+                                                                        </button>
+                                                                    </div>
+                                                                    <div *ngIf="contentData[i].templateLoadingTxt != ''" class="m-3 text-center">{{contentData[i].templateLoadingTxt}}</div>
+                                                                    <div class="email-body mb-2">
+                                                                        <editor
+                                                                                [(ngModel)]="contentData[i].emailContent"
+                                                                                cloudChannel="5"
+                                                                                [disabled]="false"
+                                                                                [init]="{
+                                                                                height: 500,
+                                                                                menubar: 'file edit view insert format tools table tc help',
+                                                                                plugins: [
+                                                                                'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons'
+                                                                                ],
+                                                                                toolbar:'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl'
+
+                                                                            }"
+                                                                        ></editor>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            </ng-container>
+
+                                                            <div class="card-body">
+                                                                <div class="no-reply-box d-flex align-items-start">
+                                                                    <div class="form-check mb-0 me-2 w-150px pt-2">
+                                                                        <input  class="form-check-input" type="checkbox" value="" id="noreply">
+                                                                        <label class="form-check-label" for="noreply">
+                                                                            If no reply on
+                                                                        </label>
+                                                                    </div>
+                                                                    <!-- <input [(ngModel)]="emailData.reminderDate" type="date" class="form-control form-control-sm me-2"> -->
+                                                                    <mat-form-field floatLabel='never' appearance="outline" class="me-2">
+                                                                        <input  matInput [ngxMatDatetimePicker]="pickerFrom" placeholder="">
+                                                                        <mat-datepicker-toggle matSuffix [for]="$any(pickerFrom)"></mat-datepicker-toggle>
+                                                                        <ngx-mat-datetime-picker #pickerFrom [enableMeridian]="true"></ngx-mat-datetime-picker>
+                                                                    </mat-form-field>
+                                                                    <div class="w-100">
+                                                                        <select class="form-select form-select-sm mb-3" (change)="onEmailActionChange($event)">
+                                                                            <option value="actions" selected>Action</option>
+                                                                            <option value="follow_up">Remind me to follow up</option>
+                                                                            <option value="email_sequence">Send and email sequence</option>
+                                                                        </select>
+                                                                        <select class="form-select form-select-sm" *ngIf="emailSequence">
+                                                                            <option value="" selected>Choose Email Secquence Template</option>
+                                                                            <option value="follow_up">Template 1</option>
+                                                                            <option value="follow_up">Template 2</option>
+                                                                            <option value="follow_up">Template 3</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="email-actions mt-3 d-flex align-items-center justify-content-between">
+                                                                    <div>
+                                                                        <button (click)="addEmailContent()" class="btn btn-sm btn-primary me-2">Add More</button>
+                                                                        
+                                                                        <button class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#preview-modal">Preview</button>
+
+                                                                        <div *ngIf="sendLater" class="no-reply-box d-flex align-items-center">
+                                                                            <button (click)="sendLater = !sendLater" type="button" class="btn btn-sm btn-primary">Send later</button>
+                                                                            <input  type="date" class="form-control form-control-sm me-2">
+                                                                            <select  class="form-select form-select-sm me-2">
+                                                                                <!-- <option value="00:00:00">Select Time</option> -->
+                                                                                <option value="00:00:00">12:00 AM</option>
+                                                                                <option value="00:15:00">12:15 AM</option>
+                                                                                <option value="00:30:00">12:30 AM</option>
+                                                                                <option value="00:45:00">12:45 AM</option>
+                                                                                <option value="01:00:00">01:00 AM</option>
+                                                                                <option value="01:15:00">01:15 AM</option>
+                                                                                <option value="01:30:00">01:30 AM</option>
+                                                                                <option value="01:45:00">01:45 AM</option>
+                                                                                <option value="02:00:00">02:00 AM</option>
+                                                                                <option value="02:15:00">02:15 AM</option>
+                                                                                <option value="02:30:00">02:30 AM</option>
+                                                                                <option value="02:45:00">02:45 AM</option>
+                                                                                <option value="03:00:00">03:00 AM</option>
+                                                                                <option value="03:15:00">03:15 AM</option>
+                                                                                <option value="03:30:00">03:30 AM</option>
+                                                                                <option value="03:45:00">03:45 AM</option>
+                                                                                <option value="04:00:00">04:00 AM</option>
+                                                                                <option value="04:15:00">04:15 AM</option>
+                                                                                <option value="04:30:00">04:30 AM</option>
+                                                                                <option value="04:45:00">04:45 AM</option>
+                                                                                <option value="05:00:00">05:00 AM</option>
+                                                                                <option value="05:15:00">05:15 AM</option>
+                                                                                <option value="05:30:00">05:30 AM</option>
+                                                                                <option value="05:45:00">05:45 AM</option>
+                                                                                <option value="06:00:00">06:00 AM</option>
+                                                                                <option value="06:15:00">06:15 AM</option>
+                                                                                <option value="06:30:00">06:30 AM</option>
+                                                                                <option value="06:45:00">06:45 AM</option>
+                                                                                <option value="07:00:00">07:00 AM</option>
+                                                                                <option value="07:15:00">07:15 AM</option>
+                                                                                <option value="07:30:00">07:30 AM</option>
+                                                                                <option value="07:45:00">07:45 AM</option>
+                                                                                <option value="08:00:00">08:00 AM</option>
+                                                                                <option value="08:15:00">08:15 AM</option>
+                                                                                <option value="08:30:00">08:30 AM</option>
+                                                                                <option value="08:45:00">08:45 AM</option>
+                                                                                <option value="09:00:00">09:00 AM</option>
+                                                                                <option value="09:15:00">09:15 AM</option>
+                                                                                <option value="09:30:00">09:30 AM</option>
+                                                                                <option value="09:45:00">09:45 AM</option>
+                                                                                <option value="10:00:00">10:00 AM</option>
+                                                                                <option value="10:15:00">10:15 AM</option>
+                                                                                <option value="10:30:00">10:30 AM</option>
+                                                                                <option value="10:45:00">10:45 AM</option>
+                                                                                <option value="11:00:00">11:00 AM</option>
+                                                                                <option value="11:15:00">11:15 AM</option>
+                                                                                <option value="11:30:00">11:30 AM</option>
+                                                                                <option value="11:45:00">11:45 AM</option>
+                                                                                <option value="12:00:00">12:00 PM</option>
+                                                                                <option value="12:15:00">12:15 PM</option>
+                                                                                <option value="12:30:00">12:30 PM</option>
+                                                                                <option value="12:45:00">12:45 PM</option>
+                                                                                <option value="13:00:00">01:00 PM</option>
+                                                                                <option value="13:15:00">01:15 PM</option>
+                                                                                <option value="13:30:00">01:30 PM</option>
+                                                                                <option value="13:45:00">01:45 PM</option>
+                                                                                <option value="14:00:00">02:00 PM</option>
+                                                                                <option value="14:15:00">02:15 PM</option>
+                                                                                <option value="14:30:00">02:30 PM</option>
+                                                                                <option value="14:45:00">02:45 PM</option>
+                                                                                <option value="15:00:00">03:00 PM</option>
+                                                                                <option value="15:15:00">03:15 PM</option>
+                                                                                <option value="15:30:00">03:30 PM</option>
+                                                                                <option value="15:45:00">03:45 PM</option>
+                                                                                <option value="16:00:00">04:00 PM</option>
+                                                                                <option value="16:15:00">04:15 PM</option>
+                                                                                <option value="16:30:00">04:30 PM</option>
+                                                                                <option value="16:45:00">04:45 PM</option>
+                                                                                <option value="17:00:00">05:00 PM</option>
+                                                                                <option value="17:15:00">05:15 PM</option>
+                                                                                <option value="17:30:00">05:30 PM</option>
+                                                                                <option value="17:45:00">05:45 PM</option>
+                                                                                <option value="18:00:00">06:00 PM</option>
+                                                                                <option value="18:15:00">06:15 PM</option>
+                                                                                <option value="18:30:00">06:30 PM</option>
+                                                                                <option value="18:45:00">06:45 PM</option>
+                                                                                <option value="19:00:00">07:00 PM</option>
+                                                                                <option value="19:15:00">07:15 PM</option>
+                                                                                <option value="19:30:00">07:30 PM</option>
+                                                                                <option value="19:45:00">07:45 PM</option>
+                                                                                <option value="20:00:00">08:00 PM</option>
+                                                                                <option value="20:15:00">08:15 PM</option>
+                                                                                <option value="20:30:00">08:30 PM</option>
+                                                                                <option value="20:45:00">08:45 PM</option>
+                                                                                <option value="21:00:00">09:00 PM</option>
+                                                                                <option value="21:15:00">09:15 PM</option>
+                                                                                <option value="21:30:00">09:30 PM</option>
+                                                                                <option value="21:45:00">09:45 PM</option>
+                                                                                <option value="22:00:00">10:00 PM</option>
+                                                                                <option value="22:15:00">10:15 PM</option>
+                                                                                <option value="22:30:00">10:30 PM</option>
+                                                                                <option value="22:45:00">10:45 PM</option>
+                                                                                <option value="23:00:00">11:00 PM</option>
+                                                                                <option value="23:15:00">11:15 PM</option>
+                                                                                <option value="23:30:00">11:30 PM</option>
+                                                                                <option value="23:45:00">11:45 PM</option>
+                                                                            </select>
+                                                                            <select class="form-select form-select-sm" aria-describedby="timezone-description">
+                                                                                <option value="-12">GMT -12:00</option>
+                                                                                <option value="-11">GMT -11:00</option>
+                                                                                <option value="-10">GMT -10:00</option>
+                                                                                <option value="-9.5">GMT -9:30</option>
+                                                                                <option value="-9">GMT -9:00</option>
+                                                                                <option value="-8">GMT -8:00</option>
+                                                                                <option value="-7">GMT -7:00</option>
+                                                                                <option value="-6">GMT -6:00</option>
+                                                                                <option value="-5">GMT -5:00</option>
+                                                                                <option value="-4.5">GMT -4:30</option>
+                                                                                <option value="-4">GMT -4:00</option>
+                                                                                <option value="-3.5">GMT -3:30</option>
+                                                                                <option value="-3">GMT -3:00</option>
+                                                                                <option value="-2">GMT -2:00</option>
+                                                                                <option value="-1">GMT -1:00</option>
+                                                                                <option value="1">GMT +1:00</option>
+                                                                                <option value="2">GMT +2:00</option>
+                                                                                <option value="3">GMT +3:00</option>
+                                                                                <option value="3.5">GMT +3:30</option>
+                                                                                <option value="4">GMT +4:00</option>
+                                                                                <option value="4.5">GMT +4:30</option>
+                                                                                <option value="5">GMT +5:00</option>
+                                                                                <option value="5.5">GMT +5:30</option>
+                                                                                <option value="5.75">GMT +5:45</option>
+                                                                                <option value="6">GMT +6:00</option>
+                                                                                <option value="6.5">GMT +6:30</option>
+                                                                                <option value="7">GMT +7:00</option>
+                                                                                <option value="8">GMT +8:00</option>
+                                                                                <option value="8.75">GMT +8:45</option>
+                                                                                <option value="9">GMT +9:00</option>
+                                                                                <option value="9.5">GMT +9:30</option>
+                                                                                <option value="10">GMT +10:00</option>
+                                                                                <option value="10.5">GMT +10:30</option>
+                                                                                <option value="11">GMT +11:00</option>
+                                                                                <option value="11.5">GMT +11:30</option>
+                                                                                <option value="12">GMT +12:00</option>
+                                                                                <option value="12.75">GMT +12:45</option>
+                                                                                <option value="13">GMT +13:00</option>
+                                                                                <option value="14">GMT +14:00</option>
+                                                                            </select>
+                                                                            <button type="button" class="btn btn-sm btn-primary content-fit-in m-2">Save for later</button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <button [disabled]="isProcessing" (click)="updateCampaign( 5, true )" class="btn btn-sm btn-primary">Save <i class="fa fa-spinner fa-spin ms-2" *ngIf="isProcessing"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item p-0">
+                                        <div class="campaign-item-wrp topic-wrp p-3">
+                                            <div class="selected-campaign-content">
+                                                <div class="d-flex align-items-top">
+                                                    <div>
+                                                        <h3 (click)="advandedOptions = !advandedOptions" class="mb-0 link cable text-danger">
+                                                            <span *ngIf="!advandedOptions">Show advanced options</span>
+                                                            <span *ngIf="advandedOptions">Hide advanced options</span>
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <div class="advanced-options" *ngIf="advandedOptions">
+                                        <li class="list-group-item p-0">
+                                            <div class="campaign-item-wrp topic-wrp p-3">
+                                                <div class="d-flex justify-content-center align-items-top">
+                                                    <div style="width:15%"><h3 class="mb-0">Contact Scoring</h3></div>
+                                                    <div style="width:70%">
+                                                        <!--selected scroing content comes here-->
+                                                    </div>
+                                                    <div class="text-end" style="width:15%">
+                                                        <button class="btn-sm btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#scoringModal">Setup Scoring</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item p-0">
+                                            <div class="campaign-item-wrp topic-wrp p-3">
+                                                <div class="d-flex justify-content-center align-items-top">
+                                                    <div style="width:15%"><h3 class="mb-0">Response Actions</h3></div>
+                                                    <div style="width:70%">
+                                                        <span class="d-block mb-2">Setup follow-up actions for contacts and have the actions triggered automatically when contacts open or make a click in the campaign.</span>
+                                                        <table class="table table-sm table-bordered" *ngIf="!configureResponse">
+                                                            <tbody>
+                                                            <tr>
+                                                                <th width="200">Email open</th>
+                                                                <td>---</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th width="200">Email click</th>
+                                                                <td>Tim Moses</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th width="200">Specific link click</th>
+                                                                <td>---</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="border p-2" *ngIf="configureResponse">
+                                                            <div class="fieldset d-flex align-items-center justify-content-around">
+                                                                <div>
+                                                                    <select class="form-select form-select-sm mb-2">
+                                                                        <option value="">Email open</option>
+                                                                        <option value="">Specific link click</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div>
+                                                                    <select class="form-select form-select-sm mb-2">
+                                                                        <option value="">Select an item</option>
+                                                                        <option value="">Add to a list</option>
+                                                                        <option value="">Assign tag</option>
+                                                                        <option value="">Remove tag</option>
+                                                                        <option value="">Add to workflow</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div>
+                                                                    <select class="form-select form-select-sm mb-2">
+                                                                        <option value="">Select an item</option>
+                                                                        <option value="">Umar</option>
+                                                                        <option value="">Tim</option>
+                                                                        <option value="">Tawassul</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="add-new-row-btn">
+                                                                    <span (click)="responseRowAdded = !responseRowAdded" class="cable"><i class="fa-light fa-circle-plus"></i></span>
+                                                                </div>
+                                                            </div>
+                                                            <div *ngIf="responseRowAdded" class="fieldset d-flex align-items-center justify-content-around">
+                                                                <div>
+                                                                    <select class="form-select form-select-sm mb-2">
+                                                                        <option value="">Email open</option>
+                                                                        <option value="">Specific link click</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div>
+                                                                    <select class="form-select form-select-sm mb-2">
+                                                                        <option value="">Select an item</option>
+                                                                        <option value="">Add to a list</option>
+                                                                        <option value="">Assign tag</option>
+                                                                        <option value="">Remove tag</option>
+                                                                        <option value="">Add to workflow</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div>
+                                                                    <select class="form-select form-select-sm mb-2">
+                                                                        <option value="">Select an item</option>
+                                                                        <option value="">Umar</option>
+                                                                        <option value="">Tim</option>
+                                                                        <option value="">Tawassul</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="add-new-row-btn">
+                                                                    <span (click)="responseRowAdded = !responseRowAdded" class="cable"><i class="fa-light fa-circle-minus"></i></span>
+                                                                </div>
+                                                            </div>
+                                                            <hr class="my-2">
+                                                            <div class="btn-group-action text-center">
+                                                                <button (click)="configureResponse = !configureResponse" class="btn btn-sm btn-outline-secondary">Save</button>
+                                                                <button (click)="configureResponse = !configureResponse" class="btn btn-sm btn-outline-secondary ms-2 me-2">Cancel</button>
+                                                                <button (click)="configureResponse = !configureResponse" class="btn btn-sm btn-outline-secondary">Reset</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-end" style="width:15%">
+                                                        <button (click)="configureResponse = !configureResponse" *ngIf="!configureResponse" class="btn-sm btn btn-outline-secondary">Configure</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item p-0">
+                                            <div class="campaign-item-wrp topic-wrp p-3">
+                                                <div class="d-flex justify-content-center align-items-top">
+                                                    <div style="width:15%"><h3 class="mb-0">Calendar</h3></div>
+                                                    <div style="width:70%">
+                                                        <span>Add as an event in Office 365 Calendar</span>
+                                                    </div>
+                                                    <div class="text-end" style="width:15%">
+                                                        <button class="btn-sm btn btn-outline-secondary">Configure</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="mt-5 pt-5 pb-5 bg-white-light" style="min-height: 500px;"></section>
+</div>
+
+<!-- Preview Modal start -->
+<div class="modal fade appstore-modal appstore-modal-width" id="preview-modal" aria-hidden="true" aria-labelledby="workflowLabel" tabindex="-1">
+    <div class="modal-dialog modal-fullscreen p-3">
+        <div class="modal-content">
+
+            <div class="modal-header py-2">
+                <div class="d-flex align-items-center ls">
+                    <h1 class="temp-title-left">Subject: {{contentData[previewKey].subject}}</h1>
+                    <div class="">
+                        <input type="text" class="form-control w-auto" [disabled]="true" value="Day {{getNumberOfDays( previewKey )}}">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center rs">
+                    <button (click)="resetPreview()" type="button" class="btn-close js-close-btn-item-views-center" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div [innerHTML]="previewBody()"></div>
+            </div>
+
+            <div class="modal-footer">
+                <button *ngIf="previewKey > 0" (click)="previewPrevious()" class="btn btn-sm btn-primary">Previous</button>
+                <button *ngIf="( previewKey + 1 ) < contentData.length" (click)="previewNext()" class="btn btn-sm btn-primary">Next</button>
+                <button *ngIf="( previewKey + 1 ) >= contentData.length" (click)="resetPreview()" data-bs-dismiss="modal" aria-label="Close" class="btn btn-sm btn-primary">Finish</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Preview Modal end -->

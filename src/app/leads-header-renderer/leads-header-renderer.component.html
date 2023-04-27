@@ -1,0 +1,21 @@
+
+<!-- other columns -->
+<div *ngIf="colName != 'checkbox'" class="wrapper-column-headers">
+    <div *ngIf="(colId === undefined || colId === 0) && typeCol !== 'new'" class="loading-overlay text-center"><i class="fas fa-spinner fa-spin"></i></div>
+    <!-- new column -->
+    
+    <div *ngIf="!collapsed" class=" d-flex align-items-center" [ngClass]="{'justify-content-center': typeCol !== 'new'}">
+        <div class="new-col-cell atmos-dropdown-btn" (click)="showPopup($event)" *ngIf="params.displayName == 'New'">
+            <span data-bs-toggle="dropdown" aria-expanded="false" >+ {{ cellValue }}</span>
+        </div>
+        <span class="cell-title" mat-raised-button matTooltip="{{ cellValue }}" matTooltipPosition="above" (click)="editColumn()" *ngIf="!editMode && params.displayName != 'New'">{{ cellValue }}</span>
+        <input class="form-control form-control-sm" *ngIf="editMode" (keyup.enter)="updateCol()" (focusout)="updateCol()" [(ngModel)]="cellValue" type="text">
+        <div *ngIf="params.displayName != 'New'" class="d-flex align-items-center header-action-group">
+            <div *ngIf="colDescription !== ''" (click)="showPopup($event, 'show-description')" class="description-info atmos-dropdown-btn"><i class="fa-thin fa-circle-info"></i></div>
+            <div *ngIf="typeCol !== 'item'" class="atmos-dropdown-three-dots"><i (click)="showPopup($event)" class="fa-solid fa-ellipsis atmos-dropdown-btn"></i></div>
+        </div>
+    </div>
+    <div *ngIf="collapsed">
+        <span (click)="colCollapse(false)" class="uncollapsed" mat-raised-button matTooltip="Expand '{{ cellValue }}' Column" matTooltipPosition="above" matTooltipClass="above"><i class="fa-solid fa-arrows-left-right"></i></span>
+    </div>
+</div>

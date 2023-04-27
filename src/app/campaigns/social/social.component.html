@@ -1,0 +1,1241 @@
+<div class="page-header">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="header-lhs d-flex align-items-center">
+            <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                <span>Social Dashboard</span>
+            </h4>
+            <span class="ms-2 me-2" mat-raised-button matTooltip="Show board description" matTooltipPosition="above"
+                matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+            <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above"
+                matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+        </div>
+    </div>
+    <div class="page-heading-description w-50" contenteditable="true"><span>Page description</span>
+        <i class="fa-solid fa-ellipsis"></i>
+    </div>
+    <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+        <div class="d-flex">
+            <ul class="tabslink nav boards-top-menu-style">
+                <li class="nav-item active">
+                    <div class="boards-top-menu-style-first"><i class="fa-thin fa-home"></i> Main View</div>
+                    <div class="boards-top-menu-style-third">
+                        <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i
+                                class="fa-solid fa-ellipsis"></i></span>
+                        <div class="dropdown-menu p-0 style-less">
+                            <ul class="list-group list-group-flush list-group-sm">
+                                <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my
+                                        favorites</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-pencil"></i><span
+                                        class="ms-2">Rename</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-trash"></i><span
+                                        class="ms-2">Delete</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as
+                                        board default</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button
+                    matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="fa-thin fa-plus"></i>
+                </button>
+                <div class="dropdown-menu p-0 style-less">
+                    <ul class="list-group list-group-flush list-group-sm">
+                        <li class="list-group-item">
+                            <div class="ls">
+                                <i class="fa-light fa-cog"></i>
+                                <span class="ms-2">Your New Menu</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex align-items-centere">
+            <div class="header-collapse-btn"><i class="fa-thin fa-angle"></i>
+            </div>
+        </div>
+    </div>
+    <div class="header-filter-area d-flex leads-drop-popup">
+        <div class="button-group outlined">
+            <button data-bs-toggle="modal" data-bs-target="#socialRightModal" type="button" class="btn btn-primary">Add New</button>
+            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu leads-drop d-none">
+                <span>
+                    <li class="d-flex align-items-baseline dropdown-item"><i
+                            class="fa-duotone fa-file-invoice"></i><span class="dropdown-item">Invoice</span></li>
+                    <li class="d-flex align-items-baseline dropdown-item"><i class="fa-duotone fa-layer-plus"></i><span
+                            class="dropdown-item">Recurring Invoice</span></li>
+                </span>
+                <span>
+                    <li class="d-flex align-items-baseline dropdown-item"><i class="fa-duotone fa-layer-plus"></i><span
+                            class="dropdown-item" href="#">New group of Leads</span></li>
+                    <li class="d-flex align-items-baseline dropdown-item"><i class="fa-duotone fa-file-import"></i><span
+                            class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#importleads">Import
+                            Leads</span></li>
+                </span>
+            </ul>
+        </div>
+        <div class="button-group outlined single-btn-in-group ms-2">
+            <button type="button" class="btn btn-outline-secondary borderless" data-bs-toggle="dropdown"
+                aria-expanded="false" (click)="filterSearch()" *ngIf="!isSrarch">
+                <i class="fa-thin fa-search"></i> Search
+            </button>
+            <div class="input-group input-group-sm input-group-search" *ngIf="isSrarch">
+                <input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append" (click)="filterSearchClose()">
+                    <span class="input-group-text bg-white" id="basic-addon2"><i class="fa-thin fa-search"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="button-group outlined single-btn-in-group ms-2">
+            <button type="button" class="btn btn-outline-secondaryless" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-light fa-calendar"></i> Date
+            </button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-2 auto-dash-left">
+        <label class="form-check-label d-flex align-items-center mb-2">
+            <input type="checkbox" name="wc_categories" value="39"
+                class="form-check-input wc_category_filter me-2 mt-0"> All Campaigns (0)
+        </label>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Folders
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <label class="form-check-label d-flex align-items-center mb-2 ms-4">
+                            <input type="checkbox" name="wc_categories" value="39"
+                                class="form-check-input wc_category_filter me-2 mt-0"> All
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Status
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <label class="form-check-label d-flex align-items-center mb-2 ms-4">
+                            <input type="checkbox" name="wc_categories" value="39"
+                                class="form-check-input wc_category_filter me-2 mt-0"> Play
+                        </label>
+                        <label class="form-check-label d-flex align-items-center mb-2 ms-4">
+                            <input type="checkbox" name="wc_categories" value="39"
+                                class="form-check-input wc_category_filter me-2 mt-0"> Pause
+                        </label>
+                        <label class="form-check-label d-flex align-items-center mb-2 ms-4">
+                            <input type="checkbox" name="wc_categories" value="39"
+                                class="form-check-input wc_category_filter me-2 mt-0"> Stop
+                        </label>
+                        <label class="form-check-label d-flex align-items-center mb-2 ms-4">
+                            <input type="checkbox" name="wc_categories" value="39"
+                                class="form-check-input wc_category_filter me-2 mt-0"> Archived Newsletters
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                        Campaign Type
+                    </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <label class="form-check-label d-flex align-items-center mb-2 ms-4">
+                            <input type="checkbox" name="wc_categories" value="39"
+                                class="form-check-input wc_category_filter me-2 mt-0"> Sequence
+                        </label>
+                        <label class="form-check-label d-flex align-items-center mb-2 ms-4">
+                            <input type="checkbox" name="wc_categories" value="39"
+                                class="form-check-input wc_category_filter me-2 mt-0"> Broadcast
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-10">
+        <div class="content-wrap">
+            <div class="content-filter-wrap">
+                <div class="d-flex justify-content-between  align-item-end">
+                    <div>
+                        <label class="form-check-label d-flex align-items-center mb-2">
+                            <input type="checkbox" name="wc_categories" value="39"
+                                class="form-check-input wc_category_filter me-2 mt-0"> Select All on Page
+                        </label>
+                    </div>
+                    <div class="d-flex justify-content-between align-item-end">
+
+                    </div>
+                </div>
+            </div>
+            <div class="main-content-wrap" id="push-automations">
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="20">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Demo (Opt-in) - May 5, 2022</h3>
+                                    <h6>Last sent on Jun 14 2022, 08:20 AM</h6>
+                                    <span data-type="sequence" data-id="20" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="19">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Client: Cold Sequence - May 5, 2022</h3>
+                                    <h6>Last sent on Jun 13 2022, 08:00 AM</h6>
+                                    <span data-type="sequence" data-id="19" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="21">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Free-Trial (Opt-in) - May 5, 2022</h3>
+                                    <h6>Last sent on Jun 03 2022, 08:21 AM</h6>
+                                    <span data-type="sequence" data-id="21" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="22">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Partner: Asked for more information via email</h3>
+                                    <h6>Last sent on Jun 02 2022, 11:27 PM</h6>
+                                    <span data-type="sequence" data-id="22" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="23">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Partner: Failed to reach but left voicemail</h3>
+                                    <h6>Last sent on Jun 03 2022, 03:13 AM</h6>
+                                    <span data-type="sequence" data-id="23" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="24">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Partner: Reached partner but not interested</h3>
+                                    <h6>Last sent on May 27 2022, 01:51 PM</h6>
+                                    <span data-type="sequence" data-id="24" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="25">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Partner: Reached the wrong person, whether via phone or email</h3>
+                                    <h6>Last sent on May 31 2022, 04:52 AM</h6>
+                                    <span data-type="sequence" data-id="25" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="26">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Partner: Begins Free Trial</h3>
+                                    <h6>Last sent on Jun 06 2022, 08:02 AM</h6>
+                                    <span data-type="sequence" data-id="26" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="27">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Partner: Completed demo</h3>
+                                    <h6>Last sent on Jun 13 2022, 04:44 AM</h6>
+                                    <span data-type="sequence" data-id="27" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="28">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Partner: Voiced interest but no free trial or demo scheduled</h3>
+                                    <h6>Last sent on Jun 09 2022, 03:24 AM</h6>
+                                    <span data-type="sequence" data-id="28" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="29">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Parter: Reached via phone but was busy</h3>
+                                    <h6>Last sent on Jun 13 2022, 08:00 AM</h6>
+                                    <span data-type="sequence" data-id="29" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+  
+<!-- Social right sidebar Modal starts -->
+<div class="modal right fade" id="socialRightModal" tabindex="-1" aria-labelledby="socialRightModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content border-0 rounded-0">
+            <div class="modal-header">
+                <h2 class="modal-title mb-0" id="socialRightModalLabel">Social Campaigns</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row" *ngIf="capmaingType == ''">
+                    <div class="col-sm-6">
+                        <div class="card rounded-3 h-100 cable">
+                            <div class="card-body text-center">
+                                <h1 class="mb-4">Page Campaigns</h1>
+                                <i class="fa-solid fa-flag-swallowtail fa-5x"></i>
+                                <p class="mt-3">Run promotions, deals, and contests to turn your Facebook page visitors to customer.</p>
+                                <button (click)="selectCampaginType('page')" class="btn btn-primary">Create New</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card rounded-3 h-100 cable">
+                            <div class="card-body text-center">
+                                <h1 class="mb-4">Post Campaigns</h1>
+                                <i class="fa-solid fa-message-captions fa-5x"></i>
+                                <p class="mt-3">Engage with your audience through social media updates.</p>
+                                <button (click)="selectCampaginType('post')" class="btn btn-primary">Create New</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-campagin border rounded-3 p-3" *ngIf="capmaingType == 'page'">
+                    <div class="form-gorup mb-4">
+                        <h3 class="mb-2">Name</h3>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="cam-opt-wrp mb-4">
+                        <h3 class="mb-2">Select Facebook page to get started</h3>
+                        <div class="card rounded-3 text-center">
+                            <div class="card-body">
+                                <i class="fa-brands fa-facebook fa-2x"></i>
+                                <p class="mt-3">You haven't integrated your Facebook account.</p>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#socialCampaignModal">Connect to Facebook</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cam-opt-wrp mb-4">
+                        <h3 class="mb-2">What would you like to create?</h3>
+                        <div class="card rounded-3 text-center">
+                            <div class="card-body">
+                                <i class="fa-light fa-notebook fa-2x"></i>
+                                <p class="mt-3">No content created yet.</p>
+                                <button class="btn btn-primary">Craft your content</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <button class="btn btn-primary me-3">Start</button>
+                        <button (click)="selectCampaginType()" class="btn btn-outline-secondary">Cancel</button>
+                    </div>
+                </div>
+                <div class="row" *ngIf="capmaingType == 'post'">
+                    <div class="col-sm-12 text-center">
+                        <h2>What type of campaign would you like to create?</h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card rounded-3 h-100 cable camp-box">
+                            <div class="card-body text-center">
+                                <h1 class="mb-4">Regular Post Campaigns</h1>
+                                <i class="fa-solid fa-message-captions fa-5x"></i>
+                                <p class="mt-3">Engage with your audience through social media updates.</p>
+                                <button (click)="selectCampaginType('regular')" class="btn btn-primary how-on-hover">Create New</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card rounded-3 h-100 cable camp-box">
+                            <div class="card-body text-center">
+                                <h1 class="mb-4">RSS based Post Campaigns</h1>
+                                <i class="fa-solid fa-square-rss fa-5x"></i>
+                                <p class="mt-3">Get periodic blog updates and post them to social media.</p>
+                                <button (click)="selectCampaginType('rss')" class="btn btn-primary how-on-hover">Create New</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-campagin border rounded-3 p-3" *ngIf="capmaingType == 'regular'">
+                    <div class="form-gorup mb-3">
+                        <h3 class="mb-2">Name</h3>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="cam-opt-wrp mb-4">
+                        <editor cloudChannel="5" [disabled]="false"
+                            [init]="{
+                                menubar: 'file edit view insert format tools table tc help',
+                                plugins: [
+                                'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons'
+                                ],
+                                toolbar:'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl'
+
+                            }">
+                        </editor>
+                    </div>
+                    <div class="cam-opt-wrp mb-4">
+                        <h3 class="mb-2">Where would you like to post this campaign?</h3>
+                        <div class="card mb-3">
+                            <div class="card-body text-center">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="card shadow-sm rounded-3 pos-rel" data-bs-toggle="modal" data-bs-target="#socialCampaignModal">
+                                            <div class="card-body connect-brand-item">
+                                                <i class="fa-solid fa-plus fa-2x"></i>
+                                                <span class="brand-item facebook">
+                                                    <i class="fa-brands fa-facebook-f"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="text-center mt-2">Associate</div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="card shadow-sm rounded-3 pos-rel" data-bs-toggle="modal" data-bs-target="#atmossocial">
+                                            <div class="card-body connect-brand-item">
+                                                <i class="fa-solid fa-plus fa-2x"></i>
+                                                <span class="brand-item twitter">
+                                                    <i class="fa-brands fa-twitter"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="text-center mt-2">Associate</div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="card shadow-sm rounded-3 pos-rel">
+                                            <div class="card-body connect-brand-item">
+                                                <i class="fa-solid fa-plus fa-2x"></i>
+                                                <span class="brand-item tumblr">
+                                                    <i class="fa-brands fa-tumblr"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="text-center mt-2">Associate</div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="card shadow-sm rounded-3 pos-rel" data-bs-toggle="modal" data-bs-target="#linkedlogin">
+                                            <div class="card-body connect-brand-item">
+                                                <i class="fa-solid fa-plus fa-2x"></i>
+                                                <span class="brand-item linkedin">
+                                                    <i class="fa-brands fa-linkedin-in"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="text-center mt-2">Associate</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <button (click)="selectCampaginType()" class="btn btn-outline-secondary">Cancel</button>
+                        <button class="btn btn-primary me-3 ms-3">Schedule</button>
+                        <button class="btn btn-primary">Post Now</button>
+                    </div>
+                </div>
+                <div class="page-campagin border rounded-3 p-3" *ngIf="capmaingType == 'rss'">
+                    <div class="form-gorup mb-3">
+                        <h3 class="mb-2">Blog Name</h3>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-gorup mb-3">
+                        <h3 class="mb-2">RSS Feed Url</h3>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <h3 class="mb-2">Fetch Posts</h3>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="fetchPost" [(ngModel)]="fetchPost" id="inlineRadio1" value="halfhour">
+                            <label class="form-check-label" for="inlineRadio1">Every 30 minutes </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="fetchPost" [(ngModel)]="fetchPost" id="inlineRadio2" value="custom">
+                            <label class="form-check-label" for="inlineRadio2">On a customized schedule</label>
+                        </div>
+                        <div class="d-bock mt-3">
+                            <small><div>Note : Schedule will start only after the blog has been posted.</div></small>
+                        </div>
+                        <div class="custom-fetch-post mt-3" *ngIf="fetchPost == 'custom'">
+                            <div class="form-group mb-3">
+                                <select name="" id="" class="form-select" [(ngModel)]="schedulePeriod">
+                                    <option value="customised">On a customized schedule</option>
+                                    <option value="once-a-day">Once a day</option>
+                                    <option value="once-two-day">Once in two days</option>
+                                    <option value="once-three-day">Once in three days</option>
+                                    <option value="once-four-day">Once in four days</option>
+                                    <option value="once-five-day">Once in five days</option>
+                                    <option value="once-six-day">Once in six days</option>
+                                </select>
+                            </div>
+                            <div class="mb-5" *ngIf="schedulePeriod == 'customised'">
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" class="btn-check" id="sun" autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="sun">SUN</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" class="btn-check" id="mon" autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="mon">MON</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" class="btn-check" id="tue" autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="tue">TUE</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" class="btn-check" id="wed" autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="wed">WED</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" class="btn-check" id="thu" autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="thu">THU</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" class="btn-check" id="fri" autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="fri">FRI</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" class="btn-check" id="sat" autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="sat">SAT</label>
+                                </div>
+                                <div class="mt-4 row">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="">Start Time</label>
+                                            <input type="time" class="form-control">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="">End Time</label>
+                                            <input type="time" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <button (click)="selectCampaginType()" class="btn btn-outline-secondary">Cancel</button>
+                        <button class="btn btn-primary ms-3">Next</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Social right sidebar modal end -->
+
+  <!-- Performance Details Modal Start -->
+  <div class="modal fade marketing-modal-width" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered marketing-modal-width-inner" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="quickAgentLabel">Email Performance
+                <p class="header-para mb-0">See how your email are doing with your audiance. <a href="#">Compare your result to the industry average.</a></p>
+            </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="automation-performance-stats-card row top mt-2">
+                <div class="col-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h4 class="mb-3 mt-2"> Sent</h4>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <h1 class="mb-2 mt-2 font-weight-bold">
+                                    0
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h4 class="mb-3 mt-2"> Open Rate</h4>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <h1 class="mb-2 mt-2 font-weight-bold">
+                                    0.0%
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h4 class="mb-3 mt-2"> Click Rate</h4>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <h1 class="mb-2 mt-2 font-weight-bold">
+                                    0.0%
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="new-table-layout mt-2 mb-2">
+                <p class="no-result d-none">No results.</p>
+                <div class="custom-table-responsive-wrapper">
+                    <table class="all-agents-table table-cols-styling w-100" style="table-layout:auto;">
+                        <thead class="ant-table-thead">
+                            <tr>
+                                <th class="ant-table-cell">Full Name</th>
+                                <th class="ant-table-cell">Email</th>
+                                <th class="ant-table-cell">Sent</th>
+                                <th class="ant-table-cell">Date Sent</th>
+                                <th class="ant-table-cell">Email Opened</th>
+                                <th class="ant-table-cell">Date Opened</th>
+                                <th class="ant-table-cell">IP Address</th>
+                            </tr>
+                        </thead>
+                        <tbody class="ant-table-tbody">
+                            <tr data-contact-id="93">
+                                <td>Joshua Lane</td>
+                                <td>jlane@testemail.com</td>
+                                <td>0</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr data-contact-id="95">
+                                <td>Joe Shoemaker</td>
+                                <td>joes@testemail.com</td>
+                                <td>0</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr data-contact-id="99">
+                                <td>Kelsey Franco</td>
+                                <td>kelsey@atmosai.io</td>
+                                <td>0</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr data-contact-id="102">
+                                <td>Joan Brooks</td>
+                                <td>joannene@atmosai.io</td>
+                                <td>0</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- Performance Details Modal end -->
+<!-- Modal -->
+<div class="modal fade" id="atmossocial" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="atmossocialLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="mb-0" id="atmossocialLabel">
+                <i class="fa-brands fa-twitter fa-2x" style="color:#1da1f2;"></i>
+            </h5>
+            <div>
+                <span class="cable">Signup for Twitter</span>
+                <button type="button" class="btn-close ms-3" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="modal-body p-5">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2 class="w-75">Autohrize AtmosAI social to access your account?</h2>
+                    <div class="login-fieldset mb-3 w-50">
+                        <input type="text" class="form-control form-control-sm mb-3" placeholder="Enter Username or Email">
+                        <input type="text" class="form-control form-control-sm mb-3" placeholder="Password">
+                        <div>
+                            <button class="btn btn-sm btn-primary me-2">Authorize App</button>
+                            <button class="btn btn-sm btn-outline-secondary">Cancel</button>
+                        </div>
+                    </div>
+                    <div class="permissions allow w-75 mt-4 mb-3">
+                        <p><strong>This application will be able to:</strong></p>
+                        <ul class="permissions allow">
+                            <li>See Tweets from your timeline (including protected Tweets) as well as your Lists and collections.</li>
+                            <li>See your Twitter profile information and account settings.</li>
+                            <li>See accounts you follow, mute, and block.</li>
+                            <li>Follow and unfollow accounts for you.</li>
+                            <li>Update your profile and account settings.</li>
+                            <li>Post and delete Tweets for you, and engage with Tweets posted by others (Like, un-Like, or reply to a Tweet, Retweet, etc.) for you.</li>
+                            <li>Create, manage, and delete Lists and collections for you.</li>
+                            <li>Mute, block, and report accounts for you.</li>
+                            <li>Send Direct Messages for you and read, manage, and delete your Direct Messages.</li>
+                        </ul>
+                    </div>
+                    <p>Learn more about third-party app permissions in the <span class="link cable">Help Center</span>.</p>
+                </div>
+                <div class="col-md-4">
+                    <img src="./assets/img/atmos-logo-sidebar.png" />
+                    <span class="fs-5 fw-normal d-block">AtmosAI Social</span>
+                    <span>by AtmosAI</span>
+                    <p class="mt-2">AtmosAI Social is a social media management software for businesses and agencies.</p>
+                    <a href="#" class="d-block cable link">Privacy Policy</a>
+                    <a href="#" class="d-block cable link">Terms and conditions</a>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p>We recommend reviewing the app’s terms and privacy policy to understand how it will use data from your Twitter account. You can revoke access to any app at any time from the <span class="link cable">Apps and sessions</span> section of your Twitter account settings.</p>
+            <small>By authorizing an app you continue to operate under Twitter’s <span class="link cable">Terms of Service</span>. In particular, some usage information will be shared back with Twitter. For more, see our <span class="link cable">Privacy Policy</span>.</small>
+        </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="linkedlogin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="linkedloginLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-body px-5">
+            <div class="text-center mb-3">
+                <div class="linkedin-logo mb-4">
+                    <svg width="84" height="21" viewBox="0 0 84 21" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M64.5 0H82.5C82.8978 0 83.2794 0.158035 83.5607 0.43934C83.842 0.720644 84 1.10218 84 1.5V19.5C84 19.8978 83.842 20.2794 83.5607 20.5607C83.2794 20.842 82.8978 21 82.5 21H64.5C64.1022 21 63.7206 20.842 63.4393 20.5607C63.158 20.2794 63 19.8978 63 19.5V1.5C63 1.10218 63.158 0.720644 63.4393 0.43934C63.7206 0.158035 64.1022 0 64.5 0ZM66.5417 5.93108C66.8229 6.12924 67.1562 6.24017 67.5 6.25C67.734 6.25669 67.9669 6.21637 68.1851 6.13142C68.4032 6.04647 68.6021 5.91863 68.7699 5.75546C68.9377 5.59228 69.0711 5.3971 69.1622 5.18145C69.2532 4.9658 69.3001 4.73408 69.3 4.5C69.2999 4.15604 69.1984 3.81975 69.0082 3.53315C68.818 3.24655 68.5476 3.02234 68.2307 2.88854C67.9139 2.75475 67.5646 2.71729 67.2266 2.78086C66.8885 2.84443 66.5767 3.00621 66.3301 3.24597C66.0835 3.48574 65.913 3.79286 65.8399 4.12897C65.7669 4.46508 65.7945 4.81527 65.9193 5.13578C66.0441 5.45629 66.2606 5.73291 66.5417 5.93108ZM78 18H81L80.96 11.76C80.96 8.69 79.07 7.76 77.3 7.76C76.6604 7.75255 76.0282 7.89631 75.4547 8.17957C74.8812 8.46283 74.3828 8.87757 74 9.39V8H71V18H74V13C73.9699 12.6909 74.0023 12.379 74.0955 12.0827C74.1887 11.7865 74.3406 11.5121 74.5423 11.2759C74.7439 11.0397 74.9911 10.8466 75.2691 10.7082C75.547 10.5697 75.85 10.4887 76.16 10.47C77.26 10.47 78 11.29 78 12.91V18ZM66 8V18H69V8H66Z" fill="#0A66C2"></path><path d="M11.5418 3.06894C11.8229 2.87077 12.1562 2.75984 12.5 2.75001C12.734 2.74332 12.967 2.78365 13.1851 2.86859C13.4032 2.95354 13.6021 3.08138 13.7699 3.24456C13.9378 3.40773 14.0712 3.60292 14.1622 3.81856C14.2533 4.03421 14.3001 4.26593 14.3 4.50001C14.2999 4.84397 14.1984 5.18026 14.0082 5.46686C13.8181 5.75347 13.5477 5.97767 13.2308 6.11147C12.9139 6.24527 12.5646 6.28272 12.2266 6.21915C11.8886 6.15558 11.5768 5.9938 11.3302 5.75404C11.0835 5.51427 10.9131 5.20715 10.84 4.87104C10.7669 4.53493 10.7945 4.18475 10.9193 3.86424C11.0442 3.54373 11.2607 3.26711 11.5418 3.06894Z" fill="#0A66C2"></path><path d="M11 8H14V18H11V8Z" fill="#0A66C2"></path><path d="M22.34 7.75999C21.6937 7.74617 21.0535 7.88687 20.4725 8.17038C19.8916 8.45389 19.3868 8.87202 19 9.38999V7.99999H16V18H19V13C18.9769 12.6949 19.0146 12.3882 19.111 12.0978C19.2074 11.8075 19.3605 11.5391 19.5615 11.3084C19.7624 11.0776 20.0072 10.8891 20.2816 10.7538C20.5561 10.6185 20.8546 10.539 21.16 10.52C22.26 10.52 23 11.34 23 12.96V18H26V11.75C26 8.68999 24.11 7.75999 22.34 7.75999Z" fill="#0A66C2"></path><path d="M3 3H0V18H9V15H3V3Z" fill="#0A66C2"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M55.5525 8.01468C56.0985 8.23857 56.5915 8.5742 57 9V3H60V18H57.18V16.69C56.8112 17.2182 56.3135 17.6433 55.7342 17.9251C55.1549 18.2069 54.5132 18.3359 53.87 18.3C53.193 18.2842 52.5262 18.131 51.9102 17.8497C51.2942 17.5684 50.7417 17.1649 50.2863 16.6637C49.8309 16.1625 49.4821 15.574 49.261 14.9339C49.0398 14.2938 48.9511 13.6154 49 12.94C48.9537 12.2744 49.0438 11.6063 49.2648 10.9767C49.4858 10.3471 49.833 9.76927 50.2853 9.27865C50.7375 8.78803 51.2852 8.39494 51.8947 8.12348C52.5042 7.85203 53.1628 7.70792 53.83 7.7C54.4198 7.6836 55.0066 7.79079 55.5525 8.01468ZM53.4235 15.5818C53.7501 15.7257 54.1031 15.8 54.46 15.8C54.8223 15.8067 55.182 15.7375 55.516 15.597C55.85 15.4565 56.1509 15.2477 56.3995 14.9841C56.6481 14.7204 56.8388 14.4077 56.9594 14.0661C57.0801 13.7244 57.1279 13.3613 57.1 13C57.1234 12.6397 57.0723 12.2786 56.95 11.9389C56.8277 11.5992 56.6367 11.2884 56.3891 11.0257C56.1414 10.7631 55.8423 10.5542 55.5105 10.4121C55.1786 10.2701 54.821 10.1979 54.46 10.2C54.1022 10.1969 53.7477 10.2691 53.4196 10.412C53.0915 10.5548 52.7972 10.7651 52.5557 11.0292C52.3143 11.2933 52.1311 11.6053 52.0181 11.9448C51.9052 12.2844 51.8649 12.6439 51.9 13C51.8681 13.3555 51.9105 13.7137 52.0247 14.0519C52.1388 14.3901 52.3221 14.7007 52.563 14.9642C52.8038 15.2276 53.0969 15.4379 53.4235 15.5818Z" fill="#0A66C2"></path><path d="M38.04 8H34.4L31.06 12.04H31V3H28V18H31V13.19H31.06L34.48 18H38.23L34.17 12.5L38.04 8Z" fill="#0A66C2"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M41.1362 8.05742C41.7695 7.8035 42.448 7.68187 43.13 7.70001C45.85 7.70001 48 9.52001 47.92 13.23V14H40.92V14.06C40.9808 14.6366 41.2627 15.1671 41.7066 15.5401C42.1504 15.9131 42.7216 16.0994 43.3 16.06C43.7471 16.0657 44.1906 15.9799 44.6033 15.808C45.0161 15.636 45.3893 15.3815 45.7 15.06L47.63 16.36C47.0925 16.9941 46.4182 17.4981 45.6578 17.8341C44.8974 18.1701 44.0708 18.3294 43.24 18.3C42.5303 18.3195 41.8243 18.1908 41.1671 17.9223C40.5099 17.6538 39.9158 17.2512 39.4228 16.7403C38.9298 16.2295 38.5486 15.6214 38.3037 14.9551C38.0587 14.2887 37.9553 13.5786 38 12.87C37.9766 12.1882 38.0929 11.5087 38.3419 10.8735C38.5909 10.2383 38.9673 9.66077 39.4478 9.17647C39.9284 8.69216 40.503 8.31133 41.1362 8.05742ZM41.6013 10.4936C41.1871 10.8872 40.9457 11.4288 40.93 12H45.14C45.1536 11.7291 45.1119 11.4582 45.0175 11.2039C44.923 10.9496 44.7779 10.7171 44.5908 10.5207C44.4037 10.3243 44.1786 10.1679 43.9292 10.0612C43.6798 9.95452 43.4113 9.89967 43.14 9.90001C42.5688 9.88657 42.0155 10.1 41.6013 10.4936Z" fill="#0A66C2"></path></svg>
+                </div>
+                <h2 class="mb-2">Welcome back</h2>
+                <p>Don't miss your next opportunity. Sign in to stay updated on your professional world.</p>
+            </div>
+            <input type="text" class="form-control form-control-lg mb-3" placeholder="Email or Phone">
+            <input type="text" class="form-control form-control-lg mb-3" placeholder="Password">
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-lg btn-outline-secondary radius-20 w-100 me-3" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                <button class="btn btn-lg btn-primary radius-20 w-100">Sign in</button>
+            </div>
+            <div class="text-center mb-3 mt-3">
+                <span class="link fw-bold mb-3 d-block cable">Forgot Password ?</span>
+                <span>New to Linkedin? <span class="link cable">Join now</span></span>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+    
+    

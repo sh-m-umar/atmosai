@@ -1,0 +1,11 @@
+<div>
+    <button #trigger class="add-new" data-action="toggle">Action</button>
+  
+    <div #content *ngIf="isOpen" class="menu-container">
+      <div (click)="onClickHandler('create')" class="menu-item">
+        Create New Row
+      </div>
+      <div (click)="onClickHandler('edit')" class="menu-item">Edit Row</div>
+      <div (click)="onClickHandler('delete')" class="menu-item">Delete Row</div>
+    </div>
+  </div>

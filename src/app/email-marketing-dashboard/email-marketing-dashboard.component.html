@@ -1,0 +1,900 @@
+<div class="page-header">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="header-lhs d-flex align-items-center">
+            <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                <span>Campaign Dashboard</span>
+            </h4>
+            <span class="ms-2 me-2" mat-raised-button matTooltip="Show board description" matTooltipPosition="above"
+                matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+            <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above"
+                matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+        </div>
+    </div>
+    <div class="page-heading-description w-50" contenteditable="true"><span>Page description</span>
+        <i class="fa-solid fa-ellipsis"></i>
+    </div>
+    <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+        <div class="d-flex">
+            <ul class="tabslink nav boards-top-menu-style">
+                <li class="nav-item active">
+                    <div class="boards-top-menu-style-first"><i class="fa-thin fa-home"></i> Main View</div>
+                    <div class="boards-top-menu-style-third">
+                        <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i
+                                class="fa-solid fa-ellipsis"></i></span>
+                        <div class="dropdown-menu p-0 style-less">
+                            <ul class="list-group list-group-flush list-group-sm">
+                                <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my
+                                        favorites</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-pencil"></i><span
+                                        class="ms-2">Rename</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-trash"></i><span
+                                        class="ms-2">Delete</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as
+                                        board default</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button
+                    matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="fa-thin fa-plus"></i>
+                </button>
+                <div class="dropdown-menu p-0 style-less">
+                    <ul class="list-group list-group-flush list-group-sm">
+                        <li class="list-group-item">
+                            <div class="ls">
+                                <i class="fa-light fa-cog"></i>
+                                <span class="ms-2">Your New Menu</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex align-items-centere">
+            <div class="header-collapse-btn"><i class="fa-thin fa-angle"></i>
+            </div>
+        </div>
+    </div>
+    <div class="header-filter-area d-flex leads-drop-popup">
+        <div class="button-group outlined">
+            <button href="#" type="button" class="btn btn-primary">Add New</button>
+            <button href="#" type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                <li class="d-flex align-items-baseline dropdown-item">
+                    <span class="dropdown-item">Dialer</span>
+                </li>
+                <li class="d-flex align-items-baseline dropdown-item">
+                    <span class="dropdown-item">Email</span>
+                </li>
+                <li class="d-flex align-items-baseline dropdown-item">
+                    <span class="dropdown-item">SMS</span>
+                </li>
+                <li class="d-flex align-items-baseline dropdown-item">
+                    <span class="dropdown-item">Social</span>
+                </li>
+            </ul>
+        </div>
+        <div class="button-group outlined single-btn-in-group ms-2">
+            <button type="button" class="btn btn-outline-secondary borderless" data-bs-toggle="dropdown"
+                aria-expanded="false" (click)="filterSearch()" *ngIf="!isSrarch">
+                <i class="fa-thin fa-search"></i> Search
+            </button>
+            <div class="input-group input-group-sm input-group-search" *ngIf="isSrarch">
+                <input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append" (click)="filterSearchClose()">
+                    <span class="input-group-text bg-white" id="basic-addon2"><i class="fa-thin fa-search"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="button-group outlined single-btn-in-group ms-2">
+            <button type="button" class="btn btn-outline-secondaryless" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-light fa-calendar"></i> Date
+            </button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-2 auto-dash-left">
+        <label class="form-check-label d-flex align-items-center mb-2">
+            <input type="checkbox" name="wc_categories" value="39"
+                class="form-check-input wc_category_filter me-2 mt-0"> All Campaigns (0)
+        </label>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Folders
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <label class="form-check-label d-flex align-items-center mb-2 ms-4">
+                            <input type="checkbox" name="wc_categories" value="39"
+                                class="form-check-input wc_category_filter me-2 mt-0"> All
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Status
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <label class="form-check-label d-flex align-items-center mb-2 ms-4">
+                            <input type="checkbox" name="wc_categories" value="39"
+                                class="form-check-input wc_category_filter me-2 mt-0"> Play
+                        </label>
+                        <label class="form-check-label d-flex align-items-center mb-2 ms-4">
+                            <input type="checkbox" name="wc_categories" value="39"
+                                class="form-check-input wc_category_filter me-2 mt-0"> Pause
+                        </label>
+                        <label class="form-check-label d-flex align-items-center mb-2 ms-4">
+                            <input type="checkbox" name="wc_categories" value="39"
+                                class="form-check-input wc_category_filter me-2 mt-0"> Stop
+                        </label>
+                        <label class="form-check-label d-flex align-items-center mb-2 ms-4">
+                            <input type="checkbox" name="wc_categories" value="39"
+                                class="form-check-input wc_category_filter me-2 mt-0"> Archived Newsletters
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                        Campaign Type
+                    </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <label class="form-check-label d-flex align-items-center mb-2 ms-4">
+                            <input type="checkbox" name="wc_categories" value="39"
+                                class="form-check-input wc_category_filter me-2 mt-0"> Sequence
+                        </label>
+                        <label class="form-check-label d-flex align-items-center mb-2 ms-4">
+                            <input type="checkbox" name="wc_categories" value="39"
+                                class="form-check-input wc_category_filter me-2 mt-0"> Broadcast
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-10">
+        <div class="content-wrap">
+            <div class="content-filter-wrap">
+                <div class="d-flex justify-content-between  align-item-end">
+                    <div>
+                        <label class="form-check-label d-flex align-items-center mb-2">
+                            <input type="checkbox" name="wc_categories" value="39"
+                                class="form-check-input wc_category_filter me-2 mt-0"> Select All on Page
+                        </label>
+                    </div>
+                    <div class="d-flex justify-content-between align-item-end">
+
+                    </div>
+                </div>
+            </div>
+            <div class="main-content-wrap" id="push-automations">
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="20">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Demo (Opt-in) - May 5, 2022</h3>
+                                    <h6>Last sent on Jun 14 2022, 08:20 AM</h6>
+                                    <span data-type="sequence" data-id="20" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="19">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Client: Cold Sequence - May 5, 2022</h3>
+                                    <h6>Last sent on Jun 13 2022, 08:00 AM</h6>
+                                    <span data-type="sequence" data-id="19" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="21">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Free-Trial (Opt-in) - May 5, 2022</h3>
+                                    <h6>Last sent on Jun 03 2022, 08:21 AM</h6>
+                                    <span data-type="sequence" data-id="21" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="22">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Partner: Asked for more information via email</h3>
+                                    <h6>Last sent on Jun 02 2022, 11:27 PM</h6>
+                                    <span data-type="sequence" data-id="22" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="23">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Partner: Failed to reach but left voicemail</h3>
+                                    <h6>Last sent on Jun 03 2022, 03:13 AM</h6>
+                                    <span data-type="sequence" data-id="23" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="24">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Partner: Reached partner but not interested</h3>
+                                    <h6>Last sent on May 27 2022, 01:51 PM</h6>
+                                    <span data-type="sequence" data-id="24" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="25">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Partner: Reached the wrong person, whether via phone or email</h3>
+                                    <h6>Last sent on May 31 2022, 04:52 AM</h6>
+                                    <span data-type="sequence" data-id="25" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="26">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Partner: Begins Free Trial</h3>
+                                    <h6>Last sent on Jun 06 2022, 08:02 AM</h6>
+                                    <span data-type="sequence" data-id="26" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="27">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Partner: Completed demo</h3>
+                                    <h6>Last sent on Jun 13 2022, 04:44 AM</h6>
+                                    <span data-type="sequence" data-id="27" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="28">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Partner: Voiced interest but no free trial or demo scheduled</h3>
+                                    <h6>Last sent on Jun 09 2022, 03:24 AM</h6>
+                                    <span data-type="sequence" data-id="28" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="compagin-box-wrapper automation-item" data-type="sequence" data-sent="">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="d-flex align-items-center">
+                                <div class="compagin-select-box me-3">
+                                    <input type="checkbox" class="automation-id form-check-input" name="automation-id"
+                                        value="29">
+                                </div>
+                                <div class="compagin-image-box me-3">
+                                    <img src="./assets/img/istockphoto.jpg">
+                                </div>
+                                <div class="compagin-desc-box">
+                                    <h3>Parter: Reached via phone but was busy</h3>
+                                    <h6>Last sent on Jun 13 2022, 08:00 AM</h6>
+                                    <span data-type="sequence" data-id="29" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter"
+                                        class=" date-created cursor-pointer automation-performance-modal compagin-btn">Performance
+                                        Details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-between h-100 align-items-center">
+                                <div class="open-rate">
+                                    <h2>0</h2>
+                                    <p>Sent</p>
+                                </div>
+                                <div class="open-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Open Rate</p>
+                                </div>
+                                <div class="click-rate">
+                                    <h2>0.0%</h2>
+                                    <p>Click Rate</p>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false">More<i class="fa-solid fa-caret-down ms-2"></i></button>
+                                    <div class="dropdown-menu p-0 style-less">
+                                        <ul class="list-group list-group-flush list-group-sm">
+                                            <li class="list-group-item"><span class="ms-2">Copy</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Detail</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Preview</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Download & Print</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Move to Folder</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Archive</span></li>
+                                            <li class="list-group-item"><span class="ms-2">Delete</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+  
+  <!-- Performance Details Modal Start -->
+  <div class="modal fade marketing-modal-width" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered marketing-modal-width-inner" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="quickAgentLabel">Email Performance
+                <p class="header-para mb-0">See how your email are doing with your audiance. <a href="#">Compare your result to the industry average.</a></p>
+            </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="automation-performance-stats-card row top mt-2">
+                <div class="col-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h4 class="mb-3 mt-2"> Sent</h4>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <h1 class="mb-2 mt-2 font-weight-bold">
+                                    0
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h4 class="mb-3 mt-2"> Open Rate</h4>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <h1 class="mb-2 mt-2 font-weight-bold">
+                                    0.0%
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h4 class="mb-3 mt-2"> Click Rate</h4>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <h1 class="mb-2 mt-2 font-weight-bold">
+                                    0.0%
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="new-table-layout mt-2 mb-2">
+                <p class="no-result d-none">No results.</p>
+                <div class="custom-table-responsive-wrapper">
+                    <table class="all-agents-table table-cols-styling w-100" style="table-layout:auto;">
+                        <thead class="ant-table-thead">
+                            <tr>
+                                <th class="ant-table-cell">Full Name</th>
+                                <th class="ant-table-cell">Email</th>
+                                <th class="ant-table-cell">Sent</th>
+                                <th class="ant-table-cell">Date Sent</th>
+                                <th class="ant-table-cell">Email Opened</th>
+                                <th class="ant-table-cell">Date Opened</th>
+                                <th class="ant-table-cell">IP Address</th>
+                            </tr>
+                        </thead>
+                        <tbody class="ant-table-tbody">
+                            <tr data-contact-id="93">
+                                <td>Joshua Lane</td>
+                                <td>jlane@testemail.com</td>
+                                <td>0</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr data-contact-id="95">
+                                <td>Joe Shoemaker</td>
+                                <td>joes@testemail.com</td>
+                                <td>0</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr data-contact-id="99">
+                                <td>Kelsey Franco</td>
+                                <td>kelsey@atmosai.io</td>
+                                <td>0</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr data-contact-id="102">
+                                <td>Joan Brooks</td>
+                                <td>joannene@atmosai.io</td>
+                                <td>0</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- Performance Details Modal end -->

@@ -1,0 +1,111 @@
+.tag-input-edit {
+  position: relative;
+  margin-bottom: 10px;
+
+  .tag-delete {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    width: 20px;
+    height: 20px;
+    background: #ec0e0e;
+    font-size: 10px;
+    color:white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      background: #ccc;
+    }
+  }
+}
+
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: flex;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: space-around;
+  padding: 3px;
+}
+
+.dropdown-content div {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.color-div {
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  display: block;
+}
+
+.vote-bar-color {
+  cursor: pointer;
+  width: 30px;
+  height: 26px;
+  border-radius: 50%;
+}
+.customize-status{
+  span.status-sorter {
+    // position: absolute;
+    // left: 0;
+    // top: 19px;
+    margin-right: 5px;
+    cursor: all-scroll;
+    visibility: hidden;
+  }
+  .pos-rel{
+    &:hover{
+      span.status-sorter{
+        visibility: visible;
+      }
+    }
+  }
+}

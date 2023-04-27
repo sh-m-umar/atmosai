@@ -1,0 +1,456 @@
+<div class="atmos-sales-report-header sticky-top card rounded-0 shadow-sm py-3">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="sales-header-ls">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                        <img src="./assets/img/fa-home-agent.png" class="me-2" width="50px">
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <small class="text-muted">Wed, Dec 21, 2022</small>
+                        <h2 class="mb-0 fw-bold">Good afternoon, Tawassul</h2>
+                        <span>Add agents, reps and employees in three easy onboarding steps</span>
+                    </div>
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>
+<section class="mt-5 pt-5 pb-5">
+    <div class="container">
+        <div class="card shadow">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <div class="ls d-flex align-items-center w-100">
+                    <h3 class="mb-0 me-3 fw-bold">Congradulation on signing up a new agent!</h3>
+                    <button (click)="isProfileComplete = !isProfileComplete" class="btn btn-sm btn-outline-secondary">Mark as complete</button>
+                </div>
+                <div class="rs d-flex align-items-center w-100 justify-content-end">
+                    <div class="progress me-2 my-0 w-50">
+                        <div role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar" style="width: 15%;">15%</div>
+                    </div>
+                    <div>
+                        <p class="m-0">15% &nbsp; Completed</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-sm-3 col-md-2 border-right pe-0">
+                        <ul class="nav nav-pills flex-column" id="setup-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0 active" id="pills-account-tab" data-bs-toggle="pill" data-bs-target="#pills-account" type="button" role="tab" aria-controls="pills-account" aria-selected="true">
+                                    <span class="tab-number">1</span>
+                                    <span>Assign agents</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0 pe-0" id="pills-upload-tab" data-bs-toggle="pill" data-bs-target="#pills-upload" type="button" role="tab" aria-controls="pills-upload" aria-selected="false">
+                                    <span class="tab-number">2</span>
+                                    <span>Customize Package</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link d-flex align-items-center justif-content-start fs-6 btn btn-outline-secondary btn-sm rounded-0" id="pills-connect-tab" data-bs-toggle="pill" data-bs-target="#pills-connect" type="button" role="tab" aria-controls="pills-connect" aria-selected="false">
+                                    <span class="tab-number">3</span>
+                                    <span>Summary</span>
+                                </a>
+                            </li>                            
+                        </ul>
+                    </div>
+                    <div class="col-sm-9 col-md-10 pt-4">
+                        <div class="tab-content py-3 mx-5 px-5" id="setup-tabContent">
+                            <div class="tab-pane fade show active mb-3" id="pills-account" role="tabpanel" aria-labelledby="pills-account-tab" tabindex="0">
+                                <div class="setup-account-title mb-4">
+                                    <p class="setup-account-title-head">The onboarding process is simple when using the Step Guide</p>
+                                    <p class="setup-account-title-pera">You can skip any step like commissions plan or location if you wish to ad later</p>
+                                </div>
+                                <div class="">
+                                    <div class="row align-items-center">
+                                        <div class="col-3">
+                                            <div class="d-flex align-items-center">
+                                                <i style="color: #2075B6 !important;" class="fa-solid fa-envelope text-muted me-2"></i> <p class="fw-bold mb-0 ps-1">Email(s) of the Agent(s):</p>
+                                            </div>
+                                            <p class="text-muted ps-4">(Separatd by commas)</p>
+                                        </div>
+                                        <div class="col-9 agen-emails-text">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-3 d-flex align-items-center">
+                                            <i style="color: #2075B6 !important;" class="fa-solid fa-dollar-sign text-muted me-2"></i> <p class="fw-bold mb-0 ps-2">Commission Plan:</p>
+                                        </div>
+                                        <div class="col-9">
+                                            <select class="form-select form-select-sm" aria-label="Default select example">
+                                                <option selected>Select an Option</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                              </select>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-3 d-flex align-items-center">
+                                            <i style="color: #2075B6 !important;" class="fa-solid fa-calendar-days text-muted me-2"></i> <p class="fw-bold mb-0 ps-2">Start Date:</p>
+                                        </div>
+                                        <div class="col-9">
+                                            <input type="text" placeholder="02/23/2016" class="form-control form-control-sm mb-3">
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-3 d-flex align-items-center">
+                                            <i style="color: #2075B6 !important;" class="fa-sharp fa-solid fa-earth-americas text-muted me-2"></i> <p class="fw-bold mb-0 ps-2">Office Location:</p>
+                                        </div>
+                                        <div class="col-9">
+                                            <select class="form-select form-select-sm" aria-label="Default select example">
+                                                <option selected>Select an Option</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                              </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="setup-profile-btn me-0">
+                                        <button class="btn btn-outline-secondary mb-3">Cancel</button>
+                                        <button class="btn btn-primary ms-2 mb-3">Continue</button>
+                                    </div>
+                                </div>                      
+                            </div>
+                            <div class="tab-pane fade mb-3" id="pills-upload" role="tabpanel" aria-labelledby="pills-upload-tab" tabindex="0">
+                                <div class="setup-account-title mb-4">                                    
+                                    <p class="setup-account-title-pera">Customize the Onboarding process for the agent(s) specified:</p>
+                                </div>                                
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    <div class="accordion-item pb-1 border">
+                                      <h2 class="accordion-header" id="flush-headingOne">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                            <i class="fa-solid fa-circle-question"></i> <h3 class="mb-0 ms-2">Choose Template:</h3>
+                                        </button>
+                                      </h2>
+                                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <div class="row align-items-center">
+                                                <div class="col-3">
+                                                    <p class="fw-bold mb-0">Choose Template</p>
+                                                </div>
+                                                <div class="col-9 d-flex align-items-center">                                                    
+                                                    <select class="form-select form-select-sm" aria-label="Default select example">
+                                                        <option selected>Select an Option</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                      </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-3"></div>
+                                                <div class="col-9 mt-3">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                          Save any edits as a new onboarding template
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-3"></div>
+                                                <div class="col-9">
+                                                    <input type="text" placeholder="Template Name (e.g, New Onboarding Template)" class="form-control form-control-sm mb-3">
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="accordion-item pb-1 border">
+                                      <h2 class="accordion-header" id="flush-headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                            <i class="fa-solid fa-folder-open"></i> <h3 class="mb-0 ms-2">Required Documents</h3>
+                                        </button>
+                                      </h2>
+                                      <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <div class="row align-items-center">
+                                                <div class="col-3">
+                                                    <p class="fw-bold mb-0">Required Documents</p>
+                                                </div>
+                                                <div class="col-9 border pt-3 pb-2 ps-3">                                                    
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            License Disclosure Form
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                          Insurance Disclosure
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                          Independent Contractor Agreement
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                          Commission Agreement
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                          Desk Free Agreement
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                          Indendent Contractor Agreement - California
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-3"></div>
+                                                <div class="col-9 mt-3 border pt-3 pb-3 w-25 text-center cable">
+                                                    <div class="">
+                                                        <div class="">
+                                                            <input type="file" class="screen-reader-text d-none" id="setup_wizard_data_logo" name="setup_wizard_data_logo" accept="image/*" />
+                                                            <div class="i-con-text me-2">
+                                                                <label for="setup_wizard_data_logo">+ Add Document(s)</label>
+                                                            </div>                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-3"></div>
+                                                    <div class="col-9 ps-0 mt-1">
+                                                        <p class="text-muted">(max file sixe: 5 MB, accepted files: ?????)</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="accordion-item pb-1 border">
+                                      <h2 class="accordion-header" id="flush-headingThree">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                            <i class="fa-solid fa-code-pull-request"></i> <h3 class="mb-0 ms-2">Items requested</h3>
+                                        </button>
+                                      </h2>
+                                      <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <div class="row align-items-center">
+                                                <div class="col-3">
+                                                    <p class="fw-bold mb-0">Items requested</p>
+                                                </div>
+                                                <div class="col-9 border pt-3 pb-2 ps-3">                                                    
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            Upload Copy of Real Estate License
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                          Enter Real Estate License Number and Expiry Date
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                          Upload a Copy of Driver's License
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                          Upload a Copy of Car Insurance
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check text-muted">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled>
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <i class="fa-solid fa-circle-question me-2"></i>Collect Credit Card Information
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check text-muted">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled>
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <i class="fa-solid fa-circle-question me-2"></i>Collect Banking Information
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>                                    
+                                </div>
+                                <div class="mt-3 me-0 setup-profile-btn">
+                                    <button class="btn btn-outline-secondary mb-3">Back</button>
+                                    <button class="btn btn-primary ms-2 mb-3">Send Invite</button>
+                                </div> 
+                            </div>
+                            <div class="tab-pane fade mb-3" id="pills-connect" role="tabpanel" aria-labelledby="pills-connect-tab" tabindex="0">
+                                <div class="row border pt-4 pb-4">
+                                    <div class="col-4">
+                                        <div class="mb-4">
+                                            <h1 class="mb-3">Summary</h1>
+                                            <p class="fw-bold mb-1">Commission plan assigned:</p>
+                                            <p class="fst-italic">New Agent Plan</p>
+                                        </div>
+                                        <div class="mb-4">                                            
+                                            <p class="fw-bold mb-1">Start Date assigned:</p>
+                                            <p class="fst-italic">Feb 26, 2016</p>
+                                        </div>
+                                        <div class="">                                            
+                                            <p class="fw-bold mb-1">Office Location assigned:</p>
+                                            <p class="fst-italic">Bay Area Realty</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="mb-4">
+                                            <h1 class="mb-3 invisible">Summary</h1>
+                                            <p class="fw-bold mb-1">Information Requested:</p>
+                                            <p class="fst-italic mb-0">- Signature for Indendent Contractor Agreement</p>
+                                            <p class="fst-italic mb-0">- California.pdf document</p>
+                                            <p class="fst-italic mb-0">- Real Estate License Number</p>
+                                            <p class="fst-italic mb-0">- Real Estate License Number and Expiry Date</p>
+                                            <p class="fst-italic mb-0">- Driver's License</p>
+                                            <p class="fst-italic">- Car Insurance</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="mb-4">
+                                            <h1 class="mb-3 invisible">Summary</h1>
+                                            <p class="fw-bold mb-0">Onboarding will be sent to:</p>
+                                            <p class="fst-italic">samsmith@brokersumo.com</p>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 me-0 setup-profile-btn">
+                                    <button class="btn btn-outline-secondary mb-3">Previous Step</button>
+                                    <button class="btn btn-primary ms-2 mb-3">Send Onboarding</button>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="mt-5 pt-5 pb-5 bg-white-light">
+    <div class="container pt-4 pb-4">
+        <div class="row" [ngClass]="{'faded': isProfileComplete}">
+            <div class="col-sm-12 text-center mb-5">
+                <h1 class="mb-2">Explore useful features and set up AtmosAI Books</h1>
+                <p class="mb-0">AtmosAi Books is your easy-to-use online accounting software. Let us help you set up AtmosAi Books and get it up and running for your business.</p>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 pt-2">
+                                <i class="fa-light fa-users fa-2x"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h3 class="mb-1 fw-bold">Invite other team members</h3>
+                                <p class="mb-3">Get started building your team. Invite your team to either become members, have viewing access only or</p>
+                                <button data-bs-toggle="modal" data-bs-target="#inviteModal" class="btn btn-primary btn-sm">Configure</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 pt-2">
+                                <i class="fa-light fa-file-import fa-2x"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h3 class="mb-1 fw-bold"> Set up your first lead or import existing leads</h3>
+                                <p class="mb-3">Add apps to your CRM to enhance your business. Apps like invoices and quo Campaigns to engage customers and leads, Power and predictive dialer to give your sales team everything it needs.</p>
+                                <button data-bs-toggle="modal" data-bs-target="#importleads" class="btn btn-primary btn-sm">Configure</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 pt-2">
+                                <i class="fa-light fa-rocket-launch fa-2x"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h3 class="mb-1 fw-bold"> Add apps like Quotes and Invoices or campaigns</h3>
+                                <p class="mb-3"> Add apps to your CRM to enhance your business. Apps like invoices and quotes, Campaigns to engage customers and leads, Power and predictive dialer to give your sales team everything it needs.</p>
+                                <button data-bs-toggle="modal" data-bs-target="#appstoremodal" class="btn btn-primary btn-sm">Configure</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 pt-2">
+                                <i class="fa-light fa-envelopes-bulk fa-2x"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h3 class="mb-1 fw-bold">Sync your Gmail or Outlook</h3>
+                                <p class="mb-3">Set up your mail accounts to the atmos system and enjoy everything in one inbox.</p>
+                                <button data-bs-toggle="modal" data-bs-target="#" class="btn btn-primary btn-sm">Configure</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 pt-2">
+                                <i class="fa-light fa-shop fa-2x"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h3 class="mb-1 fw-bold"> Customize your sales pipeline one easy step</h3>
+                                <p class="mb-3"> Add apps to your CRM to enhance your business. Apps like invoices and quotes, Campaigns to engage customers and leads, Power and predictive dialer to give your sales team everything it needs.</p>
+                                <button routerLink="/boards/2/kanban" class="btn btn-primary btn-sm">Configure</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 pt-2">
+                                <i class="fa-light fa-file-invoice-dollar fa-2x"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h3 class="mb-1 fw-bold">Add apps like Quotes and Invoices or campaigns</h3>
+                                <p class="mb-3">Add your employees, timesheet staff, and accountants as users to AtmosAi Books by configuring different
+                                    roles and permissions for them. <a href="" class="">Learn More</a>
+                                </p>
+                                <button data-bs-toggle="modal" data-bs-target="#" class="btn btn-primary btn-sm">Configure</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

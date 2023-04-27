@@ -1,0 +1,179 @@
+<div class="page-header">
+    <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+        <div class="header-lhs d-flex align-items-center">
+            <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                <span>Media Library</span>
+            </h4>
+            <span class="ms-2 me-2"  mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+            <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+        </div>
+        <div class="header-rhs d-flex align-items-center me-2">
+            <button type="button" class="btn btn-outline-secondary borderless">
+                <i class="fa-light fa-rectangle-list"></i> List View
+            </button>
+            <button type="button" class="btn btn-outline-secondary borderless">
+                <i class="fa-light fa-grid"></i> Grid View
+            </button>
+        </div>
+    </div>
+    <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true"><span>Media library description</span>
+        <i class="fa-solid fa-ellipsis"></i>
+    </div>
+    <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+        <div class="d-flex">
+            <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">Leads</h5>
+            <ul class="tabslink nav boards-top-menu-style">
+                <li class="nav-item active">
+                    <div class="boards-top-menu-style-first"><i class="fa-thin fa-home"></i> Main View</div>
+                    <div class="boards-top-menu-style-third">
+                        <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                        <div class="dropdown-menu p-0 style-less">
+                            <ul class="list-group list-group-flush list-group-sm">
+                                <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-thin fa-plus"></i>
+                </button>
+                <div class="dropdown-menu p-0 style-less">
+                    <ul class="list-group list-group-flush list-group-sm">
+                        <li class="list-group-item">
+                            <div class="ls">
+                                <i class="fa-light fa-cog"></i>
+                                <span class="ms-2">Your New Menu</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex align-items-centere">
+            <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2" style="margin-top: -5px;">
+                <div class="button-group outlined borderless">
+                    <button type="button" class="btn collapsed btn-outline-secondary"><i
+                            class="fa-thin fa-envelope"></i> Bulk Emails
+                    </button>
+                    <button type="button"
+                            class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+                <div class="button-group ms-2">
+                    <button type="button" class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div (click)="headerToggle()" class="header-collapse-btn"><i class="fa-thin fa-angle-{{anglePos}}"></i>
+            </div>
+        </div>
+    </div>
+    <div class="header-filter-area d-flex leads-drop-popup">
+        <div class="button-group outlined">
+            <button type="button" class="btn btn-primary">+ Add New</button>
+        </div>
+        <div class="button-group outlined single-btn-in-group ms-2">
+            <button type="button" class="btn btn-outline-secondary borderless" data-bs-toggle="dropdown" aria-expanded="false" (click)="filterSearch()" *ngIf="!isSrarch">
+                <i class="fa-thin fa-search"></i> Search
+            </button>
+            <div class="input-group input-group-sm input-group-search" *ngIf="isSrarch">
+                <input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append" (click)="filterSearchClose()">
+                    <span class="input-group-text bg-white" id="basic-addon2"><i class="fa-thin fa-search"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uploads-wrapper">
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="sticky-sidebar">
+                <button class="btn-sm btn-primary btn me-2 w-100 mb-3">New Folder</button>
+                <ul class="list-group list-group-flush borderless">
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                    <span><i class="fa-light fa-folder me-2"></i>All</span>
+                    <span class="badge badge-primary badge-pill">14</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                    <span><i class="fa-light fa-folder me-2"></i>Uncategories</span>
+                    <span class="badge badge-primary badge-pill">10</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <div class="gallary-wrp">
+                <div class="gallery-filter">
+                    <div class="input-group me-2">
+                        <select class="form-select form-select-sm">
+                            <option value="">All media</option>
+                            <option value="">Image</option>
+                            <option value="">File</option>
+                            <option value="">Audio</option>
+                            <option value="">Video</option>
+                            <option value="">Document</option>
+                        </select>
+                    </div>
+                    <div class="input-group me-2">
+                        <select class="form-select form-select-sm">
+                            <option value="">All dates</option>
+                            <option value="">Jan 2022</option>
+                            <option value="">Feb 2022</option>
+                            <option value="">Mar 2022</option>
+                            <option value="">Apr 2022</option>
+                        </select>
+                    </div>
+                    <button data-toggle="modal" data-target="#exampleModalCenter" class="btn-sm btn-primary btn">Bulk Select</button>
+                </div>
+                <div class="row gx-3">
+                    <div class="col-sm-2 col-lg-1" *ngFor="let item of itemsArr" (click)="showPopupImage()">
+                        <div class="gall-item">
+                            <img src="{{item.src}}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mb-5 mt-5">
+                    <button class="btn btn-primary bt-sm">Load More...</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isPopupShow" class="modal fade d-block show" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body text-center">
+                <span class="close" data-dismiss="modal" aria-label="Close" (click)="showPopupImage()">
+                    <span aria-hidden="true">&times;</span>
+                </span>
+              <img src="./assets/img/img-placeholder.png" alt="">
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

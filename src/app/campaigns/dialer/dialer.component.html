@@ -1,0 +1,1107 @@
+<div class="wrapp d-flex">
+    <div class="sidebar-collapseable w-25"> 
+        <!-- <span class="sidebar-toggler">
+            <i class="fa-solid fa-chevron-left"></i>
+        </span> -->
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">
+                        Current Call
+                    </button>
+                </h2>
+
+                <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
+                        data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="current-call-wrapper">
+                            <div class="call-information">
+                                <div class="call-type"><strong>Inbound:</strong>
+                                    <span>Tawassual Elahi</span>
+
+                                </div>
+                                <div class="calling-number">(705) 218-2325</div>
+                            </div>
+                            <div class="call-controls"><span class="media-controls"><span>Media Contros</span></span>
+                                <div class="container px-0">
+                                    <div class="row g-2 mt-2 buttons-control">
+                                        <div class="col-12">
+                                            <button class="btn btn-default can-active"><i class="fa-solid fa-pause"></i> Hold</button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button class="btn btn-default"  data-bs-toggle="modal" data-bs-target="#transferModal"><i class="fa-solid fa-arrow-right-arrow-left"></i> Transfer</button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button class="btn btn-default can-active"><i class="fa-solid fa-microphone-slash"></i> Mute</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class="btn btn-default can-active minni"><i class="fa-solid fa-arrow-down"></i> <span>Park</span>
+                                            </button>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="input-group dropdown confrence-dropdown">
+                                                <button class="btn btn-default minni"  type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-toggle="modal" data-bs-target="#confrenceModal" title="Conferance"><i class="fa-solid fa-user-plus"></i> <span>Conferance</span></button>
+                                                <ul class="dropdown-menu">
+                                                  <li class="mx-2 mb-2"><a class="dropdown-item btn btn-primary d-flex align-items-center justify-content-between" href="#"><span>Dave Carter</span><i class="fa-solid fa-xmark"></i></a></li>
+                                                  <li class="mx-2 mb-2"><a class="dropdown-item btn btn-primary d-flex align-items-center justify-content-between" href="#"><span>AgentCSR_bsummer</span><span><i class="fa-solid fa-download"></i><i class="fa-solid fa-xmark ms-3"></i></span></a></li>
+                                                  <li class="mx-2"><hr class="dropdown-divider"></li>
+                                                  <li class="mx-2">
+                                                    <a class="btn btn-outline-secondary conf-drop d-flex align-items-center justify-content-between" href="#">
+                                                      <span>Leave Conferance</span><i class="fa-solid fa-caret-right"></i>
+                                                    </a>
+                                                    <ul class="dropdown-menu dropdown-submenu">
+                                                        <li class="mx-2 mb-2"><a class="dropdown-item btn btn-primary" href="#"><i class="fa-solid fa-check me-2"></i>Confirm</a></li>
+                                                        <li class="mx-2 mb-0"><a class="dropdown-item btn btn-primary" href="#"><i class="fa-solid fa-xmark me-2"></i>Cancel</a></li>
+                                                    </ul>
+                                                   </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 pos-rel">
+                                            <button (click)="keyboard = !keyboard" class="btn btn-default keyspad minni"><i class="fa-solid fa-keyboard"></i> <span>Keypad</span>
+                                            </button>
+                                            <div class="keypad" *ngIf="keyboard">
+                                                <div class="wrapper">
+                                                    <!-- ## phone area -->
+                                                    <div class="phone">
+                                                      <!-- ## phone area -->
+                                                      <div class="phone-container">
+                                                        <input type="text" maxlength="11" class="number-input" id="numberInput" value="" placeholder="Phone Number"/>
+                                                        <!-- ## keyboard -->
+                                                        <div class="keyboard">
+                                                          <div class="number">
+                                                            <span data-number="1"><i>1</i></span>
+                                                            <span data-number="2"><i>2</i></span>
+                                                            <span data-number="3"><i>3</i></span>
+                                                            <span data-number="4"><i>4</i></span>
+                                                            <span data-number="5"><i>5</i></span>
+                                                            <span data-number="6"><i>6</i></span>
+                                                            <span data-number="7"><i>7</i></span>
+                                                            <span data-number="8"><i>8</i></span>
+                                                            <span data-number="9"><i>9</i></span>
+                                                            <span data-number="*"><i>*</i></span>
+                                                            <span data-number="0"><i>0</i></span>
+                                                            <span data-number="#"><i>#</i></span>
+                                                            <span class="call"><i class="fa-solid fa-phone"></i></span>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <button class="btn btn-default can-active"><i class="fa-solid fa-record-vinyl"></i> Record</button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button class="btn btn-default can-active"><i class="fa-solid fa-volume-high"></i> Audio</button>
+                                        </div>
+                                        <div class="col-12 mt-5">
+                                            <button class="btn btn-default"><i class="fa-solid fa-headset"></i> Predictive Dialer</button>
+                                        </div>
+                                        <div class="col-12 mb-5">
+                                            <button class="btn btn-default"><i class="fa-brands fa-buromobelexperte"></i> Power Dialer</button>
+                                        </div>
+                                        <div class="col-12 mt-4 mb-3">
+                                            <button class="btn btn-default"><i class="fa-solid fa-phone-slash text-danger"></i> End Call</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Pessonal Queue
+                    </button>
+                </h2>
+
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                        data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate
+                        the <code>.accordion-flush</code> class. This is the second item's accordion
+                        body. Let's imagine this being filled with some actual content.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                        Parked Calls
+                    </button>
+                </h2>
+
+                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+                        data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="parked-item">
+                            <div class="voice-item d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa-solid fa-chess-king"></i>
+                                    <div class="ms-2 d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <i class="fa-solid fa-circle-parking"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="number mb-0">01233454545654</h6>
+                                            <span>eLearning Chat Profile</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="voice-date d-flex align-items-center">
+                                    <h6 class="text-danger mb-0">004</h6>
+                                    <div class="input-group dropend ms-1">
+                                        <button class="borderless-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                        <ul class="dropdown-menu">
+                                          <li class="mb-2 px-3 mt-1"><h6>Parked Call</h6></li>
+                                          <li><hr class="dropdown-divider"></li>
+                                          <li><a class="dropdown-item" href="#"><i class="fa-solid fa-phone me-2"></i>Retrieve Call</a></li>
+                                          <li><a class="dropdown-item" href="#"><i class="fa-solid fa-arrow-right me-2"></i>Transfer Call</a></li>
+                                          <li><hr class="dropdown-divider"></li>
+                                          <li><a class="dropdown-item" href="#"><i class="fa-solid fa-circle-plus me-2"></i>Add to Conferance</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-voicemail">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseVoicemail" aria-expanded="false" aria-controls="flush-collapseThree">
+                        Skill Group Voicemail
+                    </button>
+                </h2>
+
+                <div id="flush-collapseVoicemail" class="accordion-collapse collapse" aria-labelledby="flush-voicemail"
+                        data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="voicemail-sidebar">
+                            <div class="voicemail-sidebar-header">
+                                <div class="d-flex align-items-center">
+                                    <input type="checkbox" class="voice-sidebar-check">
+                                    <div class="selected-item ms-3">Items: <span class="count">10</span></div>
+                                </div>
+                                <div>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>Newest First</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="viocemail-sidebar-list">
+                                <div class="voice-item">
+                                    <div class="d-flex align-items-center">
+                                        <input type="checkbox" class="voice-sidebar-check">
+                                        <div class="ms-3">
+                                            <h6 class="number">01233454545654</h6>
+                                            <span>Inbound</span>
+                                        </div>
+                                    </div>
+                                    <div class="voice-date">
+                                        <h6>1/1/2022</h6>
+                                    </div>
+                                </div>
+                                <div class="voice-item">
+                                    <div class="d-flex align-items-center">
+                                        <input type="checkbox" class="voice-sidebar-check">
+                                        <div class="ms-3">
+                                            <h6 class="number">01233454545654</h6>
+                                            <span>Inbound</span>
+                                        </div>
+                                    </div>
+                                    <div class="voice-date">
+                                        <h6>1/1/2022</h6>
+                                    </div>
+                                </div>
+                                <div class="voice-item">
+                                    <div class="d-flex align-items-center">
+                                        <input type="checkbox" class="voice-sidebar-check">
+                                        <div class="ms-3">
+                                            <h6 class="number">01233454545654</h6>
+                                            <span>Inbound</span>
+                                        </div>
+                                    </div>
+                                    <div class="voice-date">
+                                        <h6>1/1/2022</h6>
+                                    </div>
+                                </div>
+                                <div class="voice-item">
+                                    <div class="d-flex align-items-center">
+                                        <input type="checkbox" class="voice-sidebar-check">
+                                        <div class="ms-3">
+                                            <h6 class="number">01233454545654</h6>
+                                            <span>Inbound</span>
+                                        </div>
+                                    </div>
+                                    <div class="voice-date">
+                                        <h6>1/1/2022</h6>
+                                    </div>
+                                </div>
+                                <div class="voice-item">
+                                    <div class="d-flex align-items-center">
+                                        <input type="checkbox" class="voice-sidebar-check">
+                                        <div class="ms-3">
+                                            <h6 class="number">01233454545654</h6>
+                                            <span>Inbound</span>
+                                        </div>
+                                    </div>
+                                    <div class="voice-date">
+                                        <h6>1/1/2022</h6>
+                                    </div>
+                                </div>
+                                <div class="voice-item">
+                                    <div class="d-flex align-items-center">
+                                        <input type="checkbox" class="voice-sidebar-check">
+                                        <div class="ms-3">
+                                            <h6 class="number">01233454545654</h6>
+                                            <span>Inbound</span>
+                                        </div>
+                                    </div>
+                                    <div class="voice-date">
+                                        <h6>1/1/2022</h6>
+                                    </div>
+                                </div>
+                                <div class="voice-item">
+                                    <div class="d-flex align-items-center">
+                                        <input type="checkbox" class="voice-sidebar-check">
+                                        <div class="ms-3">
+                                            <h6 class="number">01233454545654</h6>
+                                            <span>Inbound</span>
+                                        </div>
+                                    </div>
+                                    <div class="voice-date">
+                                        <h6>1/1/2022</h6>
+                                    </div>
+                                </div>
+                                <div class="voice-item">
+                                    <div class="d-flex align-items-center">
+                                        <input type="checkbox" class="voice-sidebar-check">
+                                        <div class="ms-3">
+                                            <h6 class="number">01233454545654</h6>
+                                            <span>Inbound</span>
+                                        </div>
+                                    </div>
+                                    <div class="voice-date">
+                                        <h6>1/1/2022</h6>
+                                    </div>
+                                </div>
+                                <div class="voice-item">
+                                    <div class="d-flex align-items-center">
+                                        <input type="checkbox" class="voice-sidebar-check">
+                                        <div class="ms-3">
+                                            <h6 class="number">01233454545654</h6>
+                                            <span>Inbound</span>
+                                        </div>
+                                    </div>
+                                    <div class="voice-date">
+                                        <h6>1/1/2022</h6>
+                                    </div>
+                                </div>
+                                <div class="voice-item">
+                                    <div class="d-flex align-items-center">
+                                        <input type="checkbox" class="voice-sidebar-check">
+                                        <div class="ms-3">
+                                            <h6 class="number">01233454545654</h6>
+                                            <span>Inbound</span>
+                                        </div>
+                                    </div>
+                                    <div class="voice-date">
+                                        <h6>1/1/2022</h6>
+                                    </div>
+                                </div>
+                                <div class="voice-item">
+                                    <div class="d-flex align-items-center">
+                                        <input type="checkbox" class="voice-sidebar-check">
+                                        <div class="ms-3">
+                                            <h6 class="number">01233454545654</h6>
+                                            <span>Inbound</span>
+                                        </div>
+                                    </div>
+                                    <div class="voice-date">
+                                        <h6>1/1/2022</h6>
+                                    </div>
+                                </div>
+                                <div class="voice-item">
+                                    <div class="d-flex align-items-center">
+                                        <input type="checkbox" class="voice-sidebar-check">
+                                        <div class="ms-3">
+                                            <h6 class="number">01233454545654</h6>
+                                            <span>Inbound</span>
+                                        </div>
+                                    </div>
+                                    <div class="voice-date">
+                                        <h6>1/1/2022</h6>
+                                    </div>
+                                </div>
+                                <div class="voice-item">
+                                    <div class="d-flex align-items-center">
+                                        <input type="checkbox" class="voice-sidebar-check">
+                                        <div class="ms-3">
+                                            <h6 class="number">01233454545654</h6>
+                                            <span>Inbound</span>
+                                        </div>
+                                    </div>
+                                    <div class="voice-date">
+                                        <h6>1/1/2022</h6>
+                                    </div>
+                                </div>
+                                <div class="voice-item">
+                                    <div class="d-flex align-items-center">
+                                        <input type="checkbox" class="voice-sidebar-check">
+                                        <div class="ms-3">
+                                            <h6 class="number">01233454545654</h6>
+                                            <span>Inbound</span>
+                                        </div>
+                                    </div>
+                                    <div class="voice-date">
+                                        <h6>1/1/2022</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-wrapper w-100 mx-0">
+        <nav class="top-minni navbar navbar-expand-sm">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#atmos-top-navbar" aria-controls="atmos-top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="atmos-top-navbar">
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <div class="top-bar-left d-flex align-items-center">
+                            <div class="timespan">30 May 2022, 7:58 pm</div>
+                            <div class="ver-devider"></div>
+                            <div class="btn-group as-button">
+                                <button type="button" class="btn btn-secondary dropdown-toggle not-ready" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="not-ready"><i class="fa-solid fa-dna"></i> Not Ready</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><button class="dropdown-item" type="button"><span class="not-ready"><i class="fa-solid fa-dna"></i> Not Ready</span></button></li>
+                                    <li><button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#readyforModal" type="button"><span class="ready"><i class="fa-solid fa-circle-check"></i> Ready (Voice)</span></button></li>
+                                    <li><button class="dropdown-item" type="button"><span class="ready"><i class="fa-solid fa-circle-check"></i> Ready</span></button></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="top-bar-right">
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                  <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Justin
+                                  </a>
+                                  <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                  </ul>
+                                </li>
+                                <li class="nav-devider"></li>
+                                <li class="nav-item dropdown">
+                                  <a class="nav-link" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-gear"></i></a>
+                                  <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settingModal" href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                                    <li><a class="dropdown-item" href="settings"><i class="fa-solid fa-gear"></i> Settings Page</a></li>
+                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#incomingCallModal" href="#"><i class="fa-solid fa-gear"></i> Incoming call modal</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                                  </ul>
+                                </li>
+                                <li class="nav-item ms-5"><span  data-bs-dismiss="modal" aria-label="Close" class="cable modal-close-btn pt-1 border p-1 py-0 rounded-3"><i class="fa-light fa-xmark fa-2x"></i></span></li>
+                              </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="content-header container-fluid">
+            <div class="row g-2">
+                <div class="col-md-6">
+                    <div class="header-left">
+                        <div class="d-flex align-items-center">
+                            <div class="call-icon"><i class="fa-solid fa-phone"></i>
+
+                            </div>
+                            <div class="caller"><span>Live Call</span>
+
+                                <div class="caller-name"><span class="caller-name">Jimmy Miller</span>
+                                    <span class="caller-company">Vector Solution</span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 my-auto">
+                    <div class="header-right">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <div class="call-time"><i class="fa-solid fa-clock"></i>
+                                <span>1:50</span>
+
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown"
+                                        aria-expanded="false">SET DISPOSITION
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Another action</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Separated link</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body container-fluid">
+            <div class="header-navigation d-flex justify-content-between">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid px-0">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
+            
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav">
+                                <li class="nav-item"> <a class="nav-link dialer" [ngClass]="{'active': tabType == 'dialer'}" (click)="changeDialerTab('dialer')" aria-current="page">DIALER</a>
+                                </li>
+                                <li class="nav-item"> <a class="nav-link vitals" [ngClass]="{'active': tabType == 'vitals'}" (click)="changeDialerTab('vitals')" aria-current="page">VITALS</a>
+            
+                                </li>
+                                <li class="nav-item"> <a class="nav-link script" [ngClass]="{'active': tabType == 'script'}" (click)="changeDialerTab('script')" aria-current="page">SCRIPT</a></li>
+                                <li class="nav-item"> <a class="nav-link touchpoints" [ngClass]="{'active': tabType == 'touchpoints'}" (click)="changeDialerTab('touchpoints')" aria-current="page">Touchpoints</a></li>
+                                <!-- <li class="nav-item"> <a class="nav-link campaigns" [ngClass]="{'active': tabType == 'campaigns'}" (click)="changeDialerTab('campaigns')" aria-current="page">CAMPAIGNS</a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div class="right-navbar d-none">
+                    <div class="btn-group align-items-center">
+                        <label>Add to DNC</label>
+                        <button type="button" class="btn btn-default dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">Contact Record</button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Another action</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false">Connectors</button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Another action</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card border-0">
+                        <div class="card-body p-0">
+                            <div id="dialer" class="tabs-content-wrapper" [ngClass]="{'d-none': tabType != 'dialer'}">
+                                <div class="call-page">
+                                    <div class="row">
+                                       <div class="col-sm-12">
+                                          <div class="dialer-box">
+                                             <div class="icon-heading text-center">
+                                                <i class="fa-solid fa-phone-volume"></i>
+                                                <h1 >No active interactions</h1>
+                                             </div>
+                                             <div class="field-group-box">
+                                                <div class="row">
+                                                   <div class="col-sm-12 mb-3 mt-4">
+                                                      <div >
+                                                         <input list="datalistOptions" id="exampleDataList" placeholder="Type to search..." class="form-control">
+                                                         <datalist id="datalistOptions">
+                                                            <option value="1234567890"></option>
+                                                            <option value="9874567890"></option>
+                                                            <option value="1254567890"></option>
+                                                            <option value="1234567890"></option>
+                                                            <option value="1234567890"></option>
+                                                            <option value="8764567890"></option>
+                                                            <option value="6643567890"></option>
+                                                         </datalist>
+                                                      </div>
+                                                   </div>
+                                                   <div class="col-sm-4"><button data-bs-toggle="modal" data-bs-target="#selectContactModal" class="btn btn-outline-secondary"><i class="fa-solid fa-user-large"></i> Select Contact</button></div>
+                                                   <div class="col-sm-4">
+                                                      <div role="group" class="btn-group">
+                                                         <button type="button" data-bs-toggle="dropdown" aria-expanded="false" class="btn btn-outline-secondary dropdown-toggle"> AA_Real Estate </button>
+                                                         <ul class="dropdown-menu">
+                                                            <li ><a href="#" class="dropdown-item">Action</a></li>
+                                                            <li ><a href="#" class="dropdown-item">Another action</a></li>
+                                                            <li ><a href="#" class="dropdown-item">Something else here</a></li>
+                                                            <li >
+                                                               <hr class="dropdown-divider">
+                                                            </li>
+                                                            <li ><a href="#" class="dropdown-item">Separated link</a></li>
+                                                         </ul>
+                                                      </div>
+                                                   </div>
+                                                   <div class="col-sm-4"><button class="btn btn-primary"><i class="fa-solid fa-phone"></i> Dail</button></div>
+                                                   <div class="col-sm-12 text-center mt-5"><a href="#">View my activity</a></div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="vitals" class="tabs-content-wrapper" [ngClass]="{'d-none': tabType != 'vitals'}">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <form>
+                                            <div class="form-wrapper row">
+                                                <div class="mb-2 col-md-12">
+                                                    <label for="" class="form-label">Interactions Note</label>
+                                                    <textarea class="form-control" id="" rows="3"></textarea>
+                                                </div>
+                                                <div class="mb-2 col-md-6">
+                                                    <label for="" class="form-label">First Name</label>
+                                                    <input type="text" class="form-control" id="">
+                                                </div>
+                                                <div class="mb-2 col-md-6">
+                                                    <label for="" class="form-label">Last Name</label>
+                                                    <input type="text" class="form-control" id="">
+                                                </div>
+                                                <div class="mb-2 col-md-6">
+                                                    <label for="" class="form-label">Primary</label>
+                                                    <input type="tell" class="form-control" id="">
+                                                </div>
+                                                <div class="mb-2 col-md-6">
+                                                    <label for="" class="form-label">Company Name</label>
+                                                    <input type="text" class="form-control" id="">
+                                                </div>
+                                                <div class="mb-2 col-md-12">
+                                                    <label for="" class="form-label">Street Address</label>
+                                                    <input type="text" class="form-control" id="">
+                                                </div>
+                                                <div class="mb-2 col-md-4">
+                                                    <label for="" class="form-label">City</label>
+                                                    <input type="text" class="form-control" id="">
+                                                </div>
+                                                <div class="mb-2 col-md-4">
+                                                    <label for="" class="form-label">State</label>
+                                                    <input type="text" class="form-control" id="">
+                                                </div>
+                                                <div class="mb-2 col-md-4">
+                                                    <label for="" class="form-label">Zip</label>
+                                                    <input type="text" class="form-control" id="">
+                                                </div>
+                                            </div>
+                                            <div class="form-wrapper row">
+                                                <div class="col-sm-12 text-center py-3">
+                                                    <span (click)="vitalShowMore = !vitalShowMore" class="media-controls cable fw-bold">
+                                                        <span *ngIf="vitalShowMore">Hide Advance</span>
+                                                        <span *ngIf="!vitalShowMore">Show Advance</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-wrapper row" *ngIf="vitalShowMore">
+                                                <div class="mb-2 col-md-6">
+                                                    <label for="" class="form-label">Balance</label>
+                                                    <input type="tell" class="form-control" id="">
+                                                </div>
+                                                <div class="mb-2 col-md-6">
+                                                    <label for="" class="form-label">Product</label>
+                                                    <input type="text" class="form-control" id="">
+                                                </div>
+                                                <div class="mb-2 col-md-6">
+                                                    <label for="" class="form-label">Sales Force Id</label>
+                                                    <input type="tell" class="form-control" id="">
+                                                </div>
+                                                <div class="mb-2 col-md-6">
+                                                    <label for="" class="form-label">Thread Url</label>
+                                                    <input type="text" class="form-control" id="">
+                                                </div>
+                                                <div class="mb-2 col-md-6">
+                                                    <label for="" class="form-label">Last Contact</label>
+                                                    <input type="tell" class="form-control" id="">
+                                                </div>
+                                                <div class="mb-2 col-md-6">
+                                                    <label for="" class="form-label">Attempts</label>
+                                                    <input type="text" class="form-control" id="">
+                                                </div>
+                                                <div class="mb-2 col-md-6">
+                                                    <label for="" class="form-label">Dial Status</label>
+                                                    <input type="tell" class="form-control" id="">
+                                                </div>
+                                                <div class="mb-2 col-md-6">
+                                                    <label for="" class="form-label">Emai2</label>
+                                                    <input type="text" class="form-control" id="">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card shadow-sm h-100 border">
+                                            <div class="card-body p-0">
+                                                <ul class="tab-in-card nav nav-tabs app-bg border-end border-start" id="sidebarTab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link px-1 py-1 active" id="task-tab" data-bs-toggle="tab" data-bs-target="#task" type="button" role="tab" aria-controls="task" aria-selected="true"><span class="tab-header-icon"><i class="fa-light fa-list-check"></i></span>Tasks</button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link px-1 py-1" id="opportunities-tab" data-bs-toggle="tab" data-bs-target="#opportunities" type="button" role="tab" aria-controls="opportunities" aria-selected="false"><span class="tab-header-icon"><i class="fa-light fa-wand-magic-sparkles"></i></span>Opportunities</button>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content border-0" id="sidebarTabContent">
+                                                    <div class="tab-pane fade show active" id="task" role="tabpanel" aria-labelledby="task-tab">
+                                                        <div class="p-2">
+                                                            <div class="card shadow-sm taskcard mb-3 m-2">
+                                                                <div>
+                                                                    <div class="card-header ps-2 py-0 pe-0 d-flex align-items-center justify-content-between">
+                                                                        <div class="header-ls"><span class="card-title"><span class="card-header-icon me-2"><i class="fa-light fa-window"></i></span>Task</span><span class="badge badge-sm bg-primary text-white align-top ms-2">2</span></div>
+                                                                        <div class="header-rs d-flex">
+                                                                            <span (click)="activityEdit = !activityEdit" *ngIf="activityEdit" class="add-btn"><i class="fa-light fa-plus"></i></span>
+                                                                            <span (click)="activityEdit = !activityEdit" *ngIf="!activityEdit" class="add-btn"><i class="fa-regular fa-xmark"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-body p-0">
+                                                                        <div *ngIf="activityEdit" class="d-flex align-items-center justify-content-between p-2">
+                                                                            <div class="flex-shrink-0 d-flex align-items-center">
+                                                                                <div class="initial-square">TG</div>
+                                                                                <div class="flex-grow-1 ms-2">
+                                                                                    <b>Activity Item</b>
+                                                                                    <small class="d-block">11:22Am</small>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="flex-grow-1 ms-2 d-flex justify-content-end">
+                                                                                <div class="btn-group btn-group-sm me-1 hidden">
+                                                                                    <button type="button" class="btn btn-sm btn-outline-secondary"><i class="fa-light fa-edit"></i></button>
+                                                                                </div>
+                                                                                <div class="btn-group btn-group-sm">
+                                                                                    <button type="button" class="btn btn-sm btn-outline-secondary"><i class="fa-light fa-bell"></i></button>
+                                                                                    <button type="button" class="btn btn-sm btn-outline-secondary"><i class="fa-light fa-check"></i></button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="edit-task p-2" *ngIf="!activityEdit">
+                                                                            <div>
+                                                                                <div class="add-edit-task-wrp taskwrp">
+                                                                                    <div class="form-group task-group mb-2">
+                                                                                        <input  placeholder="Task title" class="form-control form-control-sm"/>
+                                                                                    </div>
+                                                                                    <div class="form-group task-group mb-2">
+                                                                                        <select  class="form-select form-select-sm">
+                                                                                            <option value="">-- select activity --</option>
+                                                                                            
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="form-group task-group mb-2">
+                                                                                        <div class="field-icon"><i class="fa-light fa-stopwatch"></i></div>
+                                                                                        <div class="row date-time-picker">
+                                                                                            <div class="col-sm-6">
+                                                                                                <mat-form-field floatLabel='never' appearance="outline">
+                                                                                                    <input matInput [ngxMatDatetimePicker]="pickerFrom" placeholder="Start time">
+                                                                                                    <mat-datepicker-toggle matSuffix [for]="$any(pickerFrom)"></mat-datepicker-toggle>
+                                                                                                    <ngx-mat-datetime-picker #pickerFrom [enableMeridian]="true"></ngx-mat-datetime-picker>
+                                                                                                </mat-form-field>
+                                                                                            </div>
+                                                                                            <!--                                                            <div class="col-sm-1 pt-2"><i class="fa-light fa-dash"></i></div>-->
+                                                                                            <div class="col-sm-6">
+                                                                                                <mat-form-field floatLabel='never' appearance="outline">
+                                                                                                    <input matInput [ngxMatDatetimePicker]="pickerTo" placeholder="End time">
+                                                                                                    <mat-datepicker-toggle matSuffix [for]="$any(pickerTo)"></mat-datepicker-toggle>
+                                                                                                    <ngx-mat-datetime-picker #pickerTo [enableMeridian]="true"></ngx-mat-datetime-picker>
+                                                                                                </mat-form-field>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div *ngIf="!isAddFields" class="form-group task-group mb-2 pt-2">
+                                                                                        <div class="field-icon"><i class="fa-solid fa-ellipsis"></i></div>
+                                                                                        <span (click)="isAddFields = !isAddFields">Add
+                                                                                            <span class="me-1 ms-1 cable link">guest</span>,
+                                                                                            <span class="me-1 cable link">location</span>,
+                                                                                            <span class="me-1 cable link">video call</span>,
+                                                                                            <span class="me-1 cable link">description</span>
+                                                                                        </span>
+                                                                                    </div>
+                                                                                    <div class="isAddFields" *ngIf="isAddFields">
+                                                                                        <div class="form-group task-group mb-2 pt-2">
+                                                                                            <div class="field-icon"><i class="fa-light fa-users"></i></div>
+                                                                                            <h4 *ngIf="!addGuest" (click)="addGuest = !addGuest" class="mb-0 link cable">Guest</h4>
+                                                                                            <tag-input [(ngModel)]="guestsArray"
+                                                                                                       [addOnBlur]="true"
+                                                                                                       [clearOnBlur]="true" placeholder="Add new email">
+                                                                                                <tag-input-dropdown [showDropdownIfEmpty]="true" [autocompleteItems]="guestsEmails"></tag-input-dropdown>
+                                                                                            </tag-input>
+                                                                                        </div>
+                                                                                        <div class="form-group task-group mb-2">
+                                                                                            <div class="field-icon"><i class="fa-light fa-location-dot"></i></div>
+                                                                                            <h4 *ngIf="!addLocation" (click)="addLocation = !addLocation" class="mb-0 link cable pt-1">Location</h4>
+                                                                                            <app-google-places *ngIf="addLocation" name="location" ngDefaultControl class="form-control form-control-sm" placeholder="Add Location" adressType="address"></app-google-places>
+                                                                                        </div>
+                                                                                        <div class="form-group task-group mb-2">
+                                                                                            <div class="field-icon"><i class="fa-light fa-video"></i></div>
+                                                                                            <select  class="form-select form-select-sm">
+                                                                                                <option value="">Install Video Call Integration</option>
+                                                                                                
+                                                                                            </select>
+                                                                                        </div>
+                                                                                        <div class="form-group task-group mb-2">
+                                                                                            <div class="field-icon"><i class="fa-light fa-bars"></i></div>
+                                                                                            <h4 *ngIf="!addDescription" (click)="addDescription = !addDescription" class="mb-0 link cable pt-1">Description</h4>
+                                                                                            <textarea *ngIf="addDescription"  class="form-control form-control-sm" placeholder="Add Description"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group task-group mb-2">
+                                                                                        <div class="field-icon"><i class="fa-light fa-copy"></i></div>
+                                                                                        <select class="form-select form-select-sm">
+                                                                                            <option value="">-- select owner status --</option>
+                                                                                            <option >Abc</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="form-group task-group mb-2">
+                                                                                        <div class="field-icon"><i class="fa-light fa-file"></i></div>
+                                                                                        <textarea  class="form-control form-control-sm w-100" placeholder="Enter your notes.."></textarea>
+                                                                                    </div>
+                                                                                    <div class="form-group task-group mb-2">
+                                                                                        <div class="field-icon"><i class="fa-light fa-circle-user"></i></div>
+                                                                                        <select  class="form-select form-select-sm">
+                                                                                            <option value="">-- select owner --</option>
+                                                                                            
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="form-group task-group mb-2 mat-normal-fields">
+                                                                                        <div class="field-icon"><i class="fa-light fa-link-simple"></i></div>
+                                                                                        <mat-form-field floatLabel="never" appearance="outline">
+                                                                                            <input type="text"
+                                                                                                   matInput
+                                                                                                   class="no-blue-input"
+                                                                                                   [matAutocomplete]="auto"
+                                                                                                   placeholder="Deal, Lead, Project">
+                                                                                            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                                                                                <mat-option
+                                                                                                            name="option.title">
+                                                                                                    abc
+                                                                                                </mat-option>
+                                                                                            </mat-autocomplete>
+                                                                                        </mat-form-field>
+                                                                                    </div>
+                                                                                    <div class="form-group task-group mb-2 mat-normal-fields">
+                                                                                        <mat-form-field floatLabel="never" appearance="outline">
+                                                                                            <input type="text"
+                                                                                                   matInput
+                                                                                                   [matAutocomplete]="searchPeople"
+                                                                                                   class="no-blue-input"
+                                                                                                   placeholder="People">
+                                                                                            <mat-autocomplete autoActiveFirstOption #searchPeople="matAutocomplete">
+                                                                                                <mat-option >
+                                                                                                    abc
+                                                                                                </mat-option>
+                                                                                            </mat-autocomplete>
+                                                                                        </mat-form-field>
+                                                                                    </div>
+                                                                                    <div class="form-group task-group mb-2">
+                                                                                        <input  placeholder="Organization" class="form-control form-control-sm"/>
+                                                                                    </div>
+                                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                                        <span  class="remove-task cable"><i class="fa-light fa-trash"></i></span>
+                                                                                        <div>
+                                                                                            <button  class="btn btn-sm btn-outlined-secondary me-2">Cancel</button>
+                                                                                            <button  class="btn btn-sm btn-primary">Save</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade show" id="opportunities" role="tabpanel" aria-labelledby="opportunities-tab">
+                                                        <div class="p-2">
+                                                            <div class="card shadow-sm taskcard mb-3 m-2">
+                                                                <div>
+                                                                    <div class="card-header ps-2 py-0 pe-0 d-flex align-items-center justify-content-between">
+                                                                        <div class="header-ls"><span class="card-title"><span class="card-header-icon me-2"><i class="fa-light fa-window"></i></span>Opportunities</span><span class="badge badge-sm bg-primary text-white align-top ms-2">2</span></div>
+                                                                        <div class="header-rs d-flex">
+                                                                            <span (click)="opportunitiesEdit = !opportunitiesEdit" *ngIf="opportunitiesEdit" class="add-btn"><i class="fa-light fa-plus"></i></span>
+                                                                            <span (click)="opportunitiesEdit = !opportunitiesEdit" *ngIf="!opportunitiesEdit" class="add-btn"><i class="fa-regular fa-xmark"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-body p-0">
+                                                                        <div class="d-flex align-items-center justify-content-between p-2" *ngIf="opportunitiesEdit">
+                                                                            <div class="flex-shrink-0 d-flex align-items-center ">
+                                                                                <div class="initial-square bg-danger">TG</div>
+                                                                                <div class="flex-grow-1 ms-2">
+                                                                                    <b>$200</b>
+                                                                                    <small class="d-block">50% on 12-8-22</small>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="flex-grow-1 ms-2 d-flex justify-content-end">
+                                                                                <div class="btn-group btn-group-sm">
+                                                                                    <button type="button" class="btn btn-sm btn-outline-secondary"><i class="fa-light fa-edit"></i></button>
+                                                                                    <div class="dropdown end-radius">
+                                                                                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
+                                                                                        <div class="dropdown-menu p-0 style-less">
+                                                                                            <ul class="list-group list-group-flush list-group-sm">
+                                                                                                <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="edit-task p-2" *ngIf="!opportunitiesEdit">
+                                                                            <div>
+                                                                                <div class="add-opportunity-wrp">
+                                                                                    <div class="row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group mb-2">
+                                                                                                <label>Deal title</label>
+                                                                                                <input  class="form-control form-control-sm"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group mb-2">
+                                                                                                <label for="">Stage</label>
+                                                                                                <select  class="form-select form-select-sm">
+                                                                                                    <option value="">-- select stage --</option>
+                                                                                                    <option >Abc</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group mb-2">
+                                                                                        <label>Company</label>
+                                                                                        <input class="form-control form-control-sm" />
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group mb-2">
+                                                                                                <label for="">Contact</label>
+                                                                                                <select  class="form-select form-select-sm">
+                                                                                                    <option value="1">Tim</option>
+                                                                                                    <option value="2">Weston</option>
+                                                                                                    <option value="3">Umar</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group mb-2">
+                                                                                                <label>Title</label>
+                                                                                                <input class="form-control form-control-sm"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group mb-2">
+                                                                                                <label for="">Estimated close date</label>
+                                                                                                <mat-form-field floatLabel='never' appearance="outline">
+                                                                                                    <input matInput [ngxMatDatetimePicker]="pickerFrom" >
+                                                                                                    <mat-datepicker-toggle matSuffix [for]="$any(pickerFrom)"></mat-datepicker-toggle>
+                                                                                                    <ngx-mat-datetime-picker #pickerFrom [enableMeridian]="true"></ngx-mat-datetime-picker>
+                                                                                                </mat-form-field>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group mb-2">
+                                                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                                                    <label>Confidence</label>
+                                                                                                    <span><b>20%</b></span>
+                                                                                                </div>
+                                                                                                <mat-slider  tickInterval="1" step="1" min="0" max="100" aria-label="units"></mat-slider>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group mb-2">
+                                                                                                <label>Pipeline</label>
+                                                                                                <select  class="form-select form-select-sm">
+                                                                                                    <option>abc</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group mb-2">
+                                                                                                <label for="">Pipeline Status</label>
+                                                                                                <select  class="form-select form-select-sm">
+                                                                                                    <option>abc</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group mb-2">
+                                                                                                <label for="">Deal Value ($)</label>
+                                                                                                <input type="number" class="form-control form-control-sm">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group mb-2">
+                                                                                                <label for="">Frequency</label>
+                                                                                                <select  class="form-select form-select-sm">
+                                                                                                    <option value="One time">One time</option>
+                                                                                                    <option value="Monthly">Monthly</option>
+                                                                                                    <option value="Annual">Annual</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group mb-2">
+                                                                                        <label>Phone</label>
+                                                                                        <input class="form-control form-control-sm" />
+                                                                                    </div>
+                                                                                    <div class="form-group mb-2">
+                                                                                        <label>Email</label>
+                                                                                        <input class="form-control form-control-sm" />
+                                                                                    </div>
+                                                                                    <div class="form-group mb-2">
+                                                                                        <label for="">Owner</label>
+                                                                                        <select  class="form-select form-select-sm">
+                                                                                            <option value="1">Tim</option>
+                                                                                            <option value="2">Weston</option>
+                                                                                            <option value="3">Umar</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="form-group mb-2">
+                                                                                        <div class="d-flex justify-content-between align-items-center">
+                                                                                            <span  class="remove-task cable cable"><i class="fa-light fa-trash"></i></span>
+                                                                                            <div>
+                                                                                                <button  class="btn btn-sm btn-outlined-secondary me-2">Cancel</button>
+                                                                                                <button  class="btn btn-sm btn-primary">Update</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                    
+                                                <div class="card calendar-card m-2 shadow-sm">
+                                                    <div class="card-header border-end">
+                                                        <h4 class="mb-0">Calendar</h4>
+                                                    </div>
+                                                    <div calss="card-body">
+                                                        <ejs-schedule width='100%' height='350px'></ejs-schedule>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="script" class="tabs-content-wrapper" [ngClass]="{'d-none': tabType != 'script'}">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <form>
+                                            <div class="form-wrapper row">
+                                                <div class="mb-2 col-md-12">
+                                                    <label for="" class="form-label">Script Title</label>
+                                                    <input type="text" class="form-control" id="">
+                                                </div>
+                                                <div class="mb-2 col-md-12">
+                                                    <label for="" class="form-label">Script Body</label>
+                                                    <textarea class="form-control" id="" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card shadow-sm h-100 border">
+                                            <div class="card-body pt-2 px-2">
+                                                <div class="accordion" id="accordionExample">
+                                                    <div class="accordion-item border-0">
+                                                        <h2 class="accordion-header" id="headingOne">
+                                                            <button class="accordion-button pb-1 pt-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                <div class="d-flex justify-content-between w-100">
+                                                                    <div>History</div>
+                                                                    <div><a href="#">Show All (1)</a></div>
+                                                                </div>
+                                    
+                                                            </button>
+                                                        </h2>
+                                                        <div id="collapseOne" class="accordion-collapse collapse show border-0"
+                                                            aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                            <div class="accordion-body p-0 border-0">
+                                                                <ul class="list-group border-0">
+                                                                    <li class="list-group-item">Call: <span class="item-heading">Appointment Confirmed</span>
+                                                                        <small>Tue 05/21/2022 1:49pm, Aron Happer</small>
+                                    
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="products" class="tabs-content-wrapper" [ngClass]="{'d-none': tabType != 'touchpoints'}">
+                                <div class="form-wrapper">
+                                    Touchpoints content area
+                                </div>
+                            </div>
+                            <div id="campaigns" class="tabs-content-wrapper" [ngClass]="{'d-none': tabType != 'campaigns'}">
+                                <form>
+                                    <div class="form-wrapper row">
+                                        <div class="mb-2 col-md-12">
+                                            <label for="" class="form-label">Campaign Title</label>
+                                            <input type="text" class="form-control" id="">
+                                        </div>
+                                        <div class="mb-2 col-md-12">
+                                            <label for="" class="form-label">Campaign Description</label>
+                                            <textarea class="form-control" id="" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

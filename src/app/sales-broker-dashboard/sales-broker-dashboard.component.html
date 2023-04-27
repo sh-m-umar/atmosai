@@ -1,0 +1,384 @@
+<div class="page-header">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="header-lhs d-flex align-items-center">
+            <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                Dashboard
+            </h4>
+            <span class="ms-2 me-2"><i class="fa-thin fa-circle-info"></i></span>
+            <span class="favorite"><i class="fa-thin fa-star"></i></span>
+        </div>
+        <div class="header-rhs d-flex align-items-center">
+            <div class="header-rhs-inner d-flex align-items-center">
+                <div class="header-rhs-language">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa-light fa-globe"></i> EN
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">English</a>
+                            <a class="dropdown-item" href="#">French</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-rhs-moon">
+                    <i class="fa-light fa-moon"></i>
+                </div>
+                <div class="header-rhs-person">
+                    <i class="fa-light fa-user-gear"></i>
+                </div>
+                <div class="header-rhs-owner d-flex align-items-center">
+                    <div class="user-picture initials ng-star-inserted"> BO</div>
+                    <div class="info-container">
+                        <div class="user-name ng-star-inserted">Business Owner</div>
+                        <div class="user-title ng-star-inserted">owner@example.com</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-heading-description w-50" contenteditable="true">Dashboard details
+        <i class="fa-solid fa-ellipsis"></i>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-8">
+        <div class="row">
+            <div cdkDrag class="col-12 mb-3">
+                <div class="marketplace-banner" style="background: url('./assets/img/hero-marketplace.jpeg');"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 mb-3">
+        <div class="card broker-left-content">
+            <div class="card-body">
+                <div class="d-flex flex-row">
+                    <div class="card-text">
+                        <h6>November 208 Commission</h6>
+                        <div class="management-card-para">
+                            <p class="management-card-para-inner">$552.63*</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <hr class="solid">
+                </div>
+                <div class="d-flex justify-content-between mt-3 retail-group-content">
+                    <div class="d-flex justify-content-between retail-downline">
+                        <p>Retail</p>
+                        <label class="retail-contant">2546,45</label>
+                    </div>
+                    <div class="d-flex justify-content-between group-downline">
+                        <p>Group</p>
+                        <label class="retail-contant">2546,45</label>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mt-3 retail-group-content">
+                    <div class="d-flex justify-content-between retail-downline">
+                        <p>Downline Retail</p>
+                        <label class="retail-contant">2546,45</label>
+                    </div>
+                    <div class="d-flex justify-content-between group-downline">
+                        <p>Downline Group</p>
+                        <label class="retail-contant">2546,45</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-8">
+        <div class="row">
+            <div cdkDrag class="col-6 mb-3">
+                <div class="card success">
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <div class="card-icon card-icon-width bg-success text-white"><p class="ms-2 me-2">1234</p></div>
+                            <div class="mt-1 ms-3 card-text">
+                                <h6 class="table-left-content-h">Total Active <span class="table-left-content ms-2">8374 ACTIVE MEMBERS + DEPENDANTS</span></h6>
+                                <small class="text-muted">(Primary only)</small>
+                            </div>
+                        </div>
+                        <div class="progress mt-3">
+                            <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': 90+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="mt-3">
+                    <span class="text-danger">
+                        <div icon="arrow-upward-outline" class="card-icon-growth"><i class="fa-light fa-arrow-up"></i></div>
+                        90%
+                    </span>
+                            Since Last Month
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div cdkDrag class="col-6 mb-3">
+                <div class="card info">
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <div class="card-icon bg-info text-white"><p class="ms-2 me-2">1234</p></div>
+                            <div class="mt-1 ms-3 card-text">
+                                <h6 class="table-left-content-h">October<span class="table-left-content ms-2">2022 revenue increase/decrease</span></h6>
+                                <small class="text-muted">11 This Month</small>
+                            </div>
+                        </div>
+                        <div class="progress mt-3">
+                            <div class="progress-bar bg-info" role="progressbar" [ngStyle]="{'width': 30+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="mt-3">
+                    <span class="text-danger">
+                        <div icon="arrow-upward-outline" class="card-icon-growth"><i class="fa-light fa-arrow-up"></i></div>
+                        90%
+                    </span>
+                            Since Last Month
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div cdkDrag class="col-6 mb-3">
+                <div class="card groups-color">
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <div class="card-icon bg-success text-white"><p class="ms-2 me-2">1234</p></div>
+                            <div class="mt-1 ms-3 card-text">
+                                <h6>Your Groups</h6>
+                                <small class="text-muted">(Does not include retail groups)</small>
+                            </div>
+                        </div>
+                        <div class="progress mt-3">
+                            <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': 90+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="mt-3 profit-detail">
+                    <span class="text-danger">
+                        <div icon="arrow-upward-outline" class="card-icon-growth"><i class="fa-light fa-arrow-up"></i></div>
+                        90%
+                    </span>
+                            Since Last Month
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div cdkDrag class="col-6 mb-3">
+                <div class="card warning bg-sent-emails">
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <div class="card-icon card-icon-width bg-warning bg-sent-emails text-white">
+                                <p class="ms-2 me-2">$123,456.00</p>
+                            </div>
+                            <div class="mt-1 ms-3 card-text">
+                                <h6 class="table-left-content-h">October<span class="table-left-content ms-2">2022 revenue</span></h6>
+                                <small class="text-muted">(Primary only)</small>
+                            </div>
+                        </div>
+                        <div class="progress mt-3">
+                            <div class="progress-bar bg-warning bg-sent-emails" role="progressbar" [ngStyle]="{'width': 60+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="mt-3 profit-detail">
+                    <span class="text-danger">
+                        <div icon="arrow-upward-outline" class="card-icon-growth"><i class="fa-light fa-arrow-up"></i></div>
+                        90%
+                    </span>
+                            Since Last Month
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 mb-3">
+        <div class="card">
+            <div class="card-header enrollments-header d-flex align-items-center justify-content-between">Enrollments - Last 12 months
+                <button class="btn btn-sm btn-primary">View All</button>
+            </div>
+            <div class="card-body">
+                <div echarts [options]="chartOption4" class="" style="height: 248px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div cdkDropList class="row services-card main">
+    <div cdkDrag class="col-4 mb-3">
+        <div class="card retail-management">
+            <div class="card-body">
+                <div class="d-flex flex-row">
+                    <div class="mt-1 ms-3 card-text">
+                        <h6>Retail Management</h6>
+                        <div class="management-card-para">
+                            <p class="management-card-para-inner">In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex mt-3">
+                    <button class="btn btn-sm btn-primary me-2">Add New Group</button>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="dropdown" aria-expanded="false">Manage<i class="fa-light fa-angle-down ms-2"></i></button>
+                        <div class="dropdown-menu p-0 style-less">
+                            <ul class="list-group list-group-flush list-group-sm">
+                                <li class="list-group-item">option 1</li>
+                                <li class="list-group-item">option 2</li>
+                                <li class="list-group-item">option 3</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div cdkDrag class="col-4 mb-3">
+        <div class="card sec-group-management">
+            <div class="card-body">
+                <div class="d-flex flex-row">
+                    <div class="mt-1 ms-3 card-text">
+                        <h6>Group Management</h6>
+                        <div class="management-card-para">
+                            <p class="management-card-para-inner">In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex mt-3">
+                    <button class="btn btn-sm btn-primary me-2">Add New Group</button>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="dropdown" aria-expanded="false">Manage<i class="fa-light fa-angle-down ms-2"></i></button>
+                        <div class="dropdown-menu p-0 style-less">
+                            <ul class="list-group list-group-flush list-group-sm">
+                                <li class="list-group-item">FirstCall Telemedicine (MTMALH01)</li>
+                                <li class="list-group-item">FirstCall Telemedicine Groups (MTMALH02)</li>
+                                <li class="list-group-item">FirstCall Telavet (MTMFITCT01)</li>
+                                <li class="list-group-item">FirstCall Telemedicine + Telavet (MTMFILTT01)</li>
+                                <li class="list-group-item">MNF First Call Telemed (MTMMNFFCT01)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div cdkDrag class="col-4 mb-3">
+        <div class="card broker-management">
+            <div class="card-body">
+                <div class="d-flex flex-row">
+                    <div class="mt-1 ms-3 card-text">
+                        <h6>Broker Signup</h6>
+                        <div class="management-card-para">
+                            <p class="management-card-para-inner">In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <button class="btn btn-sm btn-primary">Broker Management</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div cdkDropList class="row services-card main">
+    <div cdkDrag class="col-4 mb-3">
+        <div class="card commission-report">
+            <div class="card-body">
+                <div class="brokers-reports"><i class="fa-light fa-chart-area me-2"></i>Retail Cpmmission Report</div>
+            </div>
+        </div>
+    </div>
+    <div cdkDrag class="col-4 mb-3">
+        <div class="card commission-report">
+            <div class="card-body">
+                <div class="brokers-reports"><i class="fa-light fa-chart-area me-2"></i>Group Cpmmission Report</div>
+            </div>
+        </div>
+    </div>
+    <div cdkDrag class="col-4 mb-3">
+        <div class="card commission-report">
+            <div class="card-body">
+                <div class="brokers-reports"><i class="fa-light fa-chart-area me-2"></i>Downline Cpmmission Report</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="sales-portal-logos-section">
+    <div class="card footer-border-top">
+        <div class="card-body sales-portal-logos-section-inner">
+            <div class="row">
+                <div class="col-6 logo-col">
+                    <div class="company-logo-field">
+                        <label class="iqe-logo">
+                            <div>
+                                LOGO
+                            </div>
+                            <input type="file">
+                        </label>
+                        <div class="form-group mb-3">
+                            <P class="mt-2">Telephone access Hotline</P>
+                            <input type="text" placeholder="Telephone" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" placeholder="Copyright Box" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="third-party-logos">
+                        <label class="iqe-logo">
+                            <div><i class="fa-light fa-plus"></i></div>
+                            <input type="file">
+                        </label>
+                        <label class="ms-2 iqe-logo">
+                            <div><i class="fa-light fa-plus"></i></div>
+                            <input type="file">
+                        </label>
+                        <label class="ms-2 iqe-logo">
+                            <div><i class="fa-light fa-plus"></i></div>
+                            <input type="file">
+                        </label>
+                        <label class="ms-2 iqe-logo">
+                            <div><i class="fa-light fa-plus"></i></div>
+                            <input type="file">
+                        </label>
+                    </div>
+                </div>
+                <div class="col-3 legal-col">
+                    <div class="legal-inner">
+                        <p>Legal:</p>
+                    </div>
+                    <div class="mb-4">
+                        <hr class="solid">
+                    </div>
+                    <div class="legal-upload mb-2">
+                        <label class="ms-2 iqe-logo">
+                            <div><i class="fa-light fa-arrow-up-from-bracket me-2"></i>Terms of use</div>
+                            <input type="file">
+                        </label>
+                    </div>
+                    <div class="legal-upload mb-2">
+                        <label class="ms-2 iqe-logo">
+                            <div><i class="fa-light fa-arrow-up-from-bracket me-2"></i>Privacy Policy and HIPAA Privacy Practices</div>
+                            <input type="file">
+                        </label>
+                    </div>
+                    <div class="legal-upload mb-2">
+                        <label class="ms-2 iqe-logo">
+                            <div><i class="fa-light fa-arrow-up-from-bracket me-2"></i>Informed Patient Consent</div>
+                            <input type="file">
+                        </label>
+                    </div>
+                </div>
+                <div class="col-3 tools-col">
+                    <div class="legal-inner">
+                        <p>Tools:</p>
+                    </div>
+                    <div class="mb-4">
+                        <hr class="solid">
+                    </div>
+                    <div class="mb-2">
+                        <div class="mb-2">Test Your Video Capabilities</div>
+                        <div class="mb-2">Notification Settings</div>
+                        <div class="mb-2">Sign Out</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

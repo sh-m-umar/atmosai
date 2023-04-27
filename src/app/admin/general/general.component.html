@@ -1,0 +1,692 @@
+<div class="admin-page-wrapper">
+    <div class="page-header">
+        <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+            <div class="header-lhs d-flex align-items-center">
+                <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                    <span>Profile</span>
+                </h4>
+                <span class="ms-2 me-2"  mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+                <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+            </div>
+            <div class="header-rhs d-flex align-items-center">
+                <div class="button-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary borderless dropdown-toggle-split" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Console log</a></li>
+                        <li><a class="dropdown-item">Clear local cache only</a></li>
+                        <li><a class="dropdown-item">Clear cache and database both</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">
+            <span>This is description</span>
+            <i class="fa-solid fa-ellipsis"></i>
+        </div>
+        <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+                <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">Profile</h5>
+                <ul class="tabslink nav boards-top-menu-style" id="nav-tab" role="tablist">
+                    <li class="nav-item" [ngClass]="{'active':activeTab===1}" (click)="urlChange('profile')">
+                            <div class="boards-top-menu-style-first" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="true" ><i class="fa-thin fa-home"></i> Profile</div>
+                            <div class="boards-top-menu-style-third">
+                                <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                                <div class="dropdown-menu p-0 style-less">
+                                    <ul class="list-group list-group-flush list-group-sm">
+                                        <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                        <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                        <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                        <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                    </li>
+                    <li class="nav-item" [ngClass]="{'active':activeTab===2}" (click)="urlChange('account')">
+                        <div class="boards-top-menu-style-first" id="nav-account-tab" data-bs-toggle="tab" data-bs-target="#nav-account" type="button" role="tab" aria-controls="nav-account" aria-selected="false" ><i class="fa-thin fa-home"></i> Account</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" [ngClass]="{'active':activeTab===3}" (click)="urlChange('tax')">
+                        <div class="boards-top-menu-style-first" id="nav-tax-tab" data-bs-toggle="tab" data-bs-target="#nav-tax" type="button" role="tab" aria-controls="nav-tax" aria-selected="false" ><i class="fa-thin fa-home"></i> Tax</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" [ngClass]="{'active':activeTab===4}" (click)="urlChange('connected-account')">
+                        <div class="boards-top-menu-style-first" id="nav-connected-account-tab" data-bs-toggle="tab" data-bs-target="#nav-connected-account" type="button" role="tab" aria-controls="nav-connected-account" aria-selected="false" ><i class="fa-thin fa-home"></i> Connected Accounts</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" [ngClass]="{'active':activeTab===5}" (click)="urlChange('location')">
+                        <div class="boards-top-menu-style-first" id="nav-location-tab" data-bs-toggle="tab" data-bs-target="#nav-location" type="button" role="tab" aria-controls="nav-location" aria-selected="false" ><i class="fa-thin fa-home"></i> Location</div>
+                        <div class="boards-top-menu-style-third">
+                            <span class="dropdwon-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></span>
+                            <div class="dropdown-menu p-0 style-less">
+                                <ul class="list-group list-group-flush list-group-sm">
+                                    <li class="list-group-item"><i class="fa-light fa-star"></i><span class="ms-2">Add to my favorites</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-pencil"></i><span class="ms-2">Rename</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-trash"></i><span class="ms-2">Delete</span></li>
+                                    <li class="list-group-item"><i class="fa-light fa-home"></i><span class="ms-2">Set as board default</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                    <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-thin fa-plus"></i>
+                    </button>
+                    <div class="dropdown-menu p-0 style-less">
+                        <ul class="list-group list-group-flush list-group-sm">
+                            <li class="list-group-item">
+                                <div class="ls" data-bs-toggle="modal" data-bs-target="#viewcenter" >
+                                    <i class="fa-light fa fa-home"></i>
+                                    <span class="ms-2">Apps</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex align-items-centere">
+                <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2" style="margin-top: -5px;">
+                    <div class="button-group outlined borderless">
+                        <button type="button" class="btn collapsed btn-outline-secondary"><i
+                                class="fa-thin fa-envelope"></i> Bulk Emails
+                        </button>
+                        <button type="button"
+                                class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <div class="button-group ms-2">
+                        <button type="button" class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div (click)="headerToggle()" class="header-collapse-btn"><i class="fa-thin fa-angle-{{anglePos}}"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="admin-page-content-wrapper">
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h3>Login Details</h3>
+                        <div class="form-group mb-3 mt-3" *ngIf="!inpLoading">
+                            <label for="">Account Name</label>
+                            <mat-form-field appearance="outline" floatLabel="never">
+                                <input matInput placeholder="Account Name" [(ngModel)]="accountModel.account_name" (input)="saveProfChangeBtnValid(accountModel)">
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group mb-3" *ngIf="!inpLoading">
+                            <label for="">Account URL (Web Address)</label>
+                            <div class="d-flex align-items-center">
+                                <mat-form-field appearance="outline" floatLabel="never">
+                                    <input matInput #url placeholder="team name" [(ngModel)]="accountModel.account_url" (input)="saveProfChangeBtnValid(accountModel)">
+                                </mat-form-field>
+                                <span class="ms-1">.atmosai.io</span>
+                            </div>
+                        </div>
+                        <div class='loader-container mt-auto h-10' *ngIf="inpLoading">
+                            <div class='loader'>
+                                <div class='loader--dot'></div>
+                                <div class='loader--dot'></div>
+                                <div class='loader--dot'></div>
+                                <div class='loader--dot'></div>
+                                <div class='loader--dot'></div>
+                                <div class='loader--dot'></div>
+                            </div>
+                        </div>
+                        <div class="mb-4 infonote d-flex align-items-center p-4 bg-primary text-white rounded-3">
+                            <span class="me-2"><i class="fa-light fa-circle-info"></i></span>
+                            <p class="mb-0">When you change your account's URL, we'll redirect from the old one for 30 days.</p>
+                        </div>
+                        <div class="rasidency mb-3">
+                            <label for="">Data residency</label>
+                            <div class="d-flex align-items-center">
+                                <span>USA</span>
+                                <span class="flag ms-2 me-2"><img src="./assets/img/flags/us.svg" style="width:25px;"></span>
+                                <span><i class="fa-light fa-circle-info"></i></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-5">
+                            <button class="btn-sm btn btn-outline-secondary">Documantation <i class="fa-light fa-arrow-up-right-from-square ms-2"></i></button>
+                            <button class="btn-sm btn btn-primary" (click)="updateProfOptions(accountModel)" [disabled]="saveProfBtnDisableChk">{{!profSaveBtnLoad ? 'Save Changes':'Loading...'}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-account" role="tabpanel" aria-labelledby="nav-account-tab">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group mt-4 mb-3">
+                            <label for="">First Day Of The Week</label>
+                            <small class="d-block mb-2 mt-1">Change the first day of the week in the all date related places in the system (date picker, timeline, etc..)</small>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="firstDayOfWeek" id="flexRadioDefault1" [value]="'sun'" [(ngModel)]="accountModel.first_day_of_week" [checked]="accountModel.first_day_of_week === 'sun'" (change)="saveAcctChangeBtnValid(accountModel)">
+                                <label class="form-check-label" for="flexRadioDefault1">Sunday</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="firstDayOfWeek" id="flexRadioDefault2" [value]="'mon'" [(ngModel)]="accountModel.first_day_of_week" [checked]="accountModel.first_day_of_week === 'mon'" (change)="saveAcctChangeBtnValid(accountModel)">
+                                <label class="form-check-label" for="flexRadioDefault2">Monday</label>
+                            </div>
+                        </div>
+                        <div class="form-group mt-4 mb-3">
+                            <label for="">Timeline Weekends</label>
+                            <small class="d-block mb-2 mt-1">Decide whether or not to present weekends on the timeline. This will set the default presentation mode, and users may change it from each timeline view or widget.</small>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="timelineWeekends" id="show" [value]="'show'" [(ngModel)]="accountModel.timelin_weekend_show" [checked]="accountModel.timelin_weekend_show === 'show'" (change)="saveAcctChangeBtnValid(accountModel)">
+                                <label class="form-check-label" for="show">Show Weekend</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="timelineWeekends" id="hide" [value]="'hide'" [(ngModel)]="accountModel.timelin_weekend_show" [checked]="accountModel.timelin_weekend_show === 'hide'" (change)="saveAcctChangeBtnValid(accountModel)">
+                                <label class="form-check-label" for="hide">Hide Weekend</label>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button class="btn btn-sm btn-primary" (click)="updateAccOptions(accountModel)" [disabled]="saveAccBtnDisableChk">{{!accSaveBtnLoad ? 'Save changes':'Loading...'}}</button>
+                        </div>
+                        <hr class="my-3">
+                        <h3>Export account data</h3>
+                        <label for="">Export your whole account in a zip file (.zip)</label>
+                        <small class="d-block mb-2 mt-1">All of the account’s boards (including Shareable and Private boards) will be packed into a ZIP file with any files you might have in those boards.</small>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [(ngModel)]="excludeFiles">
+                            <label class="form-check-label" for="flexCheckChecked">Exclude files attached to board columns & updates for a faster export</label>
+                        </div>
+                        <div class="mt-3">
+                            <button class="btn btn-sm btn-primary me-3">Export <i class="fa-light fa-arrow-up-right-from-square ms-2"></i></button>
+                            <span class="cable link">Learn more</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-tax" role="tabpanel" aria-labelledby="nav-tax-tab">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="me-4">By using the tax rate feature you can add different tax rates for different Products, States, Countries etc. You can add as many tax rates as possible to automate your products and services tax rates.</h3>
+                                <button (click)="addNewTax()" class="btn btn-sm btn-primary modal-close-btn"><i class="fa-light fa-plus"></i></button>
+                                <ng-container *ngFor="let tax of taxes; let i = index">
+                                  <div class="row tax-item mb-3 align-items-end">
+                                      <div class="col-sm-7">
+                                          <div class="form-group">
+                                              <label for="">Name</label>
+                                              <input type="text" class="form-control form-control-sm" [(ngModel)]="taxes[i].name">
+                                          </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                          <div class="form-group">
+                                              <label for="">Tax Rate</label>
+                                              <input type="text" class="form-control form-control-sm" [(ngModel)]="taxes[i].tax">
+                                          </div>
+                                      </div>
+                                      <div class="col-sm-1">
+                                          <button (click)="removeTax(i)" *ngIf="i != 0" class="btn btn-sm btn-primary"><i class="fa-light fa-xmark"></i></button>
+                                      </div>
+                                  </div>
+                                </ng-container>
+                                  <div class="text-end mt-4">
+                                    <button class="btn btn-sm btn-primary" *ngIf="!taxBtnLoad" (click)="updateTaxOptions()">Save</button>
+                                    <button class="btn btn-sm btn-primary" *ngIf="taxBtnLoad"><i class="fa fa-spinner fa-spin"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-connected-account" role="tabpanel" aria-labelledby="nav-connected-account-tab">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3 d-flex align-item-center justify-content-between">
+                            <h3 class="mb-0">Connected Accounts</h3>
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#newConnectModal">+ Add new</button>
+                        </div>
+                        <div class="account-item mb-3 card shadow-sm">
+                        <div class="d-flex p-3 align-items-center justify-content-between border rounded-3">
+                            <div class="flex-shrink-0 w-75">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                <span class="mr-2 icon-side">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><title>Google Logo</title><path fill="#FBBC05" d="M1.7332228,11.1016467 C1.26344973,10.1681053 1,9.11559925 1,7.99999693 C1,6.88439737 1.26344926,5.83189299 1.73322154,4.89835236 L4.14245254,6.6986377 C4.00456633,7.10756746 3.93,7.54501903 3.93,7.99999693 C3.93,8.45506225 4.00452948,8.89253076 4.14235033,9.30143867 L1.7332228,11.1016467 Z"></path><path fill="#EA4335" d="M1.73322154,4.89835236 C2.89813489,2.58341388 5.33175182,0.999993873 8.163,0.999993873 C9.89559217,0.998403709 11.571067,1.61947572 12.884,2.75 L10.8,4.786 C10.0519509,4.18678258 9.12145318,3.86144361 8.163,3.864 C6.28470726,3.864 4.69857585,5.04934028 4.14245254,6.6986377 L1.73322154,4.89835236 L1.73322154,4.89835236 Z"></path><path fill="#34A853" d="M12.8317605,13.2564819 C11.579762,14.3942467 9.91005861,14.9999969 8.163,14.9999969 C5.33092793,14.9999969 2.89671856,13.4156614 1.7322049,11.0996231 L4.14029997,9.29533929 C4.69447358,10.9482355 6.28227802,12.136 8.163,12.136 C9.08326996,12.136 9.89875668,11.9242863 10.5445884,11.5261311 L12.8317605,13.2564819 L12.8317605,13.2564819 Z"></path><path fill="#4285F4" d="M12.8317946,13.2564509 L10.5446597,11.5260871 C11.2925349,11.0649973 11.8128957,10.3538862 12.005,9.432 L8.163,9.432 L8.163,6.727 L14.837,6.727 C14.935,7.14 15,7.586 15,7.99999693 C15,10.2815228 14.1460368,12.0621042 12.8317946,13.2564509 L12.8317946,13.2564509 Z"></path></svg>
+                                </span>
+                                </div>
+                                <h2 class="mb-0">Google</h2>
+                            </div>
+                            </div>
+                            <div class="flex-grow-1 d-flex justify-content-end">
+                            <button class="btn btn-sm btn-outline-secondary me-2" data-bs-toggle="modal" data-bs-target="#deleteConnectModal"><i class="fa-light fa-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-secondary "><i class="fa-light fa-trash"></i></button>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="account-item mb-3 card shadow-sm">
+                            <div class="d-flex p-3 align-items-center justify-content-between border rounded-3">
+                                <div class="flex-shrink-0 w-75">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-3">
+                                    <span class="mr-2 icon-side">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23"><path fill="#f3f3f3" d="M0 0h23v23H0z"></path><path fill="#f35325" d="M1 1h10v10H1z"></path><path fill="#81bc06" d="M12 1h10v10H12z"></path><path fill="#05a6f0" d="M1 12h10v10H1z"></path><path fill="#ffba08" d="M12 12h10v10H12z"></path></svg>
+                                    </span>
+                                    </div>
+                                    <h2 class="mb-0">Microsoft</h2>
+                                </div>
+                                </div>
+                                <div class="flex-grow-1 d-flex justify-content-end">
+                                <button class="btn btn-sm btn-outline-secondary me-2" data-bs-toggle="modal" data-bs-target="#deleteConnectModal"><i class="fa-light fa-pencil"></i></button>
+                                <button class="btn btn-sm btn-outline-secondary "><i class="fa-light fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-location" role="tabpanel" aria-labelledby="nav-location-tab">
+                <div class="row">
+                    <div class="col-sm-6 card p-3">
+                        <div class="mb-3 d-flex align-item-center justify-content-between">
+                            <h3 class="mb-0">Location</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="">Timezone</label>
+                                    <select class=" form-select form-select-sm">
+                                        <option value="-12:00">(GMT -12:00) Eniwetok, Kwajalein</option>
+                                        <option value="-11:00">(GMT -11:00) Midway Island, Samoa</option>
+                                        <option value="-10:00">(GMT -10:00) Hawaii</option>
+                                        <option value="-09:50">(GMT -9:30) Taiohae</option>
+                                        <option value="-09:00">(GMT -9:00) Alaska</option>
+                                        <option value="-08:00">(GMT -8:00) Pacific Time (US &amp; Canada)</option>
+                                        <option value="-07:00">(GMT -7:00) Mountain Time (US &amp; Canada)</option>
+                                        <option value="-06:00">(GMT -6:00) Central Time (US &amp; Canada), Mexico City</option>
+                                        <option value="-05:00">(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima</option>
+                                        <option value="-04:50">(GMT -4:30) Caracas</option>
+                                        <option value="-04:00">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option>
+                                        <option value="-03:50">(GMT -3:30) Newfoundland</option>
+                                        <option value="-03:00">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option>
+                                        <option value="-02:00">(GMT -2:00) Mid-Atlantic</option>
+                                        <option value="-01:00">(GMT -1:00) Azores, Cape Verde Islands</option>
+                                        <option value="+00:00" selected="selected">(GMT) Western Europe Time, London, Lisbon, Casablanca</option>
+                                        <option value="+01:00">(GMT +1:00) Brussels, Copenhagen, Madrid, Paris</option>
+                                        <option value="+02:00">(GMT +2:00) Kaliningrad, South Africa</option>
+                                        <option value="+03:00">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</option>
+                                        <option value="+03:50">(GMT +3:30) Tehran</option>
+                                        <option value="+04:00">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</option>
+                                        <option value="+04:50">(GMT +4:30) Kabul</option>
+                                        <option value="+05:00">(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</option>
+                                        <option value="+05:50">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</option>
+                                        <option value="+05:75">(GMT +5:45) Kathmandu, Pokhara</option>
+                                        <option value="+06:00">(GMT +6:00) Almaty, Dhaka, Colombo</option>
+                                        <option value="+06:50">(GMT +6:30) Yangon, Mandalay</option>
+                                        <option value="+07:00">(GMT +7:00) Bangkok, Hanoi, Jakarta</option>
+                                        <option value="+08:00">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option>
+                                        <option value="+08:75">(GMT +8:45) Eucla</option>
+                                        <option value="+09:00">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option>
+                                        <option value="+09:50">(GMT +9:30) Adelaide, Darwin</option>
+                                        <option value="+10:00">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option>
+                                        <option value="+10:50">(GMT +10:30) Lord Howe Island</option>
+                                        <option value="+11:00">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
+                                        <option value="+11:50">(GMT +11:30) Norfolk Island</option>
+                                        <option value="+12:00">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
+                                        <option value="+12:75">(GMT +12:45) Chatham Islands</option>
+                                        <option value="+13:00">(GMT +13:00) Apia, Nukualofa</option>
+                                        <option value="+14:00">(GMT +14:00) Line Islands, Tokelau</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <div class="form-group">
+                                    <label for="">Time format</label>
+                                    <select class=" form-select form-select-sm">
+                                        <option value="-12:00">12:00</option>
+                                        <option value="-12:00">24:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <div class="form-group">
+                                    <label for="">Date format</label>
+                                    <select class=" form-select form-select-sm">
+                                        <option value="">dd/mm/yyyy</option>
+                                        <option value="">ddmmyyyy</option>
+                                        <option value="">mm/dd/yyyy</option>
+                                        <option value="">dd-mm-yyyy</option>
+                                        <option value="">Month dd, yyyy</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 mt-3 mb-3">
+                                <h3 class="mb-0">Currency</h3>
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <div class="form-group">
+                                    <label for="">Currency</label>
+                                    <select class=" form-select form-select-sm">
+                                        <option value="">Dollar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <div class="form-group">
+                                    <label for="">Currency format</label>
+                                    <select class=" form-select form-select-sm">
+                                        <option value="">xx.xxx.xx</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 mt-3">
+                                <h3 class="mb-0">Language Preference</h3>
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <div class="form-group">
+                                    <label for=""></label>
+                                    <select class=" form-select form-select-sm">
+                                        <option value="">English</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <div class="form-group">
+                                    <label for=""></label>
+                                    <select class=" form-select form-select-sm">
+                                        <option value="">English</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 text-end">
+                                <button class="btn btn-sm btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--delete connected account-->
+<div class="modal fade" id="deleteConnectModal" tabindex="-1" aria-labelledby="deleteConnectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title mb-0" id="exampleModalLabel">Remove Account</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>You will not longer be able to send/receive emails using this account. Existing activities inside Atmosai will not be deleted.</p>
+          <button class="btn btn-sm btn-primary bg-danger">Remove Account</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!--connect new account-->
+<div class="modal fade" id="newConnectModal" tabindex="-1" aria-labelledby="newConnectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title mb-0" id="exampleModalLabel">Connect new account</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div>
+                <div class="acc-pop-text">
+                   <p class="mb-0 mt-0">Connect other tools and get more
+                      out of Atmosai.
+                   </p>
+                   <p class=" mt-0">Start video calls, send email, view
+                      calendar events.
+                   </p>
+                </div>
+                <div class="acc-accounts">
+                   <div class="acc-box d-flex justify-content-between align-items-center rounded-3 border p-2 mb-2">
+                      <label for="google" class="d-flex align-items-center">
+                         <span class="mr-2 icon-side">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                               <title>Google Logo</title>
+                               <path fill="#FBBC05" d="M1.7332228,11.1016467 C1.26344973,10.1681053 1,9.11559925 1,7.99999693 C1,6.88439737 1.26344926,5.83189299 1.73322154,4.89835236 L4.14245254,6.6986377 C4.00456633,7.10756746 3.93,7.54501903 3.93,7.99999693 C3.93,8.45506225 4.00452948,8.89253076 4.14235033,9.30143867 L1.7332228,11.1016467 Z"></path>
+                               <path fill="#EA4335" d="M1.73322154,4.89835236 C2.89813489,2.58341388 5.33175182,0.999993873 8.163,0.999993873 C9.89559217,0.998403709 11.571067,1.61947572 12.884,2.75 L10.8,4.786 C10.0519509,4.18678258 9.12145318,3.86144361 8.163,3.864 C6.28470726,3.864 4.69857585,5.04934028 4.14245254,6.6986377 L1.73322154,4.89835236 L1.73322154,4.89835236 Z"></path>
+                               <path fill="#34A853" d="M12.8317605,13.2564819 C11.579762,14.3942467 9.91005861,14.9999969 8.163,14.9999969 C5.33092793,14.9999969 2.89671856,13.4156614 1.7322049,11.0996231 L4.14029997,9.29533929 C4.69447358,10.9482355 6.28227802,12.136 8.163,12.136 C9.08326996,12.136 9.89875668,11.9242863 10.5445884,11.5261311 L12.8317605,13.2564819 L12.8317605,13.2564819 Z"></path>
+                               <path fill="#4285F4" d="M12.8317946,13.2564509 L10.5446597,11.5260871 C11.2925349,11.0649973 11.8128957,10.3538862 12.005,9.432 L8.163,9.432 L8.163,6.727 L14.837,6.727 C14.935,7.14 15,7.586 15,7.99999693 C15,10.2815228 14.1460368,12.0621042 12.8317946,13.2564509 L12.8317946,13.2564509 Z"></path>
+                            </svg>
+                         </span>
+                         <div>
+                            <h4 class="mb-0 mt-0">Google</h4>
+                            <p class="mb-0 mt-0">Email sending and
+                               receiving.
+                            </p>
+                         </div>
+                      </label>
+                      <input type="radio" class="js-connect-account" data-url="https://accounts.google.com/o/oauth2/v2/auth" data-redirect_uri="https://atmosai.io/connect?connection_type=google" data-response_type="code" data-client_id="843997978739-ubrm4t4g1g2j8kss912h3c1sha5srkg5.apps.googleusercontent.com" data-scope="openid email https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send" data-nonce="0394852-3190485-2490358" data-state="6de9b2a3-90e5-4847-9e41-1c95b76fd040" data-access_type="offline" data-response_mode="" name="connect-account" id="google" value="google" checked="">
+                   </div>
+                   <div class="acc-box d-flex justify-content-between align-items-center rounded-3 border p-2 mb-2">
+                      <label for="microsoft" class="d-flex align-items-center">
+                         <span class="mr-2 icon-side">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23">
+                               <path fill="#f3f3f3" d="M0 0h23v23H0z"></path>
+                               <path fill="#f35325" d="M1 1h10v10H1z"></path>
+                               <path fill="#81bc06" d="M12 1h10v10H12z"></path>
+                               <path fill="#05a6f0" d="M1 12h10v10H1z"></path>
+                               <path fill="#ffba08" d="M12 12h10v10H12z"></path>
+                            </svg>
+                         </span>
+                         <div>
+                            <h4 class="mb-0 mt-0">Microsoft</h4>
+                            <p class="mb-0 mt-0">Email sending and
+                               receiving.
+                            </p>
+                         </div>
+                      </label>
+                      <input type="radio" class="js-connect-account" data-url="https://login.microsoftonline.com/2cabd776-c44c-4337-ac87-fa0c6478214d/oauth2/v2.0/authorize" data-redirect_uri="https://atmosai.io/connect?connection_type=microsoft" data-response_type="code" data-client_id="5945c0e5-f377-4b48-9824-96cb97fee115" data-scope="offline_access user.read mail.read mail.send Mail.ReadWrite" data-state="6de9b2a3-90e5-4847-9e41-1c95b76fd040" data-nonce="0394852-3190485-2490358" data-access_type="" data-response_mode="query" name="connect-account" id="microsoft" value="microsoft">
+                   </div>
+                   <div class="acc-box d-flex justify-content-between align-items-center rounded-3 border p-2 mb-2">
+                      <label for="zoom" class="d-flex align-items-center">
+                         <span class="mr-2 icon-side">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                               <title>Zoom Logo</title>
+                               <path fill="#4A8CFF" fill-rule="evenodd" d="M8,15 C4.13400675,15 1,11.8659932 1,8 C1,4.13400675 4.13400675,1 8,1 C11.8659932,1 15,4.13400675 15,8 C15,11.8659932 11.8659932,15 8,15 Z M10.1304348,7.09152174 L10.1304348,8.91304348 L12.1086957,10.3586957 C12.2486957,10.4652174 12.4130435,10.4986957 12.4130435,10.2065217 L12.4130435,5.79804348 C12.4130435,5.53782609 12.281413,5.5051087 12.1086957,5.64586957 L10.1304348,7.09152174 Z M3.43478261,5.80869565 L3.43478261,9.09565217 C3.43855547,9.83872092 4.04377715,10.4381526 4.78684783,10.4347967 L9.58032609,10.4347967 C9.71534045,10.4352045 9.82524901,10.3263168 9.82608696,10.1913043 L9.82608696,6.90434783 C9.8223141,6.16127908 9.21709242,5.56184737 8.47402174,5.56520325 L3.68054348,5.56520325 C3.54552911,5.56479549 3.43562055,5.67368323 3.43478261,5.80869565 Z"></path>
+                            </svg>
+                         </span>
+                         <div>
+                            <h4 class="mb-0 mt-0">Zoom</h4>
+                            <p class="mb-0 mt-0">Watch Cloud recordings
+                               of scheduled Zoom calls.
+                            </p>
+                         </div>
+                      </label>
+                      <input type="radio" class="js-connect-account" data-state="6de9b2a3-90e5-4847-9e41-1c95b76fd040" name="connect-account" id="zoom" value="zoom">
+                   </div>
+                   <div class="acc-box d-flex justify-content-between align-items-center rounded-3 border p-2 mb-2">
+                      <label for="email" class="d-flex align-items-center">
+                         <span class="mr-2 icon-side">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                               <path fill-rule="evenodd" d="M8.01925108,6.6501743 C8.92086275,6.65531347 9.64777299,7.39005611 9.64327206,8.2916744 C9.64327206,8.29825019 9.64322008,8.30482593 9.64314535,8.31140131 C9.63283202,9.21855962 8.88907619,9.94560391 7.98191702,9.93529478 C7.07475785,9.92498146 6.34771289,9.18122633 6.35802202,8.27406802 C6.36833535,7.36690971 7.11209119,6.63986543 8.01925031,6.65017455 Z M8,1 L7.99994159,1 C11.8641866,1.00414166 14.9957808,4.13567621 15,7.99993506 L15,8 C15,11.865998 11.865995,15 8,15 C4.134005,15 1,11.865998 1,8 C1,4.13401526 4.134005,1 8,1 Z M11.2468276,10.115173 C10.7638276,10.115173 10.5182442,9.91508983 10.515911,9.52017353 L10.515911,5.74134377 C10.515911,5.49971916 10.3200358,5.30384414 10.078411,5.30384418 C9.83678614,5.30384418 9.64091094,5.49971916 9.64091098,5.7413437 L9.64091098,6.09776003 C9.64090339,6.12757977 9.63175474,6.15668032 9.61469796,6.18113987 C9.56862863,6.24720429 9.47772546,6.26341318 9.41166119,6.21734347 C9.00295453,5.93075558 8.51608469,5.77661124 8.01691107,5.77576056 C6.62676357,5.77576056 5.4998278,6.90269533 5.49982774,8.29284151 C5.49982774,9.6829877 6.62676357,10.8099224 8.01691118,10.8099225 C8.60173785,10.8097416 9.16751751,10.6019935 9.61349458,10.223673 C9.62045147,10.2177957 9.62794369,10.212583 9.63587294,10.2081032 C9.70599661,10.1684856 9.79496013,10.1932154 9.83457785,10.2633396 C10.1303045,10.7516603 10.6751845,11.032555 11.2444945,10.9901722 C12.5079945,10.9901722 13.4249945,9.72375677 13.4249945,7.97900841 C13.4249945,6.7220196 12.954507,5.51055408 12.1062061,4.58296737 C10.9621319,3.42234805 9.3747886,2.80882663 7.74753979,2.89830227 C4.87930729,2.93130724 2.57914766,5.27999753 2.60603401,8.14829705 C2.56870651,11.005671 4.85117317,13.3541521 7.70845053,13.3982921 C8.60877303,13.3980121 9.49224303,13.1541137 10.2652003,12.6924596 C10.4726752,12.5685871 10.5404479,12.2999763 10.4165753,12.0925018 C10.2927027,11.8850271 10.0240917,11.8172545 9.81661695,11.9411269 C9.17944195,12.3223163 8.45094612,12.5238914 7.70845005,12.5244597 C5.33412589,12.4810248 3.44300204,10.523885 3.48102769,8.1494614 C3.45346519,5.76413782 5.36226019,3.80679914 7.74752788,3.77446553 C9.12930455,3.6978506 10.4792487,4.20791678 11.4651111,5.1791308 C12.1644916,5.94395007 12.5523336,6.94280247 12.5523336,7.97917482 L12.5523336,7.97900663 C12.5523336,9.04067229 12.1043336,10.1151713 11.2468336,10.1151713 Z"></path>
+                            </svg>
+                         </span>
+                         <div>
+                            <h4 class="mb-0 mt-0">Custom Email</h4>
+                            <p class="mb-0 mt-0">Email sending and
+                               receiving.
+                            </p>
+                         </div>
+                      </label>
+                      <input type="radio" class="js-connect-account" name="connect-account" id="email" value="email">
+                   </div>
+                   <div class="acc-box d-flex justify-content-between align-items-center rounded-3 border p-2 mb-2">
+                      <label for="stripe-connect" class="d-flex align-items-center">
+                         <span class="mr-2 icon-side">
+                            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24">
+                               <path fill="#646FDF" d="M22,2.75H2c-1.104,0-2,0.888-2,1.982v14.536c0,1.094,0.896,1.982,2,1.982h20c1.104,0,2-0.888,2-1.982V4.732C24,3.638,23.104,2.75,22,2.75z M3.013,14.7c-0.509,0-1.067-0.1-1.617-0.335v-1.4c0.5,0.264,1.129,0.467,1.62,0.467c0.329,0,0.566-0.087,0.566-0.359c0-0.702-2.25-0.438-2.25-2.061c0-1.04,0.8-1.66,2-1.66c0.492,0,0.98,0.075,1.471,0.269v1.38c-0.451-0.24-1.021-0.376-1.471-0.376c-0.312,0-0.504,0.091-0.504,0.318c0,0.661,2.262,0.347,2.262,2.094l0.001-0.001C5.093,14.093,4.247,14.692,3.013,14.7z M7.958,10.699H6.833v2.085c0,0.863,0.938,0.595,1.125,0.521v1.194c-0.196,0.107-0.554,0.194-1.037,0.194c-0.879,0-1.538-0.64-1.538-1.507l0.008-4.703l1.446-0.306v1.272h1.121V10.699z M11.042,10.798c-0.188-0.062-0.779-0.149-1.129,0.306v3.485H8.434V9.448h1.279l0.092,0.433c0.346-0.632,1.037-0.504,1.233-0.433h0.004V10.798z M12.879,14.589h-1.487V9.448h1.487V14.589z M12.879,8.688l-1.487,0.314V7.808l1.487-0.314V8.688z M15.968,14.697c-0.517,0-0.834-0.219-1.046-0.372l-0.005,1.66l-1.479,0.31V9.448h1.304l0.075,0.363c0.204-0.186,0.579-0.458,1.158-0.458c1.037,0,2.017,0.929,2.017,2.635h0.001C17.993,13.85,17.027,14.692,15.968,14.697z M22.65,12.568h-2.896c0.067,0.685,0.575,0.888,1.15,0.888c0.587,0,1.05-0.123,1.454-0.326v1.181c-0.404,0.219-0.933,0.38-1.642,0.38c-1.442,0-2.45-0.896-2.45-2.663c0-1.495,0.854-2.68,2.262-2.68c1.404,0,2.138,1.186,2.138,2.688C22.667,12.182,22.654,12.486,22.65,12.568z"></path>
+                               <path fill="#646FDF" d="M15.625 10.654c-.341 0-.555.12-.708.289l.008 2.18c.147.152.354.277.7.277.547 0 .913-.591.913-1.379C16.538 11.253 16.163 10.649 15.625 10.654zM20.516 10.547c-.371 0-.779.277-.779.937h1.529C21.266 10.823 20.878 10.547 20.516 10.547z"></path>
+                               <polygon fill="#646FDF" points="20.516 10.546 20.516 10.547 20.516 10.546"></polygon>
+                            </svg>
+                         </span>
+                         <div>
+                            <h4 class="mb-0 mt-0">Stripe</h4>
+                            <p class="mb-0 mt-0">Connect Stripe account for invoice payments</p>
+                         </div>
+                      </label>
+                      <input type="radio" class="js-connect-account" name="connect-account" id="stripe-connect" value="stripe">
+                   </div>
+                   <div class="acc-box d-flex justify-content-between align-items-center rounded-3 border p-2 mb-2">
+                      <label for="bank-connect" class="d-flex align-items-center">
+                         <span class="mr-2 icon-side">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                               <circle style="fill:#88C5CC;" cx="256" cy="256" r="256"></circle>
+                               <rect x="124" y="200" style="fill:#406A80;" width="264" height="232"></rect>
+                               <rect x="108" y="216" style="fill:#E6E6E6;" width="64" height="200"></rect>
+                               <g>
+                                  <rect x="116" y="216" style="fill:#CCCCCC;" width="8" height="200"></rect>
+                                  <rect x="136" y="216" style="fill:#CCCCCC;" width="8" height="200"></rect>
+                                  <rect x="156" y="216" style="fill:#CCCCCC;" width="8" height="200"></rect>
+                               </g>
+                               <g>
+                                  <rect x="340" y="216" style="fill:#E6E6E6;" width="64" height="200"></rect>
+                                  <path style="fill:#E6E6E6;" d="M40,512v-32c0-4.4,3.6-8,8-8h416c4.4,0,8,3.6,8,8v32H40z"></path>
+                                  <path style="fill:#E6E6E6;" d="M64,472v-32c0-4.4,3.6-8,8-8h368c4.4,0,8,3.6,8,8v32H64z"></path>
+                               </g>
+                               <path style="fill:#F5F5F5;" d="M433.656,170.344l-176-120C256.096,48.784,254.048,48,252,48s-4.096,0.784-5.656,2.344l-176,120
+                                  c-1.548,1.544-2.328,3.628-2.344,5.656c-0.016,2.068,0.764,4.08,2.344,5.656C71.908,183.22,73.952,184,76,184h176h176
+                                  c2.048,0,4.092-0.78,5.656-2.344c1.58-1.58,2.36-3.588,2.344-5.656C435.984,173.972,435.204,171.888,433.656,170.344z"></path>
+                               <g>
+                                  <polygon style="fill:#CCCCCC;" points="102.184,168 252,65.852 401.816,168 	"></polygon>
+                                  <path style="fill:#CCCCCC;" d="M452,192c0,4.4-3.6,8-8,8H60c-4.4,0-8-3.6-8-8l0,0c0-4.4,3.6-8,8-8h384C448.4,184,452,187.6,452,192
+                                     L452,192z"></path>
+                               </g>
+                               <rect x="224" y="216" style="fill:#E6E6E6;" width="64" height="200"></rect>
+                               <g>
+                                  <rect x="232" y="216" style="fill:#CCCCCC;" width="8" height="200"></rect>
+                                  <rect x="252" y="216" style="fill:#CCCCCC;" width="8" height="200"></rect>
+                                  <rect x="272" y="216" style="fill:#CCCCCC;" width="8" height="200"></rect>
+                                  <rect x="348" y="216" style="fill:#CCCCCC;" width="8" height="200"></rect>
+                                  <rect x="368" y="216" style="fill:#CCCCCC;" width="8" height="200"></rect>
+                                  <rect x="388" y="216" style="fill:#CCCCCC;" width="8" height="200"></rect>
+                               </g>
+                               <g>
+                                  <path style="fill:#F5F5F5;" d="M180,424c0,4.4-3.6,8-8,8h-64c-4.4,0-8-3.6-8-8l0,0c0-4.4,3.6-8,8-8h64C176.4,416,180,419.6,180,424
+                                     L180,424z"></path>
+                                  <path style="fill:#F5F5F5;" d="M180,208c0,4.4-3.6,8-8,8h-64c-4.4,0-8-3.6-8-8l0,0c0-4.4,3.6-8,8-8h64C176.4,200,180,203.6,180,208
+                                     L180,208z"></path>
+                                  <path style="fill:#F5F5F5;" d="M296,424c0,4.4-3.6,8-8,8h-64c-4.4,0-8-3.6-8-8l0,0c0-4.4,3.6-8,8-8h64C292.4,416,296,419.6,296,424
+                                     L296,424z"></path>
+                                  <path style="fill:#F5F5F5;" d="M296,208c0,4.4-3.6,8-8,8h-64c-4.4,0-8-3.6-8-8l0,0c0-4.4,3.6-8,8-8h64C292.4,200,296,203.6,296,208
+                                     L296,208z"></path>
+                                  <path style="fill:#F5F5F5;" d="M412,424c0,4.4-3.6,8-8,8h-64c-4.4,0-8-3.6-8-8l0,0c0-4.4,3.6-8,8-8h64C408.4,416,412,419.6,412,424
+                                     L412,424z"></path>
+                                  <path style="fill:#F5F5F5;" d="M412,208c0,4.4-3.6,8-8,8h-64c-4.4,0-8-3.6-8-8l0,0c0-4.4,3.6-8,8-8h64C408.4,200,412,203.6,412,208
+                                     L412,208z"></path>
+                               </g>
+                               <rect x="64" y="468" style="fill:#CCCCCC;" width="384" height="4"></rect>
+                               <g>
+                                  <path style="fill:#2179A6;" d="M252,140c-6.616,0-12-5.384-12-12c0-2.208,1.792-4,4-4s4,1.792,4,4c0,2.204,1.796,4,4,4s4-1.796,4-4
+                                     s-1.796-4-4-4c-6.616,0-12-5.384-12-12s5.384-12,12-12s12,5.384,12,12c0,2.208-1.792,4-4,4s-4-1.792-4-4c0-2.204-1.796-4-4-4
+                                     s-4,1.796-4,4s1.796,4,4,4c6.616,0,12,5.384,12,12S258.616,140,252,140z"></path>
+                                  <path style="fill:#2179A6;" d="M252,108c-2.208,0-4-1.792-4-4v-8c0-2.208,1.792-4,4-4s4,1.792,4,4v8
+                                     C256,106.208,254.208,108,252,108z"></path>
+                                  <path style="fill:#2179A6;" d="M252,148c-2.208,0-4-1.792-4-4v-8c0-2.208,1.792-4,4-4s4,1.792,4,4v8
+                                     C256,146.208,254.208,148,252,148z"></path>
+                               </g>
+                               <g></g>
+                               <g></g>
+                               <g></g>
+                               <g></g>
+                               <g></g>
+                               <g></g>
+                               <g></g>
+                               <g></g>
+                               <g></g>
+                               <g></g>
+                               <g></g>
+                               <g></g>
+                               <g></g>
+                               <g></g>
+                               <g></g>
+                            </svg>
+                         </span>
+                         <div>
+                            <h4 class="mb-0 mt-0">Bank Account</h4>
+                            <p class="mb-0 mt-0">Add bank account for invoice payments</p>
+                         </div>
+                      </label>
+                      <input type="radio" class="js-connect-account" name="connect-account" id="bank-connect" value="bank">
+                   </div>
+                   <div class="acc-box d-flex justify-content-between align-items-center rounded-3 border p-2 mb-2">
+                    <label for="paypal-connect" class="d-flex align-items-center">
+                       <span class="mr-2 icon-side">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="2119" height="2500" preserveAspectRatio="xMidYMid" viewBox="0 0 256 302">
+                             <path fill="#27346A" d="M217.168 23.507C203.234 7.625 178.046.816 145.823.816h-93.52A13.393 13.393 0 0 0 39.076 12.11L.136 259.077c-.774 4.87 2.997 9.28 7.933 9.28h57.736l14.5-91.971-.45 2.88c1.033-6.501 6.593-11.296 13.177-11.296h27.436c53.898 0 96.101-21.892 108.429-85.221.366-1.873.683-3.696.957-5.477-1.556-.824-1.556-.824 0 0 3.671-23.407-.025-39.34-12.686-53.765"></path>
+                             <path fill="#27346A" d="M102.397 68.84a11.737 11.737 0 0 1 5.053-1.14h73.318c8.682 0 16.78.565 24.18 1.756a101.6 101.6 0 0 1 6.177 1.182 89.928 89.928 0 0 1 8.59 2.347c3.638 1.215 7.026 2.63 10.14 4.287 3.67-23.416-.026-39.34-12.687-53.765C203.226 7.625 178.046.816 145.823.816H52.295C45.71.816 40.108 5.61 39.076 12.11L.136 259.068c-.774 4.878 2.997 9.282 7.925 9.282h57.744L95.888 77.58a11.717 11.717 0 0 1 6.509-8.74z"></path>
+                             <path fill="#2790C3" d="M228.897 82.749c-12.328 63.32-54.53 85.221-108.429 85.221H93.024c-6.584 0-12.145 4.795-13.168 11.296L61.817 293.621c-.674 4.262 2.622 8.124 6.934 8.124h48.67a11.71 11.71 0 0 0 11.563-9.88l.474-2.48 9.173-58.136.591-3.213a11.71 11.71 0 0 1 11.562-9.88h7.284c47.147 0 84.064-19.154 94.852-74.55 4.503-23.15 2.173-42.478-9.739-56.054-3.613-4.112-8.1-7.508-13.327-10.28-.283 1.79-.59 3.604-.957 5.477z"></path>
+                             <path fill="#1F264F" d="M216.952 72.128a89.928 89.928 0 0 0-5.818-1.49 109.904 109.904 0 0 0-6.177-1.174c-7.408-1.199-15.5-1.765-24.19-1.765h-73.309a11.57 11.57 0 0 0-5.053 1.149 11.683 11.683 0 0 0-6.51 8.74l-15.582 98.798-.45 2.88c1.025-6.501 6.585-11.296 13.17-11.296h27.444c53.898 0 96.1-21.892 108.428-85.221.367-1.873.675-3.688.958-5.477-3.122-1.648-6.501-3.072-10.14-4.279a83.26 83.26 0 0 0-2.77-.865"></path>
+                          </svg>
+                       </span>
+                       <div>
+                          <h4 class="mb-0 mt-0">PayPal</h4>
+                          <p class="mb-0 mt-0">Connect PayPal account for invoice payments</p>
+                       </div>
+                    </label>
+                    <input type="radio" class="js-connect-account" name="connect-account" id="paypal-connect" value="paypal">
+                 </div>
+                </div>
+             </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Connect Account</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>

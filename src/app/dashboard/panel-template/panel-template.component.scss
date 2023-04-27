@@ -1,0 +1,85 @@
+.numeric-symbols-component {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  margin-right: 15px;
+  height: 25px;
+  color: #666;
+
+  .symbol-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 25px;
+    padding: 2px 5px;
+    border: 1px solid;
+    border-color: var(--ui-border-color);
+    color: var(--primary-text-color);
+    font-size: 13px;
+    text-transform: capitalize;
+    cursor: pointer;
+
+    .symbol-custom-item {
+      flex: 1 1 auto;
+      color: var(--primary-text-color);
+
+      input {
+        max-width: 100%;
+        line-height: 13px;
+        font-size: 13px;
+        border: 0;
+        min-width: 0;
+        outline: none;
+        background-color: var(--secondary-background-color);
+      }
+    }
+  }
+}
+
+.numeric-directions-component {
+  display: flex;
+
+  .direction-item {
+    width: 25px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid;
+    border-color: var(--ui-border-color);
+    font-size: 13px;
+    color: var(--primary-text-color);
+    cursor: pointer;
+  }
+}
+
+.function-items-container {
+  display: flex;
+  overflow: hidden;
+
+  .function-item-component {
+    flex: 1 1 auto;
+    overflow: hidden;
+    padding: 2px 5px;
+    border: 1px solid;
+    border-color: var(--ui-border-color);
+    font-size: 13px;
+    text-align: center;
+    text-transform: capitalize;
+    color: var(--primary-text-color);
+    cursor: pointer;
+  }
+}
+
+.w-400px {
+  width: 400px;
+}
+
+.large-text {
+  font-size: 36px;
+}
+
+.pointer {
+  cursor: pointer;
+}

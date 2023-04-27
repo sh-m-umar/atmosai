@@ -1,0 +1,405 @@
+<div class="page-header">
+    <div *ngIf="!headerCollapsed" class="d-flex justify-content-between align-items-center">
+        <div class="header-lhs d-flex align-items-center">
+            <h4 class="page-heading mb-0 pe-2" contenteditable="true">
+                <span>Subscription Packages</span>
+            </h4>
+            <span class="ms-2 me-2"  mat-raised-button matTooltip="Show board description" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-circle-info"></i></span>
+            <span class="favorite" mat-raised-button matTooltip="Add to favorites" matTooltipPosition="above" matTooltipClass="above"><i class="fa-thin fa-star"></i></span>
+        </div>
+        <div class="header-rhs d-flex align-items-center">
+            <div class="button-group ms-2">
+                <button type="button" class="btn btn-outline-secondary borderless dropdown-toggle-split" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                    <i class="fa-solid fa-ellipsis"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item">Console log</a></li>
+                    <li><a class="dropdown-item">Clear local cache only</a></li>
+                    <li><a class="dropdown-item">Clear cache and database both</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!headerCollapsed" class="page-heading-description w-50" contenteditable="true">
+        <span>This is description</span>
+        <i class="fa-solid fa-ellipsis"></i>
+    </div>
+    <div class="header-nab-tabs d-flex justify-content-between align-items-center">
+        <div class="d-flex">
+            <h5 class="mb-0 me-4" contenteditable="true" *ngIf="headerCollapsed">Subscription Packages</h5>
+
+            <div class="dropdown plus-icon-drop-invoice button-group outlined single-btn-in-group ms-2">
+                <button type="button" class="btn btn-outline-secondary add-new-page" mat-raised-button matTooltip="Add view" matTooltipPosition="right" matTooltipClass="right" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-thin fa-plus"></i>
+                </button>
+                <div class="dropdown-menu p-0 style-less">
+                    <ul class="list-group list-group-flush list-group-sm">
+                        <li class="list-group-item">
+                            <div class="ls" data-bs-toggle="modal" data-bs-target="#viewcenter" >
+                                <i class="fa-light fa fa-home"></i>
+                                <span class="ms-2">Apps</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex align-items-centere">
+            <div *ngIf="headerCollapsed" class="header-rhs d-flex align-items-center me-2" style="margin-top: -5px;">
+                <div class="button-group outlined borderless">
+                    <button type="button" class="btn collapsed btn-outline-secondary"><i
+                            class="fa-thin fa-envelope"></i> Bulk Emails
+                    </button>
+                    <button type="button"
+                            class="btn collapsed btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+                <div class="button-group ms-2">
+                    <button type="button" class="btn collapsed btn-outline-secondary borderless dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div (click)="headerToggle()" class="header-collapse-btn"><i class="fa-thin fa-angle-{{anglePos}}"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<!--add subscription package starts-->
+<div class="add-subscription-form mb-4 card p-3">
+    <div class="row mb-4">
+        <div class="col-sm-6">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h3 class="mb-0">Add Subscription Package</h3>
+                <button routerLink="/super-admin/subscriptions" class="btn btn-sm btn-outline-secondary">Back to Subscription Packages</button>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Package Status</label>
+                </div>
+                <div class="col-sm-9">
+                    <select class="form-select from-select-sm">
+                        <option>Active</option>
+                        <option>Cancled</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Select Module</label>
+                </div>
+                <div class="col-sm-9">
+                    <select class="form-select from-select-sm">
+                        <option>CRM</option>
+                        <option>Financial</option>
+                        <option>Sales Portal</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Package Name</label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Packages Id</label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Package Description</label>
+                </div>
+                <div class="col-sm-9">
+                    <textarea rows="3" type="text" class="form-control form-control-sm"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Packages included seats</label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Per Seat Price</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control form-control-sm">
+                            <small class="d-block">Monthly</small>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control form-control-sm">
+                            <small class="d-block">Yearly</small>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Per Additional Seat Price</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control form-control-sm">
+                            <small class="d-block">Monthly</small>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control form-control-sm">
+                            <small class="d-block">Yearly</small>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Included Feature</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="mb-0">Features</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="mb-0">Number of items</h4>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="">
+                                <label class="form-check-label" for="">crm_core</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <h4 class="mb-0"><input type="text" class="form-control form-control-sm"></h4>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="">
+                                <label class="form-check-label" for="">crm_commant_center</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <h4 class="mb-0"><input type="text" class="form-control form-control-sm"></h4>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="">
+                                <label class="form-check-label" for="">crm_pipeline</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <h4 class="mb-0"><input type="text" class="form-control form-control-sm"></h4>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="">
+                                <label class="form-check-label" for="">crm_connect_email</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <h4 class="mb-0"><input type="text" class="form-control form-control-sm"></h4>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="">
+                                <label class="form-check-label" for="">crm_tasks_activites</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <h4 class="mb-0"><input type="text" class="form-control form-control-sm"></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-sm-3">
+                    <label for="">Select Board Items</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="row mb-3">
+                        <div class="col-sm-3">
+                            <label for=""># of leads included</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <label for="">Additional lead price per 1k</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control form-control-sm">
+                            <small class="d-block">Monthly</small>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control form-control-sm">
+                            <small class="d-block">Yearly</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-2 col-lg-1"></div>
+        <div class="col-lg-8 col-md-10">
+            <h4 class="border-bottom mb-2 pb-1">Dynamic Pricing</h4>
+            <div class="row g-0 mb-2">
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50">[1]If lead item is:</label>
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50"> or more, then price:</label>
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50">/monthly or:</label>
+                    <input type="text" class="form-control form-control-sm">
+                    <label for="" class="w-50">/yearly</label>
+                </div>
+            </div>
+            <div class="row g-0 mb-2">
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50">[1]If lead item is:</label>
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50"> or more, then price:</label>
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50">/monthly or:</label>
+                    <input type="text" class="form-control form-control-sm">
+                    <label for="" class="w-50">/yearly</label>
+                </div>
+            </div>
+            <div class="row g-0 mb-2">
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50">[1]If lead item is:</label>
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50"> or more, then price:</label>
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50">/monthly or:</label>
+                    <input type="text" class="form-control form-control-sm">
+                    <label for="" class="w-50">/yearly</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-2 col-lg-1"></div>
+        <div class="col-lg-8 col-md-10">
+            <h4 class="border-bottom mb-2 pb-1">Dynamic Pricing</h4>
+            <div class="row g-0 mb-2">
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50">[1]If lead item is:</label>
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50"> or more, then price:</label>
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50">/monthly or:</label>
+                    <input type="text" class="form-control form-control-sm">
+                    <label for="" class="w-50">/yearly</label>
+                </div>
+            </div>
+            <div class="row g-0 mb-2">
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50">[1]If lead item is:</label>
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50"> or more, then price:</label>
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50">/monthly or:</label>
+                    <input type="text" class="form-control form-control-sm">
+                    <label for="" class="w-50">/yearly</label>
+                </div>
+            </div>
+            <div class="row g-0 mb-2">
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50">[1]If lead item is:</label>
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50"> or more, then price:</label>
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-4 d-flex align-items-center">
+                    <label for="" class="w-50">/monthly or:</label>
+                    <input type="text" class="form-control form-control-sm">
+                    <label for="" class="w-50">/yearly</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-sm-6">
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">Button Color</label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="color" name="" id="">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label for="">List Order</label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-end">
+                <button class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--add subscription package ends-->

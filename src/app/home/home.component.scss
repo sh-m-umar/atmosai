@@ -1,0 +1,276 @@
+.homepage-wrapper{
+    a{
+        color:inherit;
+        text-decoration: none;
+    }
+    .atmos-dashboard-header {
+        background: var(--at-card-bg);
+        box-shadow: 0 3px 7px -1px rgb(0 0 0 / 20%);
+        border-bottom: 1px solid var(--at-border-color);
+        margin-bottom: 40px;
+        padding: 20px 0 15px;
+        margin-left: -38px;
+        margin-right: -12px;
+        h5{
+            font-size: 16px;
+        }
+        p{
+            font-size: 13px;
+        }
+    }
+    .accord-wrp{
+        p.top-deals-name {
+            margin: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            font-size: 20px;
+            color: #fff;
+        }
+        span.badge {
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            padding: 0px;
+            margin-bottom: 5px;
+        }
+        .accord-content {
+            border: 1px solid var(--at-border-color);
+            padding: 15px;
+            border-radius: 5px;
+            .home-inbox-item, .home-recent-item {
+                border-bottom: 1px solid var(--at-border-color);
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                overflow: hidden;
+                .home-title-breadcrum{
+                    h5 {
+                        margin-bottom: 0;
+                        margin-right: 5px;
+                        font-weight: 400;
+                        font: 15px/18px Roboto, "Helvetica Neue", sans-serif;
+                    }
+                }
+                .home-bred{
+                    text-overflow: ellipsis;
+                    width: 65%;
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+                .home-avatar {
+                    width: 50px;
+                    text-align: center;
+                    font-size: 22px;
+                    img {
+                        border: 1px solid var(--at-border-color);
+                        width: 40px;
+                        height: 40px;
+                        margin-right: 10px;
+                        background: #f6f7fb;
+                        border-radius: 5px;
+                    }
+                }
+                .home-inboxt-item-content{
+                    line-height: 20px;
+                    .home-title-breadcrum{
+                        h5 {
+                            margin-bottom: 0;
+                            margin-right: 5px;
+                            font-weight: 400;
+                            font: 15px/18px Roboto, "Helvetica Neue", sans-serif;
+                        }
+                        .home-bred{
+                            span {
+                                font-size: 12px;
+                                i {
+                                    margin-right: 5px;
+                                    margin-left: 5px;
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+                    }
+                    .home-inbox-short-desc{
+                        p {
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            width: 600px;
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+                .recent-heading-bred{
+                    h5 {
+                        margin-bottom: 0;
+                        font-size: 16px;
+                    }
+                    .recent-bred {
+                        font-size: 12px;
+                        .recent-bred{
+                            i{
+                                font-size: 12px;
+                                margin-right: 5px;
+                                margin-left: 5px;
+                                &:first-child{
+                                    margin-left: 0px;
+                                }
+                            }
+                        }
+                    }
+                }
+                .recent-rsh{
+                    i.fa-thin.fa-star {
+                        font-size: 18px;
+                    }
+                }
+                &:hover{
+                    background: var(--at-list-item-hover);
+                }
+            }
+        }
+        .wrokspace-item {
+            border: 1px solid var(--at-border-color);
+            border-radius: 5px;
+            padding: 12px;
+            cursor: pointer;
+            .work-initial-img {
+                width: 45px;
+                height: 45px;
+                background: var(--at-app-bg);
+                padding: 2px;
+                border-radius: 5px;
+                margin-right: 10px;
+                img{
+                    width: 100%;
+                    height: auto;
+                }
+            }
+            .work-desc {
+                line-height: 20px;
+                h5 {
+                    margin-bottom: 0;
+                    font-weight: 500;
+                    font-size: 14px;
+                }
+            }
+            &:hover{
+                box-shadow: 0px 6px 20px rgb(0 0 0 / 20%);
+            }
+        }
+    }
+    .profile-steps {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        a {
+            font-size: 15px;
+            margin-bottom: 5px;
+            display: block;
+            i{
+                margin-right: 5px;
+            }
+            &:last-child {
+                margin-bottom: 0px;
+            }
+        }
+    }
+    .sidebar-learn-card {
+        background: var(--at-card-bg);
+        border-radius: 5px;
+        border: 1px solid var(--at-border-color);
+        margin-bottom: 20px;
+        padding: 15px;
+        .avatar-area {
+            height: 40px;
+            width: 40px;
+            background: #d83a52;
+            text-align: center;
+            line-height: 40px;
+            font-size: 20px;
+            border-radius: 5px;
+            color: #fff !important;
+            margin-right: 10px;
+        }
+        h5 {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 20px;
+            margin: 0;
+        }
+        p {
+            margin: 0;
+            line-height: 20px;
+        }
+        .sidebar-learn-card-getting-started .avatar-area {
+            background: #0073EA;
+        }
+        &.help-tray-btn .avatar-area {
+            background: #0060B9;
+        }
+        &.webinar-btn .avatar-area {
+            background: #a25ddc;
+        }
+        &:hover{
+            box-shadow: 0px 6px 20px rgb(0 0 0 / 20%);
+        }
+    }
+    .explore-temps{
+        .exp-img-wrp {
+            text-align: center;
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 6px;
+            background-color: #0073ea;
+        }
+        button.template-btn {
+            width: 100%;
+            padding: 5px;
+            margin-top: 6px;
+            border: 1px solid var(--at-border-color);
+        }
+    }
+    .home-invite-bar{
+        background: var(--at-app-bg);
+        padding: 12px 17px;
+        border-radius: 5px;
+        margin-top: 25px;
+        .inviter-users{
+            span {
+                margin-left: -15px;
+                border: 1px solid var(--at-border-color);
+                border-radius: 50%;
+                width: 55px;
+                height: 55px;
+                img {
+                    border-radius: 50%;
+                }
+                i {
+                    font-size: 25px;
+                }
+                &:first-child {
+                    margin-left: 0px;
+                }
+            }
+        }
+        p {
+            margin: 0;
+            margin-left: 15px;
+            font-weight: 500;
+        }
+    }
+
+}
+
+.accord-content.recent-cont {
+    margin-top: 14px;
+}
+.left-menu-tray.howcanwehelp-try {
+    position: absolute;
+    top: 0;
+    left: 74px;
+}

@@ -1,0 +1,22 @@
+span.tab-number {
+    display: block;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    background: var(--at-app-bg);
+    border-radius: 50%;
+    color: var(--at-font-color);
+    margin-right: 15px;
+    border: 1px solid var(--at-border-color);
+}
+.admin-page-wrapper {
+    background: var(--at-app-bg);
+    margin-left: -38px;
+    padding-left: 38px;
+    margin-right: -12px;
+    padding-right: 12px;
+    section.bg-white-light{
+        margin-left: -38px;
+        margin-right: -12px;
+    }
+}

@@ -1,0 +1,46 @@
+<div>
+  <div>
+    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+  </div>
+<!--  <div>-->
+<!--    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#stripeModal">Stripe</button>-->
+<!--  </div>-->
+</div>
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="stripeModal" tabindex="-1" role="dialog" aria-labelledby="stripeModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="background-color: white;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="stripeModalLongTitle">Stripe Payment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div [formGroup]="paymentElementForm">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <input matInput placeholder="name" formControlName="name" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <input matInput placeholder="Email" type="email" formControlName="email" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <input matInput placeholder="Address" formControlName="address" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <input matInput placeholder="ZIP Code" formControlName="zipCode" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <input matInput placeholder="city" formControlName="city" />
+          </mat-form-field>
+          <ng-container *ngIf="clientSecret">
+            <ngx-stripe-payment [clientSecret]="clientSecret">
+            </ngx-stripe-payment>
+          </ng-container>
+          <button (click)="pay()">PAY</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

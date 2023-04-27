@@ -1,0 +1,656 @@
+<div *ngIf="isSummaryRow; then summaryRow; else normalRows">this is ignored</div>
+<ng-template #summaryRow>
+    <!-- People -->
+    <!-- <div *ngIf="typeCol == 'people'" class="wrapper-cell-{{typeCol}}">
+        <div>
+            <div class="owner-selected owner-selected-user d-flex align-items-center justify-content-center">
+                <div class="owner-selected-user-inner-placeholder w-100 d-flex justify-content-center">
+                    <div class="user-selected-item text-center">
+                        <div data-bs-toggle="dropdown" aria-expanded="true">
+                            <div (click)="showPopup($event, 'people-hover')"  class="initials atmos-dropdown-btn" style="background: blueviolet;">TG</div>
+                        </div>
+                    </div>
+                    <div class="user-selected-item text-center">
+                        <div data-bs-toggle="dropdown" aria-expanded="true">
+                            <div (click)="showPopup($event, 'people-hover')"  class="initials atmos-dropdown-btn" style="background: blueviolet;">TG</div>
+                        </div>
+                    </div>
+                    <div>+2</div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- rating -->
+    <!-- <div *ngIf="typeCol == 'rating'" class="wrapper-cell-{{typeCol}}">
+        <div class="text-center">4.5/5</div>
+    </div> -->
+    <!-- time-tracking -->
+    <!-- <div *ngIf="typeCol == 'time-tracking'" class="wrapper-cell-{{typeCol}}">
+        <div class="text-center">0h 0m</div>
+    </div> -->
+    <!-- checkbox -->
+    <!-- <div *ngIf="typeCol == 'checkbox'" class="wrapper-cell-{{typeCol}}">
+        <div class="text-center">4/8</div>
+    </div> -->
+    <!-- number -->
+    <!-- <div *ngIf="typeCol == 'numbers'" class="wrapper-cell-{{typeCol}}">
+        <div class="atmos-dropdown-btn text-center" (click)="showPopup($event, 'summaryRow')">
+            <span class="me-2">€0</span>
+            <small>sum</small>
+        </div>
+    </div> -->
+</ng-template>
+<ng-template #normalRows>
+    <!-- add a blur effect to new row until it is added to the database -->
+    <div class="disabled-row" *ngIf="(!['checkbox', 'action', 'new'].includes(typeCol) && rowId == 0) || colId === 0"></div>
+
+    <!-- Create new item -->
+    <div *ngIf="isNewLead" class="wrapper-cell-render">
+        <input *ngIf="typeCol == 'item'" (focusout)="addNewRow()" (keyup.enter)="addNewRow()" [(ngModel)]="cellData" type="text" placeholder="{{placeHolderTxt}}" class="new-item-field form-control form-control-sm new-row-field"/>
+    </div>
+
+    <div *ngIf="!isNewLead" class="wrapper-cell-render text-center">
+        <!-- action -->
+        <div *ngIf="typeCol == 'action' && !isSubItems()" class="wrapper-cell-{{typeCol}}">
+            <div class="dropend">
+                <div class="atmos-dropdown-btn" (click)="showPopup($event)">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- rating -->
+        <div *ngIf="typeCol == 'rating'" class="wrapper-cell-{{typeCol}}">
+            <div class="dropend">
+                <div class="atmos-dropdown-btn">
+                  <i class="fa-solid fa-star fa-xs me-1" [ngClass]="['1', '2', '3', '4', '5'].includes(cellValue)? 'selectedRatingStars': 'ratingStars'" (click)="updateRating('5')"></i>
+                  <i class="fa-solid fa-star fa-xs me-1" [ngClass]="['1', '2', '3', '4'].includes(cellValue)? 'selectedRatingStars': 'ratingStars'" (click)="updateRating('4')"></i>
+                  <i class="fa-solid fa-star fa-xs me-1" [ngClass]="['1', '2', '3'].includes(cellValue)? 'selectedRatingStars': 'ratingStars'" (click)="updateRating('3')"></i>
+                  <i class="fa-solid fa-star fa-xs me-1" [ngClass]="['1', '2'].includes(cellValue)? 'selectedRatingStars': 'ratingStars'" (click)="updateRating('2')"></i>
+                  <i class="fa-solid fa-star fa-xs me-1" [ngClass]="['1'].includes(cellValue)? 'selectedRatingStars': 'ratingStars'" (click)="updateRating('1')"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- auto number -->
+        <div *ngIf="typeCol == 'auto-number'" class="wrapper-cell-{{typeCol}}">
+            <div class="dropend">
+                {{cellValue}}
+            </div>
+        </div>
+
+        <!-- World Clock Value -->
+        <div *ngIf="typeCol == 'world-clock'" class="wrapper-cell-{{typeCol}}" style="color: white" [ngStyle]="{'background-color': worldClockCellValue?.time? worldClockCellValue.isDayTime? '#47adff': '#504f6f' : ''}">
+          <div *ngIf="cellValue">
+            <div class="table-text-value-wrapper">
+                <i (click)="updateCell(true)" class="fa fa-times-circle hover-button" aria-hidden="true"></i>
+                <i class="fa-solid fa-moon fa-xs" *ngIf="!worldClockCellValue.isDayTime"></i>
+                <i class="fa-solid fa-sun fa-xs" style="color: yellow" *ngIf="worldClockCellValue.isDayTime"></i>
+                <span class="ag-cell-text" class="atmos-dropdown-btn ms-2 me-1" (click)="showPopup($event)"> <!--(click)="editColumn(currentCell)-->
+                   {{worldClockCellValue?.time}} {{worldClockCellValue?.name}}
+                </span>
+            </div>
+        </div>
+        <div *ngIf="!cellValue" class="dropdown">
+            <span class="email-placeholder atmos-dropdown-btn" (click)="showPopup($event)"></span><!--(click)="editColumn(currentCell)"-->
+        </div>
+        </div>
+
+        <!-- Vote Value -->
+        <div *ngIf="typeCol == 'vote'" class="wrapper-cell-{{typeCol}}">
+            <!-- <div class="vote-value">
+                <div class="d-flex">
+                  <input class="me-1" type="checkbox" [checked]="cellValue === '1'" (change)="updateVote()">
+                  <div class="vote" [ngStyle]="{'background-color': cellValue === '1'? voteColSettings.barColor: 'grey'}" (click)="updateVote()"></div>
+                  <div class="ms-1" (click)="updateVote()">{{cellValue || 0}}</div>
+                </div>
+            </div> -->
+            <div class="vote-col-wrp" mat-raised-button matTooltip="{{cellValue === '1'? 'You voted':'No vote yet'}}" matTooltipPosition="above" matTooltipClass="above">
+                <label class="vote-check">
+                    <input type="checkbox" [checked]="cellValue === '1'" (change)="updateVote()">
+                    <span class="checkmark" [ngStyle]="{'background-color': cellValue === '1'? voteColSettings.barColor: 'grey'}"></span>
+                </label>
+                <div class="progress votes" (click)="updateVote()">
+                    <div class="progress-bar" role="progressbar" [ngStyle]="{'background-color': cellValue === '1'? voteColSettings.barColor: 'grey'}" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="vote-count" (click)="updateVote()">{{cellValue || 0}}</div>
+            </div>
+        </div>
+
+        <!-- Forecast Value -->
+        <div *ngIf="typeCol == 'forecast-value'" class="wrapper-cell-{{typeCol}}">
+            <div class="forecast-value">
+                ${{getForecastValue() | number:'1.0':'en-US'}}
+            </div>
+        </div>
+
+        <!-- First communication Value -->
+        <div *ngIf="typeCol == 'first-comm'" class="wrapper-cell-{{typeCol}}">
+          <div class="forecast-value">
+              {{cellValue | titlecase}}
+          </div>
+
+<!--            <div class="dropdown">-->
+<!--                <div class="atmos-dropdown-btn" (click)="showPopup($event)">-->
+<!--                    <div class="d-flex align-items-center">-->
+<!--                        <span class="me-2"><i class="fab fa-google-plus-g"></i></span>-->
+<!--                        <span class="me-2"><i class="fab fa-twitter"></i></span>-->
+<!--                        <span class="me-2"><i class="fab fa-facebook-f"></i></span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+        </div>
+
+       <!-- Latest/First communication Value -->
+        <div *ngIf="['first-comm-date','latest-comm-date'].includes(typeCol)" class="wrapper-cell-{{typeCol}}">
+            <div class="forecast-value date-value">
+                {{cellValue | date : 'MMM d, yy - h:mm a'}}
+            </div>
+        </div>
+
+        <!-- Latest communication user Value -->
+        <div *ngIf="typeCol == 'latest-comm-user'" class="wrapper-cell-{{typeCol}}">
+          <div class="forecast-value">
+              {{getUsername(cellValue)}}
+          </div>
+        </div>
+
+        <!-- Latest communication Value -->
+        <div *ngIf="typeCol == 'latest-comm'" class="wrapper-cell-{{typeCol}}">
+            <div class="forecast-value">
+                {{cellValue | titlecase}}
+            </div>
+        </div>
+
+        <!-- Products Value -->
+        <div *ngIf="typeCol == 'products'" class="wrapper-cell-{{typeCol}}">
+          <div class="products">
+            <div class="atmos-dropdown-btn" (click)="showPopup($event)">
+              {{getProductsCount()}}
+            </div>
+          </div>
+      </div>
+
+         <!-- Deal Length Value -->
+         <div *ngIf="typeCol == 'deal-length'" class="wrapper-cell-{{typeCol}}">
+          <div class="deal-length">
+              {{getDealLengthValue()}}
+          </div>
+      </div>
+
+        <!-- Discount Value -->
+        <div *ngIf="typeCol == 'discount'" class="wrapper-cell-{{typeCol}}">
+          <div class="discount">
+            <input
+              (click)="showPopup($event)" (focusout)="updateCell()" (keypress)="validateField($event)" (keyup.enter)="updateCell()"
+              [(ngModel)]="cellValue" type="text" placeholder="Enter {{cellValue}}"
+              class="new-item-field w-100 form-control form-control-sm atmos-dropdown-btn"/>
+          </div>
+      </div>
+
+      <!-- Total Price -->
+      <div *ngIf="typeCol == 'total_price'" class="wrapper-cell-{{typeCol}}">
+        <div class="total_price">
+            ${{getTotalPrice()}}
+        </div>
+    </div>
+
+    <!-- Hour Value -->
+    <div *ngIf="typeCol == 'hour'" class="wrapper-cell-{{typeCol}}">
+        <div class="text-center">
+            <div class="table-text-value-wrapper">
+              <i *ngIf="cellValue" (click)="updateCell(true)" class="fa fa-times-circle hover-button" aria-hidden="true"></i>
+                <input
+                  class="new-item-field form-control form-control-sm new-row-field"
+                  [ngClass]="{'hover-button': !cellValue && !isHourChanged}"
+                  [(ngModel)]="hour"
+                  type="time"
+                  (input)="isHourChanged=true; updateCell()"/>
+            </div>
+        </div>
+    </div>
+
+        <!-- Confidence Value -->
+       <div *ngIf="typeCol == 'slider-bar'" class="wrapper-cell-{{typeCol}}">
+           <div class="slider-bar">
+                <mat-slider
+                  [(ngModel)]="cellValue"
+                  tickInterval=1
+                  max=100
+                  min=0
+                  step=1
+                  aria-label="units"
+                  (input)="cellValue = $event.value; updateCell()"
+                ></mat-slider>
+                {{cellValue || 0}}%
+           </div>
+        </div>
+
+        <!-- Timeline -->
+        <div *ngIf="typeCol == 'timeline'" class="wrapper-cell-{{typeCol}}">
+            <div class="dropend column-button-btn">
+                <div class="atmos-dropdown-btn" (click)="showPopup($event)">
+                    <p>Timeline</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formula -->
+        <div *ngIf="typeCol == 'formula'" class="wrapper-cell-{{typeCol}}">
+            <div class="dropend column-button-btn formula-cell-hidden">
+                <div class="atmos-dropdown-btn" (click)="showPopup($event)">
+                    <p>Formula</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Week -->
+        <div *ngIf="typeCol == 'week'" class="wrapper-cell-{{typeCol}}">
+            <div class="dropend column-button-btn">
+                <div class="atmos-dropdown-btn" (click)="showPopup($event)">
+                    <div class="d-flex justify-content-between align-items-center weel-cell-component">
+                        <i class="fa-solid fa-circle-arrow-left"></i>
+                        Next week
+                        <i class="fa-solid fa-circle-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Time Tracking -->
+        <div *ngIf="typeCol == 'time-tracking'" class="wrapper-cell-{{typeCol}}">
+            <div class="dropend column-button-btn">
+                <div class="atmos-dropdown-btn d-flex">
+                    <span class="time-track-btn"><i class="fa-regular fa-circle-play"></i></span>
+                    <div class="duration-cell-inner w-100 text-center" (click)="showPopup($event)">
+                        <div class="time-track-display">
+                            <span class="minutes">0m</span>
+                            <span class="seconds ms-1">45s</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dependency -->
+        <div *ngIf="typeCol == 'dependency'" class="wrapper-cell-{{typeCol}}">
+            <div class="dropend column-button-btn" (click)="showPopup($event)">
+                <div class="dependency-wrp atmos-dropdown-btn d-flex">
+                    <span class="dependency-plus"><i class="fa-solid fa-circle-plus"></i></span>
+                    <div class="dependency-text-wrp">-</div>
+                    <span class="initials">+1</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Button -->
+        <div *ngIf="typeCol == 'button'" class="wrapper-cell-{{typeCol}}">
+            <div class="dropend column-button-btn">
+                <div class="atmos-dropdown-btn">
+                  <div class="column-button-inner">
+                      <button class="btn btn-primary" (click)="boardsComponent.onButtonClick(colId, rowId, groupId)">{{currentCell === 'create_contact' ? 'Move to contacts' : 'Click me'}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Item ID -->
+        <div *ngIf="typeCol == 'item-id'" (click)="copyText(rowId, true)" class="wrapper-cell-{{typeCol}} item-id-column-content">
+            <div class="item-id-data">
+                <span *ngIf="showCopied" class="item-id-copied">Copied!</span>
+                <span *ngIf="!showCopied">{{rowId}}</span>
+            </div>
+        </div>
+
+        <!-- Progress Tracking -->
+        <div *ngIf="typeCol == 'progress-tracking'" class="wrapper-cell-{{typeCol}}">
+            <div class="dropend prog-tracking-column">
+                <div class="atmos-dropdown-btn" (click)="showPopup($event)">
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: {{getProgressPercentage()}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{getProgressPercentage()}}%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Files -->
+        <div *ngIf="typeCol == 'files'" class="wrapper-cell-{{typeCol}} column-add-file">
+          <div class="dropend atmos-dropdown-btn" (click)="showPopup($event)">
+            <div>
+              <i *ngIf="!getFiles().length" class="fa-regular fa-file-plus"></i>
+              <div *ngIf="getFiles().length">
+                <img (mouseover)="showPopup($event)" class="me-1" width="20px" height="20px" *ngFor="let file of getFiles()" src="{{file.url}}"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- connect board -->
+        <div *ngIf="typeCol == 'connect-boards'" class="wrapper-cell-{{typeCol}}">
+            <div class="dropend">
+                <div class="atmos-dropdown-btn d-flex" (click)="showPopup($event)">
+                    <span class="btn-plus"><i class="fa-solid fa-circle-plus"></i></span>
+                    <span *ngIf="!entries.length" class="input-effect"><span>-</span></span>
+                    <span *ngIf="entries.length" class="input-effect">
+                        <span *ngFor="let entry of entries"><span *ngIf="entry !== undefined && entry !== false">{{entry}}</span></span>
+                    </span>
+                   <!-- <span class="entries-count"><span>+2</span></span> -->
+                </div>
+            </div>
+        </div>
+
+        <!-- dropdown -->
+        <div *ngIf="typeCol == 'dropdown'" (click)="showPopup($event)" class="wrapper-cell-{{typeCol}} atmos-dropdown-btn">
+            <div class="dropdown-cell-column owner-selected d-flex align-items-center justify-content-center">
+                <span *ngIf="getSelectedItemsArray().length == 0">&nbsp;</span>
+                <div *ngIf="getSelectedItemsArray().length > 0" class="plus-btn"><i class="fa-solid fa-circle-plus me-1"></i></div>
+                <div (click)="showPopup($event)" class="dropdown-cell-btn">
+                    <span *ngFor="let item of getSelectedItemsArray()" class="create-contact-btn btn btn-sm btn-primary radius-20">{{item}}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Long Text -->
+        <div *ngIf="typeCol == 'long-text'" class="wrapper-cell-{{typeCol}}">
+            <div class="dropend">
+                <div class="atmos-dropdown-btn" (click)="showPopup($event)" mat-raised-button matTooltip="{{cellValue}}" matTooltipPosition="above" matTooltipClass="above">&nbsp;
+                    <span *ngIf="cellValue == ''">&nbsp;</span>
+                    {{cellValue}}
+                </div>
+            </div>
+        </div>
+
+        <!-- Tags -->
+        <div *ngIf="typeCol == 'tags'" class="wrapper-cell-{{typeCol}}">
+
+            <div class="dropend">
+                <div class="atmos-dropdown-btn" (click)="showPopup($event)">
+                    <span *ngIf="!getTags().length" class="email-placeholder atmos-dropdown-btn">
+                        <i class="fa-solid fa-circle-plus text-primary"></i>
+                        <i class="fa-light fa-hashtag ms-2"></i>
+                    </span>
+                    <span *ngIf="getTags().length">
+                        <span *ngFor="let tag of getTags()" class="tags-span" style="color:{{tag.tag_color}}">#{{tag.tag_name}}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- Tags -->
+        <div *ngIf="typeCol == 'vote'" class="wrapper-cell-{{typeCol}}">
+            <div (click)="this.voted = !this.voted" class="d-flex align-items-center justify-content-between">
+                <div class="vote-checko custom-check-wrp">
+                    <input type="checkbox" [checked]="voted">
+                    <span class="checkmark" [ngStyle]="{voted:'background:#3e79f8;border-color:#3e79f8;'}"></span>
+                </div>
+                <div class="vote-bar w-100 me-2">
+                    <div class="progress m-0" style="background: var(--at-border-color) !important;height: 1.5rem;">
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{'width':voted ? '100%': '0'}" style="background:#3e79f8 !important" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="vote-count" *ngIf="voted">1</div>
+                <div class="vote-count" *ngIf="!voted">0</div>
+            </div>
+        </div>
+
+         <!-- link -->
+         <div *ngIf="typeCol == 'link'" class="wrapper-cell-{{typeCol}}">
+          <div *ngIf="cellValue">
+              <div class="table-text-value-wrapper">
+                <i (click)="updateCell(true)" class="fa fa-times-circle hover-button" aria-hidden="true"></i>
+                  <span class="ag-cell-text" class="atmos-dropdown-btn ms-2" (click)="showPopup($event)">
+                     <a href="{{getLinkAddressOrText('link')}}">
+                          <span *ngIf="getLinkAddressOrText('text')">{{getLinkAddressOrText('text')}}</span>
+                      </a>
+                  </span>
+              </div>
+          </div>
+          <div *ngIf="!cellValue" class="dropdown">
+            <span class="email-placeholder atmos-dropdown-btn" (click)="showPopup($event)">
+                <i class="fa-solid fa-circle-plus text-primary"></i>
+                <i class="fa-light fa-link ms-2"></i>
+            </span>
+          </div>
+      </div>
+
+      <!-- Color Picker -->
+      <div *ngIf="typeCol == 'color-picker'" class="wrapper-cell-{{typeCol}}">
+        <!-- <div class="dropend">
+          <div class="atmos-dropdown-btn d-flex" (click)="showPopup($event)">
+            <div class="selected-cell-color" [ngStyle]="{'background-color': cellValue}"></div>
+            {{cellValue}}
+            </div>
+        </div> -->
+        <label for="colorpicker" class="cellColorPicker">
+            <div class="d-flex align-items-center">
+                <input id="colorpicker" type="color" [value]="cellValue" (change)="updateColorPicker($event)">
+                <span>{{colorPickerValue}}</span>
+            </div>
+        </label>
+
+       </div>
+
+        <!-- Checkbox -->
+        <div *ngIf="typeCol == 'checkbox'" class="wrapper-cell-{{typeCol}}">
+          <input class="table-checkbox" [checked]="cellValue === '1'" (change)="changeCheckbox($event)" type="checkbox"/>
+        </div>
+
+        <!-- date -->
+        <div *ngIf="typeCol == 'date'" class="wrapper-cell-{{typeCol}}" class="datepicker leads-date-formate for-expected-date-col">
+            <mat-form-field floatLabel='never'>
+                <span class="date-value" *ngIf="cellValue != ''">{{cellValue | date : 'MMM d, yy - h:mm a'}}</span>
+                <input matInput [ngxMatDatetimePicker]="pickerFrom" [(ngModel)]="myDatePickerFrom" (ngModelChange)="updateCell()" class="d-none">
+                <mat-datepicker-toggle matSuffix [for]="$any(pickerFrom)"></mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #pickerFrom [enableMeridian]="true"></ngx-mat-datetime-picker>
+            </mat-form-field>
+        </div>
+
+        <!-- timeline -->
+        <div *ngIf="typeCol == 'date-range'" class="datepicker wrapper-cell-{{typeCol}}">
+            <!--            <button class="btn btn-sm"></button>-->
+            <div class="timeline">
+                <div class="milestone" *ngIf="setMilestone"></div>
+                <div class="progress" (click)="openDaterangePicker()" [ngClass]="{'date-not-selected': progressPercentage == 0}">
+                    <div class="progress-bar" id="progress-{{typeCol}}-{{rowId}}" role="progressbar" style="width: {{progressPercentage}}%;">
+                        <span class="datevale">{{selectedDate}}</span>
+                        <span *ngIf="totalDaysSelected > 0" class="daysvalue">{{totalDaysSelected}}d</span>
+                        <span *ngIf="totalDaysSelected == 0" class="daysvalue">Select Date</span>
+                    </div>
+                </div>
+                <div class="cleardate" (click)="clearDateRange()"><i class="fa fa-times-circle hover-button"></i></div>
+            </div>
+            <igx-date-range-picker id="daterangepicker-{{currentCell}}-{{rowId}}" class="daterangepicker" [(ngModel)]="dateRange" (valueChange)="updateCell()">
+                <ng-template igxPickerActions>
+                    <div class="date-picker-actions ms-3 mb-3">
+                        <label><input (change)="checkMileStone()" [(ngModel)]="setMilestone" type="checkbox" [checked]="setMilestone"/> Set as milestone</label>
+                    </div>
+                </ng-template>
+            </igx-date-range-picker>
+
+        </div>
+
+        <!-- Table item -->
+        <div *ngIf="typeCol == 'item'" class="wrapper-cell-{{typeCol}}">
+            <div *ngIf="cellValue != '##add-new##'" class="">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="" [ngClass]="{'item-ls': !editMode}">
+                        <span *ngIf="! isSubItems()" (click)="expandSubItems()" class="leads-hover-show table-subitem-btn me-0" [ngClass]="{'opened':this.boardsComponent.dataTables[groupIndex].expandedRowIndex === rowIndex}" mat-raised-button matTooltip="Expand subitems" matTooltipPosition="above" matTooltipClass="above"><i class="fa-light fa-angle-right"></i></span>
+                        <span class="ms-2" (click)="editLeadTitle()" *ngIf="!editMode">{{cellValue}}</span>
+                        <span class="ms-2 badge" *ngIf="!editMode && ! isSubItems() && getChildCount() != 0">{{getChildCount()}}</span>
+                        <input *ngIf="editMode" (focusout)="updateCell()" (keyup.enter)="updateCell()" [(ngModel)]="cellValue" type="text" placeholder="" class="new-item-field  ms-2"/>
+                    </div>
+                    <span *ngIf="!editMode" class="item-open-btn cable" (click)="showDetailPopup()" mat-raised-button matTooltip="Open item page" matTooltipPosition="above" matTooltipClass="above"><i class="fa-regular fa-up-right-and-down-left-from-center me-2"></i>Open</span>
+                    <div [ngClass]="
+                        {'disabled': this.boardsComponent.boardName == 'Email Campaigns' || this.boardsComponent.boardName == 'SMS Broadcast' || this.boardsComponent.boardName == 'Sequences'}"
+                        class="right-sidebar-tray-btn cable" (click)="showDetailPopup()" mat-raised-button matTooltip="Start conversation" matTooltipPosition="above" matTooltipClass="above">
+                        <svg viewBox="0 0 20 20" fill="currentColor" width="24" height="24" aria-hidden="true" class="icon_component chat-without-update icon_component--no-focus-style">
+                            <path d="M10.4339 1.94996C11.5976 1.94797 12.7458 2.21616 13.7882 2.7334C14.8309 3.25083 15.7393 4.00335 16.4416 4.93167C17.144 5.85999 17.6211 6.93874 17.8355 8.08291C18.0498 9.22707 17.9956 10.4054 17.6769 11.525C17.3583 12.6446 16.7839 13.6749 15.9992 14.5347C15.2145 15.3945 14.2408 16.0604 13.1549 16.4797C12.069 16.8991 10.9005 17.0605 9.7416 16.9513C8.72154 16.8552 7.7334 16.5518 6.83723 16.0612L4.29494 17.2723C3.23222 17.7785 2.12271 16.6692 2.62876 15.6064L3.83948 13.0636C3.26488 12.0144 2.94833 10.8411 2.91898 9.64114C2.88622 8.30169 3.21251 6.97789 3.86399 5.8071C4.51547 4.63631 5.4684 3.66119 6.62389 2.98294C7.77902 2.30491 9.09451 1.94825 10.4339 1.94996ZM10.4339 1.94996C10.4343 1.94996 10.4348 1.94996 10.4352 1.94996L10.4341 2.69996L10.4327 1.94996C10.4331 1.94996 10.4335 1.94996 10.4339 1.94996ZM13.1214 4.07707C12.2868 3.66289 11.3673 3.44821 10.4355 3.44996L10.433 3.44996C9.36086 3.44842 8.30784 3.73382 7.38321 4.27655C6.45858 4.81929 5.69605 5.59958 5.17473 6.53645C4.65341 7.47332 4.39232 8.53263 4.41853 9.60446C4.44475 10.6763 4.75732 11.7216 5.32382 12.6318C5.45888 12.8489 5.47411 13.1197 5.36422 13.3505L4.28601 15.615L6.55002 14.5365C6.78078 14.4266 7.05164 14.4418 7.26869 14.5768C8.05992 15.0689 8.95463 15.3706 9.88231 15.458C10.81 15.5454 11.7453 15.4161 12.6145 15.0805C13.4838 14.7448 14.2631 14.2118 14.8913 13.5236C15.5194 12.8353 15.9791 12.0106 16.2342 11.1144C16.4893 10.2182 16.5327 9.27499 16.3611 8.35913C16.1895 7.44328 15.8076 6.57978 15.2454 5.8367C14.6832 5.09362 13.9561 4.49125 13.1214 4.07707Z"
+                                  fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
+                            <path d="M11.25 6.5C11.25 6.08579 10.9142 5.75 10.5 5.75C10.0858 5.75 9.75 6.08579 9.75 6.5V8.75H7.5C7.08579 8.75 6.75 9.08579 6.75 9.5C6.75 9.91421 7.08579 10.25 7.5 10.25H9.75V12.5C9.75 12.9142 10.0858 13.25 10.5 13.25C10.9142 13.25 11.25 12.9142 11.25 12.5V10.25H13.5C13.9142 10.25 14.25 9.91421 14.25 9.5C14.25 9.08579 13.9142 8.75 13.5 8.75H11.25V6.5Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- creation log -->
+        <div *ngIf="typeCol == 'creation-log'" class="wrapper-cell-{{typeCol}}">
+            <div mat-raised-button matTooltip="Created by {{params.data.created.fname}} {{params.data.created.lname}} on {{params.data.created.date}} at {{params.data.created.time}}" matTooltipPosition="left" matTooltipClass="left">
+                <div class="initials" style="background:blue; color:white" *ngIf="params.data.created.fname[0] && params.data.created.lname">{{params.data.created.fname[0]}}{{params.data.created.lname[0]}}</div>
+<!--                <div class="initials" style="background:blue; color:white" *ngIf="!params.data.created.fname[0] || !params.data.created.lname">{{params.data.created.display_name[0]}}</div>-->
+                {{params.data.created.date}}
+            </div>
+        </div>
+
+        <!--
+        common input field for
+         phone, numbers, text
+         -->
+        <div *ngFor="let item of commonInputItems">
+            <div *ngIf="['phone', 'numbers', 'text', 'location', 'slider-bar'].includes(typeCol)" class="wrapper-cell-{{typeCol}}">
+                <div *ngIf="['start_timezone', 'end_timezone', 'repeat'].includes(currentCell)" class="text-not-applicable">
+                    <span *ngIf="cellValue !== null && cellValue + '' !== ''" class="">{{cellValue}}</span>
+                    <span *ngIf="cellValue === null || cellValue + '' === ''" class="small">Not applicable</span>
+                </div>
+
+                <div *ngIf="!['start_timezone', 'end_timezone', 'repeat'].includes(currentCell)" [ngClass]="{'d-flex align-items-center justify-content-between': typeCol == 'phone', 'text-center':typeCol !== 'phone'}">
+                    <!-- trigger add data -->
+                    <div (click)="editColumn(currentCell)" *ngIf="!editMode && ( cellValue == '' || cellValue == undefined)" class="table-text-value-wrapper">
+                        <i *ngIf="typeCol != 'phone'" class="fa hover-button plus-button" [ngClass]="{'islocation': typeCol == 'location','fa-plus-circle istext': typeCol != 'location', 'number-icon': typeCol == 'numbers' }" aria-hidden="true"></i>
+                        <div *ngIf="typeCol == 'phone'" class=" hover-button">1(123) 123 4567</div>
+                    </div>
+
+                    <!-- display -->
+                    <div *ngIf="!editMode && cellValue != '' && cellValue != undefined">
+                        <div class="table-text-value-wrapper">
+                            <i (click)="updateCell(true)" class="fa fa-times-circle hover-button" aria-hidden="true"></i>
+                            <span class="ag-cell-text" (click)="editColumn(currentCell)">
+                                <img class="me-1" height="16" *ngIf="typeCol == 'phone' && phoneColSettings?.flag === 'show'" src="./assets/img/flags/{{getCountryImg()}}"/>
+                                <span *ngIf="!['phone', 'numbers', 'location'].includes(typeCol)" class="text-enter">{{cellValue}}</span>
+                                <span *ngIf="typeCol === 'numbers' && numberColSettings.direction === 'L'">{{numberColSettings.unit}}</span>
+                                <span *ngIf="typeCol === 'numbers' && isNumber(cellValue)">{{cellValue | number:'1.0':'en-US' }}<span *ngIf="currentCell == 'confidence' && cellValue >= 0 ">%</span></span>
+                                <span *ngIf="typeCol === 'numbers' && numberColSettings.direction === 'R'">{{numberColSettings.unit}}</span>
+                                <span *ngIf="typeCol === 'location'" matTooltip="{{cellValue}}" matTooltipPosition="above" class="text-enter">{{cellValue}}</span>
+                                <span *ngIf="typeCol === 'phone'"><a href="tel:{{cellValue}}">{{formatPhone(cellValue)}}</a></span>
+                            </span>
+                        </div>
+                        <a *ngIf="typeCol == 'phone'" class="cell-right-btn" href="tel:{{cellValue}}"><i class="fa-solid fa-phone"></i></a>
+                    </div>
+
+                    <!-- edit -->
+                    <div class="suggestions" *ngIf="editMode">
+                        <input *ngIf="typeCol != 'location'" (click)="showPopup($event)" (focusout)="updateCell()" (keypress)="validateField($event)" (keyup.enter)="updateCell()" [(ngModel)]="cellValue" type="text" placeholder="Enter {{cellValue}}" class="new-item-field w-100 form-control form-control-sm atmos-dropdown-btn"/>
+                        <app-google-places *ngIf="typeCol == 'location'" (setAddress)="getAddress($event)" adressType="address" (currentLocation)="cellValue"></app-google-places>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- People -->
+        <div *ngIf="typeCol == 'people'" class="wrapper-cell-{{typeCol}}">
+            <div>
+                <div class="owner-selected owner-selected-user d-flex align-items-center justify-content-center">
+                    <div class="plus-btn owner-selected-user-inner owner-selected-user-inner-icon">
+                        <span class="atmos-dropdown-btn" (click)="showPopup($event)"><i class="fa-solid fa-circle-plus"></i></span>
+                        <ul class="dropdown-menu ag-field-dropdown" onclick="event.stopPropagation()">
+                            <div class="selected-peoples d-flex align-items-center">
+                                <div *ngFor="let person of getSelectedPersons()" class="me-2 person-item">
+                                    <span class="user-delete"><i class="fa-solid fa-close"></i></span>
+                                    <div (click)="removeSelectedItem(person.id)" class="initials" style="background:{{person?.avatar_color}};" *ngIf="person.fname && person.lname">{{person.fname[0]}}{{person.lname[0]}}</div>
+                                    <div (click)="removeSelectedItem(person.id)" class="initials" style="background:{{person?.avatar_color}};" *ngIf="!person.fname || !person.lname">{{person.display_name[0]}}</div>
+                                </div>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" (keypress)="getSuggestedUsers()" [(ngModel)]="suggestedItemsSearch" placeholder="Search names, roles and teams">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-white" id="basic-addon2"><i class="fa-light fa-search"></i></span>
+                                </div>
+                            </div>
+                            <div class="suggested-list">
+                                <label>Suggested People</label>
+                                <div class="suggested-list-items">
+                                    <div *ngFor="let user of getSuggestedUsers()" (click)="selectPerson(user.id)" class="suggested-item d-flex align-items-center">
+                                        <div class="initials" style="background: {{user?.avatar_color}};" *ngIf="user.fname && user.lname">{{user.fname[0]}}{{user.lname[0]}}</div>
+                                        <div class="initials" style="background: {{user?.avatar_color}};" *ngIf="!user.fname || !user.lname">{{user.display_name[0]}}</div>
+                                        <div class="item-name">{{user.fname}} {{user.lname}}</div>
+                                    </div>
+                                </div>
+                                <div class="invite-new-member btn btn-outline-secondary btn-sm w-100 mt-2">
+                                    <i class="fa-light fa-user-plus"></i>
+                                    <span>Invite a new member by email</span>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="owner-selected-user-inner-placeholder w-100 d-flex justify-content-center">
+                        <div *ngFor="let person of getSelectedPersons().slice(0,2)" class="user-selected-item text-center">
+                            <div data-bs-toggle="dropdown" aria-expanded="true">
+                                <div (click)="selectedPeople = person; showPopup($event, 'people-hover')" *ngIf="person !== undefined && person.fname && person.lname" class="initials atmos-dropdown-btn" style="background: {{person?.avatar_color}};">{{person.fname[0]}}{{person.lname[0]}}</div>
+                                <div (click)="selectedPeople = person; showPopup($event, 'people-hover')" *ngIf="person !== undefined && ( !person.fname || !person.lname )" class="initials atmos-dropdown-btn" style="background: {{person?.avatar_color}};">{{person.display_name[0]}}</div>
+                            </div>
+                        </div>
+                        <div *ngIf="getSelectedPersons().length > 2">+{{getSelectedPersons().length - 2}}</div>
+                    </div>
+
+                    <!-- user placeholder -->
+                    <div *ngIf="getSelectedPersons().length == 0" class="user-placholder-size">
+                        <i class="fa-light fa-circle-user"></i>
+                    </div>
+                </div>
+                <!--(ends)-->
+            </div>
+
+        </div>
+
+        <!-- email -->
+        <div *ngIf="typeCol == 'email'" class="wrapper-cell-{{typeCol}}">
+            <div *ngIf="cellValue != '' && cellValue != undefined">
+                <div class="table-text-value-wrapper">
+                    <i (click)="updateCell(true)" class="fa fa-times-circle hover-button" aria-hidden="true"></i>
+                    <span class="ag-cell-text" class="atmos-dropdown-btn ms-2" (click)="showPopup($event)"> <!--(click)="editColumn(currentCell)-->
+                       <a href="mailto:{{getEmailId()}}">
+                            <span *ngIf="getEmailName() != ''">{{getEmailName()}}</span>
+                            <span *ngIf="getEmailName() == ''">{{getEmailId()}}</span>
+                        </a>
+                    </span>
+                </div>
+                <a class="cell-right-btn" href="mailto:{{getEmailId()}}"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+            <div *ngIf="cellValue == ''" class="dropdown">
+                <span class="email-placeholder atmos-dropdown-btn" (click)="showPopup($event)"></span><!--(click)="editColumn(currentCell)"-->
+            </div>
+        </div>
+
+        <!-- status -->
+        <div *ngIf="typeCol == 'status'" class="wrapper-cell-{{typeCol}}">
+            <div class="status-cell atmos-dropdown-btn status-cell-hover-text">
+                <div class="update-stats-popup-btn" (click)="showPopup($event, 'update-status')"><i class="fa-solid fa-plus"></i></div>
+                <span class="atmos-dropdown-btn status-list-popup" (click)="showPopup($event)" *ngIf="getStatusById(cellValue) === undefined">&nbsp;</span>
+                <div class="atmos-dropdown-btn status-list-popup" (click)="showPopup($event)" *ngIf="getStatusById(cellValue) !== undefined" mat-raised-button matTooltip="{{getStatusById(cellValue).name}}" matTooltipPosition="above" class="status-item connected" style="background: {{getStatusById(cellValue).color}};">
+                    {{getStatusById(cellValue).name}}
+                </div>
+            </div>
+        </div>
+
+        <!-- create contact -->
+        <div *ngIf="typeCol == 'createContact'" class="text-center wrapper-cell-{{typeCol}}">
+            <button class="create-contact-btn btn btn-sm" [ngClass]="{'btn-primary': ! movedToContact}" (click)="movedItemToContact()">
+                <span *ngIf="!movedToContact">Move to contact</span>
+                <span *ngIf="movedToContact"><i class="fa-solid fa-check"></i></span>
+            </button>
+        </div>
+
+        <!-- latest Communication -->
+        <div *ngIf="typeCol == 'contactType'" class="datepicker text-center wrapper-cell-{{typeCol}}">
+            <select [attr.name]="currentCell" [(ngModel)]="cellData" class="form-control form-control-sm">
+                <option>-- select --</option>
+                <option>Email</option>
+                <option>Phone</option>
+                <option>SMS</option>
+            </select>
+
+        </div>
+    </div>
+
+</ng-template>

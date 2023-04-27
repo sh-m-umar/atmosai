@@ -1,0 +1,127 @@
+<!--manage duplicate modal start-->
+<div class="modal fade" id="manageDuplicateModal" tabindex="-1" aria-labelledby="manageDuplicateModalLabel" aria-hidden="true" style="max-height: 80%;">
+    <div class="modal-dialog modal-{{manageSearchScreen ? 'lg':'fullscreen p-5'}}">
+      <div class="modal-content rounded-3">
+        <div class="modal-body">
+          <span type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa-light fa-xmark fa-2x"></i></span>
+          <div class="manage-duplicate-wpr">
+            <div class="duplicate-search-wrp pt-2 pb-3" *ngIf="manageSearchScreen">
+              <div class="text-center">
+                <h1 class="mb-2">Search Duplicates</h1>
+                <p class="mx-5 px-5 mb-5">Choose which column to scan for duplicates. Once items are merged, you can find your old items in the archived history</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-center mb-5">
+                <label for="">Search duplicates in</label>
+                <mat-form-field appearance="outline" floatLabel="never">
+                  <mat-select placeholder="Column" [ngModel]="manageSelectedCoulmn">
+                    <mat-option value="name"><i class="fa-light fa-text-size me-2"></i> Name</mat-option>
+                    <mat-option value="status"><i class="fa-light fa-bars me-2"></i> Status</mat-option>
+                    <mat-option value="email"><i class="fa-light fa-envelope me-2"></i> Email</mat-option>
+                    <mat-option value="company"><i class="fa-light fa-text-size me-2"></i> Company</mat-option>
+                    <mat-option value="priority"><i class="fa-light fa-bars me-2"></i> Priority</mat-option>
+                    <mat-option value="number"><i class="fa-light fa-table-columns me-2"></i> Number</mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix>close</mat-icon>
+                </mat-form-field>
+                <span class="info"><i class="fa-light fa-circle-info"></i></span>
+              </div>
+              <div class="text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="769" height="136" viewBox="0 0 769 136" fill="none">
+                  <g filter="url(#filter0_d)">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M24.4184 32.4676C24.4184 27.7911 28.2095 24 32.886 24H736.114C740.791 24 744.582 27.7911 744.582 32.4676V103.532C744.582 108.209 740.791 112 736.114 112H32.886C28.2095 112 24.4184 108.209 24.4184 103.532V32.4676Z" fill="white"/>
+                  </g>
+                  <rect x="39.0607" y="47.8818" width="93.2695" height="19.1151" fill="#F5F6F8"/>
+                  <rect opacity="0.1" x="39.0607" y="66.3374" width="93.2695" height="0.65914" fill="#333333"/>
+                  <rect x="39.0607" y="47.8818" width="1.98446" height="19.1151" fill="#FFAC2C"/>
+                  <rect x="224.277" y="68.3152" width="54.9033" height="19.1151" fill="#FFAC2C"/>
+                  <rect x="168.05" y="68.3152" width="54.9033" height="19.1151" fill="#597BFC"/>
+                  <rect x="611.92" y="58.1223" width="54.9033" height="19.1151" fill="#00CA72"/>
+                  <rect x="555.694" y="58.1223" width="54.9033" height="19.1151" fill="#597BFC"/>
+                  <rect x="426.704" y="58.1223" width="93.2695" height="19.1151" fill="#F5F6F8"/>
+                  <rect opacity="0.1" x="426.704" y="76.5781" width="93.2695" height="0.65914" fill="#333333"/>
+                  <rect x="426.704" y="58.1223" width="1.98446" height="19.1151" fill="#FFAC2C"/>
+                  <rect x="720.404" y="58.1223" width="9.2608" height="19.1151" fill="#E1E1E1"/>
+                  <rect opacity="0.1" x="720.404" y="76.5781" width="9.2608" height="0.65914" fill="#333333"/>
+                  <rect x="521.297" y="58.1223" width="33.0743" height="19.1151" fill="#F5F6F8"/>
+                  <rect opacity="0.1" x="521.297" y="76.5781" width="33.0743" height="0.65914" fill="#333333"/>
+                  <path opacity="0.365072" fill-rule="evenodd" clip-rule="evenodd" d="M537.834 74.6012C541.852 74.6012 545.11 71.5026 545.11 67.6802C545.11 63.8579 541.852 60.7593 537.834 60.7593C533.815 60.7593 530.557 63.8579 530.557 67.6802C530.557 71.5026 533.815 74.6012 537.834 74.6012Z" fill="#FFADAD"/>
+                  <rect x="668.146" y="58.1223" width="52.2574" height="19.1151" fill="#F5F6F8"/>
+                  <path opacity="0.25486" fill-rule="evenodd" clip-rule="evenodd" d="M434.492 68.1411C434.492 65.9569 436.262 64.1863 438.447 64.1863H496.451C498.635 64.1863 500.406 65.9569 500.406 68.1411C500.406 70.3253 498.635 72.096 496.451 72.096H438.447C436.262 72.096 434.492 70.3253 434.492 68.1411Z" fill="#706A7D"/>
+                  <path opacity="0.299781" fill-rule="evenodd" clip-rule="evenodd" d="M563.632 67.68C563.632 65.6778 565.255 64.0547 567.257 64.0547H598.373C600.375 64.0547 601.998 65.6778 601.998 67.68C601.998 69.6821 600.375 71.3052 598.373 71.3052H567.257C565.255 71.3052 563.632 69.6821 563.632 67.68Z" fill="white"/>
+                  <path opacity="0.299781" fill-rule="evenodd" clip-rule="evenodd" d="M619.196 67.68C619.196 65.6778 620.82 64.0547 622.822 64.0547H653.937C655.94 64.0547 657.563 65.6778 657.563 67.68C657.563 69.6821 655.94 71.3052 653.937 71.3052H622.822C620.82 71.3052 619.196 69.6821 619.196 67.68Z" fill="white"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M673.438 67.3501C673.438 65.1659 675.209 63.3953 677.393 63.3953H710.496C712.68 63.3953 714.45 65.1659 714.45 67.3501C714.45 69.5343 712.68 71.3049 710.496 71.3049H677.393C675.209 71.3049 673.438 69.5343 673.438 67.3501Z" fill="#E1E1E1"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M673.438 67.3501C673.438 65.1659 675.209 63.3953 677.393 63.3953H689.99C692.174 63.3953 693.944 65.1659 693.944 67.3501C693.944 69.5343 692.174 71.3049 689.99 71.3049H677.393C675.209 71.3049 673.438 69.5343 673.438 67.3501Z" fill="#A358DF"/>
+                  <rect opacity="0.1" x="668.146" y="76.5781" width="52.2574" height="0.65914" fill="#333333"/>
+                  <rect x="224.277" y="47.8816" width="54.9033" height="19.1151" fill="#00CC6F"/>
+                  <rect x="168.05" y="47.8816" width="54.9033" height="19.1151" fill="#597BFC"/>
+                  <rect x="332.76" y="47.8816" width="9.2608" height="19.1151" fill="#E1E1E1"/>
+                  <rect opacity="0.1" x="332.76" y="66.3374" width="9.2608" height="0.65914" fill="#333333"/>
+                  <rect x="133.653" y="47.8816" width="33.0743" height="19.1151" fill="#F5F6F8"/>
+                  <rect opacity="0.1" x="133.653" y="66.3374" width="33.0743" height="0.65914" fill="#333333"/>
+                  <path opacity="0.365072" fill-rule="evenodd" clip-rule="evenodd" d="M150.19 64.36C154.209 64.36 157.467 61.2614 157.467 57.439C157.467 53.6167 154.209 50.5181 150.19 50.5181C146.172 50.5181 142.914 53.6167 142.914 57.439C142.914 61.2614 146.172 64.36 150.19 64.36Z" fill="#FFADAD"/>
+                  <rect x="39.0607" y="68.3152" width="93.2695" height="19.1151" fill="#F5F6F8"/>
+                  <rect opacity="0.1" x="39.0607" y="86.771" width="93.2695" height="0.65914" fill="#333333"/>
+                  <rect x="39.0607" y="68.3152" width="1.98446" height="19.1151" fill="#FFAC2C"/>
+                  <rect x="332.76" y="68.3152" width="9.2608" height="19.1151" fill="#E1E1E1"/>
+                  <rect opacity="0.1" x="332.76" y="86.771" width="9.2608" height="0.65914" fill="#333333"/>
+                  <rect x="133.653" y="68.3152" width="33.0743" height="19.1151" fill="#F5F6F8"/>
+                  <rect opacity="0.1" x="133.653" y="86.771" width="33.0743" height="0.65914" fill="#333333"/>
+                  <path opacity="0.365072" fill-rule="evenodd" clip-rule="evenodd" d="M150.19 84.7936C154.209 84.7936 157.467 81.695 157.467 77.8726C157.467 74.0503 154.209 70.9517 150.19 70.9517C146.172 70.9517 142.914 74.0503 142.914 77.8726C142.914 81.695 146.172 84.7936 150.19 84.7936Z" fill="#4ECCC6"/>
+                  <rect x="280.503" y="47.8816" width="52.2574" height="19.1151" fill="#F5F6F8"/>
+                  <rect opacity="0.1" x="280.503" y="66.3374" width="52.2574" height="0.65914" fill="#333333"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M285.795 57.1091C285.795 54.9249 287.566 53.1543 289.75 53.1543H322.852C325.036 53.1543 326.807 54.9249 326.807 57.1091C326.807 59.2933 325.036 61.064 322.852 61.064H289.75C287.566 61.064 285.795 59.2933 285.795 57.1091Z" fill="#E1E1E1"/>
+                  <rect x="280.503" y="68.3152" width="52.2574" height="19.1151" fill="#F5F6F8"/>
+                  <rect opacity="0.1" x="280.503" y="86.771" width="52.2574" height="0.65914" fill="#333333"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M285.795 77.5427C285.795 75.3585 287.566 73.5879 289.75 73.5879H322.852C325.036 73.5879 326.807 75.3585 326.807 77.5427C326.807 79.7269 325.036 81.4976 322.852 81.4976H289.75C287.566 81.4976 285.795 79.7269 285.795 77.5427Z" fill="#E1E1E1"/>
+                  <path opacity="0.25486" fill-rule="evenodd" clip-rule="evenodd" d="M46.9984 57.4392C46.9984 55.4371 48.6215 53.814 50.6237 53.814H86.3698C88.3719 53.814 89.995 55.4371 89.995 57.4392C89.995 59.4414 88.3719 61.0645 86.3698 61.0645H50.6237C48.6215 61.0645 46.9984 59.4414 46.9984 57.4392Z" fill="#706A7D"/>
+                  <path opacity="0.299781" fill-rule="evenodd" clip-rule="evenodd" d="M175.988 57.4392C175.988 55.4371 177.611 53.814 179.613 53.814H210.729C212.731 53.814 214.354 55.4371 214.354 57.4392C214.354 59.4414 212.731 61.0645 210.729 61.0645H179.613C177.611 61.0645 175.988 59.4414 175.988 57.4392Z" fill="white"/>
+                  <path opacity="0.299781" fill-rule="evenodd" clip-rule="evenodd" d="M231.553 57.4392C231.553 55.4371 233.176 53.814 235.178 53.814H266.294C268.296 53.814 269.919 55.4371 269.919 57.4392C269.919 59.4414 268.296 61.0645 266.294 61.0645H235.178C233.176 61.0645 231.553 59.4414 231.553 57.4392Z" fill="white"/>
+                  <path opacity="0.25486" fill-rule="evenodd" clip-rule="evenodd" d="M46.9984 77.8728C46.9984 75.8706 48.6215 74.2476 50.6237 74.2476H110.183C112.185 74.2476 113.809 75.8706 113.809 77.8728C113.809 79.875 112.185 81.4981 110.183 81.4981H50.6237C48.6215 81.4981 46.9984 79.875 46.9984 77.8728Z" fill="#706A7D"/>
+                  <path opacity="0.299781" fill-rule="evenodd" clip-rule="evenodd" d="M175.988 77.8728C175.988 75.8706 177.611 74.2476 179.613 74.2476H210.729C212.731 74.2476 214.354 75.8706 214.354 77.8728C214.354 79.875 212.731 81.4981 210.729 81.4981H179.613C177.611 81.4981 175.988 79.875 175.988 77.8728Z" fill="white"/>
+                  <path opacity="0.299781" fill-rule="evenodd" clip-rule="evenodd" d="M231.553 77.8728C231.553 75.8706 233.176 74.2476 235.178 74.2476H266.294C268.296 74.2476 269.919 75.8706 269.919 77.8728C269.919 79.875 268.296 81.4981 266.294 81.4981H235.178C233.176 81.4981 231.553 79.875 231.553 77.8728Z" fill="white"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M285.795 57.1091C285.795 54.9249 287.566 53.1543 289.75 53.1543H299.7C301.884 53.1543 303.655 54.9249 303.655 57.1091C303.655 59.2933 301.884 61.064 299.7 61.064H289.75C287.566 61.064 285.795 59.2933 285.795 57.1091Z" fill="#A358DF"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M285.795 77.5427C285.795 75.3585 287.566 73.5879 289.75 73.5879H309.622C311.807 73.5879 313.577 75.3585 313.577 77.5427C313.577 79.7269 311.807 81.4976 309.622 81.4976H289.75C287.566 81.4976 285.795 79.7269 285.795 77.5427Z" fill="#E44258"/>
+                  <path d="M394.378 76.579L402.756 68.2487L394.378 59.9185" stroke="#597BFC" stroke-width="3.16082" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M399.765 68L365.643 68.0001" stroke="#597BFC" stroke-width="3.16082" stroke-linecap="round" stroke-linejoin="round"/>
+                  <defs>
+                  <filter id="filter0_d" x="0.897381" y="0.478985" width="767.205" height="135.042" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+                  <feOffset/>
+                  <feGaussianBlur stdDeviation="11.7605"/>
+                  <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.0800645 0"/>
+                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                  </filter>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+            <div class="duplicate-boards-wrp pt-2 pb-3" *ngIf="!manageSearchScreen">
+              <div class="text-center">
+                <h1 class="mb-2">Choose which items you would like to keep</h1>
+                <h4>1 duplicates found</h4>
+                <p class="mx-5 px-5 mb-3">Updates from all items will be copied to the item you've selected to keep</p>
+              </div>
+              <div class="duplicate-table border mt-5">
+                <ag-grid-angular
+                style="width: 100%; height: 700px;"
+                class="ag-theme-alpine"
+                [columnDefs]="columnDefss"
+                [defaultColDef]="defaultColDef"
+                [rowSelection]="rowSelection"
+                [rowData]="rowDataa"
+              ></ag-grid-angular>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button *ngIf="manageSearchScreen" class="btn btn-sm btn-primary" (click)="manageSearchScreen = !manageSearchScreen">Search</button>
+            <button *ngIf="!manageSearchScreen" (click)="manageSearchScreen = !manageSearchScreen" class="btn btn-sm btn-outline-secondary">Back</button>
+            <button *ngIf="!manageSearchScreen" class="btn btn-sm btn-primary ms-2">Merge</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--manage duplicate modal end-->
